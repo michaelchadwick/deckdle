@@ -1,0 +1,41 @@
+:root {
+  --animate-duration: 150ms;
+  --animate-delay: 0s;
+  --animate-repeat: 1;
+}
+
+.tile {
+  --animate-duration: 75ms;
+}
+
+header .menu-left #nav-overlay #nav-content {
+  animation: SlideRight 200ms;
+}
+
+section#game #guess-container #guess {
+  --animate-duration: 150ms;
+}
+
+@keyframes SlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+@keyframes SlideLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}

@@ -1,0 +1,85 @@
+.card {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #ccc;
+  font-size: 1.25rem;
+  height: 76px;
+  width: 44px;
+}
+@media (min-width: 768px) {
+  .card {
+    width: 55px;
+  }
+}
+@media (min-width: 992px) {
+  .card {
+    font-size: 1.5rem;
+    height: 92px;
+    width: 80px;
+  }
+}
+@media (hover: hover) {
+  .col .card.available:hover {
+    background-color: #ebf7ff;
+    border: 1px dashed var(--dark-color);
+    cursor: pointer;
+  }
+  .col .card.removed:hover {
+    cursor: default;
+  }
+}
+.card.removed {
+  opacity: 0;
+  z-index: -9999 !important;
+}
+.card[data-suit='0'],
+.card[data-suit='3'] {
+  color: black;
+}
+.card[data-suit='1'],
+.card[data-suit='2'] {
+  color: red;
+}
+.card.back {
+  background-color: #2e678e;
+  border: 1px solid #fff;
+}
+.card.back .rank,
+.card.back .suit {
+  display: none;
+}
+.card.empty {
+  background-color: #c7c7c7;
+  border: 1px solid transparent;
+}
+.rank {
+  display: flex;
+  justify-content: center;
+}
+.rank-bot,
+.rank-top {
+  display: flex;
+  justify-content: space-around;
+}
+.suit {
+  display: flex;
+  justify-content: center;
+}
+
+.card-label {
+  font-family: monospace;
+  font-size: 0.75rem;
+  margin: 5px 0 0;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  .card-label {
+    font-size: 0.9rem;
+  }
+}
+@media (min-width: 992px) {
+  .card-label {
+    font-size: 1rem;
+  }
+}

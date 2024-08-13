@@ -1,0 +1,15 @@
+#stock {
+  display: grid;
+  justify-items: center;
+}
+#stock .card {
+  grid-column: 1;
+  grid-row: 1;
+}
+#stock .card > * {
+  display: none;
+}
+#stock .card:not(.empty):hover {
+  background-color: #33749f;
+  cursor: pointer;
+}

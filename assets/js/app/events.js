@@ -1,0 +1,130 @@
+// user clicks a card (tableau)
+Deckdle._onCardClick = function (card) {
+  // console.log('card was clicked', card, card.dataset.row)
+
+  if (card.parentElement.id == 'stock') {
+    Deckdle._onStockClick(card.parentElement)
+  } else if (card.parentElement.parentElement.id == 'stock') {
+    Deckdle._onStockClick(card.parentElement.parentElement)
+  } else if (card.parentElement.id == 'tableau') {
+    Deckdle._onTableauClick(card, card.id, card.dataset.row)
+  } else if (card.parentElement.parentElement.id == 'tableau') {
+    Deckdle._onTableauClick(card, card.parentElement.id, card.dataset.row)
+  }
+}
+
+// handle both clicks and touches outside of modals
+Deckdle._handleClickTouch = function (event) {
+  // console.log('_handleClickTouch', event)
+
+  const dialog = document.getElementsByClassName('modal-dialog')[0]
+  const elem = event.target
+
+  if (dialog) {
+    const isConfirm = dialog.classList.contains('modal-confirm')
+
+    // only close if not a confirmation!
+    if (elem == dialog && !isConfirm) {
+      dialog.remove()
+    }
+  } else {
+    if (elem == Deckdle.dom.navOverlay) {
+      Deckdle.dom.navOverlay.classList.toggle('show')
+    } else if (event.target.classList.contains('card')) {
+      Deckdle._onCardClick(elem)
+    } else if (Deckdle.__hasParentWithMatchingSelector(elem, '.card')) {
+      Deckdle._onCardClick(Deckdle.__getParentCard(elem, '.card'))
+    } else {
+      // console.log('something with no handler was clicked/touched', elem)
+    }
+  }
+}
+
+// add event listeners to DOM
+Deckdle._attachEventListeners = function () {
+  // {} header icons to open modals
+  Deckdle.dom.interactive.btnNav.addEventListener('click', () => {
+    Deckdle.dom.navOverlay.classList.toggle('show')
+  })
+  Deckdle.dom.interactive.btnNavClose.addEventListener('click', () => {
+    Deckdle.dom.navOverlay.classList.toggle('show')
+  })
+  Deckdle.dom.interactive.btnHelp.addEventListener('click', () =>
+    Deckdle.modalOpen('help')
+  )
+  Deckdle.dom.interactive.btnStats.addEventListener('click', () =>
+    Deckdle.modalOpen('stats')
+  )
+  Deckdle.dom.interactive.btnSettings.addEventListener('click', () =>
+    Deckdle.modalOpen('settings')
+  )
+
+  // [A] card interaction
+  // Array.from(Deckdle.dom.interactive.cards).forEach((card) => {
+  //   card.addEventListener('click', (e) => {
+  //     Deckdle._onCardClick(e)
+  //   })
+  // })
+
+  // local debug buttons
+  if (Deckdle.env == 'local') {
+    if (Deckdle.dom.interactive.debug.all) {
+      // ⚙️ show current deckdle config
+      Deckdle.dom.interactive.debug.btnShowConfig.addEventListener(
+        'click',
+        () => {
+          Deckdle.modalOpen('show-config')
+        }
+      )
+
+      // 🎚️ show current deckdle state
+      Deckdle.dom.interactive.debug.btnShowState.addEventListener(
+        'click',
+        () => {
+          Deckdle.modalOpen('show-state')
+        }
+      )
+
+      // 🏆 win game immediately
+      Deckdle.dom.interactive.debug.btnWinGame.addEventListener('click', () => {
+        Deckdle._winGameHax()
+      })
+      // 🏅 almost win game (post-penultimate move)
+      Deckdle.dom.interactive.debug.btnWinGameAlmost.addEventListener(
+        'click',
+        () => {
+          Deckdle._winGameHax('almost')
+        }
+      )
+      // 🏁 display win tile animation
+      Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener(
+        'click',
+        () => {
+          Deckdle.__winAnimation().then(() => Deckdle.__resetCardsDuration())
+        }
+      )
+    }
+  }
+
+  // gotta use keydown, not keypress, or else Delete/Backspace aren't recognized
+  document.addEventListener('keydown', (event) => {
+    if (event.code == 'Enter') {
+      // TODO: take card from stock
+    }
+  })
+
+  // When the user clicks or touches anywhere outside of the modal, close it
+  window.addEventListener('click', Deckdle._handleClickTouch)
+  window.addEventListener('touchend', Deckdle._handleClickTouch)
+
+  // window.onload = Deckdle._resizeBoard
+  // window.onresize = Deckdle._resizeBoard
+
+  document.body.addEventListener(
+    'touchmove',
+    function (event) {
+      event.preventDefault
+    },
+    { passive: false }
+  )
+}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- BASIC
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+    <title>Deckdle</title>
+
+    <!-- META
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="description" content="Daily solitaire card game." />
+    <meta name="author" content="Michael Chadwick" />
+    <meta name="application-name" content="Deckdle" />
+    <meta name="title" content="Deckdle" />
+    <meta property="og:url" content="https://deckdle.neb.host" />
+    <meta property="og:title" content="Deckdle - A daily solitaire card game" />
+    <meta property="og:description" content="Exhaust your stock" />
+    <meta
+      property="og:image"
+      content="https://deckdle.neb.host/assets/icons/android-chrome-512x512.png"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="deckdle.neb.host" />
+
+    <!-- FAVICONS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="./assets/icons/safari-pinned-tab.svg"
+      color="#529952"
+    />
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <meta name="msapplication-TileColor" content="#529952" />
+    <meta name="msapplication-config" content="./browserconfig.xml" />
+    <meta name="theme-color" content="#529952" />
+
+    <!-- FONTAWESOME
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link
+      rel="stylesheet"
+      href="./assets/fontawesome/css/fontawesome.min.css"
+    />
+    <link rel="stylesheet" href="./assets/fontawesome/css/solid.min.css" />
+
+    <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="./assets/css/app.css" />
+    <link rel="stylesheet" href="./assets/css/app-dark.css" />
+    <link rel="stylesheet" href="./assets/css/modal.css" />
+    <link rel="stylesheet" href="./assets/css/animation.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <!-- SVG BACKGROUND
+      https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/"
+    -->
+  </head>
+  <body>
+
+    <header>
+      <div class="menu-left">
+        <div id="nav-links">
+          <button
+            id="button-nav"
+            class="icon"
+            aria-label="Click for links to more apps by neb.host"
+            tabindex="-1"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div id="nav-overlay">
+            <div id="nav-content">
+              <div class="container">
+                <div class="nav-header">More Apps By Neb</div>
+
+                <div class="nav-list"></div>
+
+                <div class="nav-footer">
+                  <!-- vvv neb.host subsite footer -->
+                  <footer id="footer-neb-host">
+                    site by
+                    <a
+                      style="
+                        color: #ffffff;
+                        font-family: 'Consolas', sans-serif;
+                        font-size: 12px;
+                      "
+                      href="https://neb.host"
+                      >neb.host</a
+                    >
+                  </footer>
+                  <!-- ^^^ neb.host subsite footer -->
+                </div>
+              </div>
+
+              <div id="button-nav-close">
+                <a href="#">X</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button id="button-help" class="icon" aria-label="Help" tabindex="-1">
+          <i class="fa-solid fa-question"></i>
+        </button>
+
+        <div id="debug-buttons" class="debug">
+          <nav class="ddmenu">
+            <div class="ddgroup">
+              <button id="button-debug-dropdown" class="icon debug">
+                <i class="fa-solid fa-bug"></i>
+              </button>
+              <div class="ddsub">
+                <button
+                  id="button-show-config"
+                  class="icon"
+                  title="Show Config"
+                >
+                  <i class="fa-solid fa-gears"></i>
+                </button>
+                <button id="button-show-state" class="icon" title="Show State">
+                  <i class="fa-solid fa-sliders"></i>
+                </button>
+                <button
+                  id="button-show-solution"
+                  class="icon"
+                  title="Show Solution"
+                >
+                  <i class="fa-solid fa-list-check"></i>
+                </button>
+                <button id="button-win-game" class="icon" title="Win Game">
+                  <i class="fa-solid fa-trophy"></i>
+                </button>
+                <button
+                  id="button-win-game-almost"
+                  class="icon"
+                  title="Win Game (Almost)"
+                >
+                  <i class="fa-solid fa-award"></i>
+                </button>
+                <button
+                  id="button-win-animation"
+                  class="icon"
+                  title="Win Animation"
+                >
+                  <i class="fa-solid fa-flag-checkered"></i>
+                </button>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <div class="title">
+        <h1>Deckdle</h1>
+      </div>
+
+      <div class="menu-right">
+        <button
+          id="button-stats"
+          class="icon"
+          aria-label="Statistics"
+          tabindex="-1"
+        >
+          <i class="fa-solid fa-chart-simple"></i>
+        </button>
+        <button
+          id="button-settings"
+          class="icon"
+          aria-label="Settings"
+          tabindex="-1"
+        >
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+    <main>
+      <section id="game">
+        <div id="mode-container">
+          <div id="gamemode-container" class="setting-row">
+            <a
+              href="#"
+              id="gamemode-0"
+              data-active="true"
+              date-gamemodeid="daily"
+              onclick="Deckdle._changeSetting('gameMode', 'daily', event)"
+              >Daily</a
+            >
+
+            <span>/</span>
+
+            <a
+              href="#"
+              id="gamemode-1"
+              data-active="false"
+              date-gamemodeid="free"
+              onclick="Deckdle._changeSetting('gameMode', 'free', event)"
+              >Free Play</a
+            >
+          </div>
+
+          <div id="daily-details" class="setting-row">
+            Deckdle #<span class="index"></span> for <span class="day"></span>
+          </div>
+        </div>
+
+        <div id="cards-container">
+          <div id="tableau"></div>
+          <div id="tableau-count" class="card-label">Tableau (<span class="count"></span>)</div>
+          <div id="user-cards">
+            <div id="stock">
+              <div class="card-label">Stock (<span class="count"></span>)</div>
+            </div>
+            <div id="base">
+              <div class="card-label">Base (<span class="count"></span>)</div>
+              <div class="card empty" draggable="false"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+    <!-- JAVASCRIPTS (VENDOR)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="./assets/js/vendor/chance.min.js"></script>
+
+    <!-- JAVASCRIPTS (CUSTOM)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/app/constants.js"></script>
+    <script src="./assets/js/app/dom.js"></script>
+
+    <script src="./assets/js/app/cards/card.js"></script>
+    <script src="./assets/js/app/cards/deck.js"></script>
+    <script src="./assets/js/app/cards/stock.js"></script>
+    <script src="./assets/js/app/cards/tableau.js"></script>
+
+    <script src="./assets/js/app/lib/animation.js"></script>
+    <script src="./assets/js/app/lib/audio.js"></script>
+    <script src="./assets/js/app/lib/debug.js"></script>
+    <script src="./assets/js/app/lib/helpers.js"></script>
+    <script src="./assets/js/app/lib/localStorage.js"></script>
+    <script src="./assets/js/app/lib/modal.js"></script>
+    <script src="./assets/js/app/lib/puzzle.js"></script>
+    <script src="./assets/js/app/lib/ui.js"></script>
+
+    <script src="./assets/js/app/events.js"></script>
+    <script src="./assets/js/app/main.js"></script>
+  </body>
+</html>

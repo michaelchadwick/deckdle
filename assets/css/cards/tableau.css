@@ -1,0 +1,90 @@
+#tableau {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  height: 175px;
+  margin: 0 auto;
+  max-width: 320px;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  #tableau {
+    max-width: 500px;
+  }
+}
+@media (min-width: 992px) {
+  #tableau {
+    height: 215px;
+    margin-top: 20px;
+    max-width: 575px;
+  }
+}
+#tableau .col .card {
+  position: relative;
+}
+#tableau .col .card:nth-of-type(1) {
+  z-index: 6;
+}
+#tableau .col .card:nth-of-type(2) {
+  top: -55px;
+  z-index: 7;
+}
+@media (min-width: 992px) {
+  #tableau .col .card:nth-of-type(2) {
+    top: -65px;
+    z-index: 7;
+  }
+}
+#tableau .col .card:nth-of-type(3) {
+  top: -110px;
+  z-index: 8;
+}
+@media (min-width: 992px) {
+  #tableau .col .card:nth-of-type(3) {
+    top: -130px;
+  }
+}
+#tableau .col .card:nth-of-type(4) {
+  top: -165px;
+  z-index: 8;
+}
+@media (min-width: 992px) {
+  #tableau .col .card:nth-of-type(4) {
+    top: -195px;
+  }
+}
+#tableau .col .card:nth-of-type(5) {
+  top: -220px;
+  z-index: 10;
+}
+@media (min-width: 992px) {
+  #tableau .col .card:nth-of-type(5) {
+    top: -260px;
+  }
+}
+@media (hover: hover) {
+  #tableau .col .card:not(.available):hover {
+    background-color: var(--gray);
+    cursor: not-allowed;
+  }
+}
+
+#tableau-count {
+  display: inline-block;
+  margin: 0 auto;
+  min-height: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+#user-cards {
+  align-content: center;
+  background-color: var(--off-white);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: 110px;
+  justify-content: center;
+  margin: 20px auto;
+}
