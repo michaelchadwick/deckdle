@@ -23,13 +23,14 @@
 }
 @media (min-width: 992px) {
   .card {
-    font-size: 1.5rem;
-    height: 92px;
+    font-size: 1.45rem;
+    height: 90px;
     width: 80px;
   }
 
   @media (min-height: 500px) {
     .card {
+      font-size: 1.5rem;
       height: 96px;
     }
   }
@@ -76,6 +77,14 @@
 .rank-top {
   display: flex;
   justify-content: space-around;
+}
+@media (min-width: 992px) {
+  @media (min-height: 500px) {
+    .rank-bot,
+    .rank-top {
+      padding-top: 2px;
+    }
+  }
 }
 .suit {
   display: flex;

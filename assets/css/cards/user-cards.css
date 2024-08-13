@@ -16,6 +16,7 @@
 }
 @media (max-width: 375px) {
   #user-cards .card {
+    max-width: 50px;
     min-width: 17vw;
   }
 }
