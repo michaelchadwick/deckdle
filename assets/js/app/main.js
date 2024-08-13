@@ -30,17 +30,17 @@ Deckdle.modalOpen = async function (type) {
             <p>Deckdle is a daily solitaire card game. Currently, the only solitaire type is 'golf', but there are plans to add the classic 'klondike', and possibly 'pyramid' or 'spider'.</p>
 
             <h3 class="blamph">${gameType}</h3>
-            <p>Exhaust the tableau onto your base before your stock runs out. You can move any unobscured card as long as its rank is one higher or lower than the current base card.</p>
+            <p>Exhaust the tableau onto your base before your stock runs out. You can move any unobscured card (just click/touch it) as long as its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current base card. Suit <strong>does not</strong> matter.</p>
 
             <div class="flex">
               <div>
                 <h4>Daily</h4>
-                <p>Come back every day (at 12 am PST) for a new <span class="blamph">${gameType}</span> tableau and stock!</p>
+                <p>Come back every day (at 12 am PST) for a new <span class="blamph">${gameType}</span> solitaire tableau and stock!</p>
               </div>
 
               <div>
                 <h4>Free</h4>
-                <p>Play <span class="blamph">${gameType}</span> endlessly!
+                <p>Play <span class="blamph">${gameType}</span> solitaire endlessly!
               </div>
             </div>
 
