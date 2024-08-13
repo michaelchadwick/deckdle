@@ -22,10 +22,15 @@
 }
 @media (min-width: 992px) {
   #tableau {
-    height: 215px;
-    margin-top: 20px;
+    height: 210px;
+    margin: 10px auto;
     max-width: 575px;
   }
+
+  @media (min-height: 500px) {
+    #tableau {
+      height: 225px;
+    }
 }
 #tableau .col .card {
   position: relative;

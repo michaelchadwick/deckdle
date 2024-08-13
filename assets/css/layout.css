@@ -280,15 +280,10 @@ section#game #mode-container .setting-row button#button-create-new i {
 }
 
 section#game #mode-container #gamemode-container {
-  height: 15px;
+  height: 20px;
 }
 section#game #mode-container #gamemode-container a.disabled:hover {
   text-decoration: none;
-}
-@media (min-height: 500px) {
-  section#game #mode-container #gamemode-container {
-    height: 20px;
-  }
 }
 
 section#game #mode-container #daily-details {
@@ -310,8 +305,8 @@ section#game #mode-container #daily-details .day {
 }
 
 section#game #game-type {
-  font-size: 1.5rem;
-  height: 30px;
+  font-size: 1.4rem;
+  height: 27px;
   margin: 0 auto;
   text-align: center;
   text-transform: uppercase;

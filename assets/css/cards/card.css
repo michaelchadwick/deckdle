@@ -26,6 +26,12 @@
     height: 92px;
     width: 80px;
   }
+
+  @media (min-height: 500px) {
+    .card {
+      height: 96px;
+    }
+  }
 }
 @media (hover: hover) {
   .col .card.available:hover {
