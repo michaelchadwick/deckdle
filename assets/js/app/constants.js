@@ -19,6 +19,7 @@ const DECKDLE_DEFAULT_CONFIG = {
 const DECKDLE_DEFAULT_STATE = {
   base: [],
   gameState: 'IN_PROGRESS',
+  gameType: 'golf',
   gameWon: false,
   lastCompletedTime: null,
   lastPlayedTime: null,

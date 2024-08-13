@@ -124,3 +124,7 @@ Deckdle.ui._updateStockBaseCounts = () => {
   Deckdle.dom.stockCount.innerText = Deckdle.__getState()['stock'].length
   Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length
 }
+
+Deckdle.ui._updateGameType = () => {
+  Deckdle.dom.gameType.innerText = Deckdle.__getState()['gameType']
+}

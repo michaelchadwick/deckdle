@@ -22,25 +22,34 @@ Deckdle.modalOpen = async function (type) {
   switch (type) {
     case 'start':
     case 'help':
-      modalText = `
-        <p>Exhaust the tableau onto your base before your stock runs out. You can move any unobscured card onto the stiock</p>
+      const gameType = Deckdle.__getState()['gameType']
+      switch (gameType) {
+        case 'golf':
+        default:
+          modalText = `
+            <p>Deckdle is a daily solitaire card game. Currently, the only solitaire type is 'golf', but there are plans to add the classic 'klondike', and possibly 'pyramid' or 'spider'.</p>
 
-        <div class="flex">
-          <div>
-            <h4>Daily</h4>
-            <p>Come back every day (at 12 am PST) for a new tableau and stock!</p>
-          </div>
+            <h3 class="blamph">${gameType}</h3>
+            <p>Exhaust the tableau onto your base before your stock runs out. You can move any unobscured card as long as its rank is one higher or lower than the current base card.</p>
 
-          <div>
-            <h4>Free</h4>
-            <p>Play golf endlessly!
-          </div>
-        </div>
+            <div class="flex">
+              <div>
+                <h4>Daily</h4>
+                <p>Come back every day (at 12 am PST) for a new <span class="blamph">${gameType}</span> tableau and stock!</p>
+              </div>
 
-        <hr />
+              <div>
+                <h4>Free</h4>
+                <p>Play <span class="blamph">${gameType}</span> endlessly!
+              </div>
+            </div>
 
-        <p><strong>Dev</strong>: <a href="https://michaelchadwick.info" target="_blank">Michael Chadwick</a>.</p>
-      `
+            <hr />
+
+            <p><strong>Dev</strong>: <a href="https://michaelchadwick.info" target="_blank">Michael Chadwick</a>.</p>
+          `
+          break
+      }
 
       this.myModal = new Modal(
         'perm',
@@ -255,9 +264,9 @@ Deckdle.initApp = async () => {
 
   Deckdle._attachEventListeners()
 
-  Deckdle._getNebyooApps()
+  Deckdle.ui._updateGameType()
 
-  // console.log('pre-load', Deckdle.__getState())
+  Deckdle._getNebyooApps()
 
   Deckdle._loadGame()
 }
