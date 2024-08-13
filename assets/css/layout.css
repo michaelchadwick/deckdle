@@ -282,6 +282,9 @@ section#game #mode-container .setting-row button#button-create-new i {
 section#game #mode-container #gamemode-container {
   height: 15px;
 }
+section#game #mode-container #gamemode-container a.disabled:hover {
+  text-decoration: none;
+}
 @media (min-height: 500px) {
   section#game #mode-container #gamemode-container {
     height: 20px;
