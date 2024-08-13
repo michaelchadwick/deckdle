@@ -31,6 +31,7 @@
     #tableau {
       height: 225px;
     }
+  }
 }
 #tableau .col .card {
   position: relative;
