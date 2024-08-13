@@ -1,7 +1,6 @@
 @import 'cards/card.css';
-@import 'cards/base.css';
-@import 'cards/stock.css';
 @import 'cards/tableau.css';
+@import 'cards/user-cards.css';
 
 @import 'common.css';
 @import 'layout.css';

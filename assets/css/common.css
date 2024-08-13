@@ -323,6 +323,7 @@ button.share.tiny {
 }
 
 .blamph {
+  font-family: 'Changa Bold', monospace;
   font-weight: bold;
   text-transform: uppercase;
 }

@@ -83,6 +83,13 @@
   padding: 0 16px;
   width: 100%;
 }
+.modal-text p {
+  margin-bottom: 5px;
+}
+.modal-text strong {
+  font-family: 'Changa Bold', monospace;
+  font-weight: bold;
+}
 .modal-text ul,
 .modal-text {
   line-height: 1.2;
@@ -205,15 +212,8 @@
 .modal-text li.not-applicable {
   color: var(--disabled);
 }
-.modal-text li.not-applicable span.solution-category + ul {
-  border-color: var(--disabled);
-}
 .modal-text li.full {
   color: var(--dark-color);
-}
-.modal-text li.full span.solution-category + ul {
-  background-color: var(--vlight-color);
-  border-color: var(--dark-color);
 }
 
 /* MODAL->STATISTICS */

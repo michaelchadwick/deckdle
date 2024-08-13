@@ -3,9 +3,17 @@
   border: 1px solid #000;
   border-radius: 5px;
   box-shadow: 2px 2px 2px #ccc;
-  font-size: 1.25rem;
-  height: 76px;
-  width: 44px;
+  font-size: 1rem;
+  height: 10vw;
+  min-height: 60px;
+  width: 12vw;
+}
+@media (min-width: 375px) {
+  .card {
+    font-size: 1.25rem;
+    height: 76px;
+    width: 50px;
+  }
 }
 @media (min-width: 768px) {
   .card {
@@ -69,9 +77,14 @@
 
 .card-label {
   font-family: monospace;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   margin: 5px 0 0;
   text-transform: uppercase;
+}
+@media (min-width: 375px) {
+  .card-label {
+    font-size: 0.75rem;
+  }
 }
 @media (min-width: 768px) {
   .card-label {

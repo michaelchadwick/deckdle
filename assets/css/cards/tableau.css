@@ -3,14 +3,21 @@
   gap: 0;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  height: 175px;
+  height: 100px;
   margin: 0 auto;
-  max-width: 320px;
+  max-width: 330px;
   width: 100%;
+}
+@media (min-width: 375px) {
+  #tableau {
+    height: 175px;
+    margin: 5px auto 0;
+    max-width: 365px;
+  }
 }
 @media (min-width: 768px) {
   #tableau {
-    max-width: 500px;
+    max-width: 430px;
   }
 }
 @media (min-width: 992px) {
@@ -76,15 +83,4 @@
   min-height: 20px;
   text-align: center;
   width: 100%;
-}
-
-#user-cards {
-  align-content: center;
-  background-color: var(--off-white);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  height: 110px;
-  justify-content: center;
-  margin: 20px auto;
 }
