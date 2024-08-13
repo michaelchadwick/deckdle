@@ -222,6 +222,7 @@ section#game {
   flex-direction: column;
   height: calc(100% - 50px); /* whole screen except for header */
   margin: 0 auto;
+  transition: all 400ms;
   width: 100%;
 }
 @media (min-height: 500px) {
