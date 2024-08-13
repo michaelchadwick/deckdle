@@ -141,6 +141,9 @@ button.icon {
   font-size: 24px;
   padding: 0 4px;
 }
+button.icon:disabled {
+  cursor: not-allowed;
+}
 @media (hover: hover) {
   button.icon:hover {
     color: var(--base-color);
