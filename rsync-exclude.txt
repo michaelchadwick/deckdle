@@ -12,6 +12,7 @@ assets/scripts/*.rb
 assets/text
 bower.json
 LICENSE.md
+node_modules
 README.md
 Rakefile
 rsync-exclude.txt
