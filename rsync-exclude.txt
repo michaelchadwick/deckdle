@@ -11,6 +11,8 @@ assets/scripts/*.py
 assets/scripts/*.rb
 assets/text
 bower.json
+cypress/
+cypress.config.js
 LICENSE.md
 node_modules
 README.md
