@@ -9,7 +9,7 @@
   transition: all 200ms;
   width: 12vw;
 }
-@media (min-width: 375px) {
+@media (min-width: 376px) {
   .card {
     font-size: 1.25rem;
     height: 76px;
@@ -87,7 +87,7 @@
   margin: 5px 0 0;
   text-transform: uppercase;
 }
-@media (min-width: 375px) {
+@media (min-width: 376px) {
   .card-label {
     font-size: 0.75rem;
   }

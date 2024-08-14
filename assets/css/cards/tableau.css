@@ -9,7 +9,7 @@
   transition: all 400ms;
   width: 100%;
 }
-@media (min-width: 375px) {
+@media (min-width: 376px) {
   #tableau {
     height: 175px;
     margin: 5px auto 0;
