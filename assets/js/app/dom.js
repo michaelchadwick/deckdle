@@ -26,11 +26,12 @@ Deckdle.dom.interactive = {
   cards: document.getElementsByClassName('card'),
   tableau: document.getElementById('tableau'),
   stock: document.getElementById('stock'),
-  stockCards: document.querySelectorAll('#stock .card'),
   base: document.getElementById('base'),
 }
-// DOM > main UI buttons
-Deckdle.dom.mainUI = {}
+// DOM > keyboard buttons
+Deckdle.dom.keyboard = {
+  btnCreateNew: document.getElementById('button-create-new'),
+}
 // DOM > interactive elements (debug)
 Deckdle.dom.interactive.debug = {
   all: document.getElementById('debug-buttons'),

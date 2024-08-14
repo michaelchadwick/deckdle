@@ -265,18 +265,6 @@ Deckdle._loadSettings = function () {
   const lsSettings = JSON.parse(localStorage.getItem(DECKDLE_SETTINGS_LS_KEY))
 
   if (lsSettings && Object.keys(lsSettings)) {
-    if (lsSettings.clearWord !== undefined) {
-      Deckdle.settings.clearWord = lsSettings.clearWord
-
-      if (Deckdle.settings.clearWord) {
-        const setting = document.getElementById('button-setting-clear-word')
-
-        if (setting) {
-          setting.dataset.status = 'true'
-        }
-      }
-    }
-
     if (lsSettings.darkMode !== undefined) {
       Deckdle.settings.darkMode = lsSettings.darkMode
 
@@ -321,6 +309,7 @@ Deckdle._loadSettings = function () {
     Deckdle.dom.interactive.gameModeDailyLink.dataset.active = false
     Deckdle.dom.interactive.gameModeFreeLink.dataset.active = true
     Deckdle.dom.dailyDetails.classList.remove('show')
+    Deckdle.dom.keyboard.btnCreateNew.disabled = false
   }
 }
 // change a setting (gear icon or difficulty) value

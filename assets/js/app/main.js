@@ -264,10 +264,12 @@ Deckdle.initApp = async () => {
 
   Deckdle._attachEventListeners()
 
+  // lib/ui.js
   Deckdle.ui._updateGameType()
 
   Deckdle._getNebyooApps()
 
+  // lib/localStorage.js
   Deckdle._loadGame()
 }
 
@@ -281,18 +283,22 @@ Deckdle._createNewSetup = async function (gameMode, setupId = null) {
   Deckdle.__setConfig('foo', [], gameMode)
 
   // set state to defaults
+  Deckdle.__setState('base', [], gameMode)
   Deckdle.__setState('gameState', 'IN_PROGRESS', gameMode)
+  Deckdle.__setState('gameType', DECKDLE_DEFAULT_GAMETYPE, gameMode)
   Deckdle.__setState('gameWon', false, gameMode)
   Deckdle.__setState('lastCompletedTime', null, gameMode)
   Deckdle.__setState('lastPlayedTime', null, gameMode)
+  Deckdle.__setState('stock', [], gameMode)
+  Deckdle.__setState('tableau', {}, gameMode)
 
-  // get seed word
+  // get setupId
   if (gameMode == 'free') {
     if (!setupId) {
       try {
         setupId = await Deckdle.__getNewSetupId()
       } catch (err) {
-        console.error('could not get new seed word', err)
+        console.error('could not get new setupId', err)
       }
     }
   } else {
@@ -323,7 +329,10 @@ Deckdle._createNewSetup = async function (gameMode, setupId = null) {
     )
 
     if (puzzle) {
-      // fill DOM tiles
+      // clear everything
+      Deckdle._emptyPlayingField()
+
+      // fill DOM cards
       Deckdle._fillCards()
     }
   } catch (err) {
@@ -424,7 +433,7 @@ Deckdle._confirmFreeCreateNew = async function () {
     const confirmed = await myConfirm.question()
 
     if (confirmed) {
-      Deckdle._resetFreeProgress()
+      // Deckdle._resetFreeProgress()
       await Deckdle._createNewSetup('free')
     }
   } catch (err) {
@@ -472,8 +481,15 @@ Deckdle._checkWinState = function () {
   }
 }
 
+Deckdle._emptyPlayingField = function () {
+  // clear tableau, stock, base
+  Deckdle.dom.interactive.tableau.replaceChildren()
+  Deckdle.dom.interactive.stock.querySelectorAll('.card').forEach(card => card.remove())
+  Deckdle.dom.interactive.base.querySelectorAll('.card').forEach(card => card.remove())
+}
+
 Deckdle._fillCards = function () {
-  // create <div class="col"> * 7
+  // create <div id="tableau"><div class="col"> * 7</div>
   for (let i = 0; i < 7; i++) {
     const col = document.createElement('div')
     col.classList.add('col')
@@ -500,12 +516,12 @@ Deckdle._fillCards = function () {
 
   Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
 
-  const stockCards = Deckdle.__getState()['stock']
-
   // fill stock UI with leftover cards
-  stockCards.forEach(card => {
+  Deckdle.__getState()['stock'].forEach(card => {
     Deckdle.ui._addCardToStock(card)
   })
+
+  Deckdle._moveCardFromStockToBase()
 
   Deckdle.dom.stockCount.innerText = Deckdle.__getState()['stock'].length
   Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length

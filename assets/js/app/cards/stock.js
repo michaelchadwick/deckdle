@@ -13,10 +13,6 @@ Deckdle._checkForEmptyStock = function () {
 Deckdle._onStockClick = function () {
   if (Deckdle.__getState()['stock'].length) {
     Deckdle._moveCardFromStockToBase()
-
-    Deckdle.ui._updateStockBaseCounts()
-
-    Deckdle._checkForEmptyStock()
   }
 }
 
@@ -31,4 +27,8 @@ Deckdle._moveCardFromStockToBase = () => {
 
   Deckdle.__setState('base', base)
   Deckdle.__setState('stock', stock)
+
+  Deckdle.ui._updateStockBaseCounts()
+
+  Deckdle._checkForEmptyStock()
 }

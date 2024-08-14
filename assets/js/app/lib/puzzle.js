@@ -18,8 +18,6 @@ class Puzzle {
     // create tableau and stock
     this.tableau = this.#createTableau()
     this.stock = this.#createStock()
-
-    Deckdle._onStockClick()
   }
 
   /*

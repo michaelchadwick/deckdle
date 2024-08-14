@@ -3,9 +3,9 @@ Deckdle._onCardClick = function (card) {
   // console.log('card was clicked', card, card.dataset.row)
 
   if (card.parentElement.id == 'stock') {
-    Deckdle._onStockClick(card.parentElement)
+    Deckdle._onStockClick()
   } else if (card.parentElement.parentElement.id == 'stock') {
-    Deckdle._onStockClick(card.parentElement.parentElement)
+    Deckdle._onStockClick()
   } else if (card.parentElement.id == 'tableau') {
     Deckdle._onTableauClick(card, card.id, card.dataset.row)
   } else if (card.parentElement.parentElement.id == 'tableau') {
@@ -59,12 +59,10 @@ Deckdle._attachEventListeners = function () {
     Deckdle.modalOpen('settings')
   )
 
-  // [A] card interaction
-  // Array.from(Deckdle.dom.interactive.cards).forEach((card) => {
-  //   card.addEventListener('click', (e) => {
-  //     Deckdle._onCardClick(e)
-  //   })
-  // })
+  // + create new solution
+  Deckdle.dom.keyboard.btnCreateNew.addEventListener('click', () => {
+    Deckdle._confirmFreeCreateNew()
+  })
 
   // local debug buttons
   if (Deckdle.env == 'local') {
