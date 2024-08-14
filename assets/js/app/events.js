@@ -17,6 +17,8 @@ Deckdle._onCardClick = function (card) {
 Deckdle._handleClickTouch = function (event) {
   // console.log('_handleClickTouch', event)
 
+  event.preventDefault()
+
   const dialog = document.getElementsByClassName('modal-dialog')[0]
   const elem = event.target
 
@@ -27,7 +29,9 @@ Deckdle._handleClickTouch = function (event) {
     if (elem == dialog && !isConfirm) {
       dialog.remove()
     }
-  } else {
+  }
+  // capture card click/touch and send meta to handler
+  else {
     if (elem == Deckdle.dom.navOverlay) {
       Deckdle.dom.navOverlay.classList.toggle('show')
     } else if (event.target.classList.contains('card')) {
