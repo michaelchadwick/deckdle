@@ -35,16 +35,6 @@
     }
   }
 }
-@media (hover: hover) {
-  .col .card.available:hover {
-    background-color: #ebf7ff;
-    border: 1px dashed var(--dark-color);
-    cursor: pointer;
-  }
-  .col .card.removed:hover {
-    cursor: default;
-  }
-}
 .card.removed {
   opacity: 0;
   z-index: -9999 !important;
