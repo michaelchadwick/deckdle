@@ -1,4 +1,4 @@
-// user clicks a card (tableau)
+// user clicks a card (stock or tableau)
 Deckdle._onCardClick = function (card) {
   // console.log('card was clicked', card, card.dataset.row)
 
@@ -15,12 +15,12 @@ Deckdle._onCardClick = function (card) {
 
 // handle both clicks and touches outside of modals
 Deckdle._handleClickTouch = function (event) {
-  // console.log('_handleClickTouch', event)
-
   event.preventDefault()
 
   const dialog = document.getElementsByClassName('modal-dialog')[0]
   const elem = event.target
+
+  // console.log('_handleClickTouch', elem, dialog)
 
   if (dialog) {
     const isConfirm = dialog.classList.contains('modal-confirm')
