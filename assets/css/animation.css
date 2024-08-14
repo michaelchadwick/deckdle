@@ -4,16 +4,12 @@
   --animate-repeat: 1;
 }
 
-.tile {
+.card {
   --animate-duration: 75ms;
 }
 
 header .menu-left #nav-overlay #nav-content {
   animation: SlideRight 200ms;
-}
-
-section#game #guess-container #guess {
-  --animate-duration: 150ms;
 }
 
 @keyframes SlideRight {

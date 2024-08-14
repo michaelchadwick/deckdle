@@ -95,18 +95,11 @@ Deckdle._initAudio = async function () {
     cache.keys().then(function (keys) {
       if (!keys.length) {
         cache.addAll([
-          `${path}/correct1.wav`,
-          `${path}/correct2.wav`,
-          `${path}/correct3.wav`,
-          `${path}/pangram.wav`,
-          `${path}/repeat1.wav`,
-          `${path}/repeat2.wav`,
-          `${path}/repeat3.wav`,
-          `${path}/tile_click.wav`,
-          `${path}/tile_delete.wav`,
-          `${path}/wrong1.wav`,
-          `${path}/wrong2.wav`,
-          `${path}/wrong3.wav`,
+          `${path}/click_stock.wav`,
+          `${path}/click_tableau.wav`,
+          `${path}/lose.wav`,
+          `${path}/win.wav`,
+
         ])
       } else {
         // console.info(`${DECKDLE_CACHE_AUDIO_KEY} is full, so no need to initialize.`)

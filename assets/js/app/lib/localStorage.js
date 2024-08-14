@@ -22,25 +22,12 @@ Deckdle._loadGame = async function () {
     let i = 0
     lsStateDaily.forEach((lsState) => {
       Deckdle.__setState(
-        'difficulty',
-        lsState.difficulty || dailyDefaults.difficulty,
-        'daily',
-        i
-      )
-      Deckdle.__setState(
         'gameState',
         lsState.gameState || dailyDefaults.gameState,
         'daily',
         i
       )
       Deckdle.__setState('gameWon', lsState.gameWon || false, 'daily', i)
-      Deckdle.__setState(
-        'guessedWords',
-        lsState.guessedWords || dailyDefaults.guessedWords,
-        'daily',
-        i
-      )
-      Deckdle.__setState('hintsUsed', lsState.hintsUsed || 0, 'daily', i)
       Deckdle.__setState(
         'lastCompletedTime',
         lsState.lastCompletedTime || null,
@@ -50,12 +37,6 @@ Deckdle._loadGame = async function () {
       Deckdle.__setState(
         'lastPlayedTime',
         lsState.lastPlayedTime || null,
-        'daily',
-        i
-      )
-      Deckdle.__setState(
-        'pangramFound',
-        lsState.pangramFound || false,
         'daily',
         i
       )
@@ -122,12 +103,6 @@ Deckdle._loadGame = async function () {
 
     let i = 0
     lsStateFree.forEach((lsState) => {
-      Deckdle.__setState(
-        'difficulty',
-        lsState.difficulty || freeDefaults.difficulty,
-        'free',
-        i
-      )
       Deckdle.__setState(
         'gameState',
         lsState.gameState || freeDefaults.gameState,

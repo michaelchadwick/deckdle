@@ -527,18 +527,6 @@ Deckdle._fillCards = function () {
   Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length
 }
 
-// dynamically resize board depending on viewport
-Deckdle._resizeBoard = function () {
-  const boardContainer = document.querySelector('#board-container')
-  const boardHeight = boardContainer.clientHeight + 20
-  const containerHeight = Math.min(Math.floor(boardHeight), 350)
-  const tileHeight = 2.5 * Math.floor(containerHeight / 3)
-
-  const board = document.querySelector('#board')
-  board.style.width = `${containerHeight}px`
-  board.style.height = `${tileHeight}px`
-}
-
 // copy results to clipboard for sharing
 Deckdle._shareResults = async function (type = 'completion') {
   let shareText = ''

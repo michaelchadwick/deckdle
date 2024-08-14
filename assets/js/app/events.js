@@ -98,7 +98,7 @@ Deckdle._attachEventListeners = function () {
           Deckdle._winGameHax('almost')
         }
       )
-      // 🏁 display win tile animation
+      // 🏁 display win animation
       Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener(
         'click',
         () => {
@@ -118,9 +118,6 @@ Deckdle._attachEventListeners = function () {
   // When the user clicks or touches anywhere outside of the modal, close it
   window.addEventListener('click', Deckdle._handleClickTouch)
   window.addEventListener('touchend', Deckdle._handleClickTouch)
-
-  // window.onload = Deckdle._resizeBoard
-  // window.onresize = Deckdle._resizeBoard
 
   document.body.addEventListener(
     'touchmove',
