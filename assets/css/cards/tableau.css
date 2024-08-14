@@ -2,7 +2,7 @@
   display: grid;
   gap: 0;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 18px);
   height: 100px;
   margin: 0 auto;
   max-width: 330px;
@@ -11,6 +11,7 @@
 }
 @media (min-width: 376px) {
   #tableau {
+    grid-template-rows: repeat(5, 34px);
     height: 175px;
     margin: 5px auto 0;
     max-width: 365px;
@@ -23,6 +24,7 @@
 }
 @media (min-width: 992px) {
   #tableau {
+    grid-template-rows: repeat(5, 46px);
     height: 210px;
     margin: 10px auto;
     max-width: 575px;
