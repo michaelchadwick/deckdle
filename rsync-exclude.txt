@@ -8,6 +8,7 @@
 .git
 .gitignore
 .husky
+*.logicx
 .prettierignore
 .prettierrc.js
 .stylelintignore
