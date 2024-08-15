@@ -315,13 +315,13 @@ section#game #game-type {
 }
 
 section#game #cards-container {
-  background-color: var(--white);
-  border: 2px solid var(--black);
-  box-shadow: 4px 4px 4px var(--gray-dark);
   margin: 0;
 }
 @media (min-width: 768px) {
   section#game #cards-container {
+    background-color: var(--white);
+    border: 2px solid var(--black);
+    box-shadow: 4px 4px 4px var(--gray-dark);
     margin: 0 1rem;
   }
 }
@@ -345,6 +345,6 @@ section#game #cards-container {
   #version-tag {
     bottom: 17px;
     font-size: 1.4rem;
-    left: -47px;
+    left: -37px;
   }
 }

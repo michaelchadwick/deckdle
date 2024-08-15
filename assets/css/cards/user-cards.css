@@ -1,6 +1,5 @@
 #user-cards {
   align-content: center;
-  background-color: var(--off-white);
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -10,6 +9,7 @@
 }
 @media (min-width: 768px) {
   #user-cards {
+    background-color: var(--off-white);
     gap: 1rem;
     margin: 20px auto;
   }
@@ -17,7 +17,7 @@
 @media (max-width: 375px) {
   #user-cards .card {
     max-width: 50px;
-    min-width: 13vw;
+    min-width: 40px;
   }
 }
 
