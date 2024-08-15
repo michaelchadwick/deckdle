@@ -83,6 +83,13 @@ body.dark-mode section#game #keyboard-container .row:last-of-type button {
   border: 1px solid var(--gray);
   color: var(--white);
 }
+@media (hover: hover) {
+  body.dark-mode section#game #keyboard-container .row:last-of-type button:hover {
+    background-color: var(--gray-dark);
+    border: 1px solid var(--black);
+    color: var(--white);
+  }
+}
 body.dark-mode
   section#game
   #keyboard-container
