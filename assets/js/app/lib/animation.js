@@ -31,15 +31,17 @@ Deckdle._animateCSS = (element, animation, loop, prefix = 'animate__') => {
 
 Deckdle.__winAnimation = async function () {
   return new Promise((resolve, reject) => {
-    Array.from(Deckdle.dom.interactive.tableau).forEach((card) =>
+    Array.from(Deckdle.dom.interactive.tableau.querySelector('.card')).forEach((card) =>
       card.style.setProperty('--animate-duration', '1000ms')
     )
 
-    setTimeout(() => Deckdle._animateCSS('#tableau #row0', 'bounce'), 0)
-    setTimeout(() => Deckdle._animateCSS('#tableau #row1', 'bounce'), 100)
-    setTimeout(() => Deckdle._animateCSS('#tableau #row2', 'bounce'), 200)
-    setTimeout(() => Deckdle._animateCSS('#tableau #row3', 'bounce'), 300)
-    setTimeout(() => Deckdle._animateCSS('#tableau #row4', 'bounce'), 400)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col0', 'bounce'), 0)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col1', 'bounce'), 70)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col2', 'bounce'), 140)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col3', 'bounce'), 200)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col4', 'bounce'), 250)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col5', 'bounce'), 285)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col6', 'bounce'), 300)
 
     setTimeout(() => resolve('__winAnimation ended'), 1000)
   })
