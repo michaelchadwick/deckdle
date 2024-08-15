@@ -212,9 +212,10 @@ Deckdle.modalOpen = async function (type) {
       break
 
     case 'game-over-win':
-      if (Deckdle.__getState()['stock'].length > 0) {
+      const stockCount = Deckdle.__getState()['stock'].length
+      if (stockCount > 0) {
         modalText = `
-          You won with a score of ${Deckdle.__getState()['stock'].length} UNDER par! :-D
+          You won with a score of ${stockCount} UNDER par! :-D
         `
       } else {
         modalText = `
@@ -473,17 +474,13 @@ Deckdle._resetFreeProgress = async function () {
 Deckdle._checkWinState = function () {
   // console.log('checking win state...')
 
-  const stockCount = Deckdle.__getState().stock.length
-  const tableauCount = Deckdle._tableauCount()
-
   // tableau exhausted
-  if (tableauCount == 0) {
+  if (Deckdle._tableauCount() == 0) {
     Deckdle.modalOpen('game-over-win')
   }
-
   // stock exhausted and no valid tableau card
-  if (
-    stockCount == 0 &&
+  else if (
+    Deckdle.__getState().stock.length == 0 &&
     !Deckdle._tableauHasValidCard()
   ) {
     Deckdle.modalOpen('game-over-lose')
