@@ -327,7 +327,7 @@ section#game #cards-container {
 }
 
 #version-tag {
-  background-color: #ff0000f2;
+  background-color: #ff0000b2;
   bottom: 12px;
   color: var(--white);
   font-size: 1rem;
