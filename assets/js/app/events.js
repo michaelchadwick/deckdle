@@ -15,8 +15,6 @@ Deckdle._onCardClick = function (card) {
 
 // handle both clicks and touches outside of modals
 Deckdle._handleClickTouch = function (event) {
-  event.preventDefault()
-
   const dialog = document.getElementsByClassName('modal-dialog')[0]
   const elem = event.target
 
@@ -35,8 +33,10 @@ Deckdle._handleClickTouch = function (event) {
     if (elem == Deckdle.dom.navOverlay) {
       Deckdle.dom.navOverlay.classList.toggle('show')
     } else if (event.target.classList.contains('card')) {
+      event.preventDefault()
       Deckdle._onCardClick(elem)
     } else if (Deckdle.__hasParentWithMatchingSelector(elem, '.card')) {
+      event.preventDefault()
       Deckdle._onCardClick(Deckdle.__getParentCard(elem, '.card'))
     } else {
       // console.log('something with no handler was clicked/touched', elem)
