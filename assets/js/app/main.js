@@ -11,6 +11,10 @@ Deckdle.config = DECKDLE_DEFAULTS.config
 // state: saved between sessions in LOCAL STORAGE
 Deckdle.state = DECKDLE_DEFAULTS.state
 
+if (!localStorage.getItem(DECKDLE_SETTINGS_LS_KEY)) {
+  localStorage.setItem(DECKDLE_SETTINGS_LS_KEY, JSON.stringify(DECKDLE_DEFAULTS.settings))
+}
+
 /*************************************************************************
  * public methods *
  *************************************************************************/
@@ -131,11 +135,11 @@ Deckdle.modalOpen = async function (type) {
               </div>
             </div>
           </div>
-          <!-- noisy
+          <!-- noisy -->
           <div class="setting-row">
             <div class="text">
               <div class="title">Sounds</div>
-              <div class="description">Enable some cute sound effects</div>
+              <div class="description">Enable music and sound.</div>
             </div>
             <div class="control">
               <div class="container">
@@ -149,7 +153,6 @@ Deckdle.modalOpen = async function (type) {
               </div>
             </div>
           </div>
-          -->
         </div>
       `
 
@@ -220,6 +223,9 @@ Deckdle.modalOpen = async function (type) {
       }
 
       this.myModal = new Modal('perm', 'Game Over (Win)', modalText, null, null)
+
+      Deckdle._playSFX('win')
+
       break
 
     case 'game-over-lose':
@@ -228,6 +234,9 @@ Deckdle.modalOpen = async function (type) {
       `
 
       this.myModal = new Modal('perm', 'Game Over (Lose)', modalText, null, null)
+
+      Deckdle._playSFX('lose')
+
       break
 
     case 'win-game':

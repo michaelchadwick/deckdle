@@ -4,8 +4,6 @@ Deckdle._checkForEmptyStock = function () {
   if (!Deckdle.__getState()['stock'].length) {
     Deckdle.dom.interactive.stock.appendChild(Deckdle.ui._createEmptyCard())
 
-    console.log('no more cards in stock')
-
     Deckdle._checkWinState()
   }
 }
@@ -13,6 +11,8 @@ Deckdle._checkForEmptyStock = function () {
 Deckdle._onStockClick = function () {
   if (Deckdle.__getState()['stock'].length) {
     Deckdle._moveCardFromStockToBase()
+
+    Deckdle._playSFX('click_stock', Deckdle.__getState()['stock'].length)
   }
 }
 

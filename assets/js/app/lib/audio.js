@@ -1,123 +1,160 @@
-/* audio */
-/* sound playing mechanisms */
+/* /app/lib/misc/audio */
 /* global Deckdle */
+/* eslint-disable no-unused-vars */
 
-const DECKDLE_CACHE_AUDIO_KEY = 'deckdle-cache-audio'
-const DECKDLE_ASSET_DATA_PATH = '/assets/audio'
+Deckdle._initSynths = function () {
+  // console.log('[INITIALIZING] synths')
 
-// Try to get data from the cache, but fall back to fetching it live.
-async function getAudio(cacheName, url) {
-  let cachedAudio = await getCachedAudio(cacheName, url)
-
-  if (cachedAudio) {
-    return cachedAudio
-  }
-
-  const cacheStorage = await caches.open(cacheName)
-  await cacheStorage.add(url)
-  cachedAudio = await getCachedAudio(cacheName, url)
-  await deleteOldCaches(cacheName)
-
-  return cachedAudio
-}
-
-// Get data from the cache.
-async function getCachedAudio(cacheName, url) {
-  const cacheStorage = await caches.open(cacheName)
-  const cachedResponse = await cacheStorage.match(url)
-
-  if (!cachedResponse || !cachedResponse.ok) {
-    return false
-  }
-
-  return await cachedResponse.arrayBuffer()
-}
-
-// Delete any old caches to respect user's disk space.
-async function deleteOldCaches(currentCache) {
-  const keys = await caches.keys()
-
-  for (const key of keys) {
-    const isOurCache = DECKDLE_CACHE_AUDIO_KEY
-
-    if (currentCache === key || !isOurCache) {
-      continue
-    }
-
-    caches.delete(key)
-  }
-}
-
-// use CacheStorage to check cache
-async function useCache(url) {
-  const context = new AudioContext()
-  const gainNode = context.createGain()
-  const source = context.createBufferSource()
-
-  try {
-    const audioBuffer = await getAudio(DECKDLE_CACHE_AUDIO_KEY, url)
-
-    gainNode.gain.value = 0.3
-    source.buffer = await context.decodeAudioData(audioBuffer)
-
-    source.connect(gainNode)
-    gainNode.connect(context.destination)
-
-    source.start()
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-// use direct fetch(url)
-async function useFetch(url) {
-  const context = new AudioContext()
-  const gainNode = context.createGain()
-  const source = context.createBufferSource()
-
-  const audioBuffer = await fetch(url)
-    .then((response) => response.arrayBuffer())
-    .then((ArrayBuffer) => context.decodeAudioData(ArrayBuffer))
-
-  gainNode.gain.value = 0.5
-  source.buffer = audioBuffer
-
-  source.connect(gainNode)
-  gainNode.connect(context.destination)
-
-  source.start()
-}
-
-Deckdle._initAudio = async function () {
-  const path = DECKDLE_ASSET_DATA_PATH
-
-  await caches.open(DECKDLE_CACHE_AUDIO_KEY).then((cache) => {
-    cache.keys().then(function (keys) {
-      if (!keys.length) {
-        cache.addAll([
-          `${path}/click_stock.wav`,
-          `${path}/click_tableau.wav`,
-          `${path}/lose.wav`,
-          `${path}/win.wav`,
-
-        ])
-      } else {
-        // console.info(`${DECKDLE_CACHE_AUDIO_KEY} is full, so no need to initialize.`)
-      }
+  if (!Deckdle.config.synthBGM) {
+    // initialize synthBGM instance
+    Deckdle.config.synthBGM = new WebAudioTinySynth({
+      debug: 0,
+      loop: 1,
+      masterVol: Deckdle.settings.soundBGMLevel,
+      quality: 0, // 0: chiptune, 1: FM
+      reverbLev: 0.1,
+      useReverb: 1,
+      voices: 8,
     })
-  })
+  }
+
+  Deckdle.config.synthBGM.setLoop(1)
+  Deckdle.config.synthBGM.setMasterVol(Deckdle.settings.soundBGMLevel)
+  Deckdle.config.synthBGM.setProgram(0, 2)
+
+  if (Deckdle.config.synthBGM) {
+    console.log('* synthBGM initialized!', Deckdle.config.synthBGM)
+  } else {
+    console.error('* synthBGM could not be initialized')
+  }
+
+  if (!Deckdle.config.synthSFX) {
+    // initialize synthBGM instance
+    Deckdle.config.synthSFX = new WebAudioTinySynth({
+      debug: 0,
+      loop: 0,
+      masterVol: Deckdle.settings.soundBGMLevel,
+      quality: 1, // 0: chiptune, 1: FM
+      reverbLev: 0,
+      useReverb: 0,
+      voices: 8,
+    })
+  }
+
+  if (Deckdle.config.synthSFX) {
+    console.log('* synthSFX initialized!', Deckdle.config.synthSFX)
+  } else {
+    console.error('* synthSFX could not be initialized')
+  }
+
+  Deckdle.dom.keyboard.btnStartMusic.removeAttribute('disabled')
+  Deckdle.dom.keyboard.btnStopMusic.removeAttribute('disabled')
+
+  console.log('[LOADED] /app/lib/audio(synths)')
 }
 
-Deckdle._audioPlay = async (soundId) => {
+// BackGround Music
+// TODO: add more background music?
+Deckdle._playBGM = function () {
   if (Deckdle.settings.noisy) {
-    const path = DECKDLE_ASSET_DATA_PATH
-    const format = 'wav'
-    const url = `${path}/${soundId}.${format}`
+    const filename = `/assets/audio/deckdle-bgm2.mid`
 
-    if ('caches' in self) {
-      useCache(url)
-    } else {
-      useFetch(url)
+    Deckdle.config.synthBGM.loadMIDIUrl(filename)
+
+    setTimeout(() => {
+      // console.log('_playBGM()', filename)
+
+      // setInterval(() => {
+      //   console.log('synthBGM.playStatus()',
+      //     Deckdle.config.synthBGM.getPlayStatus()
+      //   )
+      // }, 1000)
+
+      Deckdle.config.synthBGM.playMIDI()
+    }, 20)
+  }
+}
+Deckdle._stopBGM = function () {
+  Deckdle.config.synthBGM.stopMIDI()
+}
+
+// Sound eFfects
+Deckdle._playSFX = function (action, arg = null) {
+  if (Deckdle.settings.noisy) {
+    Deckdle.config.synthSFX.setMasterVol(Deckdle.settings.soundSFXLevel)
+    Deckdle.config.synthSFX.setProgram(0, 1)
+
+    switch (action) {
+      case 'click_stock':
+        let note = arg ? 42 + arg: 42
+        Deckdle.config.synthSFX.send([0x90, note, 100])
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x80, note, 0])
+        }, 250)
+        break
+
+      case 'click_tableau':
+        Deckdle.config.synthSFX.send([0x90, 60, 100])
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 62, 100])
+        }, 40)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 65, 100])
+        }, 70)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x80, 60, 0])
+          Deckdle.config.synthSFX.send([0x80, 62, 0])
+          Deckdle.config.synthSFX.send([0x80, 65, 0])
+        }, 300)
+        break
+
+      case 'lose':
+        Deckdle.config.synthSFX.send([0x90, 48, 100])
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x80, 48, 0])
+        }, 100)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 47, 100])
+        }, 150)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x80, 47, 0])
+        }, 250)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 44, 100])
+        }, 300)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x80, 44, 0])
+        }, 350)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 43, 100])
+        }, 450)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x80, 43, 0])
+        }, 900)
+        break
+
+      case 'win':
+        Deckdle.config.synthSFX.send([0x90, 74, 70])
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 76, 80])
+        }, 50)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 74, 70])
+        }, 50)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 79, 100])
+        }, 50)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x80, 74, 0])
+          Deckdle.config.synthSFX.send([0x80, 76, 0])
+          Deckdle.config.synthSFX.send([0x80, 79, 0])
+        }, 500)
+        break
     }
   }
+}
+
+// Flags
+Deckdle._isBGMPlaying = function () {
+  return Deckdle.config.synthBGM ? Deckdle.config.synthBGM.playing : false
 }

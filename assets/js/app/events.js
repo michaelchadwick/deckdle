@@ -67,6 +67,12 @@ Deckdle._attachEventListeners = function () {
   Deckdle.dom.keyboard.btnCreateNew.addEventListener('click', () => {
     Deckdle._confirmFreeCreateNew()
   })
+  Deckdle.dom.keyboard.btnStartMusic.addEventListener('click', () => {
+    Deckdle._playBGM()
+  })
+  Deckdle.dom.keyboard.btnStopMusic.addEventListener('click', () => {
+    Deckdle._stopBGM()
+  })
 
   // local debug buttons
   if (Deckdle.env == 'local') {

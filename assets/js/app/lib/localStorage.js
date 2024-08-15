@@ -236,7 +236,7 @@ Deckdle._saveGame = function () {
 }
 
 // load settings (gear icon) from localStorage
-Deckdle._loadSettings = function () {
+Deckdle._loadSettings = async function () {
   const lsSettings = JSON.parse(localStorage.getItem(DECKDLE_SETTINGS_LS_KEY))
 
   if (lsSettings && Object.keys(lsSettings)) {
@@ -266,12 +266,15 @@ Deckdle._loadSettings = function () {
       Deckdle.settings.noisy = lsSettings.noisy || false
 
       if (Deckdle.settings.noisy) {
-        Deckdle._initAudio()
+        // create synths
+        if (!Deckdle.config.synthBGM || !Deckdle.config.synthSFX) {
+          Deckdle._initSynths()
+        }
 
         const setting = document.getElementById('button-setting-noisy')
 
         if (setting) {
-          setting.dataset.status = 'true'
+          setting.dataset.status = Deckdle.settings.noisy
         }
       }
     }
@@ -378,13 +381,14 @@ Deckdle._changeSetting = async function (setting, value, event) {
       if (st == '' || st == 'false') {
         document.getElementById('button-setting-noisy').dataset.status = 'true'
 
-        await Deckdle._initAudio()
+        Deckdle._initSynths()
 
         Deckdle._saveSetting('noisy', true)
       } else {
         document.getElementById('button-setting-noisy').dataset.status = 'false'
 
-        await deleteOldCaches()
+        Deckdle.dom.keyboard.btnStartMusic.setAttribute('disabled', '')
+        Deckdle.dom.keyboard.btnStopMusic.setAttribute('disabled', '')
 
         Deckdle._saveSetting('noisy', false)
       }

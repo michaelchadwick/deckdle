@@ -87,6 +87,8 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
 
   if (card.classList.contains('available')) {
     if (Deckdle._baseCanBePlayedOn(card.dataset)) {
+      Deckdle._playSFX('click_tableau')
+
       Deckdle._removeCardFromTableau(card)
 
       const cardRemoved = Deckdle.ui._removeCardFromTableau(colId)

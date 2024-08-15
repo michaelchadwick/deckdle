@@ -16,7 +16,8 @@ const DECKDLE_DAILY_SCRIPT = '/assets/scripts/daily.php'
 const DECKDLE_DEFAULT_GAMETYPE = 'golf'
 
 const DECKDLE_DEFAULT_CONFIG = {
-  foo: [],
+  synthBGM: null,
+  synthSFX: null,
 }
 const DECKDLE_DEFAULT_STATE = {
   base: [],
@@ -34,6 +35,8 @@ const DECKDLE_DEFAULT_SETTINGS = {
   firstTime: true,
   gameMode: 'free',
   noisy: false,
+  soundBGMLevel: 0.1,
+  soundSFXLevel: 0.2,
 }
 
 const DECKDLE_DEFAULTS = {
