@@ -1,5 +1,5 @@
 section#game #keyboard-container {
-  margin: 8px;
+  margin: 1rem 1rem 0;
   user-select: none; /* no selecting text */
 }
 section#game #keyboard-container .row {
