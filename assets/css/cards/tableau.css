@@ -9,6 +9,11 @@
   transition: all 400ms;
   width: 100%;
 }
+@media (min-height: 500px) {
+  #tableau {
+    height: 130px;
+  }
+}
 @media (min-width: 376px) {
   #tableau {
     grid-template-rows: repeat(5, 34px);

@@ -9,6 +9,11 @@
   transition: all 200ms;
   width: 12vw;
 }
+@media (min-height: 500px) {
+  .card {
+    height: 18vw;
+  }
+}
 @media (min-width: 376px) {
   .card {
     font-size: 1.25rem;
