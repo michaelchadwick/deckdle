@@ -27,7 +27,7 @@ Deckdle.modalOpen = async function (type) {
     case 'start':
     case 'help':
       modalText = `
-        <p><strong>Deckdle</strong> is a <s>daily</s> solitaire card game. Currently, the only solitaire type is 'golf', but there are plans to add the classic 'klondike', and possibly 'pyramid' or 'spider'.</p>
+        <p><strong>Deckdle</strong> is a <s>daily</s> solitaire card game. Currently, the only solitaire type is 'golf', but there are plans to add the classic 'klondike', 'pyramid', and 'spider'.</p>
       `
 
       const gameType = Deckdle.__getState()['gameType']
@@ -55,6 +55,8 @@ Deckdle.modalOpen = async function (type) {
             <p>Play <span class="blamph">${gameType}</span> solitaire endlessly!
           </div>
         </div>
+
+        <p>Settings for dark mode and sounds can be adjusted using the <i class="fa-solid fa-gear"></i> icon.</p>
 
         <hr />
 
