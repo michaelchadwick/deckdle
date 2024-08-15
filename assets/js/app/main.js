@@ -514,9 +514,17 @@ Deckdle._fillCards = function () {
   Object.keys(tableauCards).forEach(col => {
     Object.values(tableauCards[col]).forEach((card, index) => {
       if (index == 4) {
-        Deckdle.ui._addCardToTableau(card, colId, classes = ['available'])
+        Deckdle.ui._addCardToTableau(
+          card,
+          colId,
+          classes = ['available', 'animate__animated', 'animate__slideInDown']
+        )
       } else {
-        Deckdle.ui._addCardToTableau(card, colId)
+        Deckdle.ui._addCardToTableau(
+          card,
+          colId,
+          classes = ['animate__animated', 'animate__slideInDown']
+        )
       }
     })
 

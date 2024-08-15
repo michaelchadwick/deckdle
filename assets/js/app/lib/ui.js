@@ -5,15 +5,11 @@
 Deckdle.ui = {}
 
 Deckdle.ui._createCard = (card, cardType, classes = [], draggable = false) => {
-  // if (cardType == 'base') {
-  //   console.log('creating new UI card', card, cardType, classes.length ? classes : '')
-  // }
-
   const cardDiv = document.createElement('div')
 
   if (classes.length) {
     cardDiv.classList.add('card')
-    cardDiv.classList.add(classes.join(', '))
+    cardDiv.classList.add(...classes)
   } else {
     cardDiv.classList.add('card')
   }
