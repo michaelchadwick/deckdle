@@ -31,21 +31,10 @@ section#game #keyboard-container .row.sub button:disabled {
 section#game #keyboard-container button {
   border: 1px solid transparent;
   font-size: 0.8rem;
-  height: 25px;
+  height: 35px;
   width: 50px;
 }
-@media (min-width: 376px) {
-  section#game #keyboard-container button {
-    font-size: 1.25rem;
-  }
-
-  @media (min-height: 500px) {
-    section#game #keyboard-container button {
-      font-size: 1.5rem;
-    }
-  }
-}
-@media (min-height: 500px) {
+@media (min-width: 376px) and (min-height: 500px) {
   section#game #keyboard-container button {
     font-size: 1.25rem;
     height: 50px;
