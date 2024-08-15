@@ -1,6 +1,6 @@
 .card {
-  background-color: #fff;
-  border: 1px solid #000;
+  background-color: var(--white);
+  border: 1px solid var(--black);
   border-radius: 5px;
   box-shadow: 2px 2px 2px #ccc;
   font-size: 1rem;
@@ -41,7 +41,7 @@
 }
 .card[data-suit='0'],
 .card[data-suit='3'] {
-  color: black;
+  color: var(--black);
 }
 .card[data-suit='1'],
 .card[data-suit='2'] {

@@ -20,6 +20,10 @@ body.dark-mode button.help {
   border: 1px solid var(--white);
 }
 
+body.dark-mode header {
+  background-color: var(--black);
+}
+
 body.dark-mode header .menu-left #nav-overlay #nav-content {
   background-color: var(--black);
 }
@@ -37,12 +41,35 @@ body.dark-mode
   background-color: var(--base-color);
 }
 
+body.dark-mode section#game {
+  background-color: var(--black);
+}
+
 body.dark-mode section#game #mode-container .setting-row a {
   color: var(--white);
 }
 
 body.dark-mode section#game #mode-container #daily-details {
   color: var(--white);
+}
+
+body.dark-mode section#game #cards-container #tableau .card,
+body.dark-mode section#game #cards-container #base .card {
+  background-color: var(--black);
+  border: 1px solid var(--off-white);
+  box-shadow: 2px 2px 1px #aaa;
+}
+body.dark-mode section#game #cards-container #tableau .card[data-suit='0'],
+body.dark-mode section#game #cards-container #base .card[data-suit='0'],
+body.dark-mode section#game #cards-container #tableau .card[data-suit='3'],
+body.dark-mode section#game #cards-container #base .card[data-suit='3'] {
+  color: var(--off-white);
+}
+body.dark-mode section#game #cards-container #tableau .card[data-suit='1'],
+body.dark-mode section#game #cards-container #base .card[data-suit='1'],
+body.dark-mode section#game #cards-container #tableau .card[data-suit='2'],
+body.dark-mode section#game #cards-container #base .card[data-suit='2'] {
+  color: #ff8080;
 }
 
 body.dark-mode section#game #keyboard-container button {
