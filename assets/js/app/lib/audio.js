@@ -23,7 +23,7 @@ Deckdle._initSynths = function () {
   Deckdle.config.synthBGM.setProgram(0, 2)
 
   if (Deckdle.config.synthBGM) {
-    console.log('* synthBGM initialized!', Deckdle.config.synthBGM)
+    // console.log('* synthBGM initialized!', Deckdle.config.synthBGM)
   } else {
     console.error('* synthBGM could not be initialized')
   }
@@ -42,7 +42,7 @@ Deckdle._initSynths = function () {
   }
 
   if (Deckdle.config.synthSFX) {
-    console.log('* synthSFX initialized!', Deckdle.config.synthSFX)
+    // console.log('* synthSFX initialized!', Deckdle.config.synthSFX)
   } else {
     console.error('* synthSFX could not be initialized')
   }
