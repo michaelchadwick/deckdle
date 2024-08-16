@@ -189,17 +189,6 @@ Deckdle.modalOpen = async function (type) {
       )
       break
 
-    case 'loading':
-      this.myModal = new Modal(
-        'throbber',
-        'Loading',
-        'loading...',
-        null,
-        null,
-        false
-      )
-      break
-
     case 'shared':
       this.myModal = new Modal(
         'temp',
