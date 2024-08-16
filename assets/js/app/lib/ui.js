@@ -97,6 +97,8 @@ Deckdle.ui._addCardToStock = (card) => {
   const newCard = Deckdle.ui._createCard(card, 'stock', ['back'])
 
   Deckdle.dom.interactive.stock.appendChild(newCard)
+
+  Deckdle._animateCSS(`#stock .card:last-of-type`, 'flipInX')
 }
 
 Deckdle.ui._removeCardFromStock = () => {
