@@ -66,15 +66,13 @@ Deckdle.ui._createEmptyCard = () => {
   return cardDiv
 }
 
-Deckdle.ui._addCardToTableau = (card, colId, classes = []) => {
+Deckdle.ui._addCardToTableau = (card, colId) => {
   // console.log('adding card to UI tableau', card, colId)
 
-  const newCard = Deckdle.ui._createCard(card, 'tableau', classes)
-
   const row = document.getElementById(`col${colId}`).children.length
-  newCard.dataset.row = row
+  card.dataset.row = row
 
-  document.getElementById(`col${colId}`).appendChild(newCard)
+  document.getElementById(`col${colId}`).appendChild(card)
 }
 
 Deckdle.ui._removeCardFromTableau = (colId) => {
@@ -111,7 +109,11 @@ Deckdle.ui._removeCardFromStock = () => {
 Deckdle.ui._addCardToBase = () => {
   const base = Deckdle.__getState()['base']
   const card = base[base.length - 1]
-  const newCard = Deckdle.ui._createCard(new Card(card.suit, card.rank), 'base')
+  const newCard = Deckdle.ui._createCard(
+    new Card(card.suit, card.rank),
+    (cardType = 'base'),
+    (classes = ['animate__animated', 'animate__slideInDown'])
+  )
 
   Deckdle.dom.interactive.base.appendChild(newCard)
 }
@@ -148,19 +150,12 @@ Deckdle.ui._fillCards = function () {
   // fill tableau UI with cards
   Object.keys(tableauCards).forEach(col => {
     Object.values(tableauCards[col]).forEach((card, index) => {
-      if (index == 4) {
-        Deckdle.ui._addCardToTableau(
-          card,
-          colId,
-          classes = ['available', 'animate__animated', 'animate__slideInDown']
-        )
-      } else {
-        Deckdle.ui._addCardToTableau(
-          card,
-          colId,
-          classes = ['animate__animated', 'animate__slideInDown']
-        )
-      }
+      const cardClasses = index == 4 ? ['available'] : []
+      const newCard = Deckdle.ui._createCard(card, 'tableau', cardClasses)
+
+      Deckdle.ui._addCardToTableau(newCard, colId)
+
+      Deckdle._animateCSS(`#tableau #col${colId} .card[data-row="${newCard.dataset.row}"]`, 'slideInDown')
     })
 
     colId++
