@@ -40,10 +40,6 @@
     }
   }
 }
-.card.removed {
-  opacity: 0;
-  z-index: -9999 !important;
-}
 .card[data-suit='0'],
 .card[data-suit='3'] {
   color: var(--black);

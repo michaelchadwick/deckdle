@@ -44,6 +44,10 @@
 #tableau .col .card {
   position: relative;
 }
+#tableau .col .card.removed {
+  opacity: 0;
+  z-index: -9999 !important;
+}
 @media (hover: hover) {
   #tableau .col .card.available:hover {
     background-color: #ebf7ff;
