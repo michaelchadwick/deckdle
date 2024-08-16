@@ -93,17 +93,6 @@ Deckdle._attachEventListeners = function () {
         }
       )
 
-      // 🏆 win game immediately
-      Deckdle.dom.interactive.debug.btnWinGame.addEventListener('click', () => {
-        Deckdle._winGameHax()
-      })
-      // 🏅 almost win game (post-penultimate move)
-      Deckdle.dom.interactive.debug.btnWinGameAlmost.addEventListener(
-        'click',
-        () => {
-          Deckdle._winGameHax('almost')
-        }
-      )
       // 🏁 display win animation
       Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener(
         'click',
