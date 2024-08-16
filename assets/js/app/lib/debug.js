@@ -132,32 +132,21 @@ Deckdle._displayGameState = function () {
       ) {
         html += `<dd><code>${key}: {</code><dl>`
 
-        if (key == 'statistics') {
-          Object.keys(states[state][key]).forEach((subkey) => {
-            var label = subkey
-            var value = states[state][key][subkey]
+        Object.keys(states[state][key]).forEach((k) => {
+          var label = k
+          var value = states[state][key][k]
 
-            html += `<dd><code>${label}:</code></dd><dt>${value}</dt>`
-          })
+          if (label == 'lastCompletedTime' || label == 'lastPlayedTime') {
+            value = Deckdle.__getFormattedDate(new Date(value))
+          }
 
-          html += '</dl><code>}</code></dd>'
-        } else {
-          Object.keys(states[state][key]).forEach((k) => {
-            var label = k
-            var value = states[state][key][k]
+          if (value) {
+            const val = Array.isArray(value) ? value.join(', ') : value
+            html += `<dd><code>${label}:</code></dd><dt>${val}</dt>`
+          }
+        })
 
-            if (label == 'lastCompletedTime' || label == 'lastPlayedTime') {
-              value = Deckdle.__getFormattedDate(new Date(value))
-            }
-
-            if (value) {
-              const val = Array.isArray(value) ? value.join(', ') : value
-              html += `<dd><code>${label}:</code></dd><dt>${val}</dt>`
-            }
-          })
-
-          html += '</dl><code>}</code></dd>'
-        }
+        html += '</dl><code>}</code></dd>'
       } else {
         var label = key
         var value = states[state][key]
@@ -167,15 +156,6 @@ Deckdle._displayGameState = function () {
           if (value) {
             value = Deckdle.__getFormattedDate(new Date(value))
           }
-        } else if (label == 'guessedWords') {
-          html += `<dd><code>${label}:</code></dd><dt>`
-          html += `${
-            value ? value.map((v) => v.toUpperCase()).join(', ') : value
-          }</dt>`
-        } else if (label == 'seedWord') {
-          html += `<dd><code>${label}:</code></dd><dt>${
-            value ? value.toUpperCase() : value
-          }</dt>`
         } else {
           html += `<dd><code>${label}:</code></dd><dt>${value}</dt>`
         }
