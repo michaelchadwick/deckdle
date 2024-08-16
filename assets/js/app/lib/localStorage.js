@@ -182,8 +182,6 @@ Deckdle._loadGame = async function () {
 }
 // save state from code model -> LS
 Deckdle._saveGame = function () {
-  return false
-
   // save daily game state
   let curDailyState = Deckdle.__getStateObj('daily')
 

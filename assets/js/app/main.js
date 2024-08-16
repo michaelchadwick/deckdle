@@ -298,7 +298,8 @@ Deckdle.initApp = async () => {
 // create new setupId, which resets progress
 Deckdle._createNewSetup = async function (gameMode, setupId = null) {
   // set config to defaults
-  Deckdle.__setConfig('foo', [], gameMode)
+  Deckdle.__setConfig('synthBGM', null, gameMode)
+  Deckdle.__setConfig('synthSFX', null, gameMode)
 
   // set state to defaults
   Deckdle.__setState('base', [], gameMode)
@@ -348,10 +349,10 @@ Deckdle._createNewSetup = async function (gameMode, setupId = null) {
 
     if (puzzle) {
       // clear everything
-      Deckdle._emptyPlayingField()
+      Deckdle.ui._emptyPlayingField()
 
       // fill DOM cards
-      Deckdle._fillCards()
+      Deckdle.ui._fillCards()
     }
   } catch (err) {
     console.error('could not create new puzzle', err)
@@ -361,7 +362,8 @@ Deckdle._createNewSetup = async function (gameMode, setupId = null) {
 // load existing setupId, which retains past progress
 Deckdle._loadExistingSetup = async function (gameMode, setupId = null) {
   // set config to defaults
-  Deckdle.__setConfig('foo', [], gameMode)
+  Deckdle.__setConfig('synthBGM', null, gameMode)
+  Deckdle.__setConfig('synthSFX', null, gameMode)
 
   // new game with static seed word
   if (gameMode == 'free') {
@@ -393,40 +395,15 @@ Deckdle._loadExistingSetup = async function (gameMode, setupId = null) {
   Deckdle.__setState('setupId', setupId, gameMode)
   Deckdle._saveGame()
 
-  // load existing solutionSet
+  // load existing setupId
   try {
     const puzzle = await Deckdle.__createPuzzle(
       Deckdle.__getState(gameMode).setupId
     )
 
     if (puzzle) {
-      let lsState = null
-
-      if (Deckdle.__getGameMode() == 'daily') {
-        lsState = JSON.parse(localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY))
-      } else {
-        lsState = JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
-      }
-
-      Deckdle.__setState('guessedWords', [], gameMode)
-
-      if (
-        lsState[Deckdle.__getSessionIndex()].guessedWords &&
-        lsState[Deckdle.__getSessionIndex()].guessedWords.length
-      ) {
-        lsState[Deckdle.__getSessionIndex()].guessedWords.forEach((word) => {
-          Deckdle.__getState().guessedWords.push(word)
-          Deckdle.__getConfig().solutionSet[word.length][word] = 1
-        })
-
-        // set score to existing number of guessedWords
-        Deckdle._setScore(Deckdle.__getState(gameMode).guessedWords.length)
-      } else {
-        Deckdle._setScore(0)
-      }
-
       // fill DOM cards
-      Deckdle._fillCards()
+      Deckdle.ui._fillCards()
 
       // see if we've already won
       Deckdle._checkWinState()
@@ -465,14 +442,8 @@ Deckdle._resetFreeProgress = async function () {
   Deckdle.config.free = DECKDLE_DEFAULTS.config.free
   Deckdle.state.free = DECKDLE_DEFAULTS.state.free
 
-  // set score to 0
-  Deckdle._setScore(0)
-
-  // re-enable DOM inputs
-  Deckdle._resetInput()
-
   // fill DOM cards
-  Deckdle._fillCards()
+  Deckdle.ui._fillCards()
 
   // save those defaults to localStorage
   Deckdle._saveGame()
@@ -495,73 +466,28 @@ Deckdle._checkWinState = function () {
   }
 }
 
-Deckdle._emptyPlayingField = function () {
-  // clear tableau, stock, base
-  Deckdle.dom.interactive.tableau.replaceChildren()
-  Deckdle.dom.interactive.stock.querySelectorAll('.card').forEach(card => card.remove())
-  Deckdle.dom.interactive.base.querySelectorAll('.card').forEach(card => card.remove())
-}
-
-Deckdle._fillCards = function () {
-  // create <div id="tableau"><div class="col"> * 7</div>
-  for (let i = 0; i < 7; i++) {
-    const col = document.createElement('div')
-    col.classList.add('col')
-    col.id = `col${i}`
-    Deckdle.dom.interactive.tableau.appendChild(col)
-  }
-
-  const tableauCards = Deckdle.__getState()['tableau']
-
-  let colId = 0
-
-  // fill tableau UI with cards
-  Object.keys(tableauCards).forEach(col => {
-    Object.values(tableauCards[col]).forEach((card, index) => {
-      if (index == 4) {
-        Deckdle.ui._addCardToTableau(
-          card,
-          colId,
-          classes = ['available', 'animate__animated', 'animate__slideInDown']
-        )
-      } else {
-        Deckdle.ui._addCardToTableau(
-          card,
-          colId,
-          classes = ['animate__animated', 'animate__slideInDown']
-        )
-      }
-    })
-
-    colId++
-  })
-
-  Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
-
-  // fill stock UI with leftover cards
-  Deckdle.__getState()['stock'].forEach(card => {
-    Deckdle.ui._addCardToStock(card)
-  })
-
-  Deckdle._moveCardFromStockToBase()
-
-  Deckdle.dom.stockCount.innerText = Deckdle.__getState()['stock'].length
-  Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length
-}
-
 // copy results to clipboard for sharing
-Deckdle._shareResults = async function (type = 'completion') {
+Deckdle._shareResults = async function () {
   let shareText = ''
-  const size = Deckdle.__getSolutionSize()
-  const hints = Deckdle.__getHintsUsed()
+  const gameType = Deckdle.__getState()['gameType']
 
-  if (type == 'completion') {
-    shareText += `🧩 Deckdle #${Deckdle.dailyNumber}\n${size}/${size} words, ${hints} hints\n`
-    shareText += DECKDLE_SHARE_URL
-  } else if (type == 'pangram') {
-    shareText += `🧩 Deckdle #${Deckdle.dailyNumber}\nPangram found!\n`
-    shareText += DECKDLE_SHARE_URL
+  shareText += `♦️ Deckdle #${Deckdle.dailyNumber}\n`
+
+  switch (gameType) {
+    case 'golf':
+      const stockCount = Deckdle.__getState()['stock'].length
+
+      if (stockCount == 0) {
+        shareText += `GOLF: PAR\n`
+      } else if (stockCount > 0) {
+        shareText += `GOLF: -${stockCount}\n`
+      } else {
+        shareText += `GOLF: +${stockCount}\n`
+      }
+      break
   }
+
+  shareText += DECKDLE_SHARE_URL
 
   if (navigator.canShare) {
     navigator.share({ text: shareText })

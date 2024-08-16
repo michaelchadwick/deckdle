@@ -124,3 +124,57 @@ Deckdle.ui._updateStockBaseCounts = () => {
 Deckdle.ui._updateGameType = () => {
   Deckdle.dom.gameType.innerText = Deckdle.__getState()['gameType']
 }
+
+Deckdle.ui._emptyPlayingField = function () {
+  // clear tableau, stock, base
+  Deckdle.dom.interactive.tableau.replaceChildren()
+  Deckdle.dom.interactive.stock.querySelectorAll('.card').forEach(card => card.remove())
+  Deckdle.dom.interactive.base.querySelectorAll('.card').forEach(card => card.remove())
+}
+
+Deckdle.ui._fillCards = function () {
+  // create <div id="tableau"><div class="col"> * 7</div>
+  for (let i = 0; i < 7; i++) {
+    const col = document.createElement('div')
+    col.classList.add('col')
+    col.id = `col${i}`
+    Deckdle.dom.interactive.tableau.appendChild(col)
+  }
+
+  const tableauCards = Deckdle.__getState()['tableau']
+
+  let colId = 0
+
+  // fill tableau UI with cards
+  Object.keys(tableauCards).forEach(col => {
+    Object.values(tableauCards[col]).forEach((card, index) => {
+      if (index == 4) {
+        Deckdle.ui._addCardToTableau(
+          card,
+          colId,
+          classes = ['available', 'animate__animated', 'animate__slideInDown']
+        )
+      } else {
+        Deckdle.ui._addCardToTableau(
+          card,
+          colId,
+          classes = ['animate__animated', 'animate__slideInDown']
+        )
+      }
+    })
+
+    colId++
+  })
+
+  Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
+
+  // fill stock UI with leftover cards
+  Deckdle.__getState()['stock'].forEach(card => {
+    Deckdle.ui._addCardToStock(card)
+  })
+
+  Deckdle._moveCardFromStockToBase()
+
+  Deckdle.dom.stockCount.innerText = Deckdle.__getState()['stock'].length
+  Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length
+}

@@ -90,6 +90,8 @@ Deckdle.__getConfig = function (mode = Deckdle.__getGameMode()) {
 }
 Deckdle.__setConfig = function (key, val, mode = Deckdle.__getGameMode()) {
   Deckdle.config[mode][key] = val
+
+  Deckdle._saveGame()
 }
 Deckdle.__getState = function (mode = Deckdle.__getGameMode()) {
   const rootState = Deckdle.state[mode]
@@ -110,6 +112,8 @@ Deckdle.__setState = function (
   index = Deckdle.__getSessionIndex()
 ) {
   Deckdle.state[mode][index][key] = val
+
+  Deckdle._saveGame()
 }
 Deckdle.__getStateObj = function (mode = Deckdle.__getGameMode()) {
   const rootState = Deckdle.state[mode]
