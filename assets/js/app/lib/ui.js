@@ -76,14 +76,14 @@ Deckdle.ui._addCardToTableau = (card, colId) => {
 }
 
 Deckdle.ui._removeCardFromTableau = (colId) => {
-  const card = Deckdle.dom.interactive.tableau.querySelector(`#${colId} .card.available`)
-
-  // console.log('card to remove from tableau', card)
+  const elem = `#tableau #${colId} .card.available`
+  const card = Deckdle.dom.interactive.tableau.querySelector(elem)
 
   if (card) {
-    // card.remove()
-    card.classList.add('removed')
-    card.classList.remove('available')
+    Deckdle._animateCSS(elem, 'fadeOutDown').then(() => {
+      card.classList.add('removed')
+      card.classList.remove('available')
+    })
 
     return card
   } else {

@@ -125,6 +125,10 @@ header .menu-left #nav-overlay #nav-content {
   --animate-duration: 1750ms;
 }
 
+#tableau .col .card.animate__animated.animate__fadeOutDown {
+  --animate-duration: 350ms;
+}
+
 #base .card {
   --animate-duration: 700ms;
 }

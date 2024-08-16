@@ -42,6 +42,7 @@
   }
 }
 #tableau .col .card {
+  opacity: 1;
   position: relative;
 }
 #tableau .col .card.removed {
