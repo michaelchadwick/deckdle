@@ -24,7 +24,7 @@ Deckdle._tableauHasValidCard = () => {
 
   Object.keys(tableau).forEach((col) => {
     if (tableau[col].length) {
-      if (Deckdle._baseCanBePlayedOn(tableau[col][tableau[col].length - 1])) {
+      if (Deckdle._tableauCardCanBeRemoved(tableau[col][tableau[col].length - 1])) {
         hasValid = true
       }
     }
@@ -33,8 +33,8 @@ Deckdle._tableauHasValidCard = () => {
   return hasValid
 }
 
-Deckdle._baseCanBePlayedOn = (card) => {
-  // console.log('_baseCanBePlayedOn', card)
+Deckdle._tableauCardCanBeRemoved = (card) => {
+  // console.log('_tableauCardCanBeRemoved', card)
 
   const base = Deckdle.__getState()['base']
 
@@ -86,7 +86,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
   // console.log('tableau card clicked', card, colId, rowId)
 
   if (card.classList.contains('available')) {
-    if (Deckdle._baseCanBePlayedOn(card.dataset)) {
+    if (Deckdle._tableauCardCanBeRemoved(card.dataset)) {
       Deckdle._playSFX('click_tableau')
 
       Deckdle._removeCardFromTableau(card)
