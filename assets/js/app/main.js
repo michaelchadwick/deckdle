@@ -247,20 +247,6 @@ Deckdle.modalOpen = async function (type) {
       Deckdle._playSFX('lose')
 
       break
-
-    case 'win-game':
-      this.myModal = new Modal('temp', null, 'Congratulations!', null, null)
-      break
-
-    case 'win-game-hax':
-      this.myModal = new Modal(
-        'temp',
-        null,
-        'Hacking the game, I see',
-        null,
-        null
-      )
-      break
   }
 }
 
