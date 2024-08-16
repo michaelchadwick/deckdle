@@ -9,6 +9,10 @@
   --animate-duration: 1000ms;
 }
 
+header .menu-left #nav-overlay #nav-content {
+  animation: SlideRight 200ms;
+}
+
 #tableau #col0 .card[data-row='0'].animate__animated.animate__slideInDown {
   --animate-duration: 50ms;
 }
@@ -121,8 +125,8 @@
   --animate-duration: 1750ms;
 }
 
-header .menu-left #nav-overlay #nav-content {
-  animation: SlideRight 200ms;
+#base .card {
+  --animate-duration: 700ms;
 }
 
 @keyframes SlideRight {

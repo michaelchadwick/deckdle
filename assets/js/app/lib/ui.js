@@ -112,10 +112,11 @@ Deckdle.ui._addCardToBase = () => {
   const newCard = Deckdle.ui._createCard(
     new Card(card.suit, card.rank),
     (cardType = 'base'),
-    (classes = ['animate__animated', 'animate__slideInDown'])
   )
 
   Deckdle.dom.interactive.base.appendChild(newCard)
+
+  Deckdle._animateCSS(`#base .card:last-of-type`, 'slideInDown')
 }
 
 Deckdle.ui._updateStockBaseCounts = () => {
