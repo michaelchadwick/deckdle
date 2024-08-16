@@ -1,6 +1,6 @@
 header {
   align-items: center;
-  background-color: #ffc8ac;
+  background-color: var(--bg-color);
   border-bottom: 1px solid var(--base-color);
   display: flex;
   flex-direction: row;
@@ -209,9 +209,6 @@ header .menu-right button#button-settings {
 }
 
 main {
-  /* background-attachment: fixed; */
-  /* background-color: #9F4E25; */
-  /* background-image: url(/assets/images/vanishing-stripes.svg); */
   background-color: var(--off-white);
   height: 100%;
 }

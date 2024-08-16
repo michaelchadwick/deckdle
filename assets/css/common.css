@@ -13,7 +13,6 @@ html {
 }
 
 body {
-  background-color: var(--white);
   color: var(--black);
   font-size: 100%;
   font-weight: 300;
