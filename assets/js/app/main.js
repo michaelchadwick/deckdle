@@ -208,6 +208,16 @@ Deckdle.modalOpen = async function (type) {
       )
       break
 
+    case 'cleared-local-storage':
+      this.myModal = new Modal(
+        'temp',
+        null,
+        'Local Storage has been cleared',
+        null,
+        null
+      )
+      break
+
     case 'game-over-win':
       const stockCount = Deckdle.__getState()['stock'].length
       if (stockCount > 0) {

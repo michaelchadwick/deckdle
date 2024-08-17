@@ -93,6 +93,14 @@ Deckdle._attachEventListeners = function () {
         }
       )
 
+      // 🗑️ clear localStorage
+      Deckdle.dom.interactive.debug.btnClearLS.addEventListener(
+        'click',
+        () => {
+          Deckdle._clearLocalStorage()
+        }
+      )
+
       // 🏁 display win animation
       Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener(
         'click',
