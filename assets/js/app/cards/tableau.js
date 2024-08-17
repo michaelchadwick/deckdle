@@ -1,4 +1,4 @@
-/* cards/tableau.js */
+/* lib/cards/tableau.js */
 /* functions for tableau */
 
 Deckdle._tableauCount = () => {
@@ -107,6 +107,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
 
         Deckdle.ui._addCardToBase()
 
+        // console.log('setting base from tableau')
         Deckdle.__setState('base', base)
 
         Deckdle._checkWinState()

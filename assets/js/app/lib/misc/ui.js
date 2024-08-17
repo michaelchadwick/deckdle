@@ -176,3 +176,12 @@ Deckdle.ui._fillCards = function () {
   Deckdle.dom.stockCount.innerText = Deckdle.__getState()['stock'].length
   Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length
 }
+
+Deckdle.ui._updateDailyDetails = function (index) {
+  Deckdle.dailyNumber = parseInt(index) + 1
+  Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (
+    parseInt(index) + 1
+  ).toString()
+  Deckdle.dom.dailyDetails.querySelector('.day').innerHTML =
+    Deckdle.__getTodaysDate()
+}

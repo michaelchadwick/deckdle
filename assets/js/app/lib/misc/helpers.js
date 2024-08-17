@@ -2,10 +2,6 @@
 /* misc global functions */
 /* global Deckdle */
 
-Deckdle.__sleep = (ms) => new Promise((resolve) => {
-  setTimeout(resolve, ms)
-})
-
 // timestamp -> display date
 Deckdle.__getFormattedDate = function (date) {
   let formatted_date = ''
@@ -50,15 +46,6 @@ Deckdle.__getTodaysDate = function () {
   } ${d.getDate()}, ${d.getFullYear()}`
 }
 
-Deckdle.__updateDailyDetails = function (index) {
-  Deckdle.dailyNumber = parseInt(index) + 1
-  Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (
-    parseInt(index) + 1
-  ).toString()
-  Deckdle.dom.dailyDetails.querySelector('.day').innerHTML =
-    Deckdle.__getTodaysDate()
-}
-
 Deckdle.__hasParentWithMatchingSelector = function (target, selector) {
   return [...document.querySelectorAll(selector)].some(el =>
     el !== target && el.contains(target)
@@ -69,30 +56,30 @@ Deckdle.__getParentCard = function (el, selector) {
   var parent_container = el;
 
   do {
-      parent_container = parent_container.parentNode;
-    }
+    parent_container = parent_container.parentNode;
+  }
 
-  while( !parent_container.matches(selector) && parent_container !== document.body );
+  while (!parent_container.matches(selector) && parent_container !== document.body);
 
   return parent_container;
 }
 
-Deckdle.__getNewSetupId = async function () {
-  const setupId = 1234567890
-
-  return setupId
+Deckdle.__getRandomSetupId = async function () {
+  return Math.floor(Math.random() * 10000000000)
 }
 Deckdle.__getGameMode = function () {
-  return Deckdle.settings.gameMode || 'free'
+  return Deckdle.settings ? Deckdle.settings.gameMode : DECKDLE_DEFAULTS.settings.gameMode
 }
-Deckdle.__getConfig = function (mode = Deckdle.__getGameMode()) {
-  return Deckdle.config[mode] || undefined
-}
-Deckdle.__setConfig = function (key, val, mode = Deckdle.__getGameMode()) {
-  Deckdle.config[mode][key] = val
 
-  Deckdle._saveGame()
+Deckdle.__getConfig = function () {
+  return Deckdle.config || undefined
 }
+Deckdle.__setConfig = function (key, val) {
+  Deckdle.config[key] = val
+
+  Deckdle._saveGame('__setConfig')
+}
+
 Deckdle.__getState = function (mode = Deckdle.__getGameMode()) {
   const rootState = Deckdle.state[mode]
 
@@ -111,10 +98,24 @@ Deckdle.__setState = function (
   mode = Deckdle.__getGameMode(),
   index = Deckdle.__getSessionIndex()
 ) {
-  Deckdle.state[mode][index][key] = val
+  switch (key) {
+    // case 'base':
+    //   Deckdle.state[mode][index][key].push(val)
+    //   break
 
+    default:
+      Deckdle.state[mode][index][key] = val
+  }
+
+  // Deckdle._saveGame(`__setState(${key}, ${val})`)
   Deckdle._saveGame()
+
+  // if (key == 'base') {
+  //   console.log(`__setState(${key})`, val)
+  //   console.log('Deckdle.__getState()["base"]', Deckdle.__getState()['base'])
+  // }
 }
+
 Deckdle.__getStateObj = function (mode = Deckdle.__getGameMode()) {
   const rootState = Deckdle.state[mode]
 
@@ -140,4 +141,6 @@ Deckdle._getNebyooApps = async function () {
     appLink.target = '_blank'
     appList.appendChild(appLink)
   })
+
+  // Deckdle._logStatus('[LOADED] nebyooapps')
 }

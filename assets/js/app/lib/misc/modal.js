@@ -1,3 +1,5 @@
+/* /assets/js/app/lib/modal.js */
+/* modal dialog UI */
 /* eslint-disable no-unused-vars */
 
 class Modal {
@@ -37,6 +39,8 @@ class Modal {
         this.modalDelay
       )
     }
+
+    Deckdle._logStatus('[LOADED] /app/modal')
   }
 
   question() {

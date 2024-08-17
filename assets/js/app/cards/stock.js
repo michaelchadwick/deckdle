@@ -1,4 +1,5 @@
-/* cards/stock.js */
+/* lib/cards/stock.js */
+/* functions for stock */
 
 Deckdle._checkForEmptyStock = function () {
   if (!Deckdle.__getState()['stock'].length) {
@@ -25,6 +26,7 @@ Deckdle._moveCardFromStockToBase = () => {
   Deckdle.ui._removeCardFromStock()
   Deckdle.ui._addCardToBase()
 
+  // console.log('setting base from stock')
   Deckdle.__setState('base', base)
   Deckdle.__setState('stock', stock)
 

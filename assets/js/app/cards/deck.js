@@ -1,4 +1,5 @@
-/* cards/deck.js */
+/* lib/cards/deck.js */
+/* class definition for Deck of Cards */
 
 class Deck {
   constructor(cardArray = null) {
@@ -12,8 +13,6 @@ class Deck {
   }
 
   #fillDeck = () => {
-    // console.log('filling new deck with cards...')
-
     const suitIdMin = 0
     const suitIdMax = 4
     const rankIdMin = 2
@@ -26,8 +25,6 @@ class Deck {
         this.cards.push(new Card(suit, rank))
       }
     }
-
-    // console.log(`deck has been filled with ${this.size()} cards`)
 
     return deck
   }
@@ -79,8 +76,6 @@ class Deck {
   shuffle = (seed = null) => {
     let shuffleOrder
 
-    // console.log(`shuffling deck, seed: ${seed}`)
-
     if (seed) {
       // deterministic random shuffle
       shuffleOrder = new Chance(seed)
@@ -93,7 +88,7 @@ class Deck {
     // ♣2 -> ♣A, ♦2 -> ♦A, ♥2 - ♥A, ♠2 -> ♠A
     this.cards.sort(this.#suitRankCompareFn)
 
-    // shuffle them deterministically using chance.js
+    // shuffle them using chance.js
     this.cards = shuffleOrder.shuffle(this.cards)
   }
 

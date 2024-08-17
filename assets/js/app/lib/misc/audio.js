@@ -5,9 +5,9 @@
 Deckdle._initSynths = function () {
   // console.log('[INITIALIZING] synths')
 
-  if (!Deckdle.config.synthBGM) {
+  if (!Deckdle.__getConfig().synthBGM) {
     // initialize synthBGM instance
-    Deckdle.config.synthBGM = new WebAudioTinySynth({
+    Deckdle.__setConfig('synthBGM', new WebAudioTinySynth({
       debug: 0,
       loop: 1,
       masterVol: Deckdle.settings.soundBGMLevel,
@@ -15,7 +15,7 @@ Deckdle._initSynths = function () {
       reverbLev: 0.1,
       useReverb: 1,
       voices: 8,
-    })
+    }))
   }
 
   Deckdle.config.synthBGM.setLoop(1)
@@ -28,9 +28,9 @@ Deckdle._initSynths = function () {
     console.error('* synthBGM could not be initialized')
   }
 
-  if (!Deckdle.config.synthSFX) {
+  if (!Deckdle.__getConfig().synthSFX) {
     // initialize synthBGM instance
-    Deckdle.config.synthSFX = new WebAudioTinySynth({
+    Deckdle.__setConfig('synthSFX', new WebAudioTinySynth({
       debug: 0,
       loop: 0,
       masterVol: Deckdle.settings.soundBGMLevel,
@@ -38,7 +38,7 @@ Deckdle._initSynths = function () {
       reverbLev: 0,
       useReverb: 0,
       voices: 8,
-    })
+    }))
   }
 
   if (Deckdle.config.synthSFX) {

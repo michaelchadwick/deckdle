@@ -1,4 +1,5 @@
-/* cards/card.js */
+/* lib/cards/card.js */
+/* class definition for Card */
 
 class Card {
   constructor(suit = 3, rank = 14) {

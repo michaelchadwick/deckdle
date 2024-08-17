@@ -43,3 +43,5 @@ Deckdle.dom.interactive.debug = {
   btnClearLS: document.getElementById('button-clear-ls'),
   btnWinAnimation: document.getElementById('button-win-animation'),
 }
+
+Deckdle._logStatus('[LOADED] /app/dom')

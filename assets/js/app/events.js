@@ -1,3 +1,7 @@
+/* /assets/js/app/events.js */
+/* adds event listeners to dom */
+/* global Deckdle */
+
 // user clicks a card (stock or tableau)
 Deckdle._onCardClick = function (card) {
   // console.log('card was clicked', card, card.dataset.row)
@@ -129,4 +133,6 @@ Deckdle._attachEventListeners = function () {
     },
     { passive: false }
   )
+
+  Deckdle._logStatus('[LOADED] /app/events')
 }
