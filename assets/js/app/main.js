@@ -271,11 +271,26 @@ Deckdle.modalOpen = async function (type) {
       const stockCount = Deckdle.__getState()['stock'].length
       if (stockCount > 0) {
         modalText = `
-          You won! with a score of ${stockCount} UNDER par! :-D
+          <div class='score-animation'>
+            <div>Whoa! You won with a score of...</div>
+            <div class='score animate__animated animate__zoomIn'>${stockCount}</div>
+            <div>UNDER PAR</div>
+          </div>
         `
       } else {
         modalText = `
-          You won with a score of par. :-)
+          <div class='score-animation'>
+            <div>Whew. You won with a score of...</div>
+            <div class='score animate__animated animate__zoomIn'>PAR</div>
+          </div>
+        `
+      }
+
+      if (Deckdle.__getState().gameState == 'GAME_OVER') {
+        modalText += `
+          <div class="share">
+            <button class="share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
+          </div>
         `
       }
 
@@ -287,7 +302,11 @@ Deckdle.modalOpen = async function (type) {
 
     case 'game-over-lose':
       modalText = `
-        You lost with a score of ${Deckdle._tableauCount()} OVER par. :-(
+        <div class='score-animation'>
+          <div>Ploo. You lost with a score of...</div>
+          <div class='score animate__animated animate__zoomIn'>${Deckdle._tableauCount()}</div>
+          <div>OVER PAR</div>
+        </div>
       `
 
       this.myModal = new Modal('perm', 'Game Over (Lose)', modalText, null, null)
@@ -324,31 +343,12 @@ Deckdle.initApp = async () => {
  *************************************************************************/
 
 // create new setupId, which resets progress
-Deckdle._createNewSetup = async function (gameMode, setupId = null) {
-  // // set config to defaults
-  // Deckdle.__setConfig('synthBGM', null, gameMode)
-  // Deckdle.__setConfig('synthSFX', null, gameMode)
-
-  // // set state to defaults
-  // console.log('setting base from createNewSetup')
-  // Deckdle.__setState('base', [], gameMode)
-  // Deckdle.__setState('gameState', 'IN_PROGRESS', gameMode)
-  // Deckdle.__setState('gameType', DECKDLE_DEFAULT_GAMETYPE, gameMode)
-  // Deckdle.__setState('gameWon', false, gameMode)
-  // Deckdle.__setState('lastCompletedTime', null, gameMode)
-  // Deckdle.__setState('lastPlayedTime', null, gameMode)
-  // Deckdle.__setState('stock', [], gameMode)
-  // Deckdle.__setState('tableau', {}, gameMode)
+Deckdle._createNewSetup = async function (gameMode) {
+  let setupId = null
 
   // 'free' generates random setupId
   if (gameMode == 'free') {
-    if (!setupId) {
-      try {
-        setupId = await Deckdle.__getRandomSetupId()
-      } catch (err) {
-        console.error('could not get new setupId', err)
-      }
-    }
+    setupId = Deckdle.__getRandomSetupId()
   }
   // 'daily' always uses day hash
   else {
@@ -369,45 +369,28 @@ Deckdle._createNewSetup = async function (gameMode, setupId = null) {
 
   // set gameMode's state setupId
   Deckdle.__setState('setupId', setupId, gameMode)
-  Deckdle._saveGame('_createNewSetup')
+  Deckdle._saveGame()
 
   // create Deckdle puzzle
-  try {
-    const puzzle = await Deckdle.__createPuzzle(
-      Deckdle.__getState(gameMode).setupId
-    )
+  Deckdle.__createPuzzle(
+    Deckdle.__getState(gameMode).setupId
+  )
 
-    if (puzzle) {
-      console.log('created Puzzle from new setupId', Deckdle.__getState(gameMode).setupId)
+  console.log('created Puzzle from new setupId', Deckdle.__getState(gameMode).setupId)
 
-      // clear everything
-      Deckdle.ui._emptyPlayingField()
+  // clear everything
+  Deckdle.ui._emptyPlayingField()
 
-      // fill DOM cards
-      Deckdle.ui._fillCards()
-    }
-  } catch (err) {
-    console.error('could not create new puzzle', err)
-  }
+  // fill DOM cards
+  Deckdle.ui._fillCards()
 }
 
 // load existing setupId, which retains past progress
-Deckdle._loadExistingSetup = async function (gameMode, setupId = null) {
-  // // set config to defaults
-  // Deckdle.__setConfig('synthBGM', null, gameMode)
-  // Deckdle.__setConfig('synthSFX', null, gameMode)
+Deckdle._loadExistingSetup = async function (gameMode) {
+  let setupId = null
 
-  // new game with static seed word
-  if (gameMode == 'free') {
-    if (!setupId) {
-      try {
-        setupId = await Deckdle.__getRandomSetupId()
-      } catch (err) {
-        console.error('could not get new setupId', err)
-      }
-    }
-  } else {
-    // 'daily' always uses day hash
+  // 'daily' always uses day hash
+  if (gameMode == 'daily') {
     try {
       const response = await fetch(DECKDLE_DAILY_SCRIPT)
       const data = await response.json()
@@ -417,37 +400,31 @@ Deckdle._loadExistingSetup = async function (gameMode, setupId = null) {
 
       if (!setupId) {
         console.error('daily setupId went bork', setupId)
+      } else {
+        Deckdle.__setState('setupId', setupId, gameMode)
       }
     } catch (e) {
       console.error('could not get daily setupId', e)
     }
   }
-
-  // set gameMode's state setupId
-  Deckdle.__setState('setupId', setupId, gameMode)
-  Deckdle._saveGame('_loadExistingSetup')
+  // 'free' uses localStorage value so nothing to do
+  else {}
 
   // load existing setupId
-  try {
-    const puzzle = await Deckdle.__createPuzzle(
-      Deckdle.__getState(gameMode).setupId
-    )
+  Deckdle.__createPuzzle(
+    Deckdle.__getState(gameMode).setupId
+  )
 
-    if (puzzle) {
-      console.log('created Puzzle from existing setupId', Deckdle.__getState(gameMode).setupId)
+  console.log('created Puzzle from existing setupId', Deckdle.__getState(gameMode).setupId)
 
-      // clear everything
-      Deckdle.ui._emptyPlayingField()
+  // clear everything
+  Deckdle.ui._emptyPlayingField()
 
-      // fill DOM cards
-      Deckdle.ui._fillCards()
+  // fill DOM cards
+  Deckdle.ui._fillCards()
 
-      // see if we've already won
-      Deckdle._checkWinState()
-    }
-  } catch (err) {
-    console.error('could not create puzzle', err)
-  }
+  // see if we've already won
+  Deckdle._checkWinState()
 }
 
 // ask to create new free gamemode puzzle
@@ -579,14 +556,8 @@ Deckdle._shareResults = async function () {
  * _private __helper methods *
  ************************************************************************/
 
-Deckdle.__createPuzzle = async (setupId, type = 'golf') => {
-  // console.log(`new '${Deckdle.__getGameMode()}' Puzzle(${setupId}, '${type}')`)
-
-  try {
-    return new Puzzle(setupId, type)
-  } catch (err) {
-    console.error('new Puzzle() failed', err)
-  }
+Deckdle.__createPuzzle = (setupId, type = 'golf') => {
+  return new Puzzle(setupId, type)
 }
 
 /************************************************************************

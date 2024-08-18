@@ -26,11 +26,12 @@ Deckdle._moveCardFromStockToBase = () => {
   Deckdle.ui._removeCardFromStock()
   Deckdle.ui._addCardToBase()
 
-  // console.log('setting base from stock')
   Deckdle.__setState('base', base)
   Deckdle.__setState('stock', stock)
 
   Deckdle.ui._updateStockBaseCounts()
+
+  Deckdle.__setState('lastPlayedTime', new Date().getTime())
 
   Deckdle._checkForEmptyStock()
 }

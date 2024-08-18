@@ -215,6 +215,9 @@
 .modal-text li.full {
   color: var(--dark-color);
 }
+.modal-text .share {
+  margin: 1rem auto 0;
+}
 
 /* MODAL->STATISTICS */
 .statistic-header {

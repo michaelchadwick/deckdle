@@ -64,7 +64,7 @@ Deckdle.__getParentCard = function (el, selector) {
   return parent_container;
 }
 
-Deckdle.__getRandomSetupId = async function () {
+Deckdle.__getRandomSetupId = function () {
   return Math.floor(Math.random() * 10000000000)
 }
 Deckdle.__getGameMode = function () {

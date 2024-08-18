@@ -14,114 +14,149 @@ header .menu-left #nav-overlay #nav-content {
 }
 
 #tableau #col0 .card[data-row='0'].animate__animated.animate__slideInDown {
+  --animate-delay: 1.5s;
   --animate-duration: 50ms;
 }
 #tableau #col0 .card[data-row='1'].animate__animated.animate__slideInDown {
+  --animate-delay: 1.5s;
   --animate-duration: 100ms;
 }
 #tableau #col0 .card[data-row='2'].animate__animated.animate__slideInDown {
+  --animate-delay: 1.5s;
   --animate-duration: 150ms;
 }
 #tableau #col0 .card[data-row='3'].animate__animated.animate__slideInDown {
+  --animate-delay: 1.5s;
   --animate-duration: 200ms;
 }
 #tableau #col0 .card[data-row='4'].animate__animated.animate__slideInDown {
+  --animate-delay: 1.5s;
   --animate-duration: 250ms;
 }
 
 #tableau #col1 .card[data-row='0'].animate__animated.animate__slideInDown {
+  --animate-delay: 2s;
   --animate-duration: 300ms;
 }
 #tableau #col1 .card[data-row='1'].animate__animated.animate__slideInDown {
+  --animate-delay: 2s;
   --animate-duration: 350ms;
 }
 #tableau #col1 .card[data-row='2'].animate__animated.animate__slideInDown {
+  --animate-delay: 2s;
   --animate-duration: 400ms;
 }
 #tableau #col1 .card[data-row='3'].animate__animated.animate__slideInDown {
+  --animate-delay: 2s;
   --animate-duration: 450ms;
 }
 #tableau #col1 .card[data-row='4'].animate__animated.animate__slideInDown {
+  --animate-delay: 2s;
   --animate-duration: 500ms;
 }
 
 #tableau #col2 .card[data-row='0'].animate__animated.animate__slideInDown {
+  --animate-delay: 2.5s;
   --animate-duration: 550ms;
 }
 #tableau #col2 .card[data-row='1'].animate__animated.animate__slideInDown {
+  --animate-delay: 2.5s;
   --animate-duration: 600ms;
 }
 #tableau #col2 .card[data-row='2'].animate__animated.animate__slideInDown {
+  --animate-delay: 2.5s;
   --animate-duration: 650ms;
 }
 #tableau #col2 .card[data-row='3'].animate__animated.animate__slideInDown {
+  --animate-delay: 2.5s;
   --animate-duration: 700ms;
 }
 #tableau #col2 .card[data-row='4'].animate__animated.animate__slideInDown {
+  --animate-delay: 2.5s;
   --animate-duration: 750ms;
 }
 
 #tableau #col3 .card[data-row='0'].animate__animated.animate__slideInDown {
+  --animate-delay: 3s;
   --animate-duration: 800ms;
 }
 #tableau #col3 .card[data-row='1'].animate__animated.animate__slideInDown {
+  --animate-delay: 3s;
   --animate-duration: 850ms;
 }
 #tableau #col3 .card[data-row='2'].animate__animated.animate__slideInDown {
+  --animate-delay: 3s;
   --animate-duration: 900ms;
 }
 #tableau #col3 .card[data-row='3'].animate__animated.animate__slideInDown {
+  --animate-delay: 3s;
   --animate-duration: 950ms;
 }
 #tableau #col3 .card[data-row='4'].animate__animated.animate__slideInDown {
+  --animate-delay: 3s;
   --animate-duration: 1000ms;
 }
 
 #tableau #col4 .card[data-row='0'].animate__animated.animate__slideInDown {
+  --animate-delay: 3.5s;
   --animate-duration: 1050ms;
 }
 #tableau #col4 .card[data-row='1'].animate__animated.animate__slideInDown {
+  --animate-delay: 3.5s;
   --animate-duration: 1100ms;
 }
 #tableau #col4 .card[data-row='2'].animate__animated.animate__slideInDown {
+  --animate-delay: 3.5s;
   --animate-duration: 1150ms;
 }
 #tableau #col4 .card[data-row='3'].animate__animated.animate__slideInDown {
+  --animate-delay: 3.5s;
   --animate-duration: 1200ms;
 }
 #tableau #col4 .card[data-row='4'].animate__animated.animate__slideInDown {
+  --animate-delay: 3.5s;
   --animate-duration: 1250ms;
 }
 
 #tableau #col5 .card[data-row='0'].animate__animated.animate__slideInDown {
+  --animate-delay: 4s;
   --animate-duration: 1300ms;
 }
 #tableau #col5 .card[data-row='1'].animate__animated.animate__slideInDown {
+  --animate-delay: 4s;
   --animate-duration: 1350ms;
 }
 #tableau #col5 .card[data-row='2'].animate__animated.animate__slideInDown {
+  --animate-delay: 4s;
   --animate-duration: 1400ms;
 }
 #tableau #col5 .card[data-row='3'].animate__animated.animate__slideInDown {
+  --animate-delay: 4s;
   --animate-duration: 1450ms;
 }
 #tableau #col5 .card[data-row='4'].animate__animated.animate__slideInDown {
+  --animate-delay: 4s;
   --animate-duration: 1500ms;
 }
 
 #tableau #col6 .card[data-row='0'].animate__animated.animate__slideInDown {
+  --animate-delay: 4.5s;
   --animate-duration: 1550ms;
 }
 #tableau #col6 .card[data-row='1'].animate__animated.animate__slideInDown {
+  --animate-delay: 4.5s;
   --animate-duration: 1600ms;
 }
 #tableau #col6 .card[data-row='2'].animate__animated.animate__slideInDown {
+  --animate-delay: 4.5s;
   --animate-duration: 1650ms;
 }
 #tableau #col6 .card[data-row='3'].animate__animated.animate__slideInDown {
+  --animate-delay: 4.5s;
   --animate-duration: 1700ms;
 }
 #tableau #col6 .card[data-row='4'].animate__animated.animate__slideInDown {
+  --animate-delay: 4.5s;
   --animate-duration: 1750ms;
 }
 
@@ -131,6 +166,19 @@ header .menu-left #nav-overlay #nav-content {
 
 #base .card {
   --animate-duration: 700ms;
+}
+
+.score-animation {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.score-animation .score {
+  --animate-delay: 1s;
+  --animate-duration: 2s;
+  color: var(--bright-color);
+  font-size: 3rem;
+  text-shadow: 2px 2px 0 var(--black);
 }
 
 @keyframes SlideRight {

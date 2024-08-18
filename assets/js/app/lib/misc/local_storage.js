@@ -140,22 +140,18 @@ Deckdle._loadGame = async function () {
   )
 
   // if we have previous LS values, sync them to code model
-  if (lsStateFree && Object.keys(lsStateFree)) {
+  if (lsStateFree) {
     const freeDefaults = DECKDLE_DEFAULTS.state.free
 
-    // console.log('lsStateFree', lsStateFree)
+    console.log('lsStateFree', lsStateFree)
 
     let i = 0
     lsStateFree.forEach((lsState) => {
-      // console.log('setting base from localStorage')
       Deckdle.__setState('base',
         lsState.base || freeDefaults.base,
         'free',
         i
       )
-
-      // console.log('Deckdle.__getState)["base"]', Deckdle.__getState()['base'])
-
       Deckdle.__setState('gameState',
         lsState.gameState || freeDefaults.gameState,
         'free',
@@ -209,10 +205,7 @@ Deckdle._loadGame = async function () {
     Deckdle.dom.dailyDetails.classList.add('show')
 
     if (dailyCreateOrLoad == 'load') {
-      await Deckdle._loadExistingSetup(
-        'daily',
-        Deckdle.__getState('daily').setupId
-      )
+      await Deckdle._loadExistingSetup('daily')
 
       Deckdle._logStatus('[LOADED] game(daily)')
     } else {
@@ -224,10 +217,8 @@ Deckdle._loadGame = async function () {
   // free
   else {
     if (freeCreateOrLoad == 'load') {
-      await Deckdle._loadExistingSetup(
-        'free',
-        Deckdle.__getState('free').setupId
-      )
+      console.log('found existing free setupId, so loading it', Deckdle.__getState('free')['setupId'])
+      await Deckdle._loadExistingSetup('free')
 
       Deckdle._logStatus('[LOADED] game(free)')
     } else {
