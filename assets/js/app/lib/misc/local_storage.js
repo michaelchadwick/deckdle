@@ -152,6 +152,7 @@ Deckdle._loadGame = async function () {
         'free',
         i
       )
+
       Deckdle.__setState('gameState',
         lsState.gameState || freeDefaults.gameState,
         'free',

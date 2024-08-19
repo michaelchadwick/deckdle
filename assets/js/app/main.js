@@ -376,7 +376,7 @@ Deckdle._createNewSetup = async function (gameMode) {
     Deckdle.__getState(gameMode).setupId
   )
 
-  console.log('created Puzzle from new setupId', Deckdle.__getState(gameMode).setupId)
+  console.log(`created ${gameMode} Puzzle from new setupId`, Deckdle.__getState(gameMode).setupId)
 
   // clear everything
   Deckdle.ui._emptyPlayingField()
@@ -387,35 +387,38 @@ Deckdle._createNewSetup = async function (gameMode) {
 
 // load existing setupId, which retains past progress
 Deckdle._loadExistingSetup = async function (gameMode) {
-  let setupId = null
-
   // 'daily' always uses day hash
   if (gameMode == 'daily') {
+    Deckdle._logStatus('loading existing daily setupId...')
+
     try {
       const response = await fetch(DECKDLE_DAILY_SCRIPT)
       const data = await response.json()
-      setupId = data['setupId']
+      const setupId = data['setupId']
 
       Deckdle.ui._updateDailyDetails(data['index'])
 
       if (!setupId) {
-        console.error('daily setupId went bork', setupId)
+        console.error('retrieval of daily setupId went bork', setupId)
       } else {
+        console.log('daily setupId was successfully retrieved')
         Deckdle.__setState('setupId', setupId, gameMode)
       }
     } catch (e) {
       console.error('could not get daily setupId', e)
     }
   }
-  // 'free' uses localStorage value so nothing to do
-  else {}
+  // 'free' uses value set in Deckdle.state, so nothing to do
+  else {
+    Deckdle._logStatus('loading existing free setupId...')
+  }
 
   // load existing setupId
   Deckdle.__createPuzzle(
     Deckdle.__getState(gameMode).setupId
   )
 
-  console.log('created Puzzle from existing setupId', Deckdle.__getState(gameMode).setupId)
+  console.log(`loaded ${gameMode} Puzzle from existing setupId`, Deckdle.__getState(gameMode).setupId)
 
   // clear everything
   Deckdle.ui._emptyPlayingField()
