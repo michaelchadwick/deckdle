@@ -78,8 +78,6 @@ Deckdle._removeCardFromTableau = (card) => {
   Deckdle.__setState('tableau', tableau)
 
   Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
-
-  return cardRemoved
 }
 
 Deckdle._onTableauClick = (card, colId, rowId) => {
@@ -105,7 +103,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
 
         // console.log('base', base)
 
-        Deckdle.ui._addCardToBase()
+        Deckdle.ui._addCardToBase(source = 'tableau')
 
         // console.log('setting base from tableau')
         Deckdle.__setState('base', base)

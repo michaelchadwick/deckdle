@@ -24,7 +24,7 @@ Deckdle._moveCardFromStockToBase = () => {
   base.push(stock.pop())
 
   Deckdle.ui._removeCardFromStock()
-  Deckdle.ui._addCardToBase()
+  Deckdle.ui._addCardToBase(source = 'stock')
 
   Deckdle.__setState('base', base)
   Deckdle.__setState('stock', stock)

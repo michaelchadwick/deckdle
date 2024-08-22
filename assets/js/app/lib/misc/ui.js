@@ -76,6 +76,8 @@ Deckdle.ui._addCardToTableau = (card, colId) => {
 }
 
 Deckdle.ui._removeCardFromTableau = (colId) => {
+  Deckdle._logStatus('[CHANGING] removing card from tableau')
+
   const elem = `#tableau #${colId} .card.available`
   const card = Deckdle.dom.interactive.tableau.querySelector(elem)
 
@@ -102,13 +104,21 @@ Deckdle.ui._addCardToStock = (card) => {
 }
 
 Deckdle.ui._removeCardFromStock = () => {
+  Deckdle._logStatus('[CHANGING] removing card from stock')
+
   const stock = Deckdle.dom.interactive.stock
+
   if (stock.lastElementChild.classList.contains('card')) {
+    // Deckdle._animateCSS('#stock .card:last-of-type', 'fadeOutRight').then(() => {
+      // stock.removeChild(stock.lastElementChild)
+    // })
     stock.removeChild(stock.lastElementChild)
   }
 }
 
-Deckdle.ui._addCardToBase = () => {
+Deckdle.ui._addCardToBase = (source) => {
+  Deckdle._logStatus(`[CHANGING] adding card to base from '${source}'`)
+
   const base = Deckdle.__getState()['base']
   const card = base[base.length - 1]
   const newCard = Deckdle.ui._createCard(
@@ -118,7 +128,15 @@ Deckdle.ui._addCardToBase = () => {
 
   Deckdle.dom.interactive.base.appendChild(newCard)
 
-  Deckdle._animateCSS(`#base .card:last-of-type`, 'slideInDown')
+  switch (source) {
+    case 'stock':
+      Deckdle._animateCSS(`#base .card:last-of-type`, 'slideInLeft')
+      break
+
+    case 'tableau':
+      Deckdle._animateCSS(`#base .card:last-of-type`, 'slideInDown')
+      break
+  }
 }
 
 Deckdle.ui._updateStockBaseCounts = () => {
