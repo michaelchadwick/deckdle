@@ -37,7 +37,7 @@ Deckdle._initDebug = function () {
 
 // modal: debug: display Deckdle.config
 Deckdle._displayGameConfig = function () {
-  let configs = Deckdle.config
+  let config = Deckdle.config
 
   var html = ''
 
@@ -46,67 +46,39 @@ Deckdle._displayGameConfig = function () {
 
   html += '<dl>'
 
-  Object.keys(configs).forEach((config) => {
-    html += `<h4>CONFIG: ${config}</h4>`
+  html += `<h4>CONFIG</h4>`
 
-    Object.keys(configs[config])
-      .sort()
-      .forEach((key) => {
-        if (
-          typeof configs[config][key] == 'object' &&
-          !Array.isArray(configs[config][key]) &&
-          configs[config][key] != null
-        ) {
-          html += `<dd><code>${key}: {</code><dl>`
+  Object.keys(config)
+    .sort()
+    .forEach((key) => {
+      if (
+        typeof config[key] == 'object' &&
+        !Array.isArray(config[key]) &&
+        config[key] != null
+      ) {
+        html += `<dd><code>${key}: {</code><dl>`
 
-          // skip object-within-object key
-          if (key == 'solutionSet') {
-            html += '<dd><code>v See console.log v</code></dd>'
-            html += '</dl><code>}</code></dd>'
+        Object.keys(config[key]).forEach((k) => {
+          var label = k
+          var value = config[key][k]
+
+          if (Object.keys(value)) {
+            // console.log('found another object', key, label, value)
           } else {
-            Object.keys(configs[config][key]).forEach((k) => {
-              var label = k
-              var value = configs[config][key][k]
-
-              if (label == 'lastCompletedTime' || label == 'lastPlayedTime') {
-                value = Deckdle.__getFormattedDate(new Date(value))
-              }
-
-              if (Object.keys(value)) {
-                // console.log('found another object', key, label, value)
-              } else {
-                html += `<dd><code>${label}:</code></dd><dt>${value.join(
-                  ', '
-                )}</dt>`
-              }
-            })
-
-            html += '</dl><code>}</code></dd>'
+            html += `<dd><code>${label}:</code></dd><dt>${value.join(
+              ', '
+            )}</dt>`
           }
-        } else {
-          var label = key
-          var value = configs[config][key]
+        })
 
-          if (label == 'lastCompletedTime' || label == 'lastPlayedTime') {
-            if (value) {
-              value = Deckdle.__getFormattedDate(new Date(value))
-            }
-          }
+        html += '</dl><code>}</code></dd>'
+      } else {
+        var label = key
+        var value = config[key]
 
-          // special cases
-          if (label == 'hintWord') {
-            html += `<dd><code>${label}:</code></dd><dt>${
-              value ? value.toUpperCase() : value
-            }</dt>`
-          } else if (label == 'hintObscuredWord' || label == 'letters') {
-            html += `<dd><code>${label}:</code></dd><dt>${
-              value ? value.map((v) => v.toUpperCase()).join(', ') : value
-            }</dt>`
-          } else {
-            html += `<dd><code>${label}:</code></dd><dt>${value}</dt>`
-          }
-        }
-      })
+        // special cases
+        html += `<dd><code>${label}:</code></dd><dt>${value}</dt>`
+      }
   })
 
   html += '</dl>'
