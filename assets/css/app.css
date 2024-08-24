@@ -38,6 +38,17 @@
   --shadow-dark: #11111125;
   --disabled: #b5b5b5;
   --marker-color: #222222;
+
+  --window-win1: #5ec767;
+  --window-win1-light: #e6f2e8;
+  --window-win2: #51ac59;
+  --window-skip1: #cec514;
+  --window-skip1-light: #f1f1db;
+  --window-lose1: #c75e5e;
+  --window-lose1-light: #efdbdb;
+  --window-lose2: #ad5151;
+  --window-game-over-win: #d8e4d9;
+  --window-game-over-lose: #e9dddd;
 }
 
 @font-face {

@@ -68,11 +68,6 @@ Deckdle._removeCardFromTableau = (card) => {
         bottomCard.rank == card.dataset.rank &&
         bottomCard.suit == card.dataset.suit
       ) {
-        console.log('removing tableau card', col, tableau[col].length - 1)
-
-        // dont actually remove the card from the tableau
-        // just set its status to 0
-        // cardRemoved = tableau[col].splice(tableau[col].length - 1, 1)
         tableau[col][tableau[col].filter(card => card.status == 1).length - 1].status = 0
       }
     }
@@ -84,8 +79,6 @@ Deckdle._removeCardFromTableau = (card) => {
 }
 
 Deckdle._onTableauClick = (card, colId, rowId) => {
-  console.log('tableau card clicked', colId, rowId)
-
   if (card.classList.contains('available')) {
     if (Deckdle._tableauCardCanBeRemoved(card.dataset)) {
       Deckdle._playSFX('click_tableau_valid')

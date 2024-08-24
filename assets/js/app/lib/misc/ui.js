@@ -79,7 +79,7 @@ Deckdle.ui._addCardToTableau = (card, colId) => {
   document.getElementById(`col${colId}`).appendChild(card)
 }
 Deckdle.ui._removeCardFromTableau = (colId) => {
-  Deckdle._logStatus('[UI][CHANGING] removing card from tableau')
+  // Deckdle._logStatus('[UI][CHANGING] removing card from tableau')
 
   const elem = `#tableau #${colId} .card.available`
   const card = Deckdle.dom.interactive.tableau.querySelector(elem)

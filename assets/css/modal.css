@@ -48,6 +48,12 @@
 .modal-window.debug {
   border-color: var(--debug-color);
 }
+.modal-window.game-over-win {
+  border-color: var(--window-win1);
+}
+.modal-window.game-over-lose {
+  border-color: var(--window-lose1);
+}
 
 .modal-title {
   align-items: center;
@@ -61,6 +67,16 @@
 }
 .modal-title.debug {
   background-color: var(--debug-color);
+}
+.modal-window.game-over-win .modal-title,
+.modal-window.game-over-lose .modal-title {
+  height: 48px;
+}
+.modal-window.game-over-win .modal-title {
+  background-color: var(--window-win2);
+}
+.modal-window.game-over-lose .modal-title {
+  background-color: var(--window-lose2);
 }
 
 .modal-close {

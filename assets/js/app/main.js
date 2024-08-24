@@ -79,7 +79,6 @@ Deckdle.modalOpen = async function (type) {
       break
 
     case 'stats':
-    case 'win':
       modalText = `
         <div class="container">
 
@@ -268,22 +267,35 @@ Deckdle.modalOpen = async function (type) {
       break
 
     case 'game-over-win':
-      const stockCount = Deckdle.__getState()['stock'].length
-      if (stockCount > 0) {
-        modalText = `
-          <div class='score-animation'>
-            <div>Whoa! You won with a score of...</div>
-            <div class='score animate__animated animate__zoomIn'>${stockCount}</div>
-            <div>UNDER PAR</div>
-          </div>
-        `
-      } else {
-        modalText = `
-          <div class='score-animation'>
-            <div>Whew. You won with a score of...</div>
-            <div class='score animate__animated animate__zoomIn'>PAR</div>
-          </div>
-        `
+      modalText = `
+        <div class="container game-over-win">
+      `
+
+      switch (Deckdle._getState()['gameType']) {
+        case 'golf':
+        default:
+          if (Deckdle._stockCount() > 0) {
+            modalText = `
+              <div class='score-animation'>
+                <div>Whoa! You won with a score of...</div>
+                <div class='score animate__animated animate__zoomIn'>${Deckdle._stockCount()}</div>
+                <div>UNDER PAR</div>
+              </div>
+            `
+          } else {
+            modalText = `
+              <div class='score-animation'>
+                <div>Whew. You just barely hit...</div>
+                <div class='score animate__animated animate__zoomIn'>PAR</div>
+              </div>
+            `
+          }
+
+          break
+      }
+
+      if (Deckdle.__getGameMode() == 'free') {
+        modalText += `<button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>`
       }
 
       if (Deckdle.__getState().gameState == 'GAME_OVER') {
@@ -294,7 +306,20 @@ Deckdle.modalOpen = async function (type) {
         `
       }
 
-      this.myModal = new Modal('perm', 'Game Over (Win)', modalText, null, null)
+      modalText += `
+        </div>
+      `
+
+      if (this.myModal) this.myModal._destroyModal()
+
+      this.myModal = new Modal(
+        'end-state',
+        'Congratulations! You cleared it!',
+        modalText,
+        null,
+        null,
+        'game-over-win'
+      )
 
       Deckdle._playSFX('win')
 
@@ -302,14 +327,43 @@ Deckdle.modalOpen = async function (type) {
 
     case 'game-over-lose':
       modalText = `
+        <div class="container game-over-lose">
+      `
+
+      modalText = `
         <div class='score-animation'>
-          <div>Ploo. You lost with a score of...</div>
+          <div>You lost with a score of...</div>
           <div class='score animate__animated animate__zoomIn'>${Deckdle._tableauCount()}</div>
           <div>OVER PAR</div>
         </div>
       `
 
-      this.myModal = new Modal('perm', 'Game Over (Lose)', modalText, null, null)
+      if (Deckdle.__getGameMode() == 'free') {
+        modalText += `<button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>`
+      }
+
+      if (Deckdle.__getState().gameState == 'GAME_OVER') {
+        modalText += `
+          <div class="share">
+            <button class="share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
+          </div>
+        `
+      }
+
+      modalText += `
+        </div>
+      `
+
+      if (this.myModal) this.myModal._destroyModal()
+
+      this.myModal = new Modal(
+        'end-state',
+        "Bummer! You didn't clear it this time!",
+        modalText,
+        null,
+        null,
+        'game-over-lose'
+      )
 
       Deckdle._playSFX('lose')
 
@@ -346,6 +400,8 @@ Deckdle.initApp = async () => {
 Deckdle._createNewSetup = async function (gameMode) {
   let setupId = null
 
+  Deckdle.__setState('gameState', 'IN_PROGRESS', gameMode)
+
   // 'daily' always uses day hash
   if (gameMode == 'daily') {
     try {
@@ -373,19 +429,26 @@ Deckdle._createNewSetup = async function (gameMode) {
   // create new Deckdle puzzle
   const puzzle = Deckdle.__createPuzzle(
     Deckdle.__getState(gameMode).setupId,
-    Deckdle.__getGameMode()
+    gameMode
   )
 
   Deckdle.__setState('tableau', puzzle.tableau)
   Deckdle.__setState('stock', puzzle.stock)
+  Deckdle.__setState('base', puzzle.base)
 
   console.log(`created '${gameMode}' Puzzle from new setupId`, puzzle)
+
+
 
   Deckdle._saveGame(gameMode, '_createNewSetup')
 
   // fill UI with beautiful cards
   Deckdle.ui._emptyPlayingField()
   Deckdle.ui._fillCards()
+
+  if (Deckdle._isBaseEmpty()) {
+    Deckdle._moveCardFromStockToBase()
+  }
 }
 
 // load existing setupId, which retains past progress
@@ -415,7 +478,7 @@ Deckdle._loadExistingSetup = async function (gameMode) {
   else {}
 
   // load existing Deckdle puzzle from tableau/stock
-  const puzzle = Deckdle.__loadPuzzle(Deckdle.__getState()['gameType'], Deckdle.__getState())
+  const puzzle = Deckdle.__loadPuzzle(Deckdle.__getState()['setupId'], Deckdle.__getState()['gameType'], Deckdle.__getState())
 
   Deckdle.__setState('tableau', puzzle.tableau)
   Deckdle.__setState('stock', puzzle.stock)
@@ -433,6 +496,12 @@ Deckdle._loadExistingSetup = async function (gameMode) {
 
   // see if we've already won
   Deckdle._checkWinState()
+}
+
+Deckdle._createNewFree = async function () {
+  if (this.myModal) this.myModal._destroyModal()
+
+  await Deckdle._createNewSetup('free')
 }
 
 // ask to create new free gamemode puzzle
@@ -480,6 +549,7 @@ Deckdle._checkWinState = function () {
 
   // tableau exhausted
   if (Deckdle._tableauCount() == 0) {
+    Deckdle.__setState('gameState', 'GAME_OVER')
     Deckdle.__setState('lastCompletedTime', new Date().getTime())
 
     Deckdle.modalOpen('game-over-win')
@@ -489,6 +559,7 @@ Deckdle._checkWinState = function () {
     Deckdle.__getState().stock.length == 0 &&
     !Deckdle._tableauHasValidCard()
   ) {
+    Deckdle.__setState('gameState', 'GAME_OVER')
     Deckdle.__setState('lastCompletedTime', new Date().getTime())
 
     Deckdle.modalOpen('game-over-lose')
@@ -566,8 +637,8 @@ Deckdle.__createPuzzle = (setupId, type = 'golf') => {
   return new Puzzle(setupId, type)
 }
 
-Deckdle.__loadPuzzle = (type = 'gold', state) => {
-  return new Puzzle(null, type, state)
+Deckdle.__loadPuzzle = (setupId, type = 'golf', state) => {
+  return new Puzzle(setupId, type, state)
 }
 
 /************************************************************************

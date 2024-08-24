@@ -49,3 +49,6 @@ const DECKDLE_DEFAULTS = {
   },
   settings: DECKDLE_DEFAULT_SETTINGS,
 }
+
+const DECKDLE_GOLF_ROW_MAX = 5
+const DECKDLE_GOLF_COL_MAX = 7

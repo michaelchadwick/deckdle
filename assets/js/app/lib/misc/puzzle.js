@@ -5,10 +5,8 @@
 */
 
 class Puzzle {
-  GOLF_ROW_MAX = 5
-  GOLF_COL_MAX = 7
-
   constructor(setupId, type = 'golf', state = null) {
+    this.setupId = setupId
     this.type = type
 
     if (state) {
@@ -33,9 +31,9 @@ class Puzzle {
     switch (this.type) {
       case 'golf':
       default:
-        for (let colId = 0; colId < this.GOLF_COL_MAX; colId++) {
+        for (let colId = 0; colId < DECKDLE_GOLF_COL_MAX; colId++) {
           tableau[colId] = []
-          for (let cardId = 0; cardId < this.GOLF_ROW_MAX; cardId++) {
+          for (let cardId = 0; cardId < DECKDLE_GOLF_ROW_MAX; cardId++) {
             let cardToAdd = null
 
             if (source) {

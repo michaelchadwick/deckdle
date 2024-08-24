@@ -26,9 +26,10 @@ Deckdle._handleClickTouch = function (event) {
 
   if (dialog) {
     const isConfirm = dialog.classList.contains('modal-confirm')
+    const isEndState = dialog.classList.contains('end-state')
 
     // only close if not a confirmation!
-    if (elem == dialog && !isConfirm) {
+    if (elem == dialog && !isConfirm && !isEndState) {
       dialog.remove()
     }
   }

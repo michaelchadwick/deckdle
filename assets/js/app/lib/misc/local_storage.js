@@ -244,11 +244,7 @@ Deckdle._loadGame = async function () {
   Deckdle.ui._updateGameType()
 
   if (Deckdle._isBaseEmpty()) {
-    // Deckdle._logStatus('base is empty, so add 1 from stock')
-
     Deckdle._moveCardFromStockToBase()
-  } else {
-    // Deckdle._logStatus('base loaded from LS not empty, so do not touch stock')
   }
 
   // console.log('stock length', JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))[0].stock.length)
@@ -334,13 +330,6 @@ Deckdle._loadSettings = function () {
 
     if (lsSettings.gameMode !== undefined) {
       Deckdle._saveSetting('gameMode', lsSettings.gameMode)
-
-      if (Deckdle.__getGameMode() == 'free') {
-        Deckdle.dom.interactive.gameModeDailyLink.dataset.active = false
-        Deckdle.dom.interactive.gameModeFreeLink.dataset.active = true
-        Deckdle.dom.dailyDetails.classList.remove('show')
-        Deckdle.dom.keyboard.btnCreateNew.disabled = false
-      }
     }
 
     if (lsSettings.noisy !== undefined) {
@@ -410,6 +399,13 @@ Deckdle._loadSettings = function () {
     }
   } else {
     Deckdle.modalOpen('start')
+  }
+
+  if (Deckdle.__getGameMode() == 'free') {
+    Deckdle.dom.interactive.gameModeDailyLink.dataset.active = false
+    Deckdle.dom.interactive.gameModeFreeLink.dataset.active = true
+    Deckdle.dom.dailyDetails.classList.remove('show')
+    Deckdle.dom.keyboard.btnCreateNew.disabled = false
   }
 
   Deckdle._logStatus('[LOADED] /app/main(settings)')
