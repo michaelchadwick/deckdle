@@ -153,7 +153,17 @@ class Modal {
   }
 
   _destroyModal() {
-    this.parent.removeChild(this.modal)
-    delete this
+    if (this.modal) {
+      // console.log('_destroyModal: attempting to remove this.modal', this.modal)
+
+      const modal = document.getElementsByClassName('modal-dialog')[0]
+
+      if (this.parent.contains(modal)) {
+        // console.log('_destroyModal: attempting to remove this.modal', this.modal.querySelector('.modal-title'))
+
+        this.parent.removeChild(modal)
+        delete this
+      }
+    }
   }
 }
