@@ -9,6 +9,10 @@
   --animate-duration: 1000ms;
 }
 
+.animate__animated.animate__shakeX {
+  --animate-duration: 100ms;
+}
+
 header .menu-left #nav-overlay #nav-content {
   animation: SlideRight 200ms;
 }

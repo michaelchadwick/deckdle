@@ -89,11 +89,19 @@ Deckdle._playSFX = function (action, arg = null) {
         let note = arg ? 42 + arg: 42
         Deckdle.config.synthSFX.send([0x90, note, 100])
         setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, note - 2, 100])
+        }, 100)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, note - 4, 100])
+        }, 200)
+        setTimeout(() => {
           Deckdle.config.synthSFX.send([0x80, note, 0])
-        }, 250)
+          Deckdle.config.synthSFX.send([0x80, note - 2, 0])
+          Deckdle.config.synthSFX.send([0x80, note - 4, 0])
+        }, 300)
         break
 
-      case 'click_tableau':
+      case 'click_tableau_valid':
         Deckdle.config.synthSFX.send([0x90, 60, 100])
         setTimeout(() => {
           Deckdle.config.synthSFX.send([0x90, 62, 100])
@@ -106,6 +114,25 @@ Deckdle._playSFX = function (action, arg = null) {
           Deckdle.config.synthSFX.send([0x80, 62, 0])
           Deckdle.config.synthSFX.send([0x80, 65, 0])
         }, 300)
+        break
+
+      case 'click_tableau_invalid':
+        Deckdle.config.synthSFX.send([0x90, 59, 100])
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 59, 0])
+        }, 50)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 60, 80])
+        }, 100)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x80, 60, 0])
+        }, 150)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x90, 59, 100])
+        }, 200)
+        setTimeout(() => {
+          Deckdle.config.synthSFX.send([0x80, 59, 0])
+        }, 250)
         break
 
       case 'lose':

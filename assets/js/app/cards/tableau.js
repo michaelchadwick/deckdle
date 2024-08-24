@@ -90,7 +90,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
 
   if (card.classList.contains('available')) {
     if (Deckdle._tableauCardCanBeRemoved(card.dataset)) {
-      Deckdle._playSFX('click_tableau')
+      Deckdle._playSFX('click_tableau_valid')
 
       Deckdle._removeCardFromTableau(card)
 
@@ -114,6 +114,10 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
       } else {
         console.error('could not remove card from tableau')
       }
+    } else {
+      Deckdle._animateCSS(`#tableau #${colId} .card[data-row="${rowId}"]`, 'shakeX').then(() => {
+        Deckdle._playSFX('click_tableau_invalid')
+      })
     }
   }
 }
