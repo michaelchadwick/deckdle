@@ -535,7 +535,7 @@ Deckdle._changeSetting = async function (setting, value) {
 
       break
 
-    case 'soundBGMLevel':
+    case 'soundSFXLevel':
       // set config
       const newSFXLevel = parseInt(value) / 100
 
