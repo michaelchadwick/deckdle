@@ -79,7 +79,7 @@ Deckdle.ui._addCardToTableau = (card, colId) => {
   document.getElementById(`col${colId}`).appendChild(card)
 }
 Deckdle.ui._removeCardFromTableau = (colId) => {
-  // Deckdle._logStatus('[UI][CHANGING] removing card from tableau')
+  Deckdle._logStatus('[UI][CHANGING] removing card from tableau')
 
   const elem = `#tableau #${colId} .card.available`
   const card = Deckdle.dom.interactive.tableau.querySelector(elem)
@@ -88,6 +88,7 @@ Deckdle.ui._removeCardFromTableau = (colId) => {
     Deckdle._animateCSS(elem, 'fadeOutDown').then(() => {
       card.classList.add('removed')
       card.classList.remove('available')
+      card.dataset.status = 0
     })
 
     return card
@@ -163,7 +164,7 @@ Deckdle.ui._emptyPlayingField = function () {
 }
 
 Deckdle.ui._fillCards = function () {
-  Deckdle._logStatus('[UI][LOADING] fillCards()')
+  // Deckdle._logStatus('[UI][LOADING] fillCards()')
 
   // create <div id="tableau"><div class="col"> * 7</div>
   for (let i = 0; i < 7; i++) {

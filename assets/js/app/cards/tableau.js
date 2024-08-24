@@ -6,11 +6,9 @@ Deckdle._tableauCount = () => {
   let cardCount = 0
 
   Object.keys(tableau).forEach((col) => {
-    tableau[col].forEach((card) => {
-      if (card.status == 1) {
-        cardCount++
-      }
-    })
+    const activeColCards = tableau[col].filter(card => card.status == 1)
+
+    cardCount += activeColCards.length
   })
 
   return cardCount
@@ -25,8 +23,8 @@ Deckdle._tableauHasValidCard = () => {
   let hasValid = false
 
   Object.keys(tableau).forEach((col) => {
-    if (tableau[col].length) {
-      if (Deckdle._tableauCardCanBeRemoved(tableau[col][tableau[col].length - 1])) {
+    if (tableau[col].filter(card => card.status == 1).length) {
+      if (Deckdle._tableauCardCanBeRemoved(tableau[col][tableau[col].filter(card => card.status == 1).length - 1])) {
         hasValid = true
       }
     }
@@ -63,19 +61,19 @@ Deckdle._removeCardFromTableau = (card) => {
   let cardRemoved = null
 
   Object.keys(tableau).forEach((col) => {
-    const bottomCard = tableau[col][tableau[col].length - 1]
+    const bottomCard = tableau[col][tableau[col].filter(card => card.status == 1).length - 1]
 
     if (bottomCard) {
       if (
         bottomCard.rank == card.dataset.rank &&
         bottomCard.suit == card.dataset.suit
       ) {
-        // console.log('removing tableau card', col, tableau[col].length - 1)
+        console.log('removing tableau card', col, tableau[col].length - 1)
 
         // dont actually remove the card from the tableau
         // just set its status to 0
         // cardRemoved = tableau[col].splice(tableau[col].length - 1, 1)
-        tableau[col][tableau[col].length - 1].status = 0
+        tableau[col][tableau[col].filter(card => card.status == 1).length - 1].status = 0
       }
     }
   })
@@ -86,7 +84,7 @@ Deckdle._removeCardFromTableau = (card) => {
 }
 
 Deckdle._onTableauClick = (card, colId, rowId) => {
-  // console.log('tableau card clicked', card, colId, rowId)
+  console.log('tableau card clicked', colId, rowId)
 
   if (card.classList.contains('available')) {
     if (Deckdle._tableauCardCanBeRemoved(card.dataset)) {
