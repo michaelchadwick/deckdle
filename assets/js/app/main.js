@@ -22,6 +22,10 @@ Deckdle.modalOpen = async function (type) {
   switch (type) {
     case 'start':
     case 'help':
+      if (Deckdle.myModal) {
+        Deckdle.myModal._destroyModal()
+      }
+
       modalText = `
         <p><strong>Deckdle</strong> is a <s>daily</s> solitaire card game. Currently, the only solitaire type is 'golf', but there are plans to add the classic 'klondike', 'pyramid', and 'spider'.</p>
       `
@@ -59,7 +63,7 @@ Deckdle.modalOpen = async function (type) {
         <p><strong>Dev</strong>: <a href="https://michaelchadwick.info" target="_blank">Michael Chadwick</a>.</p>
       `
 
-      this.myModal = new Modal(
+      Deckdle.myModal = new Modal(
         'perm',
         'How to Play Deckdle',
         modalText,
@@ -105,19 +109,15 @@ Deckdle.modalOpen = async function (type) {
           </div>
       `
 
-      if (Deckdle.__getState().gameState == 'GAME_OVER') {
-        modalText += `
-          <div class="share">
-            <button class="share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
-          </div>
-        `
-      }
-
       modalText += `
         </div>
       `
 
-      this.myModal = new Modal(
+      if (Deckdle.myModal) {
+        Deckdle.myModal._destroyModal()
+      }
+
+      Deckdle.myModal = new Modal(
         'perm',
         'Statistics',
         modalText,
@@ -128,6 +128,10 @@ Deckdle.modalOpen = async function (type) {
       break
 
     case 'settings':
+      if (Deckdle.myModal) {
+        Deckdle.myModal._destroyModal()
+      }
+
       modalText = `
         <div id="settings">
 
@@ -212,14 +216,14 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      this.myModal = new Modal('perm', 'Settings', modalText, null, null)
+      Deckdle.myModal = new Modal('perm', 'Settings', modalText, null, null)
 
       Deckdle._loadSettings()
 
       break
 
     case 'show-config':
-      this.myModal = new Modal(
+      Deckdle.myModal = new Modal(
         'perm-debug',
         'Game Config (code model only)',
         Deckdle._displayGameConfig(),
@@ -228,7 +232,7 @@ Deckdle.modalOpen = async function (type) {
       )
       break
     case 'show-state':
-      this.myModal = new Modal(
+      Deckdle.myModal = new Modal(
         'perm-debug',
         'Game State (load from/save to LS)',
         Deckdle._displayGameState(),
@@ -238,7 +242,7 @@ Deckdle.modalOpen = async function (type) {
       break
 
     case 'shared':
-      this.myModal = new Modal(
+      Deckdle.myModal = new Modal(
         'temp',
         null,
         'Results copied to clipboard',
@@ -247,7 +251,7 @@ Deckdle.modalOpen = async function (type) {
       )
       break
     case 'no-clipboard-access':
-      this.myModal = new Modal(
+      Deckdle.myModal = new Modal(
         'temp',
         null,
         'Sorry, but access to clipboard not available',
@@ -257,7 +261,7 @@ Deckdle.modalOpen = async function (type) {
       break
 
     case 'cleared-local-storage':
-      this.myModal = new Modal(
+      Deckdle.myModal = new Modal(
         'temp',
         null,
         'Local Storage has been cleared',
@@ -295,13 +299,13 @@ Deckdle.modalOpen = async function (type) {
       }
 
       if (Deckdle.__getGameMode() == 'free') {
-        modalText += `<button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>`
+        modalText += `<button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another free one?">Try another free one?</button>`
       }
 
       if (Deckdle.__getState().gameState == 'GAME_OVER') {
         modalText += `
           <div class="share">
-            <button class="share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
+            <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
           </div>
         `
       }
@@ -310,9 +314,9 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      if (this.myModal) this.myModal._destroyModal()
+      if (Deckdle.myModal) Deckdle.myModal._destroyModal()
 
-      this.myModal = new Modal(
+      Deckdle.myModal = new Modal(
         'end-state',
         'Congratulations! You cleared it!',
         modalText,
@@ -345,7 +349,7 @@ Deckdle.modalOpen = async function (type) {
       if (Deckdle.__getState().gameState == 'GAME_OVER') {
         modalText += `
           <div class="share">
-            <button class="share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
+            <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
           </div>
         `
       }
@@ -354,9 +358,9 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      if (this.myModal) this.myModal._destroyModal()
+      if (Deckdle.myModal) Deckdle.myModal._destroyModal()
 
-      this.myModal = new Modal(
+      Deckdle.myModal = new Modal(
         'end-state',
         "Bummer! You didn't clear it this time!",
         modalText,
@@ -382,10 +386,16 @@ Deckdle.initApp = async () => {
     }
   }
 
-  // lib/localStorage.js
-  await Deckdle._loadGame()
-
   Deckdle._getNebyooApps()
+
+  const gameId = Deckdle._loadQueryString('id')
+
+  if (gameId) {
+    await Deckdle._createNewSetup('free', gameId);
+  } else {
+    // lib/localStorage.js
+    await Deckdle._loadGame()
+  }
 
   Deckdle._attachEventListeners()
 
@@ -397,7 +407,7 @@ Deckdle.initApp = async () => {
  *************************************************************************/
 
 // create new setupId, which resets progress
-Deckdle._createNewSetup = async function (gameMode) {
+Deckdle._createNewSetup = async function (gameMode, qsId = null) {
   let setupId = null
 
   Deckdle.__setState('gameState', 'IN_PROGRESS', gameMode)
@@ -420,7 +430,17 @@ Deckdle._createNewSetup = async function (gameMode) {
   }
   // 'free' generates random setupId
   else {
-    setupId = Deckdle.__getRandomSetupId()
+    if (qsId) {
+      setupId = qsId
+
+      if ('URLSearchParams' in window) {
+        const url = new URL(window.location)
+        url.searchParams.delete('id')
+        history.pushState(null, '', url);
+      }
+    } else {
+      setupId = Deckdle.__getRandomSetupId()
+    }
   }
 
   // set gameMode's state setupId
@@ -499,7 +519,7 @@ Deckdle._loadExistingSetup = async function (gameMode) {
 }
 
 Deckdle._createNewFree = async function () {
-  if (this.myModal) this.myModal._destroyModal()
+  if (Deckdle.myModal) Deckdle.myModal._destroyModal()
 
   await Deckdle._createNewSetup('free')
 }
@@ -568,32 +588,37 @@ Deckdle._checkWinState = function () {
   Deckdle._saveGame(Deckdle.__getGameMode(), 'checkWinState')
 }
 
+Deckdle._loadQueryString = function (param) {
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  })
+
+  if (params) {
+    return params[param]
+  } else {
+    return false
+  }
+}
+
 // copy results to clipboard for sharing
 Deckdle._shareResults = async function () {
-  let shareText = ''
-  const gameType = Deckdle.__getState()['gameType']
+  let shareText = Deckdle.__getShareText()
 
-  shareText += `♦️ Deckdle #${Deckdle.dailyNumber}\n`
-
-  switch (gameType) {
-    case 'golf':
-      const stockCount = Deckdle.__getState()['stock'].length
-
-      if (stockCount == 0) {
-        shareText += `GOLF: PAR\n`
-      } else if (stockCount > 0) {
-        shareText += `GOLF: -${stockCount}\n`
-      } else {
-        shareText += `GOLF: +${stockCount}\n`
-      }
-      break
-  }
-
-  shareText += DECKDLE_SHARE_URL
-
-  if (navigator.canShare) {
-    navigator.share({ text: shareText })
-  } else {
+  // if (navigator.canShare({ text: shareText })) {
+  //   navigator.share({ text: shareText }).then(() => {
+  //     console.log('sharing was successful')
+  //   })
+  //   .catch((error) => {
+  //     if (error.name == 'AbortError') {
+  //       console.log('user canceled share')
+  //     } else {
+  //       console.log('navigator.share failed', error)
+  //     }
+  //   })
+  //   .finally(() => {
+  //     // console.log('navigator.share() ended')
+  //   })
+  // } else {
     if (navigator.clipboard) {
       navigator.clipboard
         .writeText(shareText)
@@ -607,18 +632,6 @@ Deckdle._shareResults = async function () {
 
           return
         })
-
-      // const canWrite = await navigator.permissions.query({ name: 'clipboard-write' })
-
-      // if (canWrite.state == 'granted') {
-      //   navigator.clipboard.writeText(shareText).then(() => {
-      //     Deckdle.modalOpen('shared')
-      //   }).catch(() => console.error('could not copy text to clipboard'))
-      // } else {
-      //   console.warn('clipboard access was denied')
-
-      //   Deckdle.modalOpen('no-clipboard-access')
-      // }
     } else {
       console.warn('no sharing or clipboard access available')
 
@@ -626,7 +639,7 @@ Deckdle._shareResults = async function () {
 
       return
     }
-  }
+  // }
 }
 
 /************************************************************************
@@ -639,6 +652,41 @@ Deckdle.__createPuzzle = (setupId, type = 'golf') => {
 
 Deckdle.__loadPuzzle = (setupId, type = 'golf', state) => {
   return new Puzzle(setupId, type, state)
+}
+
+Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGameType()) => {
+  let html = ''
+
+  if (mode == 'daily') {
+    html += `♦️ Deckdle DAILY #${Deckdle.dailyNumber}\n`
+  } else {
+    html += `♦️ Deckdle FREE id:${Deckdle.__getState()['setupId']}\n`
+  }
+
+  switch (type) {
+    case 'golf':
+      const tableauCount = Deckdle._tableauCount()
+      const stockCount = Deckdle._stockCount()
+
+      if (tableauCount == 0) {
+        if (stockCount == 0) {
+          html += `GOLF (WIN): PAR\n`
+        } else if (stockCount > 0) {
+          html += `GOLF (WIN): -${stockCount}\n`
+        }
+      } else {
+        html += `GOLF (LOSE): +${tableauCount + stockCount}\n`
+      }
+      break
+  }
+
+  if (mode == 'daily') {
+    html += DECKDLE_SHARE_URL
+  } else {
+    html += `${DECKDLE_SHARE_URL}&id=${Deckdle.__getState()['setupId']}`
+  }
+
+  return html
 }
 
 /************************************************************************

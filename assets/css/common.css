@@ -113,6 +113,17 @@ button.help i {
   bottom: 1px;
   position: relative;
 }
+button.new-free {
+  background-color: var(--dark-color);
+  color: var(--white);
+  height: 30px;
+  margin: 10px auto 0;
+  padding: 5px;
+  width: 200px;
+}
+button.new-free i {
+  margin-left: 6px;
+}
 button.share {
   background-color: var(--base-color);
   color: var(--white);
@@ -128,6 +139,9 @@ button.share.tiny {
   height: 20px;
   margin-left: 1em;
   width: 75px;
+}
+button.game-over {
+  margin-top: 10px;
 }
 
 .container {
