@@ -14,6 +14,7 @@ const DECKDLE_SETTINGS_LS_KEY = 'deckdle-settings'
 
 const DECKDLE_DAILY_SCRIPT = '/assets/scripts/daily.php'
 
+const DECKDLE_DEFAULT_GAMEMODE = 'free'
 const DECKDLE_DEFAULT_GAMETYPE = 'golf'
 
 const DECKDLE_DEFAULT_CONFIG = {
@@ -23,7 +24,7 @@ const DECKDLE_DEFAULT_CONFIG = {
 const DECKDLE_DEFAULT_STATE = {
   base: [],
   gameState: 'IN_PROGRESS',
-  gameType: 'golf',
+  gameType: DECKDLE_DEFAULT_GAMETYPE,
   gameWon: false,
   lastCompletedTime: null,
   lastPlayedTime: null,
@@ -34,7 +35,7 @@ const DECKDLE_DEFAULT_STATE = {
 const DECKDLE_DEFAULT_SETTINGS = {
   darkMode: false,
   firstTime: true,
-  gameMode: 'free',
+  gameMode: DECKDLE_DEFAULT_GAMEMODE,
   noisy: false,
   soundBGMLevel: 0.1,
   soundSFXLevel: 0.2,

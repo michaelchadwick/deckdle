@@ -2,14 +2,10 @@
 /* class definition for Deck of Cards */
 
 class Deck {
-  constructor(cardArray = null) {
+  constructor() {
     this.cards = []
 
-    if (cardArray) {
-      this.cards = cardArray
-    } else {
-      this.#fillDeck()
-    }
+    this.#fillDeck()
   }
 
   #fillDeck = () => {
@@ -22,7 +18,7 @@ class Deck {
 
     for (let suit = suitIdMin; suit < suitIdMax; suit++) {
       for (let rank = rankIdMin; rank < rankIdMax; rank++) {
-        this.cards.push(new Card(suit, rank))
+        this.cards.push(new Card(suit, rank, 1))
       }
     }
 

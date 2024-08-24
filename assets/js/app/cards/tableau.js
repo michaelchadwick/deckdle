@@ -6,8 +6,10 @@ Deckdle._tableauCount = () => {
   let cardCount = 0
 
   Object.keys(tableau).forEach((col) => {
-    tableau[col].forEach(() => {
-      cardCount++
+    tableau[col].forEach((card) => {
+      if (card.status == 1) {
+        cardCount++
+      }
     })
   })
 
@@ -70,7 +72,10 @@ Deckdle._removeCardFromTableau = (card) => {
       ) {
         // console.log('removing tableau card', col, tableau[col].length - 1)
 
-        cardRemoved = tableau[col].splice(tableau[col].length - 1, 1)
+        // dont actually remove the card from the tableau
+        // just set its status to 0
+        // cardRemoved = tableau[col].splice(tableau[col].length - 1, 1)
+        tableau[col][tableau[col].length - 1].status = 0
       }
     }
   })
@@ -101,11 +106,8 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
 
         base.push(new Card(cardRemoved.dataset.suit, cardRemoved.dataset.rank))
 
-        // console.log('base', base)
+        Deckdle.ui._moveCardToBase(source = 'tableau')
 
-        Deckdle.ui._addCardToBase(source = 'tableau')
-
-        // console.log('setting base from tableau')
         Deckdle.__setState('base', base)
 
         Deckdle._checkWinState()

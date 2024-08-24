@@ -69,7 +69,7 @@ Deckdle._attachEventListeners = function () {
 
   // + create new solution
   Deckdle.dom.keyboard.btnCreateNew.addEventListener('click', () => {
-    Deckdle._confirmFreeCreateNew()
+    Deckdle._confirmNewFree()
   })
   Deckdle.dom.keyboard.btnStartMusic.addEventListener('click', () => {
     Deckdle._playBGM()

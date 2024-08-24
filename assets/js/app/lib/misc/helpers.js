@@ -68,7 +68,10 @@ Deckdle.__getRandomSetupId = function () {
   return Math.floor(Math.random() * 10000000000)
 }
 Deckdle.__getGameMode = function () {
-  return Deckdle.settings ? Deckdle.settings.gameMode : DECKDLE_DEFAULTS.settings.gameMode
+  return Deckdle.settings ? Deckdle.settings.gameMode : DECKDLE_DEFAULT_GAMEMODE
+}
+Deckdle.__getGameType = function () {
+  return Deckdle.__getState()['gameType'] ?? DECKDLE_DEFAULT_GAMETYPE
 }
 
 Deckdle.__getConfig = function () {
@@ -76,8 +79,6 @@ Deckdle.__getConfig = function () {
 }
 Deckdle.__setConfig = function (key, val) {
   Deckdle.config[key] = val
-
-  Deckdle._saveGame('__setConfig')
 }
 
 Deckdle.__getState = function (mode = Deckdle.__getGameMode()) {
@@ -107,13 +108,8 @@ Deckdle.__setState = function (
       Deckdle.state[mode][index][key] = val
   }
 
-  // Deckdle._saveGame(`__setState(${key}, ${val})`)
-  Deckdle._saveGame()
-
-  // if (key == 'base') {
-  //   console.log(`__setState(${key})`, val)
-  //   console.log('Deckdle.__getState()["base"]', Deckdle.__getState()['base'])
-  // }
+  Deckdle._saveGame(mode, `__setState(${key}, ${val}, ${mode})`)
+  // Deckdle._saveGame(mode)
 }
 
 Deckdle.__getStateObj = function (mode = Deckdle.__getGameMode()) {

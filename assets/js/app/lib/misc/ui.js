@@ -16,6 +16,7 @@ Deckdle.ui._createCard = (card, cardType, classes = [], draggable = false) => {
   cardDiv.draggable = draggable
   cardDiv.dataset.rank = card.rank
   cardDiv.dataset.suit = card.suit
+  cardDiv.dataset.status = card.status
   cardDiv.dataset.type = cardType
 
   const rankTopDiv = document.createElement('div')
@@ -67,16 +68,18 @@ Deckdle.ui._createEmptyCard = () => {
 }
 
 Deckdle.ui._addCardToTableau = (card, colId) => {
-  // console.log('adding card to UI tableau', card, colId)
-
   const row = document.getElementById(`col${colId}`).children.length
   card.dataset.row = row
 
+  if (card.dataset.status == 0) {
+    card.classList.add('removed')
+    card.classList.remove('available')
+  }
+
   document.getElementById(`col${colId}`).appendChild(card)
 }
-
 Deckdle.ui._removeCardFromTableau = (colId) => {
-  Deckdle._logStatus('[CHANGING] removing card from tableau')
+  // Deckdle._logStatus('[UI][CHANGING] removing card from tableau')
 
   const elem = `#tableau #${colId} .card.available`
   const card = Deckdle.dom.interactive.tableau.querySelector(elem)
@@ -102,9 +105,8 @@ Deckdle.ui._addCardToStock = (card) => {
 
   Deckdle._animateCSS(`#stock .card:last-of-type`, 'flipInX')
 }
-
 Deckdle.ui._removeCardFromStock = () => {
-  Deckdle._logStatus('[CHANGING] removing card from stock')
+  // Deckdle._logStatus('[UI][CHANGING] removing card from stock')
 
   const stock = Deckdle.dom.interactive.stock
 
@@ -116,18 +118,23 @@ Deckdle.ui._removeCardFromStock = () => {
   }
 }
 
-Deckdle.ui._addCardToBase = (source) => {
-  Deckdle._logStatus(`[CHANGING] adding card to base from '${source}'`)
-
-  const base = Deckdle.__getState()['base']
-  const card = base[base.length - 1]
+Deckdle.ui._addCardToBase = (card) => {
   const newCard = Deckdle.ui._createCard(
     new Card(card.suit, card.rank),
     (cardType = 'base'),
   )
 
   Deckdle.dom.interactive.base.appendChild(newCard)
+}
+Deckdle.ui._moveCardToBase = (source) => {
+  // Deckdle._logStatus(`[UI][CHANGING] adding card to base from '${source}'`)
 
+  const base = Deckdle.__getState()['base']
+  const card = base[base.length - 1]
+
+  Deckdle.ui._addCardToBase(card)
+
+  // animate new card, depending on where it came from
   switch (source) {
     case 'stock':
       Deckdle._animateCSS(`#base .card:last-of-type`, 'slideInLeft')
@@ -156,6 +163,8 @@ Deckdle.ui._emptyPlayingField = function () {
 }
 
 Deckdle.ui._fillCards = function () {
+  Deckdle._logStatus('[UI][LOADING] fillCards()')
+
   // create <div id="tableau"><div class="col"> * 7</div>
   for (let i = 0; i < 7; i++) {
     const col = document.createElement('div')
@@ -164,14 +173,13 @@ Deckdle.ui._fillCards = function () {
     Deckdle.dom.interactive.tableau.appendChild(col)
   }
 
-  const tableauCards = Deckdle.__getState()['tableau']
-
-  let colId = 0
-
   // fill tableau UI with cards
+  const tableauCards = Deckdle.__getState()['tableau']
+  let colId = 0
   Object.keys(tableauCards).forEach(col => {
     Object.values(tableauCards[col]).forEach((card, index) => {
-      const cardClasses = index == 4 ? ['available'] : []
+      const lastValidCardIndex = tableauCards[col].filter(card => card.status == 1).length - 1
+      const cardClasses = index == lastValidCardIndex ? ['available'] : []
       const newCard = Deckdle.ui._createCard(card, 'tableau', cardClasses)
 
       Deckdle.ui._addCardToTableau(newCard, colId)
@@ -181,18 +189,21 @@ Deckdle.ui._fillCards = function () {
 
     colId++
   })
-
   Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
 
-  // fill stock UI with leftover cards
-  Deckdle.__getState()['stock'].forEach(card => {
+  // fill stock UI with stock cards
+  const stockCards = Deckdle.__getState()['stock']
+  stockCards.forEach(card => {
     Deckdle.ui._addCardToStock(card)
   })
 
-  Deckdle._moveCardFromStockToBase()
+  // fill base UI with base cards
+  const baseCards = Deckdle.__getState()['base']
+  baseCards.forEach(card => {
+    Deckdle.ui._addCardToBase(card)
+  })
 
-  Deckdle.dom.stockCount.innerText = Deckdle.__getState()['stock'].length
-  Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length
+  Deckdle.ui._updateStockBaseCounts()
 }
 
 Deckdle.ui._updateDailyDetails = function (index) {

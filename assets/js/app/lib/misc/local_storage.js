@@ -45,33 +45,38 @@ Deckdle._loadGame = async function () {
     let i = 0
     lsStateDaily.forEach((lsState) => {
       Deckdle.__setState(
-        'base',
-        lsState.base || dailyDefaults.base,
-        'daily',
-        i
-      )
-      Deckdle.__setState(
         'gameState',
         lsState.gameState || dailyDefaults.gameState,
         'daily',
         i
       )
-      Deckdle.__setState('gameWon', lsState.gameWon || false, 'daily', i)
+      Deckdle.__setState(
+        'gameWon',
+        lsState.gameWon || dailyDefaults.gameWon,
+        'daily',
+      i)
       Deckdle.__setState(
         'lastCompletedTime',
-        lsState.lastCompletedTime || null,
+        lsState.lastCompletedTime || dailyDefaults.lastCompletedTime,
         'daily',
         i
       )
       Deckdle.__setState(
         'lastPlayedTime',
-        lsState.lastPlayedTime || null,
+        lsState.lastPlayedTime || dailyDefaults.lastPlayedTime,
         'daily',
         i
       )
       Deckdle.__setState(
         'setupId',
         lsState.setupId || dailyDefaults.setupId,
+        'daily',
+        i
+      )
+
+      Deckdle.__setState(
+        'tableau',
+        lsState.tableau || dailyDefaults.tableau,
         'daily',
         i
       )
@@ -82,8 +87,8 @@ Deckdle._loadGame = async function () {
         i
       )
       Deckdle.__setState(
-        'tableau',
-        lsState.tableau || dailyDefaults.tableau,
+        'base',
+        lsState.base || dailyDefaults.base,
         'daily',
         i
       )
@@ -115,9 +120,13 @@ Deckdle._loadGame = async function () {
       }
       // time has elapsed on daily puzzle, and new one is needed
       else {
-        Deckdle.__setState('gameState', 'IN_PROGRESS', 'daily')
+        Deckdle.__setState(
+          'gameState',
+          'IN_PROGRESS',
+          'daily'
+        )
 
-        Deckdle._saveGame('_loadGame(daily time elapsed)')
+        Deckdle._saveGame('daily', '_loadGame(daily time elapsed)')
 
         dailyCreateOrLoad = 'create'
       }
@@ -143,28 +152,25 @@ Deckdle._loadGame = async function () {
   if (lsStateFree) {
     const freeDefaults = DECKDLE_DEFAULTS.state.free
 
-    console.log('lsStateFree', lsStateFree)
-
     let i = 0
     lsStateFree.forEach((lsState) => {
-      Deckdle.__setState('base',
-        lsState.base || freeDefaults.base,
-        'free',
-        i
-      )
-
       Deckdle.__setState('gameState',
         lsState.gameState || freeDefaults.gameState,
         'free',
         i
       )
       Deckdle.__setState('gameWon',
-        lsState.gameWon || false,
+        lsState.gameWon || freeDefaults.gameWon,
+        'free',
+        i
+      )
+      Deckdle.__setState('lastCompletedTime',
+        lsState.lastCompletedTime || freeDefaults.lastCompletedTime,
         'free',
         i
       )
       Deckdle.__setState('lastPlayedTime',
-        lsState.lastPlayedTime || null,
+        lsState.lastPlayedTime || freeDefaults.lastPlayedTime,
         'free',
         i
       )
@@ -173,13 +179,19 @@ Deckdle._loadGame = async function () {
         'free',
         i
       )
+
+      Deckdle.__setState('tableau',
+        lsState.tableau || freeDefaults.tableau,
+        'free',
+        i
+      )
       Deckdle.__setState('stock',
         lsState.stock || freeDefaults.stock,
         'free',
         i
       )
-      Deckdle.__setState('tableau',
-        lsState.tableau || freeDefaults.tableau,
+      Deckdle.__setState('base',
+        lsState.base || freeDefaults.base,
         'free',
         i
       )
@@ -201,94 +213,99 @@ Deckdle._loadGame = async function () {
     Deckdle.settings.gameMode = DECKDLE_DEFAULT_GAMETYPE
   }
 
-  // daily
+  // daily load/create
   if (Deckdle.__getGameMode() == 'daily') {
     Deckdle.dom.dailyDetails.classList.add('show')
 
     if (dailyCreateOrLoad == 'load') {
       await Deckdle._loadExistingSetup('daily')
 
-      Deckdle._logStatus('[LOADED] game(daily)')
+      Deckdle._logStatus('[LOADED] /app/game(daily)')
     } else {
       await Deckdle._createNewSetup('daily')
 
-      Deckdle._logStatus('[CREATED] game(daily)')
+      Deckdle._logStatus('[CREATED] /app/game(daily)')
     }
   }
-  // free
+  // free load/create
   else {
     if (freeCreateOrLoad == 'load') {
-      console.log('found existing free setupId, so loading it', Deckdle.__getState('free')['setupId'])
       await Deckdle._loadExistingSetup('free')
 
-      Deckdle._logStatus('[LOADED] game(free)')
+      Deckdle._logStatus('[LOADED] /app/game(free)')
     } else {
       await Deckdle._createNewSetup('free')
 
-      Deckdle._logStatus('[CREATED] game(free)')
+      Deckdle._logStatus('[CREATED] /app/game(free)')
     }
   }
 
   // lib/ui.js
   Deckdle.ui._updateGameType()
 
+  if (Deckdle._isBaseEmpty()) {
+    // Deckdle._logStatus('base is empty, so add 1 from stock')
+
+    Deckdle._moveCardFromStockToBase()
+  } else {
+    // Deckdle._logStatus('base loaded from LS not empty, so do not touch stock')
+  }
+
+  // console.log('stock length', JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))[0].stock.length)
+
   if (Deckdle.settings.firstTime) {
     Deckdle.modalOpen('start')
   }
 }
 // save state from code model -> LS
-Deckdle._saveGame = function (src = 'unknown') {
-  // save daily game state
-  let curDailyState = Deckdle.__getStateObj('daily')
+Deckdle._saveGame = function (lsType, src = 'unknown') {
+  switch (lsType) {
+    case 'daily':
+      let curDailyState = Deckdle.__getStateObj('daily')
 
-  curDailyState.forEach((sesh) => {
-    Object.keys(sesh).forEach((key) => {
-      if (sesh[key] === undefined) {
-        sesh[key] = null
-      }
-    })
-  })
+      curDailyState.forEach((sesh) => {
+        Object.keys(sesh).forEach((key) => {
+          if (sesh[key] === undefined) {
+            sesh[key] = null
+          }
+        })
+      })
 
-  try {
-    localStorage.setItem(
-      DECKDLE_STATE_DAILY_LS_KEY,
-      JSON.stringify(curDailyState)
-    )
-  } catch (error) {
-    console.error('localStorage DAILY state save failed', error)
+      localStorage.setItem(
+        DECKDLE_STATE_DAILY_LS_KEY,
+        JSON.stringify(curDailyState)
+      )
+
+      break
+
+    case 'free':
+      let curFreeState = Deckdle.__getStateObj('free')
+
+      curFreeState.forEach((sesh) => {
+        Object.keys(sesh).forEach((key) => {
+          if (sesh[key] === undefined) {
+            sesh[key] = null
+          }
+        })
+      })
+
+      localStorage.setItem(
+        DECKDLE_STATE_FREE_LS_KEY,
+        JSON.stringify(curFreeState)
+      )
+
+      break
+
+    case 'settings':
+      localStorage.setItem(
+        DECKDLE_SETTINGS_LS_KEY,
+        JSON.stringify(Deckdle.settings)
+      )
+
+      break
   }
 
-  // save free game state
-  let curFreeState = Deckdle.__getStateObj('free')
-
-  curFreeState.forEach((sesh) => {
-    Object.keys(sesh).forEach((key) => {
-      if (sesh[key] === undefined) {
-        sesh[key] = null
-      }
-    })
-  })
-
-  try {
-    localStorage.setItem(
-      DECKDLE_STATE_FREE_LS_KEY,
-      JSON.stringify(curFreeState)
-    )
-  } catch (error) {
-    console.error('localStorage FREE state save failed', error)
-  }
-
-  // save global game settings
-  try {
-    localStorage.setItem(
-      DECKDLE_SETTINGS_LS_KEY,
-      JSON.stringify(Deckdle.settings)
-    )
-  } catch (error) {
-    console.error('localStorage global settings save failed', error)
-  }
-
-  // Deckdle._logStatus('[SAVED] game', src)
+  // Deckdle._logStatus(`[SAVED] game(${type})`, src)
 }
 
 // load settings (gear icon) from localStorage
@@ -534,7 +551,7 @@ Deckdle._changeSetting = async function (setting, value) {
       break
   }
 
-  Deckdle._saveGame()
+  Deckdle._saveGame('settings', '_changeSetting', setting, value)
 
   // Deckdle._logStatus(`[CHANGED] setting(${setting}, ${value})`)
 }

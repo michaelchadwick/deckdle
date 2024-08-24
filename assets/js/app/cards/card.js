@@ -2,9 +2,10 @@
 /* class definition for Card */
 
 class Card {
-  constructor(suit = 3, rank = 14) {
+  constructor(suit = 3, rank = 14, status = 1) {
     this.suit = suit
     this.rank = rank
+    this.status = status
   }
 
   show = (type) => {

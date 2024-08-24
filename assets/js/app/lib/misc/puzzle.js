@@ -5,46 +5,84 @@
 */
 
 class Puzzle {
-  GOLF_COL_MAX = 5
-  GOLF_CARD_MAX = 7
+  GOLF_ROW_MAX = 5
+  GOLF_COL_MAX = 7
 
-  constructor(setupId, type = 'golf') {
+  constructor(setupId, type = 'golf', state = null) {
     this.type = type
-    this.deck = new Deck()
 
-    // get random, yet deterministic, shuffle
-    this.deck.shuffle(setupId)
+    if (state) {
+      this.tableau = this.#createTableau(state.tableau)
+      this.stock = this.#createStock(state.stock)
+      this.base = this.#createBase(state.base)
+    } else {
+      this.deck = new Deck()
 
-    this.tableau = this.#createTableau()
-    this.stock = this.#createStock()
+      // get random, yet deterministic, shuffle
+      this.deck.shuffle(setupId)
+
+      this.tableau = this.#createTableau()
+      this.stock = this.#createStock()
+      this.base = []
+    }
   }
 
-  #createTableau = () => {
+  #createTableau = (source = null) => {
     const tableau = {}
 
-    for (let colId = 0; colId < this.GOLF_CARD_MAX; colId++) {
-      tableau[colId] = []
-      for (let cardId = 0; cardId < this.GOLF_COL_MAX; cardId++) {
-        const card = this.deck.removeTop()
+    switch (this.type) {
+      case 'golf':
+      default:
+        for (let colId = 0; colId < this.GOLF_COL_MAX; colId++) {
+          tableau[colId] = []
+          for (let cardId = 0; cardId < this.GOLF_ROW_MAX; cardId++) {
+            let cardToAdd = null
 
-        tableau[colId][cardId] = card
-      }
+            if (source) {
+              const srcCard = source[colId][cardId]
+
+              cardToAdd = new Card(
+                srcCard.suit,
+                srcCard.rank,
+                srcCard.status,
+              )
+            } else {
+              cardToAdd = this.deck.removeTop()
+            }
+
+            tableau[colId][cardId] = cardToAdd
+          }
+        }
+
+        break
     }
-
-    Deckdle.__setState('tableau', tableau)
 
     return tableau
   }
 
-  #createStock = () => {
+  #createStock = (source = null) => {
     const stock = []
 
-    while (this.deck.size()) {
-      stock.push(this.deck.removeTop())
+    if (source) {
+      source.forEach(card => {
+        stock.push(new Card(card.suit, card.rank))
+      })
+    } else {
+      while (this.deck.size()) {
+        stock.push(this.deck.removeTop())
+      }
     }
 
-    Deckdle.__setState('stock', stock)
-
     return stock
+  }
+
+  #createBase = (source) => {
+    const base = []
+
+    source.forEach(card => {
+      base.push(new Card(card.suit, card.rank))
+    })
+
+    return base
   }
 }
