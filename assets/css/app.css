@@ -5,6 +5,7 @@
 @import 'common.css';
 @import 'layout.css';
 @import 'keyboard.css';
+@import 'combo.css';
 
 :root {
   --base-color: #996e52;

@@ -1,0 +1,31 @@
+#combo {
+  align-items: baseline;
+  background-color: #ffffffaa;
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #ccc;
+  display: flex;
+  font-size: 1rem;
+  left: 45.2vw;
+  max-height: 100px;
+  max-width: 200px;
+  min-height: 50px;
+  min-width: 100px;
+  position: absolute;
+  top: 150px;
+  transition: all 200ms;
+  z-index: 10;
+}
+#combo .title {
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--black);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: var(--black);
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+}
+#combo .text {
+  font-size: 1rem;
+}
