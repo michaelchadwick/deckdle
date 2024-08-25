@@ -27,7 +27,7 @@ Deckdle.modalOpen = async function (type) {
       }
 
       modalText = `
-        <p><strong>Deckdle</strong> is a <s>daily</s> solitaire card game. Currently, the only solitaire type is 'golf', but there are plans to add the classic 'klondike', 'pyramid', and 'spider'.</p>
+        <p><strong>Deckdle</strong> is a daily solitaire card game. Currently, the only solitaire type is <code>golf</code>, but there are plans to add the classic <code>klondike</code>, <code>pyramid</code>, and <code>spider</code>.</p>
       `
 
       const gameType = Deckdle.__getState()['gameType']
@@ -43,12 +43,10 @@ Deckdle.modalOpen = async function (type) {
 
       modalText += `
         <div class="flex">
-          <s>
-            <div>
-              <h4>Daily</h4>
-              <p>Come back every day (at 12 am PST) for a new <span class="blamph">${gameType}</span> solitaire tableau and stock!</p>
-            </div>
-          </s>
+          <div>
+            <h4>Daily</h4>
+            <p>Come back every day (at 12 am PST) for a new <span class="blamph">${gameType}</span> solitaire tableau and stock!</p>
+          </div>
 
           <div>
             <h4>Free</h4>
@@ -298,7 +296,12 @@ Deckdle.modalOpen = async function (type) {
           break
       }
 
-      if (Deckdle.__getGameMode() == 'free') {
+      // daily
+      if (Deckdle.__getGameMode() == 'daily') {
+        modalText += `<button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>`
+      }
+      // free
+      else {
         modalText += `<button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another free one?">Try another free one?</button>`
       }
 
@@ -342,7 +345,12 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      if (Deckdle.__getGameMode() == 'free') {
+      // daily
+      if (Deckdle.__getGameMode() == 'daily') {
+        modalText += `<button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>`
+      }
+      // free
+      else {
         modalText += `<button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>`
       }
 
@@ -417,12 +425,12 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
     try {
       const response = await fetch(DECKDLE_DAILY_SCRIPT)
       const data = await response.json()
-      setupId = data['setupId']
+      setupId = parseInt(data['setupId'])
 
       Deckdle.ui._updateDailyDetails(data['index'])
 
       if (!setupId) {
-        console.error('daily setupId went bork', setupId)
+        console.error('retrieval of daily setupId went bork', setupId)
       }
     } catch (e) {
       console.error('could not get daily setupId', e)
@@ -443,7 +451,6 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
     }
   }
 
-  // set gameMode's state setupId
   Deckdle.__setState('setupId', setupId, gameMode)
 
   // create new Deckdle puzzle
@@ -456,9 +463,7 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
   Deckdle.__setState('stock', puzzle.stock)
   Deckdle.__setState('base', puzzle.base)
 
-  console.log(`created '${gameMode}' Puzzle from new setupId`, puzzle)
-
-
+  Deckdle._logStatus(`created '${gameMode}' Puzzle from daily script`, puzzle)
 
   Deckdle._saveGame(gameMode, '_createNewSetup')
 
@@ -475,12 +480,10 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
 Deckdle._loadExistingSetup = async function (gameMode) {
   // 'daily' always uses day hash
   if (gameMode == 'daily') {
-    // Deckdle._logStatus('loading existing daily setupId...')
-
     try {
       const response = await fetch(DECKDLE_DAILY_SCRIPT)
       const data = await response.json()
-      const setupId = data['setupId']
+      const setupId = parseInt(data['setupId'])
 
       Deckdle.ui._updateDailyDetails(data['index'])
 
@@ -559,6 +562,11 @@ Deckdle._resetFreeProgress = async function () {
 
   // save those defaults to localStorage
   Deckdle._saveGame('free', '_resetFreeProgress')
+}
+
+// end of daily game button
+Deckdle._switchToFree = function () {
+
 }
 
 // game state checking

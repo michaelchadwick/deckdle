@@ -401,7 +401,13 @@ Deckdle._loadSettings = function () {
     Deckdle.modalOpen('start')
   }
 
-  if (Deckdle.__getGameMode() == 'free') {
+  // set dom status
+  if (Deckdle.__getGameMode() == 'daily') {
+    Deckdle.dom.interactive.gameModeDailyLink.dataset.active = true
+    Deckdle.dom.interactive.gameModeFreeLink.dataset.active = false
+    Deckdle.dom.dailyDetails.classList.add('show')
+    Deckdle.dom.keyboard.btnCreateNew.disabled = true
+  } else {
     Deckdle.dom.interactive.gameModeDailyLink.dataset.active = false
     Deckdle.dom.interactive.gameModeFreeLink.dataset.active = true
     Deckdle.dom.dailyDetails.classList.remove('show')
@@ -435,58 +441,53 @@ Deckdle._changeSetting = async function (setting, value) {
       break
 
     case 'gameMode':
-      switch (value) {
-        case 'daily':
-          // get setupId for today
-          if (!Deckdle.__getState('daily').setupId) {
-            try {
-              const response = await fetch(DECKDLE_DAILY_SCRIPT)
-              const data = await response.json()
-              Deckdle.__setState('daily', 'setupId', data['word'])
+      // if at end-state and a gameMode is clicked
+      // make sure to close the open modal
+      const dialog = document.getElementsByClassName('modal-dialog')[0]
+      if (dialog) dialog.remove()
+      if (Deckdle.myModal) Deckdle.myModal._destroyModal()
 
-              Deckdle.ui._updateDailyDetails(data['index'])
-            } catch (e) {
-              console.error('could not get daily word', e)
+      if (Deckdle.__getGameMode() != value) {
+        switch (value) {
+          case 'daily':
+            // get setupId for today
+            if (!Deckdle.__getState('daily').setupId) {
+              try {
+                const response = await fetch(DECKDLE_DAILY_SCRIPT)
+                const data = await response.json()
+                Deckdle.__setState('setupId', parseInt(data['setupId']), 'daily')
+
+                Deckdle.ui._updateDailyDetails(data['index'])
+              } catch (e) {
+                console.error('could not get daily setupId', e)
+              }
             }
-          }
 
-          Deckdle._saveSetting('gameMode', 'daily')
-          Deckdle._clearHint()
+            Deckdle._saveSetting('gameMode', 'daily')
 
-          Deckdle.dom.interactive.btnCreateNew.disabled = true
+            // set dom status
+            Deckdle.dom.interactive.gameModeDailyLink.dataset.active = true
+            Deckdle.dom.interactive.gameModeFreeLink.dataset.active = false
+            Deckdle.dom.dailyDetails.classList.add('show')
+            Deckdle.dom.keyboard.btnCreateNew.disabled = true
 
-          // set dom status
-          Deckdle.dom.interactive.gameModeDailyLink.dataset.active = true
-          Deckdle.dom.interactive.gameModeFreeLink.dataset.active = false
-          Deckdle.dom.interactive.difficultyContainer.classList.remove('show')
-          Deckdle.dom.dailyDetails.classList.add('show')
+            Deckdle._loadGame()
 
-          await Deckdle._loadExistingSetup(
-            'daily',
-            Deckdle.__getState('daily').setupId
-          )
+            break
 
-          break
+          case 'free':
+            Deckdle._saveSetting('gameMode', 'free')
 
-        case 'free':
-          Deckdle._saveSetting('gameMode', 'free')
-          Deckdle._clearHint()
-          Deckdle._enableUIButtons()
+            // set dom status
+            Deckdle.dom.interactive.gameModeDailyLink.dataset.active = false
+            Deckdle.dom.interactive.gameModeFreeLink.dataset.active = true
+            Deckdle.dom.dailyDetails.classList.remove('show')
+            Deckdle.dom.keyboard.btnCreateNew.disabled = false
 
-          Deckdle.dom.interactive.btnCreateNew.disabled = false
+            Deckdle._loadGame()
 
-          // set dom status
-          Deckdle.dom.interactive.gameModeDailyLink.dataset.active = false
-          Deckdle.dom.interactive.gameModeFreeLink.dataset.active = true
-          Deckdle.dom.interactive.difficultyContainer.classList.add('show')
-          Deckdle.dom.dailyDetails.classList.remove('show')
-
-          await Deckdle._loadExistingSetup(
-            'free',
-            Deckdle.__getState('free').setupId
-          )
-
-          break
+            break
+        }
       }
 
       break

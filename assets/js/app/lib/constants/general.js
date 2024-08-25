@@ -14,7 +14,7 @@ const DECKDLE_SETTINGS_LS_KEY = 'deckdle-settings'
 
 const DECKDLE_DAILY_SCRIPT = '/assets/scripts/daily.php'
 
-const DECKDLE_DEFAULT_GAMEMODE = 'free'
+const DECKDLE_DEFAULT_GAMEMODE = 'daily'
 const DECKDLE_DEFAULT_GAMETYPE = 'golf'
 
 const DECKDLE_DEFAULT_CONFIG = {

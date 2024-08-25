@@ -26,11 +26,12 @@ body {
 }
 
 code {
-  background-color: var(--off-white);
-  border: 1px solid var(--gray);
+  background-color: var(--vvlight-color);
+  border: 1px solid var(--light-color);
   border-radius: 4px;
   display: inline-block;
-  padding: 2px 4px 0;
+  font-size: 0.9rem;
+  padding: 0 4px;
 }
 
 h1,
