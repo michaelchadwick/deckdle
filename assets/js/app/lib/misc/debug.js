@@ -108,13 +108,20 @@ Deckdle._displayGameState = function () {
           var label = k
           var value = states[state][key][k]
 
-          if (label == 'lastCompletedTime' || label == 'lastPlayedTime') {
-            value = Deckdle.__getFormattedDate(new Date(value))
-          }
+          const consoleKeys = ['base', 'stock', 'tableau']
 
-          if (value) {
-            const val = Array.isArray(value) ? value.join(', ') : value
-            html += `<dd><code>${label}:</code></dd><dt>${val}</dt>`
+          if (consoleKeys.includes(label)) {
+            html += `<dd><code>${label}:</code></dd><dt>see dev console (⌥⌘I)</dt>`
+            console.log(`[DEBUG] #${key}[${state}]${label}`, value)
+          } else {
+            if (label == 'lastCompletedTime' || label == 'lastPlayedTime') {
+              value = Deckdle.__getFormattedDate(new Date(value))
+            }
+
+            if (value) {
+              const val = Array.isArray(value) ? value.join(', ') : value
+              html += `<dd><code>${label}:</code></dd><dt>${val}</dt>`
+            }
           }
         })
 
