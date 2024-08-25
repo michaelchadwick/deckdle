@@ -31,8 +31,6 @@ Deckdle.dom.interactive = {
 // DOM > keyboard buttons
 Deckdle.dom.keyboard = {
   btnCreateNew: document.getElementById('button-create-new'),
-  btnStartMusic: document.getElementById('button-start-music'),
-  btnStopMusic: document.getElementById('button-stop-music'),
 }
 // DOM > interactive elements (debug)
 Deckdle.dom.interactive.debug = {

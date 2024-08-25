@@ -68,15 +68,9 @@ Deckdle._attachEventListeners = function () {
     Deckdle.modalOpen('settings')
   )
 
-  // + create new solution
+  // + create new free game
   Deckdle.dom.keyboard.btnCreateNew.addEventListener('click', () => {
     Deckdle._confirmNewFree()
-  })
-  Deckdle.dom.keyboard.btnStartMusic.addEventListener('click', () => {
-    Deckdle._playBGM()
-  })
-  Deckdle.dom.keyboard.btnStopMusic.addEventListener('click', () => {
-    Deckdle._stopBGM()
   })
 
   // local debug buttons

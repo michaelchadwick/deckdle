@@ -354,6 +354,14 @@ Deckdle._loadSettings = function () {
           if (sfxSetting) {
             sfxSetting.removeAttribute('disabled')
           }
+          const startBGM = document.querySelector('#button-start-music')
+          if (startBGM) {
+            startBGM.removeAttribute('disabled')
+          }
+          const stopBGM = document.querySelector('#button-stop-music')
+          if (stopBGM) {
+            stopBGM.removeAttribute('disabled')
+          }
         }
       } else {
         const bgmSetting = document.getElementById('range-setting-bgm-level')
@@ -507,8 +515,8 @@ Deckdle._changeSetting = async function (setting, value) {
       } else {
         document.getElementById('button-setting-noisy').dataset.status = 'false'
 
-        Deckdle.dom.keyboard.btnStartMusic.setAttribute('disabled', '')
-        Deckdle.dom.keyboard.btnStopMusic.setAttribute('disabled', '')
+        document.querySelector('#button-start-music').setAttribute('disabled', '')
+        document.querySelector('#button-stop-music').setAttribute('disabled', '')
         document.querySelector('#range-setting-bgm-level').setAttribute('disabled', '')
         document.querySelector('#range-setting-sfx-level').setAttribute('disabled', '')
 

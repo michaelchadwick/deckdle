@@ -61,6 +61,7 @@
   color: var(--white);
   display: flex;
   font-weight: 500;
+  height: 40px;
   justify-content: center;
   padding: 0 10px;
   width: 100%;
@@ -86,10 +87,16 @@
   font-size: 26px;
   font-weight: inherit;
   font-family: inherit;
-  height: auto;
+  height: 26px;
   margin: 0;
   margin-left: auto;
   max-width: 26px;
+}
+@media (hover: hover) {
+  .modal-close:hover {
+    background-color: var(--white);
+    color: var(--base-color);
+  }
 }
 
 .modal-text {
@@ -291,6 +298,14 @@
   flex-direction: column;
   justify-content: center;
 }
+#settings input[type='range'] {
+  max-width: 100px;
+}
+@media (min-width: 550px) {
+  #settings input[type='range'] {
+    max-width: none;
+  }
+}
 #settings .setting-row {
   align-items: center;
   border-bottom: 1px solid #666;
@@ -312,6 +327,26 @@
   font-size: 12px;
 }
 #settings .setting-row .control {
-  display: block;
+  align-items: center;
+  display: flex;
   margin-left: 1em;
+}
+#settings .setting-row .control .spacer {
+  display: block;
+  height: 30px;
+  width: 30px;
+}
+#settings .setting-row .control span.spacer {
+  width: 36px;
+}
+#settings .setting-row .control .spacer:first-of-type {
+  margin-left: 10px;
+}
+@media (hover: hover) {
+  #settings .setting-row .control button:hover:not(.disabled),
+  #settings .setting-row .control button:hover:not([disabled]) {
+    background-color: var(--gray-dark);
+    border: 1px solid var(--black);
+    color: var(--white);
+  }
 }

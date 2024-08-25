@@ -47,8 +47,12 @@ Deckdle._initSynths = function () {
     console.error('* synthSFX could not be initialized')
   }
 
-  Deckdle.dom.keyboard.btnStartMusic.removeAttribute('disabled')
-  Deckdle.dom.keyboard.btnStopMusic.removeAttribute('disabled')
+  if (document.querySelector('#button-start-music')) {
+    document.querySelector('#button-start-music').removeAttribute('disabled')
+  }
+  if (document.querySelector('#button-stop-music')) {
+    document.querySelector('#button-stop-music').removeAttribute('disabled')
+  }
 
   console.log('[LOADED] /app/lib/audio(synths)')
 }

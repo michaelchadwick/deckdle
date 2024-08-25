@@ -188,6 +188,12 @@ Deckdle.modalOpen = async function (type) {
                   onchange="Deckdle._changeSetting('soundBGMLevel', event.target.value)"
                 >
               </div>
+              <button class="spacer" id="button-start-music" title="Start Music" onclick="Deckdle._playBGM()" disabled>
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <button class="spacer" id="button-stop-music" title="Stop Music" onclick="Deckdle._stopBGM()" disabled>
+                <i class="fa-solid fa-stop"></i>
+              </button>
             </div>
           </div>
 
@@ -208,6 +214,8 @@ Deckdle.modalOpen = async function (type) {
                   onchange="Deckdle._changeSetting('soundSFXLevel', event.target.value)"
                 >
               </div>
+              <span class="spacer"></span>
+              <span class="spacer"></span>
             </div>
           </div>
 
