@@ -6,14 +6,14 @@
 Deckdle._getGameCount = function (mode) {
   let ls = null
 
-  if (mode == 'free') {
-    ls = JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
+  if (mode == 'daily') {
+    ls = localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)
   } else {
-    ls = JSON.parse(localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY))
+    ls = localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)
   }
 
-  if (ls.length) {
-    return ls.filter((key) => key.gameWon == true).length
+  if (ls) {
+    return JSON.parse(ls).filter((session) => session.lastCompletedTime).length
   } else {
     return 0
   }
