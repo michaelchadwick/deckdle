@@ -2,4 +2,5 @@
 
 _debug
 
+!assets/css/vendor
 !assets/icons
