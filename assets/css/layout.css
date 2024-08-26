@@ -244,7 +244,7 @@ section#game #mode-container {
 }
 @media (min-height: 500px) {
   section#game #mode-container {
-    height: 80px;
+    height: 70px;
   }
 }
 section#game #mode-container .setting-row {
@@ -313,6 +313,7 @@ section#game #game-type {
 @media (min-width: 768px) {
   section#game #game-type {
     font-size: 1.4rem;
+  }
 }
 
 section#game #cards-container {

@@ -5,45 +5,38 @@
   box-shadow: 2px 2px 2px #c7c7c7;
   font-size: 1rem;
   height: 17vw;
+  margin-top: 0;
   min-height: 60px;
   transition: all 200ms;
   width: 12vw;
 }
-@media (min-height: 500px) {
-  .card {
-    height: 18vw;
-    margin-top: 2px;
-  }
-
-  @media (min-width: 376px) {
-    .card {
-      margin-top: 5px;
-    }
-  }
-}
 @media (min-width: 376px) {
   .card {
-    font-size: 1.25rem;
-    height: 76px;
+    height: 63px;
     width: 50px;
-  }
-}
-@media (min-width: 768px) {
-  .card {
-    width: 55px;
-  }
-}
-@media (min-width: 992px) {
-  .card {
-    font-size: 1.45rem;
-    height: 90px;
-    width: 80px;
   }
 
   @media (min-height: 500px) {
     .card {
-      font-size: 1.5rem;
-      height: 96px;
+      font-size: 1.2rem;
+      height: 73px;
+      margin-top: 5px;
+    }
+  }
+}
+@media (min-width: 768px) {
+  @media (min-height: 500px) {
+    .card {
+      width: 55px;
+    }
+  }
+}
+@media (min-width: 992px) {
+  @media (min-height: 500px) {
+    .card {
+      font-size: 1.3rem;
+      height: 88px;
+      width: 80px;
     }
   }
 }
