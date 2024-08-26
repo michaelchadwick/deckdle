@@ -208,11 +208,6 @@ header .menu-right button#button-settings {
   margin-right: 0;
 }
 
-main {
-  background-color: var(--off-white);
-  height: 100%;
-}
-
 section#game {
   background-color: var(--vvlight-color);
   display: flex;

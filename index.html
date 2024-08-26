@@ -195,69 +195,67 @@
     <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-    <main>
-      <section id="game">
-        <div id="mode-container">
-          <div id="gamemode-container" class="setting-row">
-            <a
-              href="#"
-              id="gamemode-0"
-              data-active="true"
-              date-gamemodeid="daily"
-              onclick="Deckdle._changeSetting('gameMode', 'daily', event)"
-              >Daily</a
-            >
+    <section id="game">
+      <div id="mode-container">
+        <div id="gamemode-container" class="setting-row">
+          <a
+            href="#"
+            id="gamemode-0"
+            data-active="true"
+            date-gamemodeid="daily"
+            onclick="Deckdle._changeSetting('gameMode', 'daily', event)"
+            >Daily</a
+          >
 
-            <span>/</span>
+          <span>/</span>
 
-            <a
-              href="#"
-              id="gamemode-1"
-              data-active="false"
-              date-gamemodeid="free"
-              onclick="Deckdle._changeSetting('gameMode', 'free', event)"
-              >Free Play</a
-            >
-          </div>
-
-          <div id="daily-details" class="setting-row">
-            Deckdle #<span class="index"></span> for <span class="day"></span>
-          </div>
+          <a
+            href="#"
+            id="gamemode-1"
+            data-active="false"
+            date-gamemodeid="free"
+            onclick="Deckdle._changeSetting('gameMode', 'free', event)"
+            >Free Play</a
+          >
         </div>
 
-        <div id="game-type"></div>
-
-        <div id="cards-container">
-          <div id="tableau"></div>
-          <div id="tableau-count" class="card-label">Tableau (<span class="count"></span>)</div>
-
-          <div id="user-cards">
-            <div id="stock">
-              <div class="card-label">Stock (<span class="count"></span>)</div>
-            </div>
-            <div id="base">
-              <div class="card-label">Base (<span class="count"></span>)</div>
-            </div>
-          </div>
+        <div id="daily-details" class="setting-row">
+          Deckdle #<span class="index"></span> for <span class="day"></span>
         </div>
-
-        <div id="keyboard-container">
-          <div class="row">
-            <button id="button-create-new" title="Create new puzzle" disabled>
-              <i class="fa-solid fa-circle-plus"></i>&nbsp;New Puzzle
-            </button>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <div id="combo-wrapper">
-      <div id="combo">
-        <div class="title">Combo</div>
-        <div class="text"></div>
       </div>
-    </div>
-    <div id="version-tag">Alpha</div>
+
+      <div id="game-type"></div>
+
+      <div id="cards-container">
+        <div id="tableau"></div>
+        <div id="tableau-count" class="card-label">Tableau (<span class="count"></span>)</div>
+
+        <div id="user-cards">
+          <div id="stock">
+            <div class="card-label">Stock (<span class="count"></span>)</div>
+          </div>
+          <div id="base">
+            <div class="card-label">Base (<span class="count"></span>)</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="keyboard-container">
+        <div class="row">
+          <button id="button-create-new" title="Create new puzzle" disabled>
+            <i class="fa-solid fa-circle-plus"></i>&nbsp;New Puzzle
+          </button>
+        </div>
+      </div>
+
+      <div id="combo-wrapper">
+        <div id="combo">
+          <div class="title">Combo</div>
+          <div class="text"></div>
+        </div>
+      </div>
+      <div id="version-tag">Alpha</div>
+    </section>
 
     <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
