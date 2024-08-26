@@ -54,7 +54,7 @@ Deckdle.modalOpen = async function (type) {
           </div>
         </div>
 
-        <p>Settings for dark mode and sounds can be adjusted using the <i class="fa-solid fa-gear"></i> icon.</p>
+        <p>Settings for dark mode, sounds, and a visual combo counter can be adjusted using the <i class="fa-solid fa-gear"></i> icon.</p>
 
         <hr />
 
