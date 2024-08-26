@@ -3,7 +3,7 @@
 $HASH_ALGO = 'crc32';
 $DATE_FORMAT = 'l jS \of F Y';
 
-$deckdleEpoch = new DateTime('2024-08-25T00:00:00-0700');
+$deckdleEpoch = new DateTime('2024-09-02T00:00:00-0700');
 $serverDate = new DateTime();
 
 $daysSinceEpoch = $deckdleEpoch->diff($serverDate)->format('%a');
