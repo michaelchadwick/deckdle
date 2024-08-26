@@ -4,7 +4,6 @@
 /* eslint-disable no-unused-vars */
 
 const NEBYOOAPPS_SOURCE_URL = 'https://dave.neb.host/?sites'
-const DECKDLE_SHARE_URL = 'https://deckdle.neb.host/?r=share'
 
 const DECKDLE_SHOW_LOG_STATUS = 1
 
