@@ -300,7 +300,7 @@ Deckdle.modalOpen = async function (type) {
         <div class="container game-over-win">
       `
 
-      switch (Deckdle._getState()['gameType']) {
+      switch (Deckdle.__getState()['gameType']) {
         case 'golf':
         default:
           if (Deckdle._stockCount() > 0) {
