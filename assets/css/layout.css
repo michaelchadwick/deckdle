@@ -327,6 +327,7 @@ section#game #cards-container {
   background-color: #ff0000b2;
   bottom: 12px;
   color: var(--white);
+  display: none;
   font-size: 1rem;
   left: -47px;
   letter-spacing: 2px;
