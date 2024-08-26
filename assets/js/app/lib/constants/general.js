@@ -33,6 +33,7 @@ const DECKDLE_DEFAULT_STATE = {
   tableau: {}
 }
 const DECKDLE_DEFAULT_SETTINGS = {
+  comboCounter: false,
   darkMode: false,
   firstTime: true,
   gameMode: DECKDLE_DEFAULT_GAMEMODE,

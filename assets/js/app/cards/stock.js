@@ -25,6 +25,10 @@ Deckdle._moveCardFromStockToBase = () => {
   const base = Deckdle.__getState()['base']
   const stock = Deckdle.__getState()['stock']
 
+  if (base.length) {
+    Deckdle._resetCombo()
+  }
+
   base.push(stock.pop())
 
   // updates DOM

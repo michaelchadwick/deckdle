@@ -58,7 +58,6 @@ Deckdle._tableauCardCanBeRemoved = (card) => {
 
 Deckdle._removeCardFromTableau = (card) => {
   const tableau = Deckdle.__getState()['tableau']
-  let cardRemoved = null
 
   Object.keys(tableau).forEach((col) => {
     const bottomCard = tableau[col][tableau[col].filter(card => card.status == 1).length - 1]
@@ -76,6 +75,8 @@ Deckdle._removeCardFromTableau = (card) => {
   Deckdle.__setState('tableau', tableau)
 
   Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
+
+  Deckdle._increaseCombo()
 }
 
 Deckdle._onTableauClick = (card, colId, rowId) => {

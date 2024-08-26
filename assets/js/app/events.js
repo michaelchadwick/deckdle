@@ -1,4 +1,4 @@
-/* /assets/js/app/events.js */
+/* app/events.js */
 /* adds event listeners to dom */
 /* global Deckdle */
 

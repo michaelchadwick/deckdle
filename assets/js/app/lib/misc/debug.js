@@ -158,3 +158,8 @@ Deckdle._clearLocalStorage = function () {
     Deckdle.modalOpen('cleared-local-storage')
   }
 }
+
+Deckdle._debugCombo = function () {
+  Deckdle._playSFX('click_tableau_valid')
+  Deckdle._increaseCombo()
+}

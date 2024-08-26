@@ -1,4 +1,4 @@
-/* dom */
+/* app/dom.js */
 /* grab references to dom elements */
 /* global Deckdle */
 
@@ -11,7 +11,9 @@ Deckdle.dom = {
   board: document.getElementById('board'),
   tableauCount: document.querySelector('#tableau-count .count'),
   stockCount: document.querySelector('#stock .count'),
-  baseCount: document.querySelector('#base .count')
+  baseCount: document.querySelector('#base .count'),
+  combo: document.getElementById('combo'),
+  comboText: document.querySelector('#combo .text')
 }
 
 // DOM > interactive elements

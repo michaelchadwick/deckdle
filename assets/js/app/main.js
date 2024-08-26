@@ -1,4 +1,4 @@
-/* /assets/js/app/main.js */
+/* app/main.js */
 /* app entry point and main functions */
 /* global Deckdle */
 
@@ -132,6 +132,25 @@ Deckdle.modalOpen = async function (type) {
 
       modalText = `
         <div id="settings">
+
+          <!-- combo counter -->
+          <div class="setting-row">
+            <div class="text">
+              <div class="title">Combo Counter</div>
+              <div class="description">Show a combination counter for excitement!</div>
+            </div>
+            <div class="control">
+              <div class="container">
+                <div id="button-setting-combo-counter"
+                  data-status=""
+                  class="switch"
+                  onclick="Deckdle._changeSetting('comboCounter')"
+                >
+                  <span class="knob"></span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- dark mode -->
           <div class="setting-row">
@@ -409,9 +428,11 @@ Deckdle.initApp = async () => {
   if (gameId) {
     await Deckdle._createNewSetup('free', gameId);
   } else {
-    // lib/localStorage.js
     await Deckdle._loadGame()
   }
+
+  Deckdle.combo = 0
+  Deckdle.ui._resetComboCounter()
 
   Deckdle._attachEventListeners()
 
@@ -471,17 +492,20 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
   Deckdle.__setState('stock', puzzle.stock)
   Deckdle.__setState('base', puzzle.base)
 
-  Deckdle._logStatus(`created '${gameMode}' Puzzle from daily script`, puzzle)
+  Deckdle._logStatus(`created '${gameMode}' Puzzle from id: '${setupId}'`, puzzle)
 
   Deckdle._saveGame(gameMode, '_createNewSetup')
 
   // fill UI with beautiful cards
   Deckdle.ui._emptyPlayingField()
-  Deckdle.ui._fillCards()
+  Deckdle.ui._fillCards((animate = true))
 
   if (Deckdle._isBaseEmpty()) {
     Deckdle._moveCardFromStockToBase()
   }
+
+  Deckdle.combo = 0
+  Deckdle.ui._resetComboCounter()
 }
 
 // load existing setupId, which retains past progress
@@ -525,6 +549,9 @@ Deckdle._loadExistingSetup = async function (gameMode) {
     Deckdle.dom.interactive.stock.appendChild(Deckdle.ui._createEmptyCard())
   }
 
+  Deckdle.combo = 0
+  Deckdle.ui._resetComboCounter()
+
   // see if we've already won
   Deckdle._checkWinState()
 }
@@ -539,8 +566,8 @@ Deckdle._createNewFree = async function () {
 Deckdle._confirmNewFree = async function () {
   const myConfirm = new Modal(
     'confirm',
-    'Create New Puzzle?',
-    'Are you <strong>sure</strong> you want to create a new puzzle?',
+    'Create New Free Play Puzzle?',
+    'Are you <strong>sure</strong> you want to create a new free play puzzle?',
     'Yes, please',
     'No, never mind'
   )

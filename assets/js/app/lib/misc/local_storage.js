@@ -310,6 +310,23 @@ Deckdle._loadSettings = function () {
   let setting = null
 
   if (lsSettings) {
+    if (lsSettings.comboCounter !== undefined) {
+      Deckdle.settings.comboCounter = lsSettings.comboCounter
+
+      if (Deckdle.settings.comboCounter) {
+        Deckdle.dom.combo.classList.add('show')
+
+        setting = document.getElementById('button-setting-combo-counter')
+
+        if (setting) {
+          setting.dataset.status = Deckdle.settings.comboCounter
+        }
+      }
+
+      Deckdle.combo = 0
+      Deckdle.ui._resetComboCounter()
+    }
+
     if (lsSettings.darkMode !== undefined) {
       Deckdle.settings.darkMode = lsSettings.darkMode
 
@@ -428,6 +445,29 @@ Deckdle._loadSettings = function () {
 // then save to localStorage
 Deckdle._changeSetting = async function (setting, value) {
   switch (setting) {
+    case 'comboCounter':
+      var st = document.getElementById('button-setting-combo-counter').dataset
+        .status
+
+      if (st == '' || st == 'false') {
+        document.getElementById('button-setting-combo-counter').dataset.status =
+          'true'
+        Deckdle.dom.combo.classList.add('show')
+
+        Deckdle._saveSetting('comboCounter', true)
+      } else {
+        document.getElementById('button-setting-combo-counter').dataset.status =
+          'false'
+        Deckdle.dom.combo.classList.remove('show')
+
+        Deckdle._saveSetting('comboCounter', false)
+      }
+
+      Deckdle.combo = 0
+      Deckdle.ui._resetComboCounter()
+
+      break
+
     case 'darkMode':
       var st = document.getElementById('button-setting-dark-mode').dataset
         .status
