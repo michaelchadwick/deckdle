@@ -31,6 +31,7 @@
   --white: #fafafa;
   --off-white: #f8f8f8;
   --gray: #e1e1e1;
+  --gray-light: #f4f4f4;
   --gray-medium: #a7a7a7;
   --gray-dark: #787878;
   --gray-dark2: #535353;
@@ -50,6 +51,10 @@
   --window-lose2: #ad5151;
   --window-game-over-win: #d8e4d9;
   --window-game-over-lose: #e9dddd;
+
+  --card-back: #2e678e;
+  --card-suit-black: var(--black);
+  --card-suit-red: #e71111;
 }
 
 @font-face {
