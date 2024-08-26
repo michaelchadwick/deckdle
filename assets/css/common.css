@@ -60,7 +60,7 @@ button {
   display: flex;
   flex: 1;
   font-family: inherit;
-  font-weight: bold;
+  font-weight: 300;
   height: 50px;
   justify-content: center;
   margin: 0 6px 0 0;
@@ -267,6 +267,6 @@ button.game-over {
 
 .blamph {
   font-family: 'Changa Bold', monospace;
-  font-weight: bold;
+  font-weight: 400;
   text-transform: uppercase;
 }

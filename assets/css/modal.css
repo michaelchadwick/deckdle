@@ -111,7 +111,7 @@
 }
 .modal-text strong {
   font-family: 'Changa Bold', monospace;
-  font-weight: bold;
+  font-weight: 400;
 }
 .modal-text ul,
 .modal-text {
@@ -125,19 +125,6 @@
 }
 .modal-text ul li {
   padding: 0;
-}
-.modal-text ul li span.solution-category {
-  font-size: 20px;
-  font-weight: 700;
-}
-.modal-text ul li span.solution-category + ul {
-  background-color: var(--off-white);
-  border: 1px solid var(--marker-color);
-  margin-bottom: 10px;
-  padding: 10px;
-}
-.modal-text ul li span.solution-category + ul li {
-  margin-left: 0;
 }
 
 .modal-text dl dt {
