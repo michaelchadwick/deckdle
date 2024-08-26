@@ -2,7 +2,7 @@
   background-color: var(--white);
   border: 1px solid var(--black);
   border-radius: 5px;
-  box-shadow: 2px 2px 2px #ccc;
+  box-shadow: 2px 2px 2px #c7c7c7;
   font-size: 1rem;
   height: 10vw;
   min-height: 60px;
@@ -50,7 +50,7 @@
 }
 .card.back {
   background-color: #2e678e;
-  border: 1px solid #fff;
+  border: 1px solid var(--white);
 }
 .card.back .rank,
 .card.back .suit {
