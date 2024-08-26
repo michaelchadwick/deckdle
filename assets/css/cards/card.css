@@ -36,7 +36,7 @@
     .card {
       font-size: 1.3rem;
       height: 88px;
-      width: 80px;
+      width: 73px;
     }
   }
 }
@@ -94,12 +94,16 @@
   }
 }
 @media (min-width: 768px) {
-  .card-label {
-    font-size: 0.9rem;
+  @media (min-height: 500px) {
+    .card-label {
+      font-size: 0.9rem;
+    }
   }
 }
 @media (min-width: 992px) {
-  .card-label {
-    font-size: 1rem;
+  @media (min-height: 500px) {
+    .card-label {
+      font-size: 1rem;
+    }
   }
 }
