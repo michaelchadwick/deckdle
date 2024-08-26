@@ -4,8 +4,6 @@
 
 // user clicks a card (stock or tableau)
 Deckdle._onCardClick = function (card) {
-  // console.log('card was clicked', card, card.dataset.row)
-
   if (card.parentElement.id == 'stock') {
     Deckdle._onStockClick()
   } else if (card.parentElement.parentElement.id == 'stock') {
@@ -21,8 +19,6 @@ Deckdle._onCardClick = function (card) {
 Deckdle._handleClickTouch = function (event) {
   const dialog = document.getElementsByClassName('modal-dialog')[0]
   const elem = event.target
-
-  // console.log('_handleClickTouch', elem, dialog)
 
   if (dialog) {
     const isConfirm = dialog.classList.contains('modal-confirm')

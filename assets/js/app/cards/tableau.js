@@ -34,8 +34,6 @@ Deckdle._tableauHasValidCard = () => {
 }
 
 Deckdle._tableauCardCanBeRemoved = (card) => {
-  // console.log('_tableauCardCanBeRemoved', card)
-
   const base = Deckdle.__getState()['base']
 
   if (!base.length) {

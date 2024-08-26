@@ -492,7 +492,7 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
   Deckdle.__setState('stock', puzzle.stock)
   Deckdle.__setState('base', puzzle.base)
 
-  Deckdle._logStatus(`created '${gameMode}' Puzzle from id: '${setupId}'`, puzzle)
+  Deckdle._logStatus(`[LOADED] '${gameMode}' Puzzle from id: '${setupId}'`, puzzle)
 
   Deckdle._saveGame(gameMode, '_createNewSetup')
 
@@ -522,7 +522,7 @@ Deckdle._loadExistingSetup = async function (gameMode) {
       if (!setupId) {
         console.error('retrieval of daily setupId went bork', setupId)
       } else {
-        console.log('daily setupId was successfully retrieved')
+        Deckdle._logStatus('daily setupId was successfully retrieved')
         Deckdle.__setState('setupId', setupId, gameMode)
       }
     } catch (e) {
@@ -539,7 +539,7 @@ Deckdle._loadExistingSetup = async function (gameMode) {
   Deckdle.__setState('stock', puzzle.stock)
   Deckdle.__setState('base', puzzle.base)
 
-  console.log(`loaded '${gameMode}' Puzzle from existing card setup`, puzzle)
+  Deckdle._logStatus(`[LOADED] '${gameMode}' Puzzle from existing card setup`, puzzle)
 
   // fill UI with beautiful cards
   Deckdle.ui._emptyPlayingField()
@@ -606,8 +606,6 @@ Deckdle._switchToFree = function () {
 
 // game state checking
 Deckdle._checkWinState = function () {
-  // console.log('checking win state...')
-
   Deckdle.__setState('lastPlayedTime', new Date().getTime())
 
   // tableau exhausted

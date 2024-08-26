@@ -246,8 +246,6 @@ Deckdle.ui._updateComboCounter = function () {
         })
       }
     } else if (comboLevel == 0) {
-      console.log('combo is 0, so hide toaster')
-
       Deckdle.dom.comboText.innerText = ':-('
 
       Deckdle._animateCSS('#combo', 'hinge').then(() => {

@@ -247,8 +247,6 @@ Deckdle._loadGame = async function () {
     Deckdle._moveCardFromStockToBase()
   }
 
-  // console.log('stock length', JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))[0].stock.length)
-
   if (Deckdle.settings.firstTime) {
     Deckdle.modalOpen('start')
   }
@@ -602,8 +600,6 @@ Deckdle._changeSetting = async function (setting, value) {
 }
 // save a setting (gear icon) to localStorage
 Deckdle._saveSetting = function (setting, value) {
-  // console.log('saving setting to LS...', setting, value)
-
   const settings = JSON.parse(localStorage.getItem(DECKDLE_SETTINGS_LS_KEY))
 
   if (settings) {

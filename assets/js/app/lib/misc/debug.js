@@ -112,7 +112,7 @@ Deckdle._displayGameState = function () {
 
           if (consoleKeys.includes(label)) {
             html += `<dd><code>${label}:</code></dd><dt>see dev console (⌥⌘I)</dt>`
-            console.log(`[DEBUG] #${key}[${state}]${label}`, value)
+            Deckdle._logStatus(`[DEBUG] #${key}[${state}]${label}`, value)
           } else {
             if (label == 'lastCompletedTime' || label == 'lastPlayedTime') {
               value = Deckdle.__getFormattedDate(new Date(value))

@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 
 Deckdle._initSynths = function () {
-  // console.log('[INITIALIZING] synths')
+  Deckdle._logStatus('[INITIALIZING] synths')
 
   if (!Deckdle.__getConfig().synthBGM) {
     // initialize synthBGM instance
@@ -54,7 +54,7 @@ Deckdle._initSynths = function () {
     document.querySelector('#button-stop-music').removeAttribute('disabled')
   }
 
-  console.log('[LOADED] /app/lib/audio(synths)')
+  Deckdle._logStatus('[LOADED] /app/lib/audio(synths)')
 }
 
 // BackGround Music
@@ -66,14 +66,6 @@ Deckdle._playBGM = function () {
     Deckdle.config.synthBGM.loadMIDIUrl(filename)
 
     setTimeout(() => {
-      // console.log('_playBGM()', filename)
-
-      // setInterval(() => {
-      //   console.log('synthBGM.playStatus()',
-      //     Deckdle.config.synthBGM.getPlayStatus()
-      //   )
-      // }, 1000)
-
       Deckdle.config.synthBGM.playMIDI()
     }, 20)
   }
