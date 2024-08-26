@@ -468,7 +468,9 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
   // 'free' generates random setupId
   else {
     if (qsId) {
-      setupId = qsId
+      setupId = parseInt(qsId)
+
+      Deckdle._changeSetting('gameMode', 'free')
 
       if ('URLSearchParams' in window) {
         const url = new URL(window.location)
