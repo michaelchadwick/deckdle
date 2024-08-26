@@ -6,7 +6,8 @@
 
 .animate__animated.animate__fadeInUp,
 .animate__animated.animate__fadeOutDown,
-.animate__animated.animate__shakeX {
+.animate__animated.animate__shakeX,
+.animated_animated.animate__zoomIn {
   --animate-delay: 0s;
 }
 
@@ -183,10 +184,10 @@ header .menu-left #nav-overlay #nav-content {
   flex-direction: column;
 }
 .score-animation .score {
-  --animate-delay: 1s;
+  --animate-delay: 200ms;
   --animate-duration: 2s;
   color: var(--bright-color);
-  font-size: 3rem;
+  font-size: 4rem;
   text-shadow: 2px 2px 0 var(--black);
 }
 
