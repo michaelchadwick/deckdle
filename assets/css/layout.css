@@ -35,9 +35,9 @@ header .menu-left #nav-overlay.show {
 header .menu-left #nav-overlay #nav-content {
   background-color: var(--white);
   border-radius: 0;
-  box-shadow: 3px 5px 5px rgb(0 0 0 / 15%);
+  box-shadow: 3px 0 5px rgb(0 0 0 / 15%);
   box-sizing: border-box;
-  max-height: calc(100% - 41px);
+  max-height: calc(100% - 50px);
   max-width: 500px;
   overflow-y: auto;
   padding: 0px;
