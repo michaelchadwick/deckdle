@@ -603,7 +603,11 @@ Deckdle._createNewFree = async function () {
 
 // ask to create new free gamemode puzzle
 Deckdle._confirmNewFree = async function () {
-  const myConfirm = new Modal(
+  if (Deckdle.myModal) {
+    Deckdle.myModal._destroyModal()
+  }
+
+  Deckdle.myModal = new Modal(
     'confirm',
     'Create New Free Play Puzzle?',
     'Are you <strong>sure</strong> you want to create a new free play puzzle?',
@@ -611,31 +615,21 @@ Deckdle._confirmNewFree = async function () {
     'No, never mind'
   )
 
-  try {
-    // wait for modal confirmation
-    const confirmed = await myConfirm.question()
+  const confirmed = await Deckdle.myModal.question()
 
-    if (confirmed) {
-      // Deckdle._resetFreeProgress()
-      await Deckdle._createNewSetup('free')
-    }
-  } catch (err) {
-    console.error('progress reset failed', err)
+  if (confirmed) {
+    await Deckdle._createNewSetup('free')
   }
-}
 
-// reset config, state, and LS for free play
-Deckdle._resetFreeProgress = async function () {
-  // set config and state to defaults
-  Deckdle.config.free = DECKDLE_DEFAULTS.config.free
-  Deckdle.state.free = DECKDLE_DEFAULTS.state.free
+  const dialog = document.getElementsByClassName('modal-dialog')[0]
 
-  // fill UI with beautiful cards
-  Deckdle.ui._emptyPlayingField()
-  Deckdle.ui._fillCards()
+  if (dialog) {
+    dialog.remove()
+  }
 
-  // save those defaults to localStorage
-  Deckdle._saveGame('free', '_resetFreeProgress')
+  if (Deckdle.myModal) {
+    Deckdle.myModal._destroyModal()
+  }
 }
 
 // game state checking
