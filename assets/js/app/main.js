@@ -308,7 +308,10 @@ Deckdle.modalOpen = async function (type) {
       if (Deckdle.__getGameMode() == 'daily') {
         modalText += `
           <div class="para">New daily puzzle available at 12 am PST</div>
-          <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>
+          <div class="buttons">
+            <button class="game-over refresh-daily" onclick="Deckdle._reload()" title="Daily game not loading?">Daily game not loading?</button>
+            <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>
+          </div>
         `
       }
       // free
@@ -362,7 +365,10 @@ Deckdle.modalOpen = async function (type) {
       if (Deckdle.__getGameMode() == 'daily') {
         modalText += `
           <div class="para">New daily puzzle available at 12 am PST</div>
-          <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>
+          <div class="buttons">
+            <button class="game-over refresh-daily" onclick="Deckdle._reload()" title="Wrong day loading?">Wrong day loading?</button>
+            <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>
+          </div>
         `
       }
       // free
@@ -714,6 +720,10 @@ Deckdle._shareResults = async function () {
       return
     }
   // }
+}
+
+Deckdle._reload = function () {
+  location.reload()
 }
 
 /************************************************************************
