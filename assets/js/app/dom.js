@@ -42,6 +42,7 @@ Deckdle.dom.interactive.debug = {
   btnShowState: document.getElementById('button-show-state'),
   btnClearLS: document.getElementById('button-clear-ls'),
   btnWinAnimation: document.getElementById('button-win-animation'),
+  btnLoseAnimation: document.getElementById('button-lose-animation'),
 }
 
 Deckdle._logStatus('[LOADED] /app/dom')

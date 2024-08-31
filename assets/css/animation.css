@@ -4,9 +4,13 @@
   --animate-repeat: 1;
 }
 
+.animate__animated.animate__bounce,
+.animate__animated.animate__flash,
 .animate__animated.animate__fadeInUp,
 .animate__animated.animate__fadeOutDown,
+.animate__animated.animate__rotateOutDownLeft,
 .animate__animated.animate__shakeX,
+.animate__animated.animate__tada,
 .animated_animated.animate__zoomIn {
   --animate-delay: 0s;
 }

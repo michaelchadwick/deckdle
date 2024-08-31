@@ -103,6 +103,14 @@ Deckdle._attachEventListeners = function () {
           Deckdle.__winAnimation().then(() => Deckdle.__resetCardsDuration())
         }
       )
+
+      // ☹ display win animation
+      Deckdle.dom.interactive.debug.btnLoseAnimation.addEventListener(
+        'click',
+        () => {
+          Deckdle.__loseAnimation().then(() => Deckdle.__resetCardsDuration())
+        }
+      )
     }
   }
 
