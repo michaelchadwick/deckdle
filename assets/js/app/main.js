@@ -81,6 +81,10 @@ Deckdle.modalOpen = async function (type) {
       break
 
     case 'stats':
+      if (Deckdle.myModal) {
+        Deckdle.myModal._destroyModal()
+      }
+
       modalText = `
         <div class="container">
 
@@ -110,10 +114,6 @@ Deckdle.modalOpen = async function (type) {
       modalText += `
         </div>
       `
-
-      if (Deckdle.myModal) {
-        Deckdle.myModal._destroyModal()
-      }
 
       Deckdle.myModal = new Modal(
         'perm',
@@ -241,7 +241,13 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      Deckdle.myModal = new Modal('perm', 'Settings', modalText, null, null)
+      Deckdle.myModal = new Modal(
+        'perm',
+        'Settings',
+        modalText,
+        null,
+        null
+      )
 
       Deckdle._loadSettings()
 
@@ -266,36 +272,11 @@ Deckdle.modalOpen = async function (type) {
       )
       break
 
-    case 'shared':
-      Deckdle.myModal = new Modal(
-        'temp',
-        null,
-        'Results copied to clipboard',
-        null,
-        null
-      )
-      break
-    case 'no-clipboard-access':
-      Deckdle.myModal = new Modal(
-        'temp',
-        null,
-        'Sorry, but access to clipboard not available',
-        null,
-        null
-      )
-      break
-
-    case 'cleared-local-storage':
-      Deckdle.myModal = new Modal(
-        'temp',
-        null,
-        'Local Storage has been cleared',
-        null,
-        null
-      )
-      break
-
     case 'game-over-win':
+      if (Deckdle.myModal) {
+        Deckdle.myModal._destroyModal()
+      }
+
       modalText = `
         <div class="container game-over-win">
       `
@@ -325,7 +306,10 @@ Deckdle.modalOpen = async function (type) {
 
       // daily
       if (Deckdle.__getGameMode() == 'daily') {
-        modalText += `<button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>`
+        modalText += `
+          <div class="para">New daily puzzle available at 12 am PST</div>
+          <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>
+        `
       }
       // free
       else {
@@ -344,8 +328,6 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      if (Deckdle.myModal) Deckdle.myModal._destroyModal()
-
       Deckdle.myModal = new Modal(
         'end-state',
         'Congratulations! You cleared it!',
@@ -360,6 +342,10 @@ Deckdle.modalOpen = async function (type) {
       break
 
     case 'game-over-lose':
+      if (Deckdle.myModal) {
+        Deckdle.myModal._destroyModal()
+      }
+
       modalText = `
         <div class="container game-over-lose">
       `
@@ -374,7 +360,10 @@ Deckdle.modalOpen = async function (type) {
 
       // daily
       if (Deckdle.__getGameMode() == 'daily') {
-        modalText += `<button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>`
+        modalText += `
+          <div class="para">New daily puzzle available at 12 am PST</div>
+          <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>
+        `
       }
       // free
       else {
@@ -393,8 +382,6 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      if (Deckdle.myModal) Deckdle.myModal._destroyModal()
-
       Deckdle.myModal = new Modal(
         'end-state',
         "Bummer! You didn't clear it this time!",
@@ -406,6 +393,48 @@ Deckdle.modalOpen = async function (type) {
 
       Deckdle._playSFX('lose')
 
+      break
+
+    case 'shared':
+      if (Deckdle.myModalTemp) {
+        Deckdle.myModalTemp._destroyModal()
+      }
+
+      Deckdle.myModalTemp = new Modal(
+        'temp',
+        null,
+        'Results copied to clipboard',
+        null,
+        null
+      )
+      break
+
+    case 'no-clipboard-access':
+      if (Deckdle.myModalTemp) {
+        Deckdle.myModalTemp._destroyModal()
+      }
+
+      Deckdle.myModalTemp = new Modal(
+        'temp',
+        null,
+        'Sorry, but access to clipboard not available',
+        null,
+        null
+      )
+      break
+
+    case 'cleared-local-storage':
+      if (Deckdle.myModalTemp) {
+        Deckdle.myModalTemp._destroyModal()
+      }
+
+      Deckdle.myModalTemp = new Modal(
+        'temp',
+        null,
+        'Local Storage has been cleared',
+        null,
+        null
+      )
       break
   }
 }
@@ -559,7 +588,9 @@ Deckdle._loadExistingSetup = async function (gameMode) {
 }
 
 Deckdle._createNewFree = async function () {
-  if (Deckdle.myModal) Deckdle.myModal._destroyModal()
+  if (Deckdle.myModal) {
+    Deckdle.myModal._destroyModal()
+  }
 
   await Deckdle._createNewSetup('free')
 }
