@@ -1,25 +1,22 @@
-/* /assets/js/app/lib/modal.js */
+/* /assets/js/app/lib/misc/modal.js */
 /* modal dialog UI */
 /* eslint-disable no-unused-vars */
 
 class Modal {
-  constructor(modalType, modalTitle, modalText, acceptText, cancelText, modalClass) {
+  constructor(modalType = 'perm',
+    modalTitle = 'Confirmation',
+    modalText = 'You sure?',
+    acceptText = 'Yes',
+    cancelText = 'No',
+    modalClass = null
+  ) {
     this.modalDelay = 1500
-    this.modalType = modalType || 'perm'
-    this.modalTitle = modalTitle || 'Confirmation'
-    this.modalText = modalText || 'Are you sure you want to do this?'
+    this.modalType = modalType
+    this.modalTitle = modalTitle
+    this.modalText = modalText
     this.modalClass = modalClass || null
-
-    if (acceptText) {
-      this.acceptText = acceptText || 'Yes'
-    } else {
-      this.acceptText = null
-    }
-    if (cancelText) {
-      this.cancelText = cancelText || 'No'
-    } else {
-      this.cancelText = null
-    }
+    this.acceptText = acceptText
+    this.cancelText = cancelText
 
     this.parent = document.body
 
@@ -68,6 +65,7 @@ class Modal {
     // Background dialog
     this.modal = document.createElement('dialog')
     this.modal.classList.add('modal-dialog')
+
     if (modalType == 'confirm' || modalType == 'confirm-debug') {
       this.modal.classList.add('modal-confirm')
     }
@@ -92,6 +90,7 @@ class Modal {
     if (modalType == 'perm-debug' || modalType == 'confirm-debug') {
       window.classList.add('debug')
     }
+
     this.modal.appendChild(window)
 
     // if not a temporary modal, add a title and close button
@@ -163,11 +162,18 @@ class Modal {
 
   _destroyModal() {
     if (this.modal) {
-      const modal = document.getElementsByClassName('modal-dialog')[0]
+      const modals = document.getElementsByClassName('modal-dialog')
+      const modalCount = modals.length
+      const modal = modals[modalCount - 1]
 
       if (this.parent.contains(modal)) {
-        this.parent.removeChild(modal)
-        delete this
+        if (
+          !modal.classList.contains('modal-confirm') &&
+          !modal.classList.contains('end-state')
+        ) {
+          this.parent.removeChild(modal)
+          delete this
+        }
       }
     }
   }
