@@ -490,8 +490,14 @@ Deckdle._changeSetting = async function (setting, value) {
       // if at end-state and a gameMode is clicked
       // make sure to close the open modal
       const dialog = document.getElementsByClassName('modal-dialog')[0]
-      if (dialog) dialog.remove()
-      if (Deckdle.myModal) Deckdle.myModal._destroyModal()
+
+      if (dialog) {
+        dialog.remove()
+      }
+
+      if (Deckdle.myModal) {
+        Deckdle.myModal._destroyModal()
+      }
 
       if (Deckdle.__getGameMode() != value) {
         switch (value) {
