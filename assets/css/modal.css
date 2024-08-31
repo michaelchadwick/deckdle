@@ -128,7 +128,7 @@
   color: var(--white);
   height: 30px;
   margin: 10px auto 0;
-  max-width: 150px;
+  max-width: 200px;
   padding: 5px;
 }
 .modal-text div.buttons button i {

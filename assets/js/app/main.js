@@ -310,13 +310,18 @@ Deckdle.modalOpen = async function (type) {
           <div class="para">New daily puzzle available at 12 am PST</div>
           <div class="buttons">
             <button class="game-over refresh-daily" onclick="Deckdle._reload()" title="Daily game not loading?">Daily game not loading?</button>
-            <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>
+            <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Switch to free play?">Switch to free play?</button>
           </div>
         `
       }
       // free
       else {
-        modalText += `<button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another free one?">Try another free one?</button>`
+        modalText += `
+          <div class="buttons">
+            <button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>
+            <button class="game-over switch-daily" onclick="Deckdle._changeSetting('gameMode', 'daily')" title="Switch to daily?">Switch to daily?</button>
+          </div>
+        `
       }
 
       if (Deckdle.__getState().gameState == 'GAME_OVER') {
@@ -367,13 +372,18 @@ Deckdle.modalOpen = async function (type) {
           <div class="para">New daily puzzle available at 12 am PST</div>
           <div class="buttons">
             <button class="game-over refresh-daily" onclick="Deckdle._reload()" title="Wrong day loading?">Wrong day loading?</button>
-            <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Try free play?">Try free play?</button>
+            <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Switch to free play?">Switch to free play?</button>
           </div>
         `
       }
       // free
       else {
-        modalText += `<button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>`
+        modalText += `
+          <div class="buttons">
+            <button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>
+            <button class="game-over switch-daily" onclick="Deckdle._changeSetting('gameMode', 'daily')" title="Switch to daily?">Switch to daily?</button>
+          </div>
+        `
       }
 
       if (Deckdle.__getState().gameState == 'GAME_OVER') {
@@ -594,11 +604,17 @@ Deckdle._loadExistingSetup = async function (gameMode) {
 }
 
 Deckdle._createNewFree = async function () {
+  await Deckdle._createNewSetup('free')
+
+  const dialog = document.getElementsByClassName('modal-dialog')[0]
+
+  if (dialog) {
+    dialog.remove()
+  }
+
   if (Deckdle.myModal) {
     Deckdle.myModal._destroyModal()
   }
-
-  await Deckdle._createNewSetup('free')
 }
 
 // ask to create new free gamemode puzzle
