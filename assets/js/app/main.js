@@ -638,11 +638,6 @@ Deckdle._resetFreeProgress = async function () {
   Deckdle._saveGame('free', '_resetFreeProgress')
 }
 
-// end of daily game button
-Deckdle._switchToFree = function () {
-
-}
-
 // game state checking
 Deckdle._checkWinState = function () {
   Deckdle.__setState('lastPlayedTime', new Date().getTime())
