@@ -80,6 +80,13 @@
   background-color: var(--window-lose2);
 }
 
+.modal-window.game-over-win .modal-text .score {
+  color: var(--window-win2);
+}
+.modal-window.game-over-lose .modal-text .score {
+  color: var(--window-lose2);
+}
+
 .modal-close {
   background: none;
   border: 0 none;
@@ -109,6 +116,23 @@
 .modal-text div.para {
   padding: 10px;
   text-align: center;
+}
+.modal-text div.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.modal-text div.buttons button {
+  background-color: var(--dark-color);
+  color: var(--white);
+  height: 30px;
+  margin: 10px auto 0;
+  max-width: 150px;
+  padding: 5px;
+}
+.modal-text div.buttons button i {
+  margin-left: 6px;
 }
 .modal-text p {
   margin-bottom: 10px;
