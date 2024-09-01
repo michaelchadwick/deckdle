@@ -6,8 +6,10 @@
 
 .animate__animated.animate__bounce,
 .animate__animated.animate__flash,
+.animate__animated.animate__fadeInDown,
 .animate__animated.animate__fadeInUp,
 .animate__animated.animate__fadeOutDown,
+.animate__animated.animate__flipInY,
 .animate__animated.animate__rotateOutDownLeft,
 .animate__animated.animate__shakeX,
 .animate__animated.animate__tada,
@@ -15,160 +17,81 @@
   --animate-delay: 0s;
 }
 
+/* nebyooaps slider */
 header .menu-left #nav-overlay #nav-content {
   animation: SlideRight 200ms;
 }
 
-#tableau #col0 .card[data-row='4'].animate__animated.animate__slideInDown {
-  --animate-delay: 0s;
+#tableau .card {
+  --animate-delay: 0ms;
+  --animate-duration: 100ms;
+  transition: 10ms;
+}
+
+#tableau .card.animate__animated.animate__fadeInDown {
+  --animate-delay: 0ms;
   --animate-duration: 200ms;
 }
-#tableau #col0 .card[data-row='3'].animate__animated.animate__slideInDown {
-  --animate-delay: 0s;
-  --animate-duration: 250ms;
-}
-#tableau #col0 .card[data-row='2'].animate__animated.animate__slideInDown {
-  --animate-delay: 0s;
-  --animate-duration: 300ms;
-}
-#tableau #col0 .card[data-row='1'].animate__animated.animate__slideInDown {
-  --animate-delay: 0s;
-  --animate-duration: 350ms;
-}
-#tableau #col0 .card[data-row='0'].animate__animated.animate__slideInDown {
-  --animate-delay: 0s;
-  --animate-duration: 400ms;
-}
-
-#tableau #col1 .card[data-row='4'].animate__animated.animate__slideInDown {
-  --animate-delay: 50ms;
-  --animate-duration: 450ms;
-}
-#tableau #col1 .card[data-row='3'].animate__animated.animate__slideInDown {
-  --animate-delay: 50ms;
-  --animate-duration: 500ms;
-}
-#tableau #col1 .card[data-row='2'].animate__animated.animate__slideInDown {
-  --animate-delay: 50ms;
-  --animate-duration: 550ms;
-}
-#tableau #col1 .card[data-row='1'].animate__animated.animate__slideInDown {
-  --animate-delay: 50ms;
-  --animate-duration: 600ms;
-}
-#tableau #col1 .card[data-row='0'].animate__animated.animate__slideInDown {
-  --animate-delay: 50ms;
-  --animate-duration: 650ms;
-}
-
-#tableau #col2 .card[data-row='4'].animate__animated.animate__slideInDown {
-  --animate-delay: 100ms;
-  --animate-duration: 700ms;
-}
-#tableau #col2 .card[data-row='3'].animate__animated.animate__slideInDown {
-  --animate-delay: 100ms;
-  --animate-duration: 750ms;
-}
-#tableau #col2 .card[data-row='2'].animate__animated.animate__slideInDown {
-  --animate-delay: 100ms;
-  --animate-duration: 800ms;
-}
-#tableau #col2 .card[data-row='1'].animate__animated.animate__slideInDown {
-  --animate-delay: 100ms;
-  --animate-duration: 850ms;
-}
-#tableau #col2 .card[data-row='0'].animate__animated.animate__slideInDown {
-  --animate-delay: 100ms;
-  --animate-duration: 900ms;
-}
-
-#tableau #col3 .card[data-row='4'].animate__animated.animate__slideInDown {
-  --animate-delay: 150ms;
-  --animate-duration: 950ms;
-}
-#tableau #col3 .card[data-row='3'].animate__animated.animate__slideInDown {
-  --animate-delay: 150ms;
+#tableau .card.animate__animated.animate__flipInY {
+  --animate-delay: 0ms;
   --animate-duration: 1000ms;
 }
-#tableau #col3 .card[data-row='2'].animate__animated.animate__slideInDown {
-  --animate-delay: 150ms;
-  --animate-duration: 1050ms;
+
+#tableau #col0 .card.animate__animated.animate__fadeInDown,
+#tableau #col0 .card.animate__animated.animate__slideInDown {
+  --animate-delay: 100ms;
 }
-#tableau #col3 .card[data-row='1'].animate__animated.animate__slideInDown {
-  --animate-delay: 150ms;
-  --animate-duration: 1100ms;
+#tableau #col1 .card.animate__animated.animate__fadeInDown,
+#tableau #col1 .card.animate__animated.animate__slideInDown {
+  --animate-delay: 400ms;
 }
-#tableau #col3 .card[data-row='0'].animate__animated.animate__slideInDown {
-  --animate-delay: 150ms;
-  --animate-duration: 1150ms;
+#tableau #col2 .card.animate__animated.animate__fadeInDown,
+#tableau #col2 .card.animate__animated.animate__slideInDown {
+  --animate-delay: 700ms;
+}
+#tableau #col3 .card.animate__animated.animate__fadeInDown,
+#tableau #col3 .card.animate__animated.animate__slideInDown {
+  --animate-delay: 1000ms;
+}
+#tableau #col4 .card.animate__animated.animate__fadeInDown,
+#tableau #col4 .card.animate__animated.animate__slideInDown {
+  --animate-delay: 1300ms;
+}
+#tableau #col5 .card.animate__animated.animate__fadeInDown,
+#tableau #col5 .card.animate__animated.animate__slideInDown {
+  --animate-delay: 1600ms;
+}
+#tableau #col6 .card.animate__animated.animate__fadeInDown,
+#tableau #col6 .card.animate__animated.animate__slideInDown {
+  --animate-delay: 1900ms;
 }
 
-#tableau #col4 .card[data-row='4'].animate__animated.animate__slideInDown {
-  --animate-delay: 200ms;
-  --animate-duration: 1200ms;
+#tableau .card[data-row="4"].animate__animated.animate__fadeInDown,
+#tableau .card[data-row="4"].animate__animated.animate__slideInDown {
+  --animate-duration: 200ms;
 }
-#tableau #col4 .card[data-row='3'].animate__animated.animate__slideInDown {
-  --animate-delay: 200ms;
-  --animate-duration: 1250ms;
+#tableau .card[data-row="3"].animate__animated.animate__fadeInDown,
+#tableau .card[data-row="3"].animate__animated.animate__slideInDown {
+  --animate-duration: 300ms;
 }
-#tableau #col4 .card[data-row='2'].animate__animated.animate__slideInDown {
-  --animate-delay: 200ms;
-  --animate-duration: 1300ms;
+#tableau .card[data-row="2"].animate__animated.animate__fadeInDown,
+#tableau .card[data-row="2"].animate__animated.animate__slideInDown {
+  --animate-duration: 400ms;
 }
-#tableau #col4 .card[data-row='1'].animate__animated.animate__slideInDown {
-  --animate-delay: 200ms;
-  --animate-duration: 1350ms;
+#tableau .card[data-row="1"].animate__animated.animate__fadeInDown,
+#tableau .card[data-row="1"].animate__animated.animate__slideInDown {
+  --animate-duration: 500ms;
 }
-#tableau #col4 .card[data-row='0'].animate__animated.animate__slideInDown {
-  --animate-delay: 200ms;
-  --animate-duration: 1400ms;
-}
-
-#tableau #col5 .card[data-row='4'].animate__animated.animate__slideInDown {
-  --animate-delay: 250ms;
-  --animate-duration: 1450ms;
-}
-#tableau #col5 .card[data-row='3'].animate__animated.animate__slideInDown {
-  --animate-delay: 250ms;
-  --animate-duration: 1500ms;
-}
-#tableau #col5 .card[data-row='2'].animate__animated.animate__slideInDown {
-  --animate-delay: 250ms;
-  --animate-duration: 1550ms;
-}
-#tableau #col5 .card[data-row='1'].animate__animated.animate__slideInDown {
-  --animate-delay: 250ms;
-  --animate-duration: 1600ms;
-}
-#tableau #col5 .card[data-row='0'].animate__animated.animate__slideInDown {
-  --animate-delay: 250ms;
-  --animate-duration: 1650ms;
+#tableau .card[data-row="0"].animate__animated.animate__fadeInDown,
+#tableau .card[data-row="0"].animate__animated.animate__slideInDown {
+  --animate-duration: 600ms;
 }
 
-#tableau #col6 .card[data-row='4'].animate__animated.animate__slideInDown {
-  --animate-delay: 300ms;
-  --animate-duration: 1700ms;
-}
-#tableau #col6 .card[data-row='3'].animate__animated.animate__slideInDown {
-  --animate-delay: 300ms;
-  --animate-duration: 1750ms;
-}
-#tableau #col6 .card[data-row='2'].animate__animated.animate__slideInDown {
-  --animate-delay: 300ms;
-  --animate-duration: 1800ms;
-}
-#tableau #col6 .card[data-row='1'].animate__animated.animate__slideInDown {
-  --animate-delay: 300ms;
-  --animate-duration: 1850ms;
-}
-#tableau #col6 .card[data-row='0'].animate__animated.animate__slideInDown {
-  --animate-delay: 300ms;
-  --animate-duration: 1900ms;
-}
-
+/* remove tableau card to put on base */
 #tableau .card.animate__animated.animate__fadeOutDown {
   --animate-duration: 350ms;
 }
+/* invalud tableau card removal */
 #tableau .card.animate__animated.animate__shakeX {
   --animate-duration: 100ms;
 }
@@ -182,6 +105,7 @@ header .menu-left #nav-overlay #nav-content {
   --animate-duration: 700ms;
 }
 
+/* game-over modal */
 .score-animation {
   align-items: center;
   display: flex;
@@ -195,6 +119,7 @@ header .menu-left #nav-overlay #nav-content {
   text-shadow: 2px 2px 0 var(--black);
 }
 
+/* combo counter */
 #combo.show {
   --animate-duration: 250ms;
 }
