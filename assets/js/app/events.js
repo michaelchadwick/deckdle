@@ -96,7 +96,24 @@ Deckdle._attachEventListeners = function () {
         }
       )
 
-      // 🏁 display win animation
+      // 🂡 clear cards
+      Deckdle.dom.interactive.debug.btnClearCards.addEventListener(
+        'click',
+        () => {
+          Deckdle.ui._emptyPlayingField()
+        }
+      )
+
+      // 🂡 deal cards animation
+      Deckdle.dom.interactive.debug.btnDealCards.addEventListener(
+        'click',
+        () => {
+          Deckdle.ui._emptyPlayingField()
+          Deckdle.ui._dealCards(animate = true)
+        }
+      )
+
+      // ☺ display win animation
       Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener(
         'click',
         () => {

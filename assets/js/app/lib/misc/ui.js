@@ -165,7 +165,7 @@ Deckdle.ui._emptyPlayingField = function () {
   Deckdle.dom.interactive.base.querySelectorAll('.card').forEach(card => card.remove())
 }
 
-Deckdle.ui._fillCards = function (animate = false) {
+Deckdle.ui._dealCards = function (animate = false) {
   // Deckdle._logStatus('[UI][LOADING] fillCards()')
 
   // create <div id="tableau"><div class="col"> * 7</div>
@@ -188,7 +188,14 @@ Deckdle.ui._fillCards = function (animate = false) {
       Deckdle.ui._addCardToTableau(newCard, colId)
 
       if (animate) {
-        Deckdle._animateCSS(`#tableau #col${colId} .card[data-row="${newCard.dataset.row}"]`, 'slideInDown')
+        const elem = `#tableau #col${colId} .card[data-row="${newCard.dataset.row}"]`
+
+        document.querySelector(elem).classList.add('back')
+        Deckdle._animateCSS(elem, 'fadeInDown').then(() => {
+          Deckdle._animateCSS(elem, 'flipInY').then(() => {
+            document.querySelector(elem).classList.remove('back')
+          })
+        })
       }
     })
 

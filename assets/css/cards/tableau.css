@@ -46,7 +46,8 @@
   opacity: 1;
   position: relative;
 }
-#tableau .col .card.removed {
+#tableau .col .card.removed,
+#tableau .col .card[data-status="0"] {
   opacity: 0;
   z-index: -9999 !important;
 }

@@ -41,6 +41,8 @@ Deckdle.dom.interactive.debug = {
   btnShowConfig: document.getElementById('button-show-config'),
   btnShowState: document.getElementById('button-show-state'),
   btnClearLS: document.getElementById('button-clear-ls'),
+  btnClearCards: document.getElementById('button-clear-cards'),
+  btnDealCards: document.getElementById('button-deal-cards'),
   btnWinAnimation: document.getElementById('button-win-animation'),
   btnLoseAnimation: document.getElementById('button-lose-animation'),
 }

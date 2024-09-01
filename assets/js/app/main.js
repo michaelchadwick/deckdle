@@ -545,7 +545,7 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
 
   // fill UI with beautiful cards
   Deckdle.ui._emptyPlayingField()
-  Deckdle.ui._fillCards((animate = true))
+  Deckdle.ui._dealCards((animate = true))
 
   if (Deckdle._isBaseEmpty()) {
     Deckdle._moveCardFromStockToBase()
@@ -590,7 +590,7 @@ Deckdle._loadExistingSetup = async function (gameMode) {
 
   // fill UI with beautiful cards
   Deckdle.ui._emptyPlayingField()
-  Deckdle.ui._fillCards()
+  Deckdle.ui._dealCards()
 
   if (!Deckdle._stockCount()) {
     Deckdle.dom.interactive.stock.appendChild(Deckdle.ui._createEmptyCard())
