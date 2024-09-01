@@ -2,6 +2,10 @@
 /* misc global functions */
 /* global Deckdle */
 
+Deckdle._sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 // timestamp -> display date
 Deckdle.__getFormattedDate = function (date) {
   let formatted_date = ''
