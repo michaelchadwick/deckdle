@@ -1,4 +1,4 @@
-/* debug */
+/* lib/misc/debug */
 /* debug functions */
 /* global Deckdle */
 

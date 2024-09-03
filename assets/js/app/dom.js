@@ -1,4 +1,4 @@
-/* app/dom.js */
+/* dom */
 /* grab references to dom elements */
 /* global Deckdle */
 
@@ -13,7 +13,7 @@ Deckdle.dom = {
   stockCount: document.querySelector('#stock .count'),
   baseCount: document.querySelector('#base .count'),
   combo: document.getElementById('combo'),
-  comboText: document.querySelector('#combo .text')
+  comboText: document.querySelector('#combo .text'),
 }
 
 // DOM > interactive elements
@@ -31,7 +31,7 @@ Deckdle.dom.interactive = {
   base: document.getElementById('base'),
 }
 // DOM > keyboard buttons
-Deckdle.dom.keyboard = {
+Deckdle.dom.input = {
   btnCreateNew: document.getElementById('button-create-new'),
 }
 // DOM > interactive elements (debug)

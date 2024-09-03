@@ -1,23 +1,6 @@
-/* lib/localStorage */
+/* lib/misc/local_storage */
 /* functions to interact with window.localStorage */
 /* global Deckdle */
-
-// function for modal win/stats
-Deckdle._getGameCount = function (mode) {
-  let ls = null
-
-  if (mode == 'daily') {
-    ls = localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)
-  } else {
-    ls = localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)
-  }
-
-  if (ls) {
-    return JSON.parse(ls).filter((session) => session.lastCompletedTime).length
-  } else {
-    return 0
-  }
-}
 
 // load state from LS -> code model
 Deckdle._loadGame = async function () {
@@ -34,9 +17,7 @@ Deckdle._loadGame = async function () {
   /* daily state LS -> code    */
   /* ************************* */
 
-  const lsStateDaily = JSON.parse(
-    localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)
-  )
+  const lsStateDaily = JSON.parse(localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY))
 
   // if we have previous LS values, sync them to code model
   if (lsStateDaily && Object.keys(lsStateDaily)) {
@@ -44,17 +25,8 @@ Deckdle._loadGame = async function () {
 
     let i = 0
     lsStateDaily.forEach((lsState) => {
-      Deckdle.__setState(
-        'gameState',
-        lsState.gameState || dailyDefaults.gameState,
-        'daily',
-        i
-      )
-      Deckdle.__setState(
-        'gameWon',
-        lsState.gameWon || dailyDefaults.gameWon,
-        'daily',
-      i)
+      Deckdle.__setState('gameState', lsState.gameState || dailyDefaults.gameState, 'daily', i)
+      Deckdle.__setState('gameWon', lsState.gameWon || dailyDefaults.gameWon, 'daily', i)
       Deckdle.__setState(
         'lastCompletedTime',
         lsState.lastCompletedTime || dailyDefaults.lastCompletedTime,
@@ -67,31 +39,11 @@ Deckdle._loadGame = async function () {
         'daily',
         i
       )
-      Deckdle.__setState(
-        'setupId',
-        lsState.setupId || dailyDefaults.setupId,
-        'daily',
-        i
-      )
+      Deckdle.__setState('setupId', lsState.setupId || dailyDefaults.setupId, 'daily', i)
 
-      Deckdle.__setState(
-        'tableau',
-        lsState.tableau || dailyDefaults.tableau,
-        'daily',
-        i
-      )
-      Deckdle.__setState(
-        'stock',
-        lsState.stock || dailyDefaults.stock,
-        'daily',
-        i
-      )
-      Deckdle.__setState(
-        'base',
-        lsState.base || dailyDefaults.base,
-        'daily',
-        i
-      )
+      Deckdle.__setState('tableau', lsState.tableau || dailyDefaults.tableau, 'daily', i)
+      Deckdle.__setState('stock', lsState.stock || dailyDefaults.stock, 'daily', i)
+      Deckdle.__setState('base', lsState.base || dailyDefaults.base, 'daily', i)
 
       i++
     })
@@ -120,11 +72,7 @@ Deckdle._loadGame = async function () {
       }
       // time has elapsed on daily puzzle, and new one is needed
       else {
-        Deckdle.__setState(
-          'gameState',
-          'IN_PROGRESS',
-          'daily'
-        )
+        Deckdle.__setState('gameState', 'IN_PROGRESS', 'daily')
 
         Deckdle._saveGame('daily', '_loadGame(daily time elapsed)')
 
@@ -144,9 +92,7 @@ Deckdle._loadGame = async function () {
   /* free state LS -> code     */
   /* ************************* */
 
-  const lsStateFree = JSON.parse(
-    localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)
-  )
+  const lsStateFree = JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
 
   // if we have previous LS values, sync them to code model
   if (lsStateFree) {
@@ -154,47 +100,25 @@ Deckdle._loadGame = async function () {
 
     let i = 0
     lsStateFree.forEach((lsState) => {
-      Deckdle.__setState('gameState',
-        lsState.gameState || freeDefaults.gameState,
-        'free',
-        i
-      )
-      Deckdle.__setState('gameWon',
-        lsState.gameWon || freeDefaults.gameWon,
-        'free',
-        i
-      )
-      Deckdle.__setState('lastCompletedTime',
+      Deckdle.__setState('gameState', lsState.gameState || freeDefaults.gameState, 'free', i)
+      Deckdle.__setState('gameWon', lsState.gameWon || freeDefaults.gameWon, 'free', i)
+      Deckdle.__setState(
+        'lastCompletedTime',
         lsState.lastCompletedTime || freeDefaults.lastCompletedTime,
         'free',
         i
       )
-      Deckdle.__setState('lastPlayedTime',
+      Deckdle.__setState(
+        'lastPlayedTime',
         lsState.lastPlayedTime || freeDefaults.lastPlayedTime,
         'free',
         i
       )
-      Deckdle.__setState('setupId',
-        lsState.setupId || freeDefaults.setupId,
-        'free',
-        i
-      )
+      Deckdle.__setState('setupId', lsState.setupId || freeDefaults.setupId, 'free', i)
 
-      Deckdle.__setState('tableau',
-        lsState.tableau || freeDefaults.tableau,
-        'free',
-        i
-      )
-      Deckdle.__setState('stock',
-        lsState.stock || freeDefaults.stock,
-        'free',
-        i
-      )
-      Deckdle.__setState('base',
-        lsState.base || freeDefaults.base,
-        'free',
-        i
-      )
+      Deckdle.__setState('tableau', lsState.tableau || freeDefaults.tableau, 'free', i)
+      Deckdle.__setState('stock', lsState.stock || freeDefaults.stock, 'free', i)
+      Deckdle.__setState('base', lsState.base || freeDefaults.base, 'free', i)
 
       i++
     })
@@ -206,11 +130,12 @@ Deckdle._loadGame = async function () {
   }
 
   /* ************************* */
-  /* create/load setupId       */
+  /* create/load puzzle        */
   /* ************************* */
 
+  // make sure a gameMode is set
   if (!Deckdle.settings.gameMode) {
-    Deckdle.settings.gameMode = DECKDLE_DEFAULT_GAMETYPE
+    Deckdle.settings.gameMode = DECKDLE_DEFAULT_GAMEMODE
   }
 
   // daily load/create
@@ -240,13 +165,6 @@ Deckdle._loadGame = async function () {
     }
   }
 
-  // lib/ui.js
-  Deckdle.ui._updateGameType()
-
-  if (Deckdle._isBaseEmpty()) {
-    Deckdle._moveCardFromStockToBase()
-  }
-
   if (Deckdle.settings.firstTime) {
     Deckdle.modalOpen('start')
   }
@@ -265,10 +183,7 @@ Deckdle._saveGame = function (lsType, src = 'unknown') {
         })
       })
 
-      localStorage.setItem(
-        DECKDLE_STATE_DAILY_LS_KEY,
-        JSON.stringify(curDailyState)
-      )
+      localStorage.setItem(DECKDLE_STATE_DAILY_LS_KEY, JSON.stringify(curDailyState))
 
       break
 
@@ -283,23 +198,17 @@ Deckdle._saveGame = function (lsType, src = 'unknown') {
         })
       })
 
-      localStorage.setItem(
-        DECKDLE_STATE_FREE_LS_KEY,
-        JSON.stringify(curFreeState)
-      )
+      localStorage.setItem(DECKDLE_STATE_FREE_LS_KEY, JSON.stringify(curFreeState))
 
       break
 
     case 'settings':
-      localStorage.setItem(
-        DECKDLE_SETTINGS_LS_KEY,
-        JSON.stringify(Deckdle.settings)
-      )
+      localStorage.setItem(DECKDLE_SETTINGS_LS_KEY, JSON.stringify(Deckdle.settings))
 
       break
   }
 
-  // Deckdle._logStatus(`[SAVED] game(${type})`, src)
+  // Deckdle._logStatus(`[SAVED] game(${lsType})`, src)
 }
 
 // load settings (gear icon) from localStorage
@@ -380,13 +289,13 @@ Deckdle._loadSettings = function () {
         }
       } else {
         const bgmSetting = document.getElementById('range-setting-bgm-level')
-          if (bgmSetting) {
-            bgmSetting.setAttribute('disabled', '')
-          }
-          const sfxSetting = document.getElementById('range-setting-sfx-level')
-          if (sfxSetting) {
-            sfxSetting.setAttribute('disabled', '')
-          }
+        if (bgmSetting) {
+          bgmSetting.setAttribute('disabled', '')
+        }
+        const sfxSetting = document.getElementById('range-setting-sfx-level')
+        if (sfxSetting) {
+          sfxSetting.setAttribute('disabled', '')
+        }
       }
     }
 
@@ -429,33 +338,30 @@ Deckdle._loadSettings = function () {
     Deckdle.dom.interactive.gameModeDailyLink.dataset.active = true
     Deckdle.dom.interactive.gameModeFreeLink.dataset.active = false
     Deckdle.dom.dailyDetails.classList.add('show')
-    Deckdle.dom.keyboard.btnCreateNew.disabled = true
+    Deckdle.dom.input.btnCreateNew.disabled = true
   } else {
     Deckdle.dom.interactive.gameModeDailyLink.dataset.active = false
     Deckdle.dom.interactive.gameModeFreeLink.dataset.active = true
     Deckdle.dom.dailyDetails.classList.remove('show')
-    Deckdle.dom.keyboard.btnCreateNew.disabled = false
+    Deckdle.dom.input.btnCreateNew.disabled = false
   }
 
-  Deckdle._logStatus('[LOADED] /app/main(settings)')
+  Deckdle._logStatus('[LOADED] /app/ls(settings)')
 }
 // change a setting (gear icon) value
 // then save to localStorage
 Deckdle._changeSetting = async function (setting, value) {
   switch (setting) {
     case 'comboCounter':
-      var st = document.getElementById('button-setting-combo-counter').dataset
-        .status
+      var st = document.getElementById('button-setting-combo-counter').dataset.status
 
       if (st == '' || st == 'false') {
-        document.getElementById('button-setting-combo-counter').dataset.status =
-          'true'
+        document.getElementById('button-setting-combo-counter').dataset.status = 'true'
         Deckdle.dom.combo.classList.add('show')
 
         Deckdle._saveSetting('comboCounter', true)
       } else {
-        document.getElementById('button-setting-combo-counter').dataset.status =
-          'false'
+        document.getElementById('button-setting-combo-counter').dataset.status = 'false'
         Deckdle.dom.combo.classList.remove('show')
 
         Deckdle._saveSetting('comboCounter', false)
@@ -467,18 +373,15 @@ Deckdle._changeSetting = async function (setting, value) {
       break
 
     case 'darkMode':
-      var st = document.getElementById('button-setting-dark-mode').dataset
-        .status
+      var st = document.getElementById('button-setting-dark-mode').dataset.status
 
       if (st == '' || st == 'false') {
-        document.getElementById('button-setting-dark-mode').dataset.status =
-          'true'
+        document.getElementById('button-setting-dark-mode').dataset.status = 'true'
         document.body.classList.add('dark-mode')
 
         Deckdle._saveSetting('darkMode', true)
       } else {
-        document.getElementById('button-setting-dark-mode').dataset.status =
-          'false'
+        document.getElementById('button-setting-dark-mode').dataset.status = 'false'
         document.body.classList.remove('dark-mode')
 
         Deckdle._saveSetting('darkMode', false)
@@ -489,15 +392,7 @@ Deckdle._changeSetting = async function (setting, value) {
     case 'gameMode':
       // if at end-state and a gameMode is clicked
       // make sure to close the open modal
-      const dialog = document.getElementsByClassName('modal-dialog')[0]
-
-      if (dialog) {
-        dialog.remove()
-      }
-
-      if (Deckdle.myModal) {
-        Deckdle.myModal._destroyModal()
-      }
+      Deckdle.ui._removeModalVestige()
 
       if (Deckdle.__getGameMode() != value) {
         switch (value) {
@@ -521,7 +416,7 @@ Deckdle._changeSetting = async function (setting, value) {
             Deckdle.dom.interactive.gameModeDailyLink.dataset.active = true
             Deckdle.dom.interactive.gameModeFreeLink.dataset.active = false
             Deckdle.dom.dailyDetails.classList.add('show')
-            Deckdle.dom.keyboard.btnCreateNew.disabled = true
+            Deckdle.dom.input.btnCreateNew.disabled = true
 
             Deckdle._loadGame()
 
@@ -534,7 +429,7 @@ Deckdle._changeSetting = async function (setting, value) {
             Deckdle.dom.interactive.gameModeDailyLink.dataset.active = false
             Deckdle.dom.interactive.gameModeFreeLink.dataset.active = true
             Deckdle.dom.dailyDetails.classList.remove('show')
-            Deckdle.dom.keyboard.btnCreateNew.disabled = false
+            Deckdle.dom.input.btnCreateNew.disabled = false
 
             Deckdle._loadGame()
 
@@ -600,7 +495,7 @@ Deckdle._changeSetting = async function (setting, value) {
       break
   }
 
-  Deckdle._saveGame('settings', '_changeSetting', setting, value)
+  Deckdle._saveGame('settings', '_changeSetting')
 
   // Deckdle._logStatus(`[CHANGED] setting(${setting}, ${value})`)
 }
@@ -617,7 +512,9 @@ Deckdle._saveSetting = function (setting, value) {
 
     // save all settings to LS
     localStorage.setItem(DECKDLE_SETTINGS_LS_KEY, JSON.stringify(settings))
-  }
 
-  // Deckdle._logStatus(`[SAVED] setting(${setting}, ${value})`)
+    // Deckdle._logStatus(`[SAVED] setting(${setting}, ${value})`)
+  } else {
+    console.error('could not parse local storage key', DECKDLE_SETTINGS_LS_KEY)
+  }
 }

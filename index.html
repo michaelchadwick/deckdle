@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- BASIC
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8" />
     <meta http-equiv="cache-control" content="no-cache" />
     <meta
@@ -12,14 +12,17 @@
     <title>Deckdle</title>
 
     <!-- META
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="description" content="Daily solitaire card game." />
     <meta name="author" content="Michael Chadwick" />
     <meta name="application-name" content="Deckdle" />
     <meta name="title" content="Deckdle" />
     <meta property="og:url" content="https://deckdle.neb.host" />
     <meta property="og:title" content="Deckdle - A daily solitaire card game" />
-    <meta property="og:description" content="Exhaust your tableau before your stock." />
+    <meta
+      property="og:description"
+      content="Exhaust your tableau before your stock."
+    />
     <meta
       property="og:image"
       content="https://deckdle.neb.host/assets/icons/android-chrome-512x512.png"
@@ -28,8 +31,8 @@
     <meta property="twitter:domain" content="deckdle.neb.host" />
 
     <!-- FAVICONS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="icon" href="/assets/icons/favicon.svg">
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" href="/assets/icons/favicon.svg" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -54,24 +57,27 @@
       color="#000000"
     />
     <link rel="shortcut icon" href="./favicon.ico" />
-    <meta name="msapplication-TileColor" content="#529952" />
+    <meta name="msapplication-TileColor" content="#ffc8ac" />
     <meta name="msapplication-config" content="./browserconfig.xml" />
-    <meta name="theme-color" content="#529952" />
+    <meta name="theme-color" content="#ffc8ac" />
 
     <!-- FONTAWESOME
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="./assets/fontawesome/css/fontawesome.min.css" />
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link
+      rel="stylesheet"
+      href="./assets/fontawesome/css/fontawesome.min.css"
+    />
     <link rel="stylesheet" href="./assets/fontawesome/css/solid.min.css" />
 
     <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="./assets/css/app.css" />
     <link rel="stylesheet" href="./assets/css/app-dark.css" />
     <link rel="stylesheet" href="./assets/css/modal.css" />
     <link rel="stylesheet" href="./assets/css/animation.css" />
 
     <!-- ANIMATE.STYLE
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="./assets/css/vendor/animate.min.css" />
 
     <!-- SVG BACKGROUND
@@ -140,11 +146,7 @@
                 >
                   <i class="fa-solid fa-gears"></i>
                 </button>
-                <button
-                  id="button-show-state"
-                  class="icon"
-                  title="Show State"
-                >
+                <button id="button-show-state" class="icon" title="Show State">
                   <i class="fa-solid fa-sliders"></i>
                 </button>
                 <button
@@ -161,11 +163,7 @@
                 >
                   <i class="fa-solid fa-ban"></i>
                 </button>
-                <button
-                  id="button-deal-cards"
-                  class="icon"
-                  title="Deal Cards"
-                >
+                <button id="button-deal-cards" class="icon" title="Deal Cards">
                   <i class="fa-solid fa-diamond"></i>
                 </button>
                 <button
@@ -248,7 +246,9 @@
 
       <div id="cards-container">
         <div id="tableau"></div>
-        <div id="tableau-count" class="card-label">Tableau (<span class="count"></span>)</div>
+        <div id="tableau-count" class="card-label">
+          Tableau (<span class="count"></span>)
+        </div>
 
         <div id="user-cards">
           <div id="stock">
@@ -278,18 +278,19 @@
     </section>
 
     <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
     <!-- JAVASCRIPTS (VENDOR)
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="./assets/js/vendor/chance.min.js"></script>
-    <script src='./assets/js/vendor/webaudio-tinysynth.js'></script>
+    <script src="./assets/js/vendor/webaudio-tinysynth.js"></script>
 
     <!-- JAVASCRIPTS (CUSTOM)
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/app/dom.js"></script>
     <script src="./assets/js/app/events.js"></script>
+    <script src="./assets/js/app/ui.js"></script>
 
     <script src="./assets/js/app/cards/base.js"></script>
     <script src="./assets/js/app/cards/card.js"></script>
@@ -298,8 +299,9 @@
     <script src="./assets/js/app/cards/tableau.js"></script>
 
     <!-- JAVASCRIPTS (CUSTOM - LIBRARIES)
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="./assets/js/app/lib/constants/general.js"></script>
+    <script src="./assets/js/app/lib/constants/specific.js"></script>
 
     <script src="./assets/js/app/lib/misc/animation.js"></script>
     <script src="./assets/js/app/lib/misc/audio.js"></script>
@@ -309,7 +311,7 @@
     <script src="./assets/js/app/lib/misc/local_storage.js"></script>
     <script src="./assets/js/app/lib/misc/modal.js"></script>
     <script src="./assets/js/app/lib/misc/puzzle.js"></script>
-    <script src="./assets/js/app/lib/misc/ui.js"></script>
+    <script src="./assets/js/app/lib/misc/stats.js"></script>
 
     <script src="./assets/js/app/main.js"></script>
   </body>

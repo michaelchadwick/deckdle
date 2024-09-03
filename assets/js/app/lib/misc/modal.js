@@ -1,9 +1,10 @@
-/* /assets/js/app/lib/misc/modal.js */
+/* lib/misc/modal.js */
 /* modal dialog UI */
 /* eslint-disable no-unused-vars */
 
 class Modal {
-  constructor(modalType = 'perm',
+  constructor(
+    modalType = 'perm',
     modalTitle = 'Confirmation',
     modalText = 'You sure?',
     acceptText = 'Yes',
@@ -37,8 +38,6 @@ class Modal {
         this.modalDelay
       )
     }
-
-    Deckdle._logStatus('[LOADED] /app/modal')
   }
 
   question() {
@@ -167,10 +166,7 @@ class Modal {
       const modal = modals[modalCount - 1]
 
       if (this.parent.contains(modal)) {
-        if (
-          !modal.classList.contains('modal-confirm') &&
-          !modal.classList.contains('end-state')
-        ) {
+        if (!modal.classList.contains('modal-confirm') && !modal.classList.contains('end-state')) {
           this.parent.removeChild(modal)
           delete this
         }

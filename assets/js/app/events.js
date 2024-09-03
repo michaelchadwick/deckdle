@@ -1,4 +1,4 @@
-/* app/events.js */
+/* events */
 /* adds event listeners to dom */
 /* global Deckdle */
 
@@ -45,7 +45,6 @@ Deckdle._handleClickTouch = function (event) {
   }
 }
 
-// add event listeners to DOM
 Deckdle._attachEventListeners = function () {
   // {} header icons to open modals
   Deckdle.dom.interactive.btnNav.addEventListener('click', () => {
@@ -54,18 +53,12 @@ Deckdle._attachEventListeners = function () {
   Deckdle.dom.interactive.btnNavClose.addEventListener('click', () => {
     Deckdle.dom.navOverlay.classList.toggle('show')
   })
-  Deckdle.dom.interactive.btnHelp.addEventListener('click', () =>
-    Deckdle.modalOpen('help')
-  )
-  Deckdle.dom.interactive.btnStats.addEventListener('click', () =>
-    Deckdle.modalOpen('stats')
-  )
-  Deckdle.dom.interactive.btnSettings.addEventListener('click', () =>
-    Deckdle.modalOpen('settings')
-  )
+  Deckdle.dom.interactive.btnHelp.addEventListener('click', () => Deckdle.modalOpen('help'))
+  Deckdle.dom.interactive.btnStats.addEventListener('click', () => Deckdle.modalOpen('stats'))
+  Deckdle.dom.interactive.btnSettings.addEventListener('click', () => Deckdle.modalOpen('settings'))
 
   // + create new free game
-  Deckdle.dom.keyboard.btnCreateNew.addEventListener('click', () => {
+  Deckdle.dom.input.btnCreateNew.addEventListener('click', () => {
     Deckdle._confirmNewFree()
   })
 
@@ -73,61 +66,40 @@ Deckdle._attachEventListeners = function () {
   if (Deckdle.env == 'local') {
     if (Deckdle.dom.interactive.debug.all) {
       // ⚙️ show current deckdle config
-      Deckdle.dom.interactive.debug.btnShowConfig.addEventListener(
-        'click',
-        () => {
-          Deckdle.modalOpen('show-config')
-        }
-      )
+      Deckdle.dom.interactive.debug.btnShowConfig.addEventListener('click', () => {
+        Deckdle.modalOpen('show-config')
+      })
 
       // 🎚️ show current deckdle state
-      Deckdle.dom.interactive.debug.btnShowState.addEventListener(
-        'click',
-        () => {
-          Deckdle.modalOpen('show-state')
-        }
-      )
+      Deckdle.dom.interactive.debug.btnShowState.addEventListener('click', () => {
+        Deckdle.modalOpen('show-state')
+      })
 
       // 🗑️ clear localStorage
-      Deckdle.dom.interactive.debug.btnClearLS.addEventListener(
-        'click',
-        () => {
-          Deckdle._clearLocalStorage()
-        }
-      )
+      Deckdle.dom.interactive.debug.btnClearLS.addEventListener('click', () => {
+        Deckdle._clearLocalStorage()
+      })
 
       // 🂡 clear cards
-      Deckdle.dom.interactive.debug.btnClearCards.addEventListener(
-        'click',
-        () => {
-          Deckdle.ui._emptyPlayingField()
-        }
-      )
+      Deckdle.dom.interactive.debug.btnClearCards.addEventListener('click', () => {
+        Deckdle.ui._emptyPlayingField()
+      })
 
       // 🂡 deal cards animation
-      Deckdle.dom.interactive.debug.btnDealCards.addEventListener(
-        'click',
-        () => {
-          Deckdle.ui._emptyPlayingField()
-          Deckdle.ui._dealCards(animate = true)
-        }
-      )
+      Deckdle.dom.interactive.debug.btnDealCards.addEventListener('click', () => {
+        Deckdle.ui._emptyPlayingField()
+        Deckdle.ui._dealCards((animate = true))
+      })
 
       // ☺ display win animation
-      Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener(
-        'click',
-        () => {
-          Deckdle.__winAnimation().then(() => Deckdle.__resetCardsDuration())
-        }
-      )
+      Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener('click', () => {
+        Deckdle.__winAnimation().then(() => Deckdle.__resetCardsDuration())
+      })
 
       // ☹ display win animation
-      Deckdle.dom.interactive.debug.btnLoseAnimation.addEventListener(
-        'click',
-        () => {
-          Deckdle.__loseAnimation().then(() => Deckdle.__resetCardsDuration())
-        }
-      )
+      Deckdle.dom.interactive.debug.btnLoseAnimation.addEventListener('click', () => {
+        Deckdle.__loseAnimation().then(() => Deckdle.__resetCardsDuration())
+      })
     }
   }
 
@@ -149,6 +121,6 @@ Deckdle._attachEventListeners = function () {
     },
     { passive: false }
   )
-
-  Deckdle._logStatus('[LOADED] /app/events')
 }
+
+Deckdle._logStatus('[LOADED] /app/events')

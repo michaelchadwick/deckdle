@@ -1,4 +1,4 @@
-/* lib/ui */
+/* lib/misc/ui */
 /* functions that update the UI */
 /* global Deckdle */
 
@@ -115,17 +115,14 @@ Deckdle.ui._removeCardFromStock = () => {
 
   if (stock.lastElementChild.classList.contains('card')) {
     // Deckdle._animateCSS('#stock .card:last-of-type', 'fadeOutRight').then(() => {
-      // stock.removeChild(stock.lastElementChild)
+    // stock.removeChild(stock.lastElementChild)
     // })
     stock.removeChild(stock.lastElementChild)
   }
 }
 
 Deckdle.ui._addCardToBase = (card) => {
-  const newCard = Deckdle.ui._createCard(
-    new Card(card.suit, card.rank),
-    (cardType = 'base'),
-  )
+  const newCard = Deckdle.ui._createCard(new Card(card.suit, card.rank), (cardType = 'base'))
 
   Deckdle.dom.interactive.base.appendChild(newCard)
 }
@@ -161,8 +158,8 @@ Deckdle.ui._updateGameType = () => {
 Deckdle.ui._emptyPlayingField = function () {
   // clear tableau, stock, base
   Deckdle.dom.interactive.tableau.replaceChildren()
-  Deckdle.dom.interactive.stock.querySelectorAll('.card').forEach(card => card.remove())
-  Deckdle.dom.interactive.base.querySelectorAll('.card').forEach(card => card.remove())
+  Deckdle.dom.interactive.stock.querySelectorAll('.card').forEach((card) => card.remove())
+  Deckdle.dom.interactive.base.querySelectorAll('.card').forEach((card) => card.remove())
 }
 
 Deckdle.ui._dealCards = function (animate = false) {
@@ -179,9 +176,9 @@ Deckdle.ui._dealCards = function (animate = false) {
   // fill tableau UI with cards
   const tableauCards = Deckdle.__getState()['tableau']
   let colId = 0
-  Object.keys(tableauCards).forEach(col => {
+  Object.keys(tableauCards).forEach((col) => {
     Object.values(tableauCards[col]).forEach((card, index) => {
-      const lastValidCardIndex = tableauCards[col].filter(card => card.status == 1).length - 1
+      const lastValidCardIndex = tableauCards[col].filter((card) => card.status == 1).length - 1
       const cardClasses = index == lastValidCardIndex ? ['available'] : []
       const newCard = Deckdle.ui._createCard(card, 'tableau', cardClasses)
 
@@ -205,13 +202,13 @@ Deckdle.ui._dealCards = function (animate = false) {
 
   // fill stock UI with stock cards
   const stockCards = Deckdle.__getState()['stock']
-  stockCards.forEach(card => {
+  stockCards.forEach((card) => {
     Deckdle.ui._addCardToStock(card, animate)
   })
 
   // fill base UI with base cards
   const baseCards = Deckdle.__getState()['base']
-  baseCards.forEach(card => {
+  baseCards.forEach((card) => {
     Deckdle.ui._addCardToBase(card)
   })
 
@@ -220,11 +217,8 @@ Deckdle.ui._dealCards = function (animate = false) {
 
 Deckdle.ui._updateDailyDetails = function (index) {
   Deckdle.dailyNumber = parseInt(index) + 1
-  Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (
-    parseInt(index) + 1
-  ).toString()
-  Deckdle.dom.dailyDetails.querySelector('.day').innerHTML =
-    Deckdle.__getTodaysDate()
+  Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (parseInt(index) + 1).toString()
+  Deckdle.dom.dailyDetails.querySelector('.day').innerHTML = Deckdle.__getTodaysDate()
 }
 
 Deckdle.ui._updateComboCounter = function () {
@@ -265,3 +259,17 @@ Deckdle.ui._updateComboCounter = function () {
 Deckdle.ui._resetComboCounter = function () {
   Deckdle.dom.comboText.classList.remove('x', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9', 'x10')
 }
+
+Deckdle.ui._removeModalVestige = () => {
+  const dialog = document.getElementsByClassName('modal-dialog')[0]
+
+  if (dialog) {
+    dialog.remove()
+  }
+
+  if (Deckdle.myModal) {
+    Deckdle.myModal._destroyModal()
+  }
+}
+
+Deckdle._logStatus('[LOADED] /app/ui')

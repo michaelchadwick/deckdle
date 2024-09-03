@@ -1,4 +1,4 @@
-/* lib/puzzle.js */
+/* lib/misc/puzzle */
 /*
   Creates a new Deck full of Cards, and then uses
   a generated setupId to create a tableau and stock
@@ -39,11 +39,7 @@ class Puzzle {
             if (source) {
               const srcCard = source[colId][cardId]
 
-              cardToAdd = new Card(
-                srcCard.suit,
-                srcCard.rank,
-                srcCard.status,
-              )
+              cardToAdd = new Card(srcCard.suit, srcCard.rank, srcCard.status)
             } else {
               cardToAdd = this.deck.removeTop()
             }
@@ -62,7 +58,7 @@ class Puzzle {
     const stock = []
 
     if (source) {
-      source.forEach(card => {
+      source.forEach((card) => {
         stock.push(new Card(card.suit, card.rank))
       })
     } else {
@@ -77,7 +73,7 @@ class Puzzle {
   #createBase = (source) => {
     const base = []
 
-    source.forEach(card => {
+    source.forEach((card) => {
       base.push(new Card(card.suit, card.rank))
     })
 

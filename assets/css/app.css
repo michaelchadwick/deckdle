@@ -1,11 +1,21 @@
-@import 'cards/card.css';
-@import 'cards/tableau.css';
-@import 'cards/user-cards.css';
+@import "cards/card.css";
+@import "cards/tableau.css";
+@import "cards/user-cards.css";
 
-@import 'common.css';
-@import 'layout.css';
-@import 'keyboard.css';
-@import 'combo.css';
+@import "combo.css";
+@import "common.css";
+@import "input.css";
+@import "layout.css";
+
+@font-face {
+  font-family: "Changa";
+  src: url(https://fonts.neb.host/Changa/static/Changa-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Changa Bold";
+  src: url(https://fonts.neb.host/Changa/static/Changa-Bold.ttf);
+}
 
 :root {
   --base-color: #996e52;
@@ -55,19 +65,7 @@
   --card-back: #2e678e;
   --card-suit-black: var(--black);
   --card-suit-red: #e71111;
-}
 
-@font-face {
-  font-family: "Changa";
-  src: url(https://fonts.neb.host/Changa/static/Changa-Regular.ttf);
-}
-
-@font-face {
-  font-family: "Changa Bold";
-  src: url(https://fonts.neb.host/Changa/static/Changa-Bold.ttf);
-}
-
-:root {
   font-family: "Changa", sans-serif;
   font-size: 16px;
 }

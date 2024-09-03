@@ -1,9 +1,9 @@
-/* lib/helpers */
+/* lib/misc/helpers */
 /* misc global functions */
 /* global Deckdle */
 
 Deckdle._sleep = (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 // timestamp -> display date
@@ -21,15 +21,7 @@ Deckdle.__getFormattedDate = function (date) {
 }
 Deckdle.__getTodaysDate = function () {
   const d = new Date(Date.now())
-  const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ]
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const months = [
     'January',
     'February',
@@ -45,27 +37,21 @@ Deckdle.__getTodaysDate = function () {
     'December',
   ]
 
-  return `${days[d.getDay()]}, ${
-    months[d.getMonth()]
-  } ${d.getDate()}, ${d.getFullYear()}`
+  return `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
 }
 
 Deckdle.__hasParentWithMatchingSelector = function (target, selector) {
-  return [...document.querySelectorAll(selector)].some(el =>
-    el !== target && el.contains(target)
-  )
+  return [...document.querySelectorAll(selector)].some((el) => el !== target && el.contains(target))
 }
 
 Deckdle.__getParentCard = function (el, selector) {
-  var parent_container = el;
+  var parent_container = el
 
   do {
-    parent_container = parent_container.parentNode;
-  }
+    parent_container = parent_container.parentNode
+  } while (!parent_container.matches(selector) && parent_container !== document.body)
 
-  while (!parent_container.matches(selector) && parent_container !== document.body);
-
-  return parent_container;
+  return parent_container
 }
 
 Deckdle.__getRandomSetupId = function () {
@@ -125,6 +111,41 @@ Deckdle.__getSessionIndex = function (mode = Deckdle.__getGameMode()) {
   const rootState = Deckdle.state[mode]
 
   return rootState ? rootState.length - 1 : 0
+}
+
+Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGameType()) => {
+  let html = ''
+
+  if (mode == 'daily') {
+    html += `♦️ Deckdle DAILY #${Deckdle.dailyNumber}\n`
+  } else {
+    html += `♦️ Deckdle FREE id:${Deckdle.__getState()['setupId']}\n`
+  }
+
+  switch (type) {
+    case 'golf':
+      const tableauCount = Deckdle._tableauCount()
+      const stockCount = Deckdle._stockCount()
+
+      if (tableauCount == 0) {
+        if (stockCount == 0) {
+          html += `GOLF (WIN): PAR\n`
+        } else if (stockCount > 0) {
+          html += `GOLF (WIN): -${stockCount}\n`
+        }
+      } else {
+        html += `GOLF (LOSE): +${tableauCount + stockCount}\n`
+      }
+      break
+  }
+
+  if (mode == 'daily') {
+    html += DECKDLE_SHARE_URL
+  } else {
+    html += `${DECKDLE_SHARE_URL}&id=${Deckdle.__getState()['setupId']}`
+  }
+
+  return html
 }
 
 // get list of other NebyooApps from Dave

@@ -1,4 +1,4 @@
-/* /app/lib/misc/audio */
+/* lib/misc/audio */
 /* global Deckdle */
 /* eslint-disable no-unused-vars */
 
