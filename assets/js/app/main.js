@@ -36,7 +36,7 @@ Deckdle.modalOpen = async function (type) {
         default:
           modalText += `
             <h3 class="blamph">${gameType}</h3>
-            <p>Exhaust the tableau onto your base before your stock runs out. You can move any unobscured card (just click/touch it) as long as its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current base card. Suit <strong>does not</strong> matter.</p>
+            <p>Exhaust the tableau (the top grid of cards) onto your base (bottom-right stack) before your stock (bottom-left stack) runs out. You can move any unobscured card (just click/touch it) as long as its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current base card. Suit <strong>does not</strong> matter.</p>
           `
           break
       }
