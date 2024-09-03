@@ -7,7 +7,7 @@
   height: 17vw;
   margin-top: 0;
   min-height: 60px;
-  transition: all 200ms;
+  transition: all 50ms;
   width: 12vw;
 }
 @media (min-width: 376px) {
@@ -40,17 +40,18 @@
     }
   }
 }
-.card[data-suit='0'],
-.card[data-suit='3'] {
+.card[data-suit="0"],
+.card[data-suit="3"] {
   color: var(--black);
 }
-.card[data-suit='1'],
-.card[data-suit='2'] {
+.card[data-suit="1"],
+.card[data-suit="2"] {
   color: var(--card-suit-red);
 }
 .card.back {
   background-color: var(--card-back);
   border: 1px solid var(--white);
+  transition: all 50ms;
 }
 .card.back .rank,
 .card.back .suit {

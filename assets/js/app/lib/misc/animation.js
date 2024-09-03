@@ -17,11 +17,7 @@ Deckdle._animateCSS = (element, animation, loop, prefix = 'animate__') => {
     // When the animation ends, we clean the classes and resolve the Promise
     function handleAnimationEnd(event) {
       event.stopPropagation()
-      node.classList.remove(
-        `${prefix}animated`,
-        `${prefix}infinite`,
-        animationName
-      )
+      node.classList.remove(`${prefix}animated`, `${prefix}infinite`, animationName)
       resolve('Animation ended')
     }
 
@@ -41,20 +37,18 @@ Deckdle.__loseAnimation = async function () {
   return new Promise((resolve, reject) => {
     const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelector('.card'))
 
-    tableauCardArray.forEach((card) =>
-      card.style.setProperty('--animate-duration', '1000ms')
-    )
+    tableauCardArray.forEach((card) => card.style.setProperty('--animate-duration', '1000ms'))
 
-    setTimeout(() => Deckdle._animateCSS('#tableau #col0', 'rotateOutDownLeft'), 0)
-    setTimeout(() => Deckdle._animateCSS('#tableau #col1', 'rotateOutDownLeft'), 70)
-    setTimeout(() => Deckdle._animateCSS('#tableau #col2', 'rotateOutDownLeft'), 140)
-    setTimeout(() => Deckdle._animateCSS('#tableau #col3', 'rotateOutDownLeft'), 200)
-    setTimeout(() => Deckdle._animateCSS('#tableau #col4', 'rotateOutDownLeft'), 250)
-    setTimeout(() => Deckdle._animateCSS('#tableau #col5', 'rotateOutDownLeft'), 285)
-    setTimeout(() => Deckdle._animateCSS('#tableau #col6', 'rotateOutDownLeft'), 300)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col0', 'shakeX'), 0)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col1', 'shakeX'), 70)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col2', 'shakeX'), 140)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col3', 'shakeX'), 200)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col4', 'shakeX'), 250)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col5', 'shakeX'), 285)
+    setTimeout(() => Deckdle._animateCSS('#tableau #col6', 'shakeX'), 300)
 
-    setTimeout(() => Deckdle._animateCSS('#stock', 'rotateOutDownLeft'), 330)
-    setTimeout(() => Deckdle._animateCSS('#base', 'rotateOutDownLeft'), 350)
+    setTimeout(() => Deckdle._animateCSS('#stock', 'shakeX'), 330)
+    setTimeout(() => Deckdle._animateCSS('#base', 'shakeX'), 350)
 
     setTimeout(() => resolve('__loseAnimation ended'), 1000)
   })

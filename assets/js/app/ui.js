@@ -189,9 +189,8 @@ Deckdle.ui._dealCards = function (animate = false) {
 
         document.querySelector(elem).classList.add('back')
         Deckdle._animateCSS(elem, 'fadeInDown').then(() => {
-          Deckdle._animateCSS(elem, 'flipInY').then(() => {
-            document.querySelector(elem).classList.remove('back')
-          })
+          document.querySelector(elem).classList.remove('back')
+          Deckdle._animateCSS(elem, 'flipInY')
         })
       }
     })

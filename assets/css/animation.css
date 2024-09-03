@@ -1,5 +1,5 @@
 :root {
-  --animate-duration: 150ms;
+  --animate-duration: 100ms;
   --animate-delay: 0s;
   --animate-repeat: 1;
 }
@@ -13,7 +13,8 @@
 .animate__animated.animate__rotateOutDownLeft,
 .animate__animated.animate__shakeX,
 .animate__animated.animate__tada,
-.animated_animated.animate__zoomIn {
+.animated_animated.animate__zoomIn,
+.animated_animated.animate__zoomOut {
   --animate-delay: 0s;
 }
 
@@ -34,7 +35,7 @@ header .menu-left #nav-overlay #nav-content {
 }
 #tableau .card.animate__animated.animate__flipInY {
   --animate-delay: 0ms;
-  --animate-duration: 1000ms;
+  --animate-duration: 400ms;
 }
 
 #tableau #col0 .card.animate__animated.animate__fadeInDown,
