@@ -11,6 +11,11 @@ Deckdle._initDebug = function () {
     // make header buttons smaller to fit in debug buttons
     document.querySelectorAll('button.icon').forEach((btn) => {
       btn.style.fontSize = '16px'
+
+      if (btn.id == 'button-nav') {
+        btn.querySelector('img').style.height = '16px'
+        btn.querySelector('img').style.width = '16px'
+      }
     })
   }
 
@@ -51,11 +56,7 @@ Deckdle._displayGameConfig = function () {
   Object.keys(config)
     .sort()
     .forEach((key) => {
-      if (
-        typeof config[key] == 'object' &&
-        !Array.isArray(config[key]) &&
-        config[key] != null
-      ) {
+      if (typeof config[key] == 'object' && !Array.isArray(config[key]) && config[key] != null) {
         html += `<dd><code>${key}: {</code><dl>`
 
         Object.keys(config[key]).forEach((k) => {
@@ -65,9 +66,7 @@ Deckdle._displayGameConfig = function () {
           if (Object.keys(value)) {
             // console.log('found another object', key, label, value)
           } else {
-            html += `<dd><code>${label}:</code></dd><dt>${value.join(
-              ', '
-            )}</dt>`
+            html += `<dd><code>${label}:</code></dd><dt>${value.join(', ')}</dt>`
           }
         })
 
@@ -79,7 +78,7 @@ Deckdle._displayGameConfig = function () {
         // special cases
         html += `<dd><code>${label}:</code></dd><dt>${value}</dt>`
       }
-  })
+    })
 
   html += '</dl>'
 
