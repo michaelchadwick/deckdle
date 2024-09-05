@@ -518,3 +518,39 @@ Deckdle._saveSetting = function (setting, value) {
     console.error('could not parse local storage key', DECKDLE_SETTINGS_LS_KEY)
   }
 }
+
+// add another element to localStorage state
+Deckdle._createNewSession = function () {
+  let curLS = null
+
+  // daily
+  if (Deckdle.__getGameMode() == 'daily') {
+    curLS = localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)
+
+    if (curLS) {
+      curLS = JSON.parse(curLS)
+      curLS.push(JSON.parse(JSON.stringify(DECKDLE_DEFAULT_STATE)))
+
+      curLS[curLS.length - 1].sessionIndex = curLS.length - 1
+
+      // internal saveGame()
+      localStorage.setItem(DECKDLE_STATE_DAILY_LS_KEY, JSON.stringify(curLS))
+    }
+  }
+  // free
+  else {
+    curLS = localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)
+
+    if (curLS) {
+      curLS = JSON.parse(curLS)
+      curLS.push(JSON.parse(JSON.stringify(DECKDLE_DEFAULT_STATE)))
+
+      curLS[curLS.length - 1].sessionIndex = curLS.length - 1
+
+      // internal saveGame()
+      localStorage.setItem(DECKDLE_STATE_FREE_LS_KEY, JSON.stringify(curLS))
+    }
+  }
+
+  console.log('createNewSession(free)', JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)))
+}
