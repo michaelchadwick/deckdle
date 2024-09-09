@@ -14,7 +14,7 @@
 .stylelintignore
 .stylelintrc.js
 *.icloud
-assets/_debug
+assets/php/_debug
 assets/scripts/*.java
 assets/scripts/*.py
 assets/scripts/*.rb
