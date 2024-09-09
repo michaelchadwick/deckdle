@@ -1,5 +1,5 @@
 /* lib/misc/stats */
-/* function for modal win/stats */
+/* function for modal stats */
 /* global Deckdle */
 
 Deckdle._getGameCount = function (mode) {

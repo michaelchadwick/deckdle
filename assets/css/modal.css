@@ -69,8 +69,7 @@
 .modal-title.debug {
   background-color: var(--debug-color);
 }
-.modal-window.game-over-win .modal-title,
-.modal-window.game-over-lose .modal-title {
+.modal-window.game-over .modal-title {
   height: 48px;
 }
 .modal-window.game-over-win .modal-title {
@@ -138,7 +137,7 @@
   margin-bottom: 10px;
 }
 .modal-text strong {
-  font-family: 'Changa Bold', monospace;
+  font-family: "Changa Bold", monospace;
   font-weight: 400;
 }
 .modal-text ul,
@@ -313,11 +312,11 @@
   flex-direction: column;
   justify-content: center;
 }
-#settings input[type='range'] {
+#settings input[type="range"] {
   max-width: 100px;
 }
 @media (min-width: 550px) {
-  #settings input[type='range'] {
+  #settings input[type="range"] {
     max-width: none;
   }
 }

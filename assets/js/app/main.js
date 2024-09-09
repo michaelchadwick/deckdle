@@ -228,7 +228,7 @@ Deckdle._checkWinState = function () {
     Deckdle.__setState('lastCompletedTime', new Date().getTime())
 
     Deckdle.__winAnimation().then(() => {
-      Deckdle.modalOpen('game-over-win')
+      Deckdle.modalOpen('game-over')
     })
   }
   // stock exhausted and no valid tableau card
@@ -237,7 +237,7 @@ Deckdle._checkWinState = function () {
     Deckdle.__setState('lastCompletedTime', new Date().getTime())
 
     Deckdle.__loseAnimation().then(() => {
-      Deckdle.modalOpen('game-over-lose')
+      Deckdle.modalOpen('game-over')
     })
   }
 

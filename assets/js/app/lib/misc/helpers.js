@@ -166,12 +166,12 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
 
       if (tableauCount == 0) {
         if (stockCount == 0) {
-          html += `GOLF (WIN): PAR\n`
+          html += `GOLF: 0\n`
         } else if (stockCount > 0) {
-          html += `GOLF (WIN): -${stockCount}\n`
+          html += `GOLF: -${stockCount}\n`
         }
       } else {
-        html += `GOLF (LOSE): +${tableauCount + stockCount}\n`
+        html += `GOLF: +${tableauCount + stockCount}\n`
       }
       break
   }

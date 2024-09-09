@@ -236,31 +236,44 @@ Deckdle.modalOpen = async function (type) {
       )
       break
 
-    case 'game-over-win':
+    case 'game-over':
       if (Deckdle.myModal) {
         Deckdle.myModal._destroyModal()
       }
 
       modalText = `
-        <div class="container game-over-win">
+        <div class="container game-over">
       `
 
       switch (Deckdle.__getState()['gameType']) {
         case 'golf':
         default:
-          if (Deckdle._stockCount() > 0) {
-            modalText = `
-              <div class='score-animation'>
-                <div>Whoa! You won with a score of...</div>
-                <div class='score animate__animated animate__zoomIn'>${Deckdle._stockCount()}</div>
-                <div>UNDER PAR</div>
-              </div>
-            `
+          if (Deckdle._tableauCount() == 0) {
+            Deckdle._playSFX('win')
+
+            if (Deckdle._stockCount() > 0) {
+              modalText = `
+                <div class='score-animation'>
+                  <div>Whoa! You shot under par with a score of...</div>
+                  <div class='score animate__animated animate__zoomIn'>${Deckdle._stockCount()}</div>
+                </div>
+              `
+            } else {
+              modalText = `
+                <div class='score-animation'>
+                  <div>Whew! You just barely hit...</div>
+                  <div class='score animate__animated animate__zoomIn'>PAR</div>
+                </div>
+              `
+            }
           } else {
+            Deckdle._playSFX('lose')
+
             modalText = `
               <div class='score-animation'>
-                <div>Whew. You just barely hit...</div>
-                <div class='score animate__animated animate__zoomIn'>PAR</div>
+                <div>You didn't quite clear it with a score of...</div>
+                <div class='score animate__animated animate__zoomIn'>${Deckdle._tableauCount()}</div>
+                <div>OVER PAR</div>
               </div>
             `
           }
@@ -300,78 +313,7 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      Deckdle.myModal = new Modal(
-        'end-state',
-        'Congratulations! You cleared it!',
-        modalText,
-        null,
-        null,
-        'game-over-win'
-      )
-
-      Deckdle._playSFX('win')
-
-      break
-
-    case 'game-over-lose':
-      if (Deckdle.myModal) {
-        Deckdle.myModal._destroyModal()
-      }
-
-      modalText = `
-        <div class="container game-over-lose">
-      `
-
-      modalText = `
-        <div class='score-animation'>
-          <div>You lost with a score of...</div>
-          <div class='score animate__animated animate__zoomIn'>${Deckdle._tableauCount()}</div>
-          <div>OVER PAR</div>
-        </div>
-      `
-
-      // daily
-      if (Deckdle.__getGameMode() == 'daily') {
-        modalText += `
-          <div class="para">New daily puzzle available at 12 am PST</div>
-          <div class="buttons">
-            <button class="game-over refresh-daily" onclick="Deckdle._reload()" title="Wrong day loading?">Wrong day loading?</button>
-            <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Switch to free play?">Switch to free play?</button>
-          </div>
-        `
-      }
-      // free
-      else {
-        modalText += `
-          <div class="buttons">
-            <button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>
-            <button class="game-over switch-daily" onclick="Deckdle._changeSetting('gameMode', 'daily')" title="Switch to daily?">Switch to daily?</button>
-          </div>
-        `
-      }
-
-      if (Deckdle.__getState().gameState == 'GAME_OVER') {
-        modalText += `
-          <div class="share">
-            <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
-          </div>
-        `
-      }
-
-      modalText += `
-        </div>
-      `
-
-      Deckdle.myModal = new Modal(
-        'end-state',
-        "Bummer! You didn't clear it this time!",
-        modalText,
-        null,
-        null,
-        'game-over-lose'
-      )
-
-      Deckdle._playSFX('lose')
+      Deckdle.myModal = new Modal('end-state', 'Game Over', modalText, null, null, 'game-over')
 
       break
 
