@@ -57,6 +57,10 @@ Deckdle._attachEventListeners = function () {
   Deckdle.dom.interactive.btnStats.addEventListener('click', () => Deckdle.modalOpen('stats'))
   Deckdle.dom.interactive.btnSettings.addEventListener('click', () => Deckdle.modalOpen('settings'))
 
+  // ⎌ undo last move
+  Deckdle.dom.input.btnUndoMove.addEventListener('click', () => {
+    Deckdle._undoLastMove()
+  })
   // + create new free game
   Deckdle.dom.input.btnCreateNew.addEventListener('click', () => {
     Deckdle._confirmNewFree()

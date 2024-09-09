@@ -33,6 +33,7 @@ Deckdle.dom.interactive = {
 // DOM > keyboard buttons
 Deckdle.dom.input = {
   btnCreateNew: document.getElementById('button-create-new'),
+  btnUndoMove: document.getElementById('button-undo-move'),
 }
 // DOM > interactive elements (debug)
 Deckdle.dom.interactive.debug = {

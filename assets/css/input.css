@@ -2,7 +2,7 @@ section#game #keyboard-container {
   margin: 1rem 1rem 0;
   user-select: none; /* no selecting text */
 }
-section#game #keyboard-container button:disabled {
+section#game #keyboard-container button#button-create-new:disabled {
   display: none;
 }
 section#game #keyboard-container .row {

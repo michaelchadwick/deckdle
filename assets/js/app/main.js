@@ -195,6 +195,11 @@ Deckdle._createNewFree = async function () {
   Deckdle.ui._removeModalVestige()
 }
 
+// undo last move
+Deckdle._undoLastMove = function () {
+  console.log('TODO undo last move')
+}
+
 // ask to create new free gamemode puzzle
 Deckdle._confirmNewFree = async function () {
   if (Deckdle.myModal) {
