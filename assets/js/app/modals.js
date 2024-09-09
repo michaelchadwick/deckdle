@@ -77,6 +77,10 @@ Deckdle.modalOpen = async function (type) {
               <div class="statistic">${Deckdle._getGameCount('daily')}</div>
               <div class="statistic-label">Game(s) Finished</div>
             </div>
+            <div class="statistic-container">
+              <div class="statistic">${Deckdle._getComboMaxest('daily')}</div>
+              <div class="statistic-label">Max<br />Combo</div>
+            </div>
           </div>
         `
 
@@ -86,6 +90,10 @@ Deckdle.modalOpen = async function (type) {
             <div class="statistic-container">
               <div class="statistic">${Deckdle._getGameCount('free')}</div>
               <div class="statistic-label">Game(s) Finished</div>
+            </div>
+            <div class="statistic-container">
+              <div class="statistic">${Deckdle._getComboMaxest('free')}</div>
+              <div class="statistic-label">Max<br />Combo</div>
             </div>
           </div>
       `

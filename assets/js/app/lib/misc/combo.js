@@ -3,6 +3,15 @@
 
 Deckdle._increaseCombo = () => {
   Deckdle.combo += 1
+
+  const curComboMax = Deckdle.__getState()['comboMax']
+
+  if (Deckdle.combo > curComboMax) {
+    Deckdle.__setState('comboMax', Deckdle.combo)
+  }
+
+  Deckdle._saveGame(Deckdle.__getGameMode())
+
   Deckdle.ui._updateComboCounter()
 }
 

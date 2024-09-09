@@ -31,6 +31,7 @@ Deckdle._loadGame = async function () {
 
       let i = 0
       lsStateDaily.forEach((lsState) => {
+        Deckdle.__setState('comboMax', lsState.comboMax || dailyDefaults.comboMax, 'daily', i)
         Deckdle.__setState('gameState', lsState.gameState || dailyDefaults.gameState, 'daily', i)
         Deckdle.__setState(
           'lastCompletedTime',
@@ -116,6 +117,7 @@ Deckdle._loadGame = async function () {
 
       let i = 0
       lsStateFree.forEach((lsState) => {
+        Deckdle.__setState('comboMax', lsState.comboMax || freeDefaults.comboMax, 'free', i)
         Deckdle.__setState('gameState', lsState.gameState || freeDefaults.gameState, 'free', i)
         Deckdle.__setState(
           'lastCompletedTime',

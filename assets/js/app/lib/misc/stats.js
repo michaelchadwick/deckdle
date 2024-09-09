@@ -10,3 +10,12 @@ Deckdle._getGameCount = function (mode) {
 
   return ls ? JSON.parse(ls).filter((session) => session.lastCompletedTime).length : 0
 }
+
+Deckdle._getComboMaxest = function (mode) {
+  let ls =
+    mode == 'daily'
+      ? localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)
+      : localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)
+
+  return ls ? Math.max(...JSON.parse(ls).map((session) => session.comboMax)) : 0
+}

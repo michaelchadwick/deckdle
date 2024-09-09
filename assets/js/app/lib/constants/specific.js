@@ -17,6 +17,7 @@ const DECKDLE_DEFAULT_CONFIG = {
 }
 const DECKDLE_DEFAULT_STATE = {
   base: [],
+  comboMax: 0,
   gameState: 'IN_PROGRESS',
   gameType: DECKDLE_DEFAULT_GAMETYPE,
   lastCompletedTime: null,
