@@ -78,29 +78,36 @@ class Modal {
     }
 
     // Message window
-    const window = document.createElement('div')
-    window.classList.add('modal-window')
-    window.classList.add('animate__animated', 'animate__fadeInUp')
+    const msgWindow = document.createElement('div')
+    msgWindow.classList.add('modal-window')
+
+    if (modalType == 'end-state') {
+      msgWindow.classList.add('animate__animated', 'animate__zoomIn')
+    } else {
+      msgWindow.classList.add('animate__animated', 'animate__fadeInUp')
+    }
 
     if (this.modalClass) {
-      window.classList.add(this.modalClass)
+      msgWindow.classList.add(this.modalClass)
     }
 
     if (modalType == 'perm-debug' || modalType == 'confirm-debug') {
-      window.classList.add('debug')
+      msgWindow.classList.add('debug')
     }
 
-    this.modal.appendChild(window)
+    this.modal.appendChild(msgWindow)
 
     // if not a temporary modal, add a title and close button
     if (modalType != 'temp') {
       // Title
       const title = document.createElement('div')
       title.classList.add('modal-title')
+
       if (modalType == 'perm-debug' || modalType == 'confirm-debug') {
         title.classList.add('debug')
       }
-      window.appendChild(title)
+
+      msgWindow.appendChild(title)
 
       // Title text
       const titleText = document.createElement('div')
@@ -116,6 +123,7 @@ class Modal {
         this.closeButton.addEventListener('click', () => {
           this._destroyModal()
         })
+
         title.appendChild(this.closeButton)
       }
     }
@@ -124,17 +132,19 @@ class Modal {
     const text = document.createElement('div')
     text.classList.add('modal-text')
     text.innerHTML = this.modalText
-    window.appendChild(text)
+    msgWindow.appendChild(text)
 
     // if a confirm modal, add buttons
     if (modalType == 'confirm' || modalType == 'confirm-debug') {
       // Accept and cancel button group
       const buttonGroup = document.createElement('div')
       buttonGroup.classList.add('modal-button-group')
+
       if (modalType == 'confirm-debug') {
         buttonGroup.classList.add('debug')
       }
-      window.appendChild(buttonGroup)
+
+      msgWindow.appendChild(buttonGroup)
 
       // Cancel button
       this.cancelButton = document.createElement('button')
@@ -157,6 +167,15 @@ class Modal {
 
     // Let's rock
     this.parent.appendChild(this.modal)
+
+    // end state dialog gets a little fade-in panache
+    if (modalType == 'end-state') {
+      setTimeout(() => this.modal.classList.add('loaded'), 1)
+      setTimeout(() => this.modal.firstChild.classList.add('loaded'), 500)
+    } else {
+      this.modal.classList.add('loaded')
+      this.modal.firstChild.classList.add('loaded')
+    }
   }
 
   _destroyModal() {

@@ -1,8 +1,7 @@
 /* MODAL */
 .modal-dialog {
   align-items: center;
-  background-color: var(--black);
-  background-color: var(--shadow);
+  background-color: transparent;
   border: none;
   display: flex;
   height: 100%;
@@ -10,8 +9,12 @@
   left: 0;
   position: fixed;
   top: 0;
+  transition: background-color 1000ms linear;
   width: 100%;
   z-index: 10;
+}
+.modal-dialog.loaded {
+  background-color: var(--shadow-dark);
 }
 .modal-dialog * {
   box-sizing: border-box;
@@ -37,13 +40,16 @@
   border: 4px solid var(--base-color);
   border-top-width: 0;
   box-shadow: 0 0 0 4px rgb(0 0 0 / 15%), 0 0 16px rgb(0 0 0 / 25%);
-  display: flex;
+  display: none;
   flex-flow: column;
   flex-wrap: nowrap;
   margin: 0 1em;
   max-height: 95%;
   max-width: 500px;
   width: 90%;
+}
+.modal-window.loaded {
+  display: flex;
 }
 .modal-window.debug {
   border-color: var(--debug-color);

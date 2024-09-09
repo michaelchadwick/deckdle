@@ -113,8 +113,8 @@ header .menu-left #nav-overlay #nav-content {
   flex-direction: column;
 }
 .score-animation .score {
-  --animate-delay: 200ms;
-  --animate-duration: 2s;
+  --animate-delay: 100ms;
+  --animate-duration: 2500ms;
   color: var(--bright-color);
   font-size: 4rem;
   text-shadow: 2px 2px 0 var(--black);
@@ -138,6 +138,11 @@ header .menu-left #nav-overlay #nav-content {
   --animate-delay: 0ms;
   --animate-duration: 750ms;
   display: flex;
+}
+
+.modal-dialog.end-state .modal-window.animate__animated.animate__zoomIn {
+  --animate-delay: 0ms;
+  --animate-duration: 2000ms;
 }
 
 @keyframes SlideRight {
