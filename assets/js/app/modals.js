@@ -55,6 +55,8 @@ Deckdle.modalOpen = async function (type) {
 
       Deckdle._saveSetting('firstTime', false)
 
+      Deckdle._loadSettings()
+
       break
 
     case 'stats':
