@@ -40,6 +40,10 @@ body.dark-mode
   a:hover {
   background-color: var(--base-color);
 }
+header .menu-left #button-nav img {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(262deg)
+    brightness(104%) contrast(96%);
+}
 
 body.dark-mode main {
   background-color: var(--gray-dark2);
@@ -67,16 +71,16 @@ body.dark-mode section#game #cards-container #base .card {
   background-color: var(--black);
   border: 1px solid var(--off-white);
 }
-body.dark-mode section#game #cards-container #tableau .card[data-suit='0'],
-body.dark-mode section#game #cards-container #base .card[data-suit='0'],
-body.dark-mode section#game #cards-container #tableau .card[data-suit='3'],
-body.dark-mode section#game #cards-container #base .card[data-suit='3'] {
+body.dark-mode section#game #cards-container #tableau .card[data-suit="0"],
+body.dark-mode section#game #cards-container #base .card[data-suit="0"],
+body.dark-mode section#game #cards-container #tableau .card[data-suit="3"],
+body.dark-mode section#game #cards-container #base .card[data-suit="3"] {
   color: var(--off-white);
 }
-body.dark-mode section#game #cards-container #tableau .card[data-suit='1'],
-body.dark-mode section#game #cards-container #base .card[data-suit='1'],
-body.dark-mode section#game #cards-container #tableau .card[data-suit='2'],
-body.dark-mode section#game #cards-container #base .card[data-suit='2'] {
+body.dark-mode section#game #cards-container #tableau .card[data-suit="1"],
+body.dark-mode section#game #cards-container #base .card[data-suit="1"],
+body.dark-mode section#game #cards-container #tableau .card[data-suit="2"],
+body.dark-mode section#game #cards-container #base .card[data-suit="2"] {
   color: #ff8080;
 }
 
@@ -96,7 +100,11 @@ body.dark-mode section#game #keyboard-container .row:last-of-type button {
   color: var(--white);
 }
 @media (hover: hover) {
-  body.dark-mode section#game #keyboard-container .row:last-of-type button:hover {
+  body.dark-mode
+    section#game
+    #keyboard-container
+    .row:last-of-type
+    button:hover {
     background-color: var(--gray-dark);
     border: 1px solid var(--black);
     color: var(--white);
