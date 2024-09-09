@@ -18,6 +18,8 @@ header .menu-left {
   width: 70px;
 }
 header .menu-left #button-nav img {
+  filter: invert(0%) sepia(3%) saturate(2135%) hue-rotate(317deg)
+    brightness(97%) contrast(87%);
   height: 24px;
   width: 24px;
 }

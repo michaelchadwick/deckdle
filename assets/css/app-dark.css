@@ -40,7 +40,7 @@ body.dark-mode
   a:hover {
   background-color: var(--base-color);
 }
-header .menu-left #button-nav img {
+body.dark-mode header .menu-left #button-nav img {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(262deg)
     brightness(104%) contrast(96%);
 }
