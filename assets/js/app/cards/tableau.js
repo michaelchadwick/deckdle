@@ -6,7 +6,7 @@ Deckdle._tableauCount = () => {
   let cardCount = 0
 
   Object.keys(tableau).forEach((col) => {
-    const activeColCards = tableau[col].filter(card => card.status == 1)
+    const activeColCards = tableau[col].filter((card) => card.status == 1)
 
     cardCount += activeColCards.length
   })
@@ -23,8 +23,12 @@ Deckdle._tableauHasValidCard = () => {
   let hasValid = false
 
   Object.keys(tableau).forEach((col) => {
-    if (tableau[col].filter(card => card.status == 1).length) {
-      if (Deckdle._tableauCardCanBeRemoved(tableau[col][tableau[col].filter(card => card.status == 1).length - 1])) {
+    if (tableau[col].filter((card) => card.status == 1).length) {
+      if (
+        Deckdle._tableauCardCanBeRemoved(
+          tableau[col][tableau[col].filter((card) => card.status == 1).length - 1]
+        )
+      ) {
         hasValid = true
       }
     }
@@ -44,10 +48,7 @@ Deckdle._tableauCardCanBeRemoved = (card) => {
   const rankAbove = parseInt(baseCard.rank) + 1 == 15 ? 2 : parseInt(baseCard.rank) + 1
   const rankBelow = parseInt(baseCard.rank) - 1 == 1 ? 14 : parseInt(baseCard.rank) - 1
 
-  if (
-    parseInt(card.rank) == rankAbove ||
-    parseInt(card.rank) == rankBelow
-  ) {
+  if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
     return true
   } else {
     return false
@@ -58,19 +59,18 @@ Deckdle._removeCardFromTableau = (card) => {
   const tableau = Deckdle.__getState()['tableau']
 
   Object.keys(tableau).forEach((col) => {
-    const bottomCard = tableau[col][tableau[col].filter(card => card.status == 1).length - 1]
+    const bottomCard = tableau[col][tableau[col].filter((card) => card.status == 1).length - 1]
 
     if (bottomCard) {
-      if (
-        bottomCard.rank == card.dataset.rank &&
-        bottomCard.suit == card.dataset.suit
-      ) {
-        tableau[col][tableau[col].filter(card => card.status == 1).length - 1].status = 0
+      if (bottomCard.rank == card.dataset.rank && bottomCard.suit == card.dataset.suit) {
+        tableau[col][tableau[col].filter((card) => card.status == 1).length - 1].status = 0
       }
     }
   })
 
   Deckdle.__setState('tableau', tableau)
+
+  Deckdle._saveGame(Deckdle.__getGameMode())
 
   Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
 
@@ -89,14 +89,16 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
       if (cardRemoved) {
         // only transfer 'available' class up the column if there are cards left
         if (rowId - 1 >= 0) {
-          Deckdle.dom.interactive.tableau.querySelector(`#${colId} .card[data-row='${rowId - 1}']`).classList.add('available')
+          Deckdle.dom.interactive.tableau
+            .querySelector(`#${colId} .card[data-row='${rowId - 1}']`)
+            .classList.add('available')
         }
 
         const base = Deckdle.__getState()['base']
 
         base.push(new Card(cardRemoved.dataset.suit, cardRemoved.dataset.rank))
 
-        Deckdle.ui._moveCardToBase(source = 'tableau')
+        Deckdle.ui._moveCardToBase((source = 'tableau'))
 
         Deckdle.__setState('base', base)
 

@@ -10,6 +10,8 @@ class Puzzle {
     this.type = type
 
     if (state) {
+      // console.log('loading Puzzle from state', state)
+
       this.tableau = this.#createTableau(state.tableau)
       this.stock = this.#createStock(state.stock)
       this.base = this.#createBase(state.base)

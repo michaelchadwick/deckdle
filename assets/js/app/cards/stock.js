@@ -42,5 +42,7 @@ Deckdle._moveCardFromStockToBase = () => {
 
   Deckdle.__setState('lastPlayedTime', new Date().getTime())
 
+  Deckdle._saveGame(Deckdle.__getGameMode())
+
   Deckdle._checkForEmptyStock()
 }

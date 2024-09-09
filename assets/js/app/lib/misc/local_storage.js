@@ -10,133 +10,154 @@ Deckdle._loadGame = async function () {
 
   Deckdle._loadSettings()
 
+  // make sure a gameMode is set
+  if (!Deckdle.settings.gameMode) {
+    Deckdle.settings.gameMode = DECKDLE_DEFAULT_GAMEMODE
+  }
+
   let dailyCreateOrLoad = ''
   let freeCreateOrLoad = ''
 
-  /* ************************* */
-  /* daily state LS -> code    */
-  /* ************************* */
+  if (Deckdle.__getGameMode() == 'daily') {
+    /* ************************* */
+    /* daily state LS -> code    */
+    /* ************************* */
 
-  const lsStateDaily = JSON.parse(localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY))
+    const lsStateDaily = JSON.parse(localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY))
 
-  // if we have previous LS values, sync them to code model
-  if (lsStateDaily && Object.keys(lsStateDaily)) {
-    const dailyDefaults = DECKDLE_DEFAULTS.state.daily
+    // if we have previous LS values, sync them to code model
+    if (lsStateDaily) {
+      const dailyDefaults = DECKDLE_DEFAULTS.state.daily
 
-    let i = 0
-    lsStateDaily.forEach((lsState) => {
-      Deckdle.__setState('gameState', lsState.gameState || dailyDefaults.gameState, 'daily', i)
-      Deckdle.__setState('gameWon', lsState.gameWon || dailyDefaults.gameWon, 'daily', i)
-      Deckdle.__setState(
-        'lastCompletedTime',
-        lsState.lastCompletedTime || dailyDefaults.lastCompletedTime,
-        'daily',
-        i
-      )
-      Deckdle.__setState(
-        'lastPlayedTime',
-        lsState.lastPlayedTime || dailyDefaults.lastPlayedTime,
-        'daily',
-        i
-      )
-      Deckdle.__setState('setupId', lsState.setupId || dailyDefaults.setupId, 'daily', i)
-
-      Deckdle.__setState('tableau', lsState.tableau || dailyDefaults.tableau, 'daily', i)
-      Deckdle.__setState('stock', lsState.stock || dailyDefaults.stock, 'daily', i)
-      Deckdle.__setState('base', lsState.base || dailyDefaults.base, 'daily', i)
-
-      i++
-    })
-
-    // special case for daily word: need to check
-    // to make sure time hasn't elapsed on saved progress
-    try {
-      const response = await fetch(DECKDLE_DAILY_SCRIPT)
-      const data = await response.json()
-      const dailySetupId = data['setupId']
-
-      // saved setupId and daily setupId are the same? still working on it
-      if (dailySetupId == lsStateDaily[Deckdle.__getSessionIndex()].setupId) {
+      let i = 0
+      lsStateDaily.forEach((lsState) => {
+        Deckdle.__setState('gameState', lsState.gameState || dailyDefaults.gameState, 'daily', i)
         Deckdle.__setState(
-          'gameState',
-          lsStateDaily[Deckdle.__getSessionIndex()].gameState,
-          'daily'
+          'lastCompletedTime',
+          lsState.lastCompletedTime || dailyDefaults.lastCompletedTime,
+          'daily',
+          i
         )
         Deckdle.__setState(
-          'guessedWords',
-          lsStateDaily[Deckdle.__getSessionIndex()].guessedWords,
-          'daily'
+          'lastPlayedTime',
+          lsState.lastPlayedTime || dailyDefaults.lastPlayedTime,
+          'daily',
+          i
         )
+        Deckdle.__setState(
+          'sessionIndex',
+          lsState.sessionIndex || dailyDefaults.sessionIndex,
+          'daily',
+          i
+        )
+        Deckdle.__setState('setupId', lsState.setupId || dailyDefaults.setupId, 'daily', i)
 
-        dailyCreateOrLoad = 'load'
+        Deckdle.__setState('tableau', lsState.tableau || dailyDefaults.tableau, 'daily', i)
+        Deckdle.__setState('stock', lsState.stock || dailyDefaults.stock, 'daily', i)
+        Deckdle.__setState('base', lsState.base || dailyDefaults.base, 'daily', i)
+
+        i++
+
+        if (i < lsStateDaily.length) {
+          Deckdle.__addStateObjSession('daily')
+        }
+      })
+
+      // special case for daily word: need to check
+      // to make sure time hasn't elapsed on saved progress
+      try {
+        const response = await fetch(DECKDLE_DAILY_SCRIPT)
+        const data = await response.json()
+        const dailySetupId = data['setupId']
+
+        // console.log('Deckdle.__getSessionIndex()', Deckdle.__getSessionIndex())
+
+        // saved setupId and daily setupId are the same? still working on it
+        if (lsStateDaily[Deckdle.__getSessionIndex()].setupId) {
+          if (dailySetupId == parseInt(lsStateDaily[Deckdle.__getSessionIndex()].setupId)) {
+            Deckdle.__setState(
+              'gameState',
+              lsStateDaily[Deckdle.__getSessionIndex()].gameState,
+              'daily'
+            )
+
+            dailyCreateOrLoad = 'load'
+          }
+        }
+        // time has elapsed on daily puzzle, and new one is needed
+        else {
+          Deckdle.__setState('gameState', 'IN_PROGRESS', 'daily')
+
+          Deckdle._saveGame('daily', '_loadGame(daily time elapsed)')
+
+          dailyCreateOrLoad = 'create'
+        }
+
+        Deckdle.ui._updateDailyDetails(data['index'])
+      } catch (e) {
+        console.error('could not get daily setupId', e)
       }
-      // time has elapsed on daily puzzle, and new one is needed
-      else {
-        Deckdle.__setState('gameState', 'IN_PROGRESS', 'daily')
-
-        Deckdle._saveGame('daily', '_loadGame(daily time elapsed)')
-
-        dailyCreateOrLoad = 'create'
-      }
-
-      Deckdle.ui._updateDailyDetails(data['index'])
-    } catch (e) {
-      console.error('could not get daily setupId', e)
+    } else {
+      // Deckdle._logStatus('no previous daily state found. creating new daily puzzle.')
+      dailyCreateOrLoad = 'create'
     }
   } else {
-    // Deckdle._logStatus('no previous daily state found. creating new daily puzzle.')
-    dailyCreateOrLoad = 'create'
-  }
+    /* ************************* */
+    /* free state LS -> code     */
+    /* ************************* */
 
-  /* ************************* */
-  /* free state LS -> code     */
-  /* ************************* */
+    const lsStateFree = JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
 
-  const lsStateFree = JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
+    // if we have previous LS values, sync them to code model
+    if (lsStateFree) {
+      const freeDefaults = DECKDLE_DEFAULTS.state.free
 
-  // if we have previous LS values, sync them to code model
-  if (lsStateFree) {
-    const freeDefaults = DECKDLE_DEFAULTS.state.free
+      // console.log('lsStateFree', lsStateFree)
 
-    let i = 0
-    lsStateFree.forEach((lsState) => {
-      Deckdle.__setState('gameState', lsState.gameState || freeDefaults.gameState, 'free', i)
-      Deckdle.__setState('gameWon', lsState.gameWon || freeDefaults.gameWon, 'free', i)
-      Deckdle.__setState(
-        'lastCompletedTime',
-        lsState.lastCompletedTime || freeDefaults.lastCompletedTime,
-        'free',
-        i
-      )
-      Deckdle.__setState(
-        'lastPlayedTime',
-        lsState.lastPlayedTime || freeDefaults.lastPlayedTime,
-        'free',
-        i
-      )
-      Deckdle.__setState('setupId', lsState.setupId || freeDefaults.setupId, 'free', i)
+      let i = 0
+      lsStateFree.forEach((lsState) => {
+        Deckdle.__setState('gameState', lsState.gameState || freeDefaults.gameState, 'free', i)
+        Deckdle.__setState(
+          'lastCompletedTime',
+          lsState.lastCompletedTime || freeDefaults.lastCompletedTime,
+          'free',
+          i
+        )
+        Deckdle.__setState(
+          'lastPlayedTime',
+          lsState.lastPlayedTime || freeDefaults.lastPlayedTime,
+          'free',
+          i
+        )
+        Deckdle.__setState(
+          'sessionIndex',
+          lsState.sessionIndex || freeDefaults.sessionIndex,
+          'free',
+          i
+        )
+        Deckdle.__setState('setupId', lsState.setupId || freeDefaults.setupId, 'free', i)
 
-      Deckdle.__setState('tableau', lsState.tableau || freeDefaults.tableau, 'free', i)
-      Deckdle.__setState('stock', lsState.stock || freeDefaults.stock, 'free', i)
-      Deckdle.__setState('base', lsState.base || freeDefaults.base, 'free', i)
+        Deckdle.__setState('tableau', lsState.tableau || freeDefaults.tableau, 'free', i)
+        Deckdle.__setState('stock', lsState.stock || freeDefaults.stock, 'free', i)
+        Deckdle.__setState('base', lsState.base || freeDefaults.base, 'free', i)
 
-      i++
-    })
+        i++
 
-    freeCreateOrLoad = 'load'
-  } else {
-    // Deckdle._logStatus('no previous free state found. creating new free puzzle.')
-    freeCreateOrLoad = 'create'
+        if (i < lsStateFree.length && Deckdle.__getState().gameState == 'GAME_OVER') {
+          Deckdle.__addStateObjSession('free')
+        }
+      })
+
+      freeCreateOrLoad = 'load'
+    } else {
+      // Deckdle._logStatus('no previous free state found. creating new free puzzle.')
+      freeCreateOrLoad = 'create'
+    }
   }
 
   /* ************************* */
   /* create/load puzzle        */
   /* ************************* */
-
-  // make sure a gameMode is set
-  if (!Deckdle.settings.gameMode) {
-    Deckdle.settings.gameMode = DECKDLE_DEFAULT_GAMEMODE
-  }
 
   // daily load/create
   if (Deckdle.__getGameMode() == 'daily') {
@@ -397,20 +418,23 @@ Deckdle._changeSetting = async function (setting, value) {
       if (Deckdle.__getGameMode() != value) {
         switch (value) {
           case 'daily':
-            // get setupId for today
-            if (!Deckdle.__getState('daily').setupId) {
-              try {
-                const response = await fetch(DECKDLE_DAILY_SCRIPT)
-                const data = await response.json()
-                Deckdle.__setState('setupId', parseInt(data['setupId']), 'daily')
+            Deckdle._saveSetting('gameMode', 'daily')
 
-                Deckdle.ui._updateDailyDetails(data['index'])
-              } catch (e) {
-                console.error('could not get daily setupId', e)
+            // get setupId for today
+            if (Deckdle.__getState('daily')) {
+              if (!Deckdle.__getState('daily').setupId) {
+                try {
+                  const response = await fetch(DECKDLE_DAILY_SCRIPT)
+                  const data = await response.json()
+
+                  Deckdle.__setState('setupId', parseInt(data['setupId']), 'daily')
+
+                  Deckdle.ui._updateDailyDetails(data['index'])
+                } catch (e) {
+                  console.error('could not get daily setupId', e)
+                }
               }
             }
-
-            Deckdle._saveSetting('gameMode', 'daily')
 
             // set dom status
             Deckdle.dom.interactive.gameModeDailyLink.dataset.active = true
@@ -533,7 +557,7 @@ Deckdle._createNewSession = function () {
 
       curLS[curLS.length - 1].sessionIndex = curLS.length - 1
 
-      // internal saveGame()
+      // localStorage saveGame()
       localStorage.setItem(DECKDLE_STATE_DAILY_LS_KEY, JSON.stringify(curLS))
     }
   }
@@ -552,5 +576,11 @@ Deckdle._createNewSession = function () {
     }
   }
 
-  console.log('createNewSession(free)', JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)))
+  Deckdle.__addStateObjSession()
+
+  // console.log(
+  //   'createNewSession(free) ls',
+  //   JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
+  // )
+  // console.log('createNewSession(free) stateObj', Deckdle.__getStateObj('free'))
 }

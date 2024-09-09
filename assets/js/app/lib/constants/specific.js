@@ -19,12 +19,12 @@ const DECKDLE_DEFAULT_STATE = {
   base: [],
   gameState: 'IN_PROGRESS',
   gameType: DECKDLE_DEFAULT_GAMETYPE,
-  gameWon: false,
   lastCompletedTime: null,
   lastPlayedTime: null,
+  sessionIndex: 0,
   setupId: null,
   stock: [],
-  tableau: {}
+  tableau: {},
 }
 const DECKDLE_DEFAULT_SETTINGS = {
   comboCounter: false,
@@ -39,8 +39,8 @@ const DECKDLE_DEFAULT_SETTINGS = {
 const DECKDLE_DEFAULTS = {
   config: { ...DECKDLE_DEFAULT_CONFIG },
   state: {
-    daily: [{ ...DECKDLE_DEFAULT_STATE }],
-    free: [{ ...DECKDLE_DEFAULT_STATE }],
+    daily: [JSON.parse(JSON.stringify(DECKDLE_DEFAULT_STATE))],
+    free: [JSON.parse(JSON.stringify(DECKDLE_DEFAULT_STATE))],
   },
   settings: DECKDLE_DEFAULT_SETTINGS,
 }

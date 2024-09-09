@@ -89,6 +89,8 @@ Deckdle.__setState = function (
   mode = Deckdle.__getGameMode(),
   index = Deckdle.__getSessionIndex()
 ) {
+  // console.log(`attempting Deckdle.state[${mode}][${index}][${key}] =`, val)
+
   switch (key) {
     // case 'base':
     //   Deckdle.state[mode][index][key].push(val)
@@ -98,8 +100,36 @@ Deckdle.__setState = function (
       Deckdle.state[mode][index][key] = val
   }
 
-  Deckdle._saveGame(mode, `__setState(${key}, ${val}, ${mode})`)
+  // console.log(`__setState[${mode}][${index}][${key}] =`, val)
+
   // Deckdle._saveGame(mode)
+}
+
+Deckdle.__getSessionIndex = function (mode = Deckdle.__getGameMode()) {
+  const rootState = Deckdle.__getStateObj(mode)
+  let index = null
+
+  // console.log('__getSessionIndex() rootState', rootState)
+
+  if (rootState) {
+    const latestSession = rootState[rootState.length - 1]
+
+    if (latestSession.hasOwnProperty('sessionIndex')) {
+      index = latestSession.sessionIndex ?? 0
+
+      // console.log('index = latestSession.sessionIndex', index)
+    } else {
+      index = rootState.length - 1 ?? 0
+
+      // console.log('index = rootState.length - 1', index)
+    }
+  } else {
+    index = 0
+
+    // console.log('index = 0', index)
+  }
+
+  return index
 }
 
 Deckdle.__getStateObj = function (mode = Deckdle.__getGameMode()) {
@@ -107,10 +137,17 @@ Deckdle.__getStateObj = function (mode = Deckdle.__getGameMode()) {
 
   return rootState || undefined
 }
-Deckdle.__getSessionIndex = function (mode = Deckdle.__getGameMode()) {
+
+Deckdle.__addStateObjSession = function (mode = Deckdle.__getGameMode()) {
   const rootState = Deckdle.state[mode]
 
-  return rootState ? rootState.length - 1 : 0
+  if (rootState) {
+    const blankState = JSON.parse(JSON.stringify(DECKDLE_DEFAULT_STATE))
+    blankState.sessionIndex = Deckdle.__getSessionIndex() + 1
+    Deckdle.state[mode].push(blankState)
+  } else {
+    console.error(`could not add session to '${mode}' state`)
+  }
 }
 
 Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGameType()) => {
