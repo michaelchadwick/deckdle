@@ -39,8 +39,6 @@ Deckdle._getBestScore = function (mode) {
           score = Deckdle._tableauCount(session.tableau)
         }
 
-        console.log('session score', score)
-
         if (score < bestScore) {
           bestScore = score
         }
