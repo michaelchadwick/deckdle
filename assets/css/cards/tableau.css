@@ -3,11 +3,16 @@
   gap: 0;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 18px);
-  height: 107px;
+  height: 125px;
   margin: 0 auto;
   max-width: 330px;
   transition: all 400ms;
   width: 100%;
+}
+@media (min-height: 500px) {
+  #tableau {
+    height: 155px;
+  }
 }
 @media (min-width: 376px) {
   #tableau {
@@ -43,6 +48,9 @@
   margin: 0 auto;
 }
 #tableau .col .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   opacity: 1;
   position: relative;
 }

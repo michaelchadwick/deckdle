@@ -40,7 +40,7 @@
   cursor: pointer;
 }
 
-#base  {
+#base {
   display: grid;
   justify-items: center;
 }
@@ -50,7 +50,4 @@
 }
 #base .card:nth-last-child(2) {
   background-color: var(--gray);
-}
-#base .card:last-of-type {
-  display: block;
 }
