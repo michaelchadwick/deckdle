@@ -54,4 +54,9 @@ section#game #keyboard-container button:last-of-type {
     border: 1px solid var(--black);
     color: var(--white);
   }
+  section#game #keyboard-container button:disabled:hover {
+    background-color: var(--gray);
+    border: 1px solid transparent;
+    color: var(--disabled);
+  }
 }

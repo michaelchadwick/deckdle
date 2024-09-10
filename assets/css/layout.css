@@ -294,17 +294,27 @@ section#game #mode-container #gamemode-container a.disabled:hover {
 section#game #mode-container #daily-details {
   color: var(--marker-color);
   display: none;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   height: 20px;
   margin: 5px 0 0;
   padding: 4px 4px 0;
   transform: scale(0);
 }
+@media (min-width: 375px) {
+  section#game #mode-container #daily-details {
+    font-size: 0.9rem;
+  }
+}
+@media (min-width: 768px) {
+  section#game #mode-container #daily-details {
+    font-size: 1rem;
+  }
+}
 section#game #mode-container #daily-details.show {
   display: block;
   transform: scale(1);
 }
-section#game #mode-container #daily-details .day {
+section#game #mode-container #daily-details.show .day {
   font-family: "Changa Bold";
   font-weight: 400;
 }

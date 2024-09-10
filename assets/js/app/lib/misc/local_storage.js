@@ -71,8 +71,6 @@ Deckdle._loadGame = async function () {
         const data = await response.json()
         const dailySetupId = data['setupId']
 
-        // console.log('Deckdle.__getSessionIndex()', Deckdle.__getSessionIndex())
-
         // saved setupId and daily setupId are the same? still working on it
         if (lsStateDaily[Deckdle.__getSessionIndex()].setupId) {
           if (dailySetupId == parseInt(lsStateDaily[Deckdle.__getSessionIndex()].setupId)) {
@@ -112,8 +110,6 @@ Deckdle._loadGame = async function () {
     // if we have previous LS values, sync them to code model
     if (lsStateFree) {
       const freeDefaults = DECKDLE_DEFAULTS.state.free
-
-      // console.log('lsStateFree', lsStateFree)
 
       let i = 0
       lsStateFree.forEach((lsState) => {
@@ -193,7 +189,7 @@ Deckdle._loadGame = async function () {
   }
 }
 // save state from code model -> LS
-Deckdle._saveGame = function (lsType, src = 'unknown') {
+Deckdle._saveGame = function (lsType = Deckdle.__getGameMode(), src = 'unknown') {
   switch (lsType) {
     case 'daily':
       let curDailyState = Deckdle.__getStateObj('daily')
@@ -579,10 +575,4 @@ Deckdle._createNewSession = function () {
   }
 
   Deckdle.__addStateObjSession()
-
-  // console.log(
-  //   'createNewSession(free) ls',
-  //   JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
-  // )
-  // console.log('createNewSession(free) stateObj', Deckdle.__getStateObj('free'))
 }

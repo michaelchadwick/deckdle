@@ -109,8 +109,6 @@ Deckdle.ui._addCardToStock = function (card, animate = false) {
   }
 }
 Deckdle.ui._removeCardFromStock = () => {
-  // Deckdle._logStatus('[UI][CHANGING] removing card from stock')
-
   const stock = Deckdle.dom.interactive.stock
 
   if (stock.lastElementChild.classList.contains('card')) {
@@ -118,6 +116,8 @@ Deckdle.ui._removeCardFromStock = () => {
     // stock.removeChild(stock.lastElementChild)
     // })
     stock.removeChild(stock.lastElementChild)
+
+    Deckdle.dom.input.btnUndoMove.disabled = true
   }
 }
 
@@ -144,9 +144,12 @@ Deckdle.ui._moveCardToBase = (source) => {
       Deckdle._animateCSS(`#base .card:last-of-type`, 'slideInDown')
       break
   }
+
+  Deckdle.ui._updateCardCounts()
 }
 
-Deckdle.ui._updateStockBaseCounts = () => {
+Deckdle.ui._updateCardCounts = () => {
+  Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
   Deckdle.dom.stockCount.innerText = Deckdle.__getState()['stock'].length
   Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length
 }
@@ -197,7 +200,6 @@ Deckdle.ui._dealCards = function (animate = false) {
 
     colId++
   })
-  Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
 
   // fill stock UI with stock cards
   const stockCards = Deckdle.__getState()['stock']
@@ -211,13 +213,36 @@ Deckdle.ui._dealCards = function (animate = false) {
     Deckdle.ui._addCardToBase(card)
   })
 
-  Deckdle.ui._updateStockBaseCounts()
+  Deckdle.ui._updateCardCounts()
 }
 
 Deckdle.ui._updateDailyDetails = function (index) {
   Deckdle.dailyNumber = parseInt(index) + 1
   Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (parseInt(index) + 1).toString()
   Deckdle.dom.dailyDetails.querySelector('.day').innerHTML = Deckdle.__getTodaysDate()
+}
+
+Deckdle.ui._undoBaseMove = function (card) {
+  // remove second most recent available
+  Deckdle.dom.interactive.tableau
+    .querySelector(`#col${card.col} .card[data-row="${card.row - 1}"]`)
+    .classList.remove('available')
+  // make card moved back available
+  Deckdle.dom.interactive.tableau
+    .querySelector(`#col${card.col} .card[data-row="${card.row}"]`)
+    .classList.remove('removed')
+  Deckdle.dom.interactive.tableau
+    .querySelector(`#col${card.col} .card[data-row="${card.row}"]`)
+    .classList.add('available')
+  Deckdle.dom.interactive.tableau.querySelector(
+    `#col${card.col} .card[data-row="${card.row}"]`
+  ).dataset.status = 1
+
+  // disable button until next card is moved
+  Deckdle.dom.input.btnUndoMove.disabled = true
+
+  Deckdle.ui._resetComboCounter()
+  Deckdle.ui._updateCardCounts()
 }
 
 Deckdle.ui._updateComboCounter = function () {

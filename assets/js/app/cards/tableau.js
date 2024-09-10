@@ -64,17 +64,35 @@ Deckdle._removeCardFromTableau = (card) => {
     if (bottomCard) {
       if (bottomCard.rank == card.dataset.rank && bottomCard.suit == card.dataset.suit) {
         tableau[col][tableau[col].filter((card) => card.status == 1).length - 1].status = 0
+
+        bottomCard.row = parseInt(card.dataset.row)
+        bottomCard.col = parseInt(col)
+
+        Deckdle._lastTableauMove = bottomCard
       }
     }
   })
 
-  Deckdle.__setState('tableau', tableau)
-
-  Deckdle._saveGame(Deckdle.__getGameMode())
-
-  Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
-
   Deckdle._increaseCombo()
+
+  Deckdle.dom.input.btnUndoMove.disabled = false
+
+  Deckdle.__setState('tableau', tableau)
+  Deckdle._saveGame()
+}
+
+// undo last move from tableau to base
+Deckdle._undoLastTableauMove = function () {
+  if (Deckdle._lastTableauMove) {
+    const card = Deckdle._lastTableauMove
+    const tableauCards = Deckdle.__getState()['tableau']
+
+    tableauCards[card.col][card.row].status = 1
+    Deckdle._removeCardFromBase(card)
+
+    Deckdle.__setState('tableau', tableauCards)
+    Deckdle._saveGame()
+  }
 }
 
 Deckdle._onTableauClick = (card, colId, rowId) => {
@@ -101,6 +119,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
         Deckdle.ui._moveCardToBase((source = 'tableau'))
 
         Deckdle.__setState('base', base)
+        Deckdle._saveGame()
 
         Deckdle._checkWinState()
       } else {

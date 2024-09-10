@@ -59,7 +59,7 @@ Deckdle._attachEventListeners = function () {
 
   // ⎌ undo last move
   Deckdle.dom.input.btnUndoMove.addEventListener('click', () => {
-    Deckdle._undoLastMove()
+    Deckdle._undoLastTableauMove()
   })
   // + create new free game
   Deckdle.dom.input.btnCreateNew.addEventListener('click', () => {

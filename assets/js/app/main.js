@@ -1,6 +1,6 @@
 /* main */
 /* app entry point and main functions */
-/* global Deckdle */
+/* global Deckdle, Card */
 
 // settings: saved in LOCAL STORAGE
 Deckdle.settings = { ...DECKDLE_DEFAULTS.settings }
@@ -112,17 +112,7 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
 
   Deckdle._logStatus(`[CREATED] '${gameMode}' Puzzle from id: '${setupId}'`, puzzle)
 
-  // console.log(
-  //   'createNew(free) post-setState',
-  //   JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
-  // )
-
   Deckdle._saveGame(gameMode, '_createNewSetup')
-
-  // console.log(
-  //   'createNew(free) post-saveGame',
-  //   JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
-  // )
 
   // fill UI with beautiful cards
   Deckdle.ui._emptyPlayingField()
@@ -193,11 +183,6 @@ Deckdle._createNewFree = async function () {
   await Deckdle._createNewSetup('free')
 
   Deckdle.ui._removeModalVestige()
-}
-
-// undo last move
-Deckdle._undoLastMove = function () {
-  console.log('TODO undo last move')
 }
 
 // ask to create new free gamemode puzzle

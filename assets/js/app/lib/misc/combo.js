@@ -10,14 +10,17 @@ Deckdle._increaseCombo = () => {
     Deckdle.__setState('comboMax', Deckdle.combo)
   }
 
-  Deckdle._saveGame(Deckdle.__getGameMode())
-
   Deckdle.ui._updateComboCounter()
+
+  Deckdle._saveGame()
 }
 
 Deckdle._resetCombo = () => {
-  if (Deckdle.combo > 1) {
-    Deckdle.combo = 0
+  const needsToReset = Deckdle.combo > 1
+
+  Deckdle.combo = 0
+
+  if (needsToReset) {
     Deckdle.ui._updateComboCounter()
   }
 }
