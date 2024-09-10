@@ -300,7 +300,7 @@
   font-variant-numeric: proportional-nums;
   font-weight: 400;
   justify-content: center;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
   text-align: center;
 }
 .statistics .statistic-container .statistic-label {

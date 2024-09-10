@@ -66,7 +66,10 @@ Deckdle.modalOpen = async function (type) {
 
       modalText = `
         <div class="container">
+      `
 
+      // daily stats
+      modalText += `
           <div class="statistic-header">Daily</div>
           <div class="statistic-subheader">
             (<small>New puzzle available at 12am PST</small>)
@@ -74,26 +77,35 @@ Deckdle.modalOpen = async function (type) {
 
           <div class="statistics">
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getGameCount('daily')}</div>
+              <div class="statistic">${Deckdle._getFinishedGameCount('daily')}</div>
               <div class="statistic-label">Game(s) Finished</div>
             </div>
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getComboMaxest('daily')}</div>
+              <div class="statistic">${Deckdle._getBestCombo('daily')}</div>
               <div class="statistic-label">Max<br />Combo</div>
+            </div>
+            <div class="statistic-container">
+              <div class="statistic">${Deckdle._getBestScore('daily')}</div>
+              <div class="statistic-label">Best<br />Score</div>
             </div>
           </div>
         `
 
+      // free stats
       modalText += `
           <div class="statistic-header">Free Play</div>
           <div class="statistics">
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getGameCount('free')}</div>
+              <div class="statistic">${Deckdle._getFinishedGameCount('free')}</div>
               <div class="statistic-label">Game(s) Finished</div>
             </div>
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getComboMaxest('free')}</div>
+              <div class="statistic">${Deckdle._getBestCombo('free')}</div>
               <div class="statistic-label">Max<br />Combo</div>
+            </div>
+            <div class="statistic-container">
+              <div class="statistic">${Deckdle._getBestScore('free')}</div>
+              <div class="statistic-label">Best<br />Score</div>
             </div>
           </div>
       `

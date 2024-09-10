@@ -1,8 +1,15 @@
 /* lib/cards/tableau.js */
 /* functions for tableau */
 
-Deckdle._tableauCount = () => {
-  const tableau = Deckdle.__getState()['tableau']
+Deckdle._tableauCount = (cards = null) => {
+  let tableau = null
+
+  if (cards) {
+    tableau = cards
+  } else {
+    tableau = Deckdle.__getState()['tableau']
+  }
+
   let cardCount = 0
 
   Object.keys(tableau).forEach((col) => {
