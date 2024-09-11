@@ -223,10 +223,17 @@ Deckdle.ui._updateDailyDetails = function (index) {
 }
 
 Deckdle.ui._undoBaseMove = function (card) {
-  // remove second most recent available
-  Deckdle.dom.interactive.tableau
-    .querySelector(`#col${card.col} .card[data-row="${card.row - 1}"]`)
-    .classList.remove('available')
+  // if card still remains in column
+  // remove its availability
+  if (
+    Deckdle.dom.interactive.tableau.querySelector(
+      `#col${card.col} .card[data-row="${card.row - 1}"]`
+    )
+  ) {
+    Deckdle.dom.interactive.tableau
+      .querySelector(`#col${card.col} .card[data-row="${card.row - 1}"]`)
+      .classList.remove('available')
+  }
   // make card moved back available
   Deckdle.dom.interactive.tableau
     .querySelector(`#col${card.col} .card[data-row="${card.row}"]`)
