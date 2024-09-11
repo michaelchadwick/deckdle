@@ -308,8 +308,8 @@ Deckdle.modalOpen = async function (type) {
         modalText += `
           <div class="para">New daily puzzle available at 12 am PST</div>
           <div class="buttons">
-            <button class="game-over refresh-daily" onclick="Deckdle._reload()" title="Daily game not loading?">Daily game not loading?</button>
             <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Switch to free play?">Switch to free play?</button>
+            <button class="game-over check-stats" onclick="Deckdle.modalOpen('stats')" title="Check stats">Check stats</button>
           </div>
         `
       }
@@ -317,8 +317,9 @@ Deckdle.modalOpen = async function (type) {
       else {
         modalText += `
           <div class="buttons">
-            <button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>
             <button class="game-over switch-daily" onclick="Deckdle._changeSetting('gameMode', 'daily')" title="Switch to daily?">Switch to daily?</button>
+            <button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>
+            <button class="game-over check-stats" onclick="Deckdle.modalOpen('stats')" title="Check stats">Check stats</button>
           </div>
         `
       }
