@@ -4,6 +4,7 @@
 
 Deckdle.modalOpen = async function (type) {
   let modalText
+  const gameType = Deckdle.__getState()['gameType']
 
   switch (type) {
     case 'start':
@@ -16,7 +17,6 @@ Deckdle.modalOpen = async function (type) {
         <p><strong>Deckdle</strong> is a daily solitaire card game. Currently, the only solitaire type is <code>golf</code>, but there are plans to add the classic <code>klondike</code>, <code>pyramid</code>, and <code>spider</code>.</p>
       `
 
-      const gameType = Deckdle.__getState()['gameType']
       switch (gameType) {
         case 'golf':
         default:

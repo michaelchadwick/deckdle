@@ -1,5 +1,6 @@
 /* lib/cards/deck.js */
 /* class definition for Deck of Cards */
+/* global Deck, Card, Chance */
 
 class Deck {
   constructor() {
@@ -32,7 +33,7 @@ class Deck {
   list = () => {
     let display = ''
 
-    this.cards.forEach(card => {
+    this.cards.forEach((card) => {
       display += card.show('short')
     })
 
@@ -48,7 +49,7 @@ class Deck {
   removeCard = (card) => {
     if (this.#cardExists(card)) {
       const vals = Object.values(this.cards)
-      const index = vals.findIndex(v => v.rank == card.rank && v.suit == card.suit)
+      const index = vals.findIndex((v) => v.rank == card.rank && v.suit == card.suit)
 
       // grab card we are removing
       const card = vals[index]
@@ -95,10 +96,7 @@ class Deck {
   #cardExists = (card) => {
     const vals = Object.values(this.cards)
 
-    if (
-      vals.some(c => c.suit == card.suit) &&
-      vals.some(c => c.rank == card.rank)
-    ) {
+    if (vals.some((c) => c.suit == card.suit) && vals.some((c) => c.rank == card.rank)) {
       return true
     } else {
       return false

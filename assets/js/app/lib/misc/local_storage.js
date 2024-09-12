@@ -191,7 +191,7 @@ Deckdle._loadGame = async function () {
 // save state from code model -> LS
 Deckdle._saveGame = function (lsType = Deckdle.__getGameMode(), src = 'unknown') {
   switch (lsType) {
-    case 'daily':
+    case 'daily': {
       let curDailyState = Deckdle.__getStateObj('daily')
 
       curDailyState.forEach((sesh) => {
@@ -205,8 +205,9 @@ Deckdle._saveGame = function (lsType = Deckdle.__getGameMode(), src = 'unknown')
       localStorage.setItem(DECKDLE_STATE_DAILY_LS_KEY, JSON.stringify(curDailyState))
 
       break
+    }
 
-    case 'free':
+    case 'free': {
       let curFreeState = Deckdle.__getStateObj('free')
 
       curFreeState.forEach((sesh) => {
@@ -220,6 +221,7 @@ Deckdle._saveGame = function (lsType = Deckdle.__getGameMode(), src = 'unknown')
       localStorage.setItem(DECKDLE_STATE_FREE_LS_KEY, JSON.stringify(curFreeState))
 
       break
+    }
 
     case 'settings':
       localStorage.setItem(DECKDLE_SETTINGS_LS_KEY, JSON.stringify(Deckdle.settings))
@@ -370,9 +372,11 @@ Deckdle._loadSettings = function () {
 // change a setting (gear icon) value
 // then save to localStorage
 Deckdle._changeSetting = async function (setting, value) {
+  let st = null
+
   switch (setting) {
     case 'comboCounter':
-      var st = document.getElementById('button-setting-combo-counter').dataset.status
+      st = document.getElementById('button-setting-combo-counter').dataset.status
 
       if (st == '' || st == 'false') {
         document.getElementById('button-setting-combo-counter').dataset.status = 'true'
@@ -392,7 +396,7 @@ Deckdle._changeSetting = async function (setting, value) {
       break
 
     case 'darkMode':
-      var st = document.getElementById('button-setting-dark-mode').dataset.status
+      st = document.getElementById('button-setting-dark-mode').dataset.status
 
       if (st == '' || st == 'false') {
         document.getElementById('button-setting-dark-mode').dataset.status = 'true'
@@ -462,7 +466,7 @@ Deckdle._changeSetting = async function (setting, value) {
       break
 
     case 'noisy':
-      var st = document.getElementById('button-setting-noisy').dataset.status
+      st = document.getElementById('button-setting-noisy').dataset.status
 
       if (st == '' || st == 'false') {
         document.getElementById('button-setting-noisy').dataset.status = 'true'
@@ -486,7 +490,7 @@ Deckdle._changeSetting = async function (setting, value) {
 
       break
 
-    case 'soundBGMLevel':
+    case 'soundBGMLevel': {
       // set config
       const newBGMLevel = parseInt(value) / 100
 
@@ -500,8 +504,9 @@ Deckdle._changeSetting = async function (setting, value) {
       Deckdle._saveSetting('soundBGMLevel', newBGMLevel)
 
       break
+    }
 
-    case 'soundSFXLevel':
+    case 'soundSFXLevel': {
       // set config
       const newSFXLevel = parseInt(value) / 100
 
@@ -515,6 +520,7 @@ Deckdle._changeSetting = async function (setting, value) {
       Deckdle._saveSetting('soundSFXLevel', newSFXLevel)
 
       break
+    }
   }
 
   Deckdle._saveGame('settings', '_changeSetting')

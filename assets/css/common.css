@@ -199,12 +199,6 @@ button.game-over {
   position: relative;
   width: 32px;
 }
-.switch[data-status="true"] {
-  background-color: var(--base-color);
-}
-.switch[data-status="true"] .knob {
-  transform: translateX(calc(100% - 4px));
-}
 .switch .knob {
   background-color: var(--white);
   border-radius: 8px;
@@ -217,10 +211,16 @@ button.game-over {
   transition: transform 0.3s;
   width: 50%;
 }
+.switch[data-status="true"] {
+  background-color: var(--base-color);
+}
+.switch[data-status="true"] .knob {
+  transform: translateX(calc(100% - 4px));
+}
 
 .help .invalid,
 .help .valid {
-  font-family: "Changa Bold";
+  font-family: "Changa Bold", sans-serif;
   font-weight: 600;
 }
 
@@ -255,7 +255,7 @@ button.game-over {
 }
 
 .blamph {
-  font-family: 'Changa Bold', monospace;
+  font-family: "Changa Bold", monospace;
   font-weight: 400;
   text-transform: uppercase;
 }

@@ -148,8 +148,6 @@ Deckdle._loadExistingSetup = async function (gameMode) {
     }
   }
   // free uses current state, so nothing to do
-  else {
-  }
 
   // load existing Deckdle puzzle from tableau/stock
   const puzzle = Deckdle.__loadPuzzle(

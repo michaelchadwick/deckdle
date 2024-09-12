@@ -81,7 +81,7 @@ header .menu-left #nav-overlay #nav-content .container .nav-list a {
   align-items: center;
   background-color: transparent;
   display: flex;
-  font-family: "Changa Bold";
+  font-family: "Changa Bold", sans-serif;
   font-size: 16px;
   font-weight: 400;
   height: 30px;
@@ -163,10 +163,12 @@ header #debug-buttons .ddmenu .ddgroup .ddsub {
   top: 100%;
   width: 100%;
 }
+/* stylelint-disable */
 header #debug-buttons .ddmenu .ddgroup .ddsub a {
   box-sizing: border-box;
   display: block;
 }
+/* stylelint-enable */
 header #debug-buttons .ddmenu .ddgroup .ddsub button {
   background-color: #e3e0f3;
   border: 1px solid transparent;
@@ -260,10 +262,12 @@ section#game #mode-container .setting-row {
   padding: 4px;
   text-align: center;
 }
+/* stylelint-disable */
 section#game #mode-container .setting-row a {
   color: var(--black);
   text-decoration: none;
 }
+/* stylelint-enable */
 @media (hover: hover) {
   section#game #mode-container .setting-row a:hover:not(.disabled) {
     text-decoration: underline;
@@ -315,7 +319,7 @@ section#game #mode-container #daily-details.show {
   transform: scale(1);
 }
 section#game #mode-container #daily-details.show .day {
-  font-family: "Changa Bold";
+  font-family: "Changa Bold", sans-serif;
   font-weight: 400;
 }
 

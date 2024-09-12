@@ -1,5 +1,6 @@
 /* lib/cards/stock.js */
 /* functions for stock */
+/* global Deckdle */
 
 Deckdle._stockCount = function () {
   return Deckdle.__getState()['stock'].length

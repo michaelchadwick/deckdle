@@ -2,5 +2,9 @@
 _archive
 _debug
 
+node_modules
+
+.eslintcache
+
 !assets/css/vendor
 !assets/icons

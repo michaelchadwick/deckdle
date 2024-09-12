@@ -1,6 +1,5 @@
 /* lib/constants/specific */
-/* global specific constants */
-/* eslint-disable no-unused-vars */
+/* constant values: specific */
 
 const DECKDLE_GOLF_ROW_MAX = 5
 const DECKDLE_GOLF_COL_MAX = 7

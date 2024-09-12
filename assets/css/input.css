@@ -25,18 +25,22 @@ section#game #keyboard-container .row:last-of-type {
   }
 }
 
-section#game #keyboard-container .row.sub button {
-  background-color: #d6cece;
-}
-section#game #keyboard-container .row.sub button:disabled {
-  background-color: var(--gray);
-}
 section#game #keyboard-container button {
   border: 1px solid transparent;
   font-size: 0.8rem;
   height: 35px;
   width: 50px;
 }
+section#game #keyboard-container button:last-of-type {
+  margin: 0;
+}
+section#game #keyboard-container .row.sub button {
+  background-color: #d6cece;
+}
+section#game #keyboard-container .row.sub button:disabled {
+  background-color: var(--gray);
+}
+
 @media (min-width: 376px) and (min-height: 500px) {
   section#game #keyboard-container button {
     font-size: 1.25rem;
@@ -44,9 +48,7 @@ section#game #keyboard-container button {
     width: 100px;
   }
 }
-section#game #keyboard-container button:last-of-type {
-  margin: 0;
-}
+
 @media (hover: hover) {
   section#game #keyboard-container button:hover:not(.disabled),
   section#game #keyboard-container button:hover:not([disabled]) {

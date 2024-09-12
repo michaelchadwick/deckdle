@@ -106,10 +106,10 @@ Deckdle.__getSessionIndex = function (mode = Deckdle.__getGameMode()) {
   if (rootState) {
     const latestSession = rootState[rootState.length - 1]
 
-    if (latestSession.hasOwnProperty('sessionIndex')) {
+    if (Object.prototype.hasOwnProperty.call(latestSession, 'sessionIndex')) {
       index = latestSession.sessionIndex ?? 0
     } else {
-      index = rootState.length - 1 ?? 0
+      index = rootState.length ? rootState.length - 1 : 0
     }
   } else {
     index = 0
@@ -146,7 +146,7 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
   }
 
   switch (type) {
-    case 'golf':
+    case 'golf': {
       const tableauCount = Deckdle._tableauCount()
       const stockCount = Deckdle._stockCount()
 
@@ -160,6 +160,7 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
         html += `GOLF: +${tableauCount + stockCount}\n`
       }
       break
+    }
   }
 
   if (mode == 'daily') {

@@ -92,7 +92,7 @@ Deckdle._attachEventListeners = function () {
       // 🂡 deal cards animation
       Deckdle.dom.interactive.debug.btnDealCards.addEventListener('click', () => {
         Deckdle.ui._emptyPlayingField()
-        Deckdle.ui._dealCards((animate = true))
+        Deckdle.ui._dealCards(true)
       })
 
       // ☺ display win animation

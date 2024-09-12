@@ -1,21 +1,23 @@
 /* lib/misc/audio */
-/* global Deckdle */
-/* eslint-disable no-unused-vars */
+/* global Deckdle, WebAudioTinySynth */
 
 Deckdle._initSynths = function () {
   Deckdle._logStatus('[INITIALIZING] synths')
 
   if (!Deckdle.__getConfig().synthBGM) {
     // initialize synthBGM instance
-    Deckdle.__setConfig('synthBGM', new WebAudioTinySynth({
-      debug: 0,
-      loop: 1,
-      masterVol: Deckdle.settings.soundBGMLevel,
-      quality: 0, // 0: chiptune, 1: FM
-      reverbLev: 0.1,
-      useReverb: 1,
-      voices: 8,
-    }))
+    Deckdle.__setConfig(
+      'synthBGM',
+      new WebAudioTinySynth({
+        debug: 0,
+        loop: 1,
+        masterVol: Deckdle.settings.soundBGMLevel,
+        quality: 0, // 0: chiptune, 1: FM
+        reverbLev: 0.1,
+        useReverb: 1,
+        voices: 8,
+      })
+    )
   }
 
   Deckdle.config.synthBGM.setLoop(1)
@@ -30,15 +32,18 @@ Deckdle._initSynths = function () {
 
   if (!Deckdle.__getConfig().synthSFX) {
     // initialize synthBGM instance
-    Deckdle.__setConfig('synthSFX', new WebAudioTinySynth({
-      debug: 0,
-      loop: 0,
-      masterVol: Deckdle.settings.soundBGMLevel,
-      quality: 1, // 0: chiptune, 1: FM
-      reverbLev: 0,
-      useReverb: 0,
-      voices: 8,
-    }))
+    Deckdle.__setConfig(
+      'synthSFX',
+      new WebAudioTinySynth({
+        debug: 0,
+        loop: 0,
+        masterVol: Deckdle.settings.soundBGMLevel,
+        quality: 1, // 0: chiptune, 1: FM
+        reverbLev: 0,
+        useReverb: 0,
+        voices: 8,
+      })
+    )
   }
 
   if (Deckdle.config.synthSFX) {
@@ -80,9 +85,10 @@ Deckdle._playSFX = function (action, arg = null) {
     Deckdle.config.synthSFX.setMasterVol(Deckdle.settings.soundSFXLevel)
     Deckdle.config.synthSFX.setProgram(0, 1)
 
+    let note = arg ? 42 + arg : 42
+
     switch (action) {
       case 'click_stock':
-        let note = arg ? 42 + arg: 42
         Deckdle.config.synthSFX.send([0x90, note, 100])
         setTimeout(() => {
           Deckdle.config.synthSFX.send([0x90, note - 2, 100])

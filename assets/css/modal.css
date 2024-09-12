@@ -22,24 +22,15 @@
 .modal-dialog.temp {
   background-color: transparent;
 }
-.modal-dialog.temp .modal-window {
-  background-color: var(--white);
-  border: 2px solid var(--black);
-  border-radius: 8px;
-  box-shadow: none;
-  color: var(--black);
-  pointer-events: none;
-  position: absolute;
-  top: 25%;
-  width: fit-content;
-}
 
 .modal-window {
   --animate-duration: 100ms;
   background-color: var(--white);
   border: 4px solid var(--base-color);
   border-top-width: 0;
-  box-shadow: 0 0 0 4px rgb(0 0 0 / 15%), 0 0 16px rgb(0 0 0 / 25%);
+  box-shadow:
+    0 0 0 4px rgb(0 0 0 / 15%),
+    0 0 16px rgb(0 0 0 / 25%);
   display: none;
   flex-flow: column;
   flex-wrap: nowrap;
@@ -59,6 +50,18 @@
 }
 .modal-window.game-over-lose {
   border-color: var(--window-lose1);
+}
+
+.modal-dialog.temp .modal-window {
+  background-color: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 8px;
+  box-shadow: none;
+  color: var(--black);
+  pointer-events: none;
+  position: absolute;
+  top: 25%;
+  width: fit-content;
 }
 
 .modal-title {
@@ -109,6 +112,18 @@
     background-color: var(--white);
     color: var(--base-color);
   }
+}
+
+.modal-button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto 0 16px 0;
+  padding: 0 10px;
+}
+.modal-button-group button {
+  font-weight: inherit;
+  font-family: inherit;
 }
 
 .modal-text {
@@ -166,18 +181,6 @@
 }
 .modal-text dl dl {
   margin-left: 1em;
-}
-
-.modal-button-group {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: auto 0 16px 0;
-  padding: 0 10px;
-}
-.modal-button-group button {
-  font-weight: inherit;
-  font-family: inherit;
 }
 
 .modal-button {

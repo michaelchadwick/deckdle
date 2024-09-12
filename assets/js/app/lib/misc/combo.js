@@ -1,5 +1,6 @@
 /* lib/misc/combo.js */
 /* functions for combo notification */
+/* global Deckdle */
 
 Deckdle._increaseCombo = () => {
   Deckdle.combo += 1

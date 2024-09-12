@@ -1,5 +1,6 @@
 /* lib/cards/base.js */
 /* functions for base */
+/* global Deckdle */
 
 Deckdle._isBaseEmpty = function () {
   return Deckdle.__getState()['base'].length == 0

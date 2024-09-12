@@ -6,8 +6,7 @@ context('anon', () => {
   })
 
   it('should load web app and have correct components', () => {
-    cy.title()
-      .should('include', 'Deckdle')
+    cy.title().should('include', 'Deckdle')
 
     cy.get('header').should('exist')
     cy.get('header #nav-links').should('exist')

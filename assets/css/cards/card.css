@@ -56,6 +56,29 @@
 .card[data-suit="2"] {
   color: var(--card-suit-red);
 }
+
+.card .rank {
+  display: flex;
+  justify-content: center;
+}
+.card .rank-bot,
+.card .rank-top {
+  display: flex;
+  justify-content: space-around;
+}
+@media (min-width: 992px) {
+  @media (min-height: 500px) {
+    .card .rank-bot,
+    .card .rank-top {
+      padding-top: 2px;
+    }
+  }
+}
+.card .suit {
+  display: flex;
+  justify-content: center;
+}
+
 .card.back {
   background-color: var(--card-back);
   border: 1px solid var(--white);
@@ -68,27 +91,6 @@
 .card.empty {
   background-color: #c7c7c7;
   border: 1px solid transparent;
-}
-.rank {
-  display: flex;
-  justify-content: center;
-}
-.rank-bot,
-.rank-top {
-  display: flex;
-  justify-content: space-around;
-}
-@media (min-width: 992px) {
-  @media (min-height: 500px) {
-    .rank-bot,
-    .rank-top {
-      padding-top: 2px;
-    }
-  }
-}
-.suit {
-  display: flex;
-  justify-content: center;
 }
 
 .card-label {

@@ -1,5 +1,6 @@
 /* lib/cards/tableau.js */
 /* functions for tableau */
+/* global Deckdle, Card */
 
 Deckdle._tableauCount = (cards = null) => {
   let tableau = null
@@ -123,7 +124,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
 
         base.push(new Card(cardRemoved.dataset.suit, cardRemoved.dataset.rank))
 
-        Deckdle.ui._moveCardToBase((source = 'tableau'))
+        Deckdle.ui._moveCardToBase('tableau')
 
         Deckdle.__setState('base', base)
         Deckdle._saveGame()

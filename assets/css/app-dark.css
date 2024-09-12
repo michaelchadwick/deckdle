@@ -30,6 +30,11 @@ body.dark-mode header .menu-left #nav-overlay #nav-content {
 body.dark-mode header .menu-left #nav-overlay #nav-content a {
   color: var(--white);
 }
+
+body.dark-mode section#game #mode-container .setting-row a {
+  color: var(--white);
+}
+
 body.dark-mode
   header
   .menu-left
@@ -53,10 +58,6 @@ body.dark-mode section#game {
   background-color: var(--black);
 }
 
-body.dark-mode section#game #mode-container .setting-row a {
-  color: var(--white);
-}
-
 body.dark-mode section#game #mode-container #daily-details {
   color: var(--white);
 }
@@ -64,6 +65,10 @@ body.dark-mode section#game #mode-container #daily-details {
 body.dark-mode section#game #cards-container,
 body.dark-mode section#game #cards-container #user-cards {
   background-color: var(--gray-dark);
+}
+
+body.dark-mode section#game #cards-container .card {
+  box-shadow: 2px 2px 1px #aaa;
 }
 
 body.dark-mode section#game #cards-container #tableau .card,
@@ -82,10 +87,6 @@ body.dark-mode section#game #cards-container #base .card[data-suit="1"],
 body.dark-mode section#game #cards-container #tableau .card[data-suit="2"],
 body.dark-mode section#game #cards-container #base .card[data-suit="2"] {
   color: #ff8080;
-}
-
-body.dark-mode section#game #cards-container .card {
-  box-shadow: 2px 2px 1px #aaa;
 }
 
 body.dark-mode section#game #keyboard-container button {
