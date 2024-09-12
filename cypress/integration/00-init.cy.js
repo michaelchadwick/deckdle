@@ -5,7 +5,7 @@ context('anon', () => {
     cy.visit('/')
   })
 
-  it('should load web app and have correct components', () => {
+  it('should load web app have correct global components', () => {
     cy.title().should('include', 'Deckdle')
 
     cy.get('header').should('exist')
@@ -15,13 +15,22 @@ context('anon', () => {
     cy.get('header #button-settings').should('exist')
 
     cy.get('#game').should('exist')
+    cy.get('#game #mode-container').should('exist')
+    cy.get('#game #mode-container #gamemode-container').should('exist')
+
     cy.get('#game #game-type').should('exist')
+
     cy.get('#game #cards-container').should('exist')
     cy.get('#game #tableau').should('exist')
     cy.get('#game #tableau-count').should('exist')
+
     cy.get('#game #user-cards').should('exist')
     cy.get('#game #user-cards #stock').should('exist')
     cy.get('#game #user-cards #base').should('exist')
+
+    cy.get('#game #keyboard-container').should('exist')
+    cy.get('#game #keyboard-container #button-undo-move').should('exist')
+    cy.get('#game #keyboard-container #button-undo-move').should('have.attr', 'disabled')
   })
 
   it('should load a tableau with 35 cards', () => {
@@ -34,5 +43,30 @@ context('anon', () => {
 
   it('should load a base with 1 card', () => {
     cy.get('#user-cards #base .card').should('have.length', 1)
+  })
+
+  it('should load daily golf if no saved progress', () => {
+    cy.get('#game #mode-container #gamemode-container #gamemode-0').should(
+      'have.attr',
+      'data-active',
+      'true'
+    )
+    cy.get('#game #mode-container #gamemode-container #gamemode-1').should(
+      'have.attr',
+      'data-active',
+      'false'
+    )
+    cy.get('#game #mode-container #daily-details').should('exist')
+
+    cy.get('#game #game-type').should('have.text', 'golf')
+  })
+
+  it('should load help modal if no saved progress', () => {
+    cy.get('dialog.modal-dialog').should('exist')
+    cy.get('dialog.modal-dialog .modal-window').should('exist')
+    cy.get('dialog.modal-dialog .modal-window .modal-title').should(
+      'contain.text',
+      'How to Play Deckdle'
+    )
   })
 })
