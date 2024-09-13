@@ -54,7 +54,10 @@ Deckdle._loseAnimationFade = async function (debug = false) {
 }
 
 Deckdle._disableUI = function () {
-  Deckdle._logStatus('disabling UI')
+  // Deckdle._logStatus('disabling UI')
+
+  setTimeout(() => Deckdle.dom.cardsContainer.classList.remove('disabled'), 0)
+  setTimeout(() => Deckdle.dom.cardsContainer.classList.add('disabled'), 5)
 
   const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
 
@@ -63,6 +66,9 @@ Deckdle._disableUI = function () {
     setTimeout(() => card.classList.add('disabled'), 5)
     card.setAttribute('disabled', true)
   })
+
+  setTimeout(() => Deckdle.dom.userCards.classList.remove('disabled'), 0)
+  setTimeout(() => Deckdle.dom.userCards.classList.add('disabled'), 5)
 
   const stockCardTop = Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
 
@@ -80,7 +86,10 @@ Deckdle._disableUI = function () {
 }
 
 Deckdle._enableUI = function () {
-  Deckdle._logStatus('enabling UI')
+  // Deckdle._logStatus('enabling UI')
+
+  Deckdle.dom.cardsContainer.classList.remove('disabled')
+  Deckdle.dom.userCards.classList.remove('disabled')
 
   const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
 

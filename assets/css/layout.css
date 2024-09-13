@@ -340,6 +340,9 @@ section#game #game-type {
 section#game #cards-container {
   margin: 0;
 }
+section#game #cards-container.disabled {
+  background-color: var(--gray);
+}
 @media (min-width: 768px) {
   section#game #cards-container {
     background-color: var(--white);

@@ -419,6 +419,8 @@ Deckdle._changeSetting = async function (setting, value) {
       Deckdle.ui._removeModalVestige()
 
       if (Deckdle.__getGameMode() != value) {
+        Deckdle._enableUI()
+
         switch (value) {
           case 'daily':
             Deckdle._saveSetting('gameMode', 'daily')

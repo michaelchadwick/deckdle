@@ -7,6 +7,9 @@
   justify-content: center;
   margin: 5px auto;
 }
+#user-cards.disabled {
+  background-color: var(--gray-light2);
+}
 @media (min-width: 768px) {
   @media (min-height: 500px) {
     #user-cards {
