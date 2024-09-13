@@ -9,7 +9,9 @@
     "lint:css:fix": "stylelint \"**/*.css\" --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "test": "cypress run",
+    "test": "npx cypress run --env host=local",
+    "test-open": "npx cypress open --e2e -b electron --env host=local",
+    "test-open-prod": "npx cypress open --e2e -b electron --config baseUrl='https://deckdle.neb.host' --env host=prod",
     "prepare": "husky"
   },
   "keywords": [],
