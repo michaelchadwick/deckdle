@@ -1,5 +1,5 @@
 body.dark-mode {
-  background-color: var(--black);
+  background-color: var(--black-light);
   color: var(--white);
 }
 body.dark-mode a {
