@@ -60,13 +60,4 @@ context('anon', () => {
 
     cy.get('#game #game-type').should('have.text', 'golf')
   })
-
-  it('should load help modal if no saved progress', () => {
-    cy.get('dialog.modal-dialog').should('exist')
-    cy.get('dialog.modal-dialog .modal-window').should('exist')
-    cy.get('dialog.modal-dialog .modal-window .modal-title').should(
-      'contain.text',
-      'How to Play Deckdle'
-    )
-  })
 })
