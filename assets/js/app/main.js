@@ -225,7 +225,8 @@ Deckdle._checkWinState = function () {
     Deckdle.__setState('gameState', 'GAME_OVER')
     Deckdle.__setState('lastCompletedTime', new Date().getTime())
 
-    Deckdle.__loseAnimation().then(() => {
+    Deckdle.__loseAnimationFade().then((msg) => {
+      Deckdle._logStatus(msg)
       Deckdle.modalOpen('game-over')
     })
   }

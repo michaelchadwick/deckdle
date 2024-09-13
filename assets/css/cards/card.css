@@ -10,7 +10,7 @@
   justify-content: space-between;
   margin-top: 0;
   min-height: 67px;
-  transition: all 50ms;
+  opacity: 1;
   width: 12vw;
 }
 @media (min-height: 500px) {
@@ -91,6 +91,10 @@
 .card.empty {
   background-color: #c7c7c7;
   border: 1px solid transparent;
+}
+.card.disabled {
+  background-color: var(--disabled);
+  opacity: 0.3;
 }
 
 .card-label {

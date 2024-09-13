@@ -22,10 +22,10 @@ Deckdle._handleClickTouch = function (event) {
 
   if (dialog) {
     const isConfirm = dialog.classList.contains('modal-confirm')
-    const isEndState = dialog.classList.contains('end-state')
+    // const isEndState = dialog.classList.contains('end-state')
 
-    // only close if not a confirmation or end state!
-    if (elem == dialog && !isConfirm && !isEndState) {
+    // only close if not a confirmation!
+    if (elem == dialog && !isConfirm) {
       dialog.remove()
     }
   }
@@ -97,12 +97,18 @@ Deckdle._attachEventListeners = function () {
 
       // ☺ display win animation
       Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener('click', () => {
-        Deckdle.__winAnimation().then(() => Deckdle.__resetCardsDuration())
+        Deckdle.__winAnimation().then((msg) => {
+          Deckdle._logStatus(msg)
+          Deckdle.__resetCardsDuration()
+        })
       })
 
-      // ☹ display win animation
+      // ☹ display lose animation
       Deckdle.dom.interactive.debug.btnLoseAnimation.addEventListener('click', () => {
-        Deckdle.__loseAnimation().then(() => Deckdle.__resetCardsDuration())
+        Deckdle.__loseAnimationFade().then((msg) => {
+          Deckdle._logStatus(msg)
+          Deckdle.__resetCardsDuration()
+        })
       })
     }
   }

@@ -28,12 +28,19 @@
 #stock {
   display: grid;
   justify-items: center;
+  opacity: 1;
 }
 
 #base .card,
 #stock .card {
   grid-column: 1;
   grid-row: 1;
+}
+
+#base .card.disabled,
+#stock .card.disabled {
+  cursor: not-allowed;
+  opacity: 1;
 }
 
 #base .card:nth-last-child(2) {

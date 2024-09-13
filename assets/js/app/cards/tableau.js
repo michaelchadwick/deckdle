@@ -134,9 +134,12 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
         console.error('could not remove card from tableau')
       }
     } else {
-      Deckdle._animateCSS(`#tableau #${colId} .card[data-row="${rowId}"]`, 'shakeX').then(() => {
-        Deckdle._playSFX('click_tableau_invalid')
-      })
+      const cardSelector = `#tableau #${colId} .card[data-row="${rowId}"]`
+      if (!document.querySelector(cardSelector).classList.contains('disabled')) {
+        Deckdle._animateCSS(cardSelector, 'shakeX').then(() => {
+          Deckdle._playSFX('click_tableau_invalid')
+        })
+      }
     }
   }
 }

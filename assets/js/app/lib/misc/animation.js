@@ -26,6 +26,7 @@ Deckdle._animateCSS = (element, animation, loop, prefix = 'animate__') => {
 }
 
 Deckdle.__winAnimation = async function () {
+  Deckdle._logStatus('__winAnimation started')
   return new Promise((resolve) => {
     Deckdle._animateCSS('#base', 'tada')
 
@@ -33,7 +34,8 @@ Deckdle.__winAnimation = async function () {
   })
 }
 
-Deckdle.__loseAnimation = async function () {
+Deckdle.__loseAnimationShake = async function () {
+  Deckdle._logStatus('__loseAnimationShake started')
   return new Promise((resolve) => {
     const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelector('.card'))
 
@@ -50,7 +52,30 @@ Deckdle.__loseAnimation = async function () {
     setTimeout(() => Deckdle._animateCSS('#stock', 'shakeX'), 330)
     setTimeout(() => Deckdle._animateCSS('#base', 'shakeX'), 350)
 
-    setTimeout(() => resolve('__loseAnimation ended'), 1000)
+    setTimeout(() => resolve('__loseAnimationShake ended'), 1000)
+  })
+}
+
+Deckdle.__loseAnimationFade = async function () {
+  Deckdle._logStatus('__loseAnimationFade started')
+  return new Promise((resolve) => {
+    const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
+
+    tableauCardArray.forEach((card) => {
+      setTimeout(() => card.classList.remove('disabled'), 1)
+      setTimeout(() => card.classList.add('disabled'), 2)
+      card.setAttribute('disabled', true)
+    })
+
+    const baseCardTop = Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
+
+    setTimeout(() => baseCardTop.classList.remove('disabled'), 3)
+    setTimeout(() => baseCardTop.classList.add('disabled'), 4)
+    baseCardTop.setAttribute('disabled', true)
+
+    setTimeout(() => {
+      resolve('__loseAnimationFade ended')
+    }, 1000)
   })
 }
 
