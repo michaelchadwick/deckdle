@@ -59,21 +59,21 @@ Deckdle._disableUI = function () {
   const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
 
   tableauCardArray.forEach((card) => {
-    setTimeout(() => card.classList.remove('disabled'), 1)
-    setTimeout(() => card.classList.add('disabled'), 2)
+    setTimeout(() => card.classList.remove('disabled'), 0)
+    setTimeout(() => card.classList.add('disabled'), 5)
     card.setAttribute('disabled', true)
   })
 
   const stockCardTop = Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
 
-  setTimeout(() => stockCardTop.classList.remove('disabled'), 3)
-  setTimeout(() => stockCardTop.classList.add('disabled'), 4)
+  setTimeout(() => stockCardTop.classList.remove('disabled'), 0)
+  setTimeout(() => stockCardTop.classList.add('disabled'), 5)
   stockCardTop.setAttribute('disabled', true)
 
   const baseCardTop = Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
 
-  setTimeout(() => baseCardTop.classList.remove('disabled'), 5)
-  setTimeout(() => baseCardTop.classList.add('disabled'), 6)
+  setTimeout(() => baseCardTop.classList.remove('disabled'), 0)
+  setTimeout(() => baseCardTop.classList.add('disabled'), 5)
   baseCardTop.setAttribute('disabled', true)
 
   Deckdle.dom.input.btnUndoMove.disabled = true
