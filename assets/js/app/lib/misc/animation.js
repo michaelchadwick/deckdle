@@ -73,6 +73,8 @@ Deckdle.__loseAnimationFade = async function () {
     setTimeout(() => baseCardTop.classList.add('disabled'), 4)
     baseCardTop.setAttribute('disabled', true)
 
+    Deckdle.dom.input.btnUndoMove.disabled = true
+
     setTimeout(() => {
       resolve('__loseAnimationFade ended')
     }, 1000)
