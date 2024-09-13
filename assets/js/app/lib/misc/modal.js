@@ -115,7 +115,7 @@ class Modal {
       title.appendChild(titleText)
 
       // Close
-      if (modalType == 'perm' || modalType == 'perm-debug') {
+      if (modalType == 'perm' || modalType == 'perm-debug' || modalType == 'end-state') {
         this.closeButton = document.createElement('button')
         this.closeButton.type = 'button'
         this.closeButton.innerHTML = '&times;'
@@ -185,7 +185,7 @@ class Modal {
       const modal = modals[modalCount - 1]
 
       if (this.parent.contains(modal)) {
-        if (!modal.classList.contains('modal-confirm') && !modal.classList.contains('end-state')) {
+        if (!modal.classList.contains('modal-confirm')) {
           this.parent.removeChild(modal)
           delete this
         }
