@@ -22,10 +22,11 @@ Deckdle._handleClickTouch = function (event) {
 
   if (dialog) {
     const isConfirm = dialog.classList.contains('modal-confirm')
+    const isShareLink = event.target.classList.contains('share')
     // const isEndState = dialog.classList.contains('end-state')
 
-    // only close if not a confirmation!
-    if (elem == dialog && !isConfirm) {
+    // only close if not a confirmation or share link!
+    if (elem == dialog && !isConfirm && !isShareLink) {
       dialog.remove()
     }
   }
@@ -92,22 +93,25 @@ Deckdle._attachEventListeners = function () {
       // 🂡 deal cards animation
       Deckdle.dom.interactive.debug.btnDealCards.addEventListener('click', () => {
         Deckdle.ui._emptyPlayingField()
-        Deckdle.ui._dealCards(true)
+        /* eslint-disable-next-line no-undef */
+        Deckdle.ui._dealCards((animate = true))
       })
 
       // ☺ display win animation
       Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener('click', () => {
-        Deckdle.__winAnimation().then((msg) => {
+        /* eslint-disable-next-line no-undef */
+        Deckdle._winAnimation((debug = true)).then((msg) => {
           Deckdle._logStatus(msg)
-          Deckdle.__resetCardsDuration()
+          Deckdle._resetCardsDuration()
         })
       })
 
       // ☹ display lose animation
       Deckdle.dom.interactive.debug.btnLoseAnimation.addEventListener('click', () => {
-        Deckdle.__loseAnimationFade().then((msg) => {
+        /* eslint-disable-next-line no-undef */
+        Deckdle._loseAnimationFade((debug = true)).then((msg) => {
           Deckdle._logStatus(msg)
-          Deckdle.__resetCardsDuration()
+          Deckdle._resetCardsDuration()
         })
       })
     }

@@ -99,6 +99,9 @@ header .menu-left #nav-overlay #nav-content {
 
 #stock {
   --animate-delay: 0s;
+}
+
+#stock .card {
   transition: all 1s;
 }
 

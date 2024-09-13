@@ -111,6 +111,14 @@ Deckdle.modalOpen = async function (type) {
           </div>
       `
 
+      if (Deckdle.__getState().gameState == 'GAME_OVER') {
+        modalText += `
+          <div class="share">
+            <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
+          </div>
+        `
+      }
+
       modalText += `
         </div>
       `
@@ -308,19 +316,13 @@ Deckdle.modalOpen = async function (type) {
       if (Deckdle.__getGameMode() == 'daily') {
         modalText += `
           <div class="para">New daily puzzle available at 12 am PST</div>
-          <div class="buttons">
-            <button class="game-over new-free" onclick="Deckdle._changeSetting('gameMode', 'free')" title="Switch to free play?">Switch to free play?</button>
-            <button class="game-over check-stats" onclick="Deckdle.modalOpen('stats')" title="Check stats">Check stats</button>
-          </div>
         `
       }
       // free
       else {
         modalText += `
           <div class="buttons">
-            <button class="game-over switch-daily" onclick="Deckdle._changeSetting('gameMode', 'daily')" title="Switch to daily?">Switch to daily?</button>
             <button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>
-            <button class="game-over check-stats" onclick="Deckdle.modalOpen('stats')" title="Check stats">Check stats</button>
           </div>
         `
       }

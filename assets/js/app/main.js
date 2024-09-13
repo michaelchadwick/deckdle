@@ -209,6 +209,8 @@ Deckdle._confirmNewFree = async function () {
 
 // game state checking
 Deckdle._checkWinState = function () {
+  // Deckdle._logStatus('checking win state...')
+
   Deckdle.__setState('lastPlayedTime', new Date().getTime())
 
   // tableau exhausted
@@ -216,7 +218,7 @@ Deckdle._checkWinState = function () {
     Deckdle.__setState('gameState', 'GAME_OVER')
     Deckdle.__setState('lastCompletedTime', new Date().getTime())
 
-    Deckdle.__winAnimation().then(() => {
+    Deckdle._winAnimation().then(() => {
       Deckdle.modalOpen('game-over')
     })
   }
@@ -225,7 +227,7 @@ Deckdle._checkWinState = function () {
     Deckdle.__setState('gameState', 'GAME_OVER')
     Deckdle.__setState('lastCompletedTime', new Date().getTime())
 
-    Deckdle.__loseAnimationFade().then((msg) => {
+    Deckdle._loseAnimationFade().then((msg) => {
       Deckdle._logStatus(msg)
       Deckdle.modalOpen('game-over')
     })

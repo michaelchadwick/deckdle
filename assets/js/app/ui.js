@@ -14,6 +14,7 @@ Deckdle.ui._createCard = (card, cardType, classes = [], draggable = false) => {
   } else {
     cardDiv.classList.add('card')
   }
+  card.disabled = false
   cardDiv.draggable = draggable
   cardDiv.dataset.rank = card.rank
   cardDiv.dataset.suit = card.suit
