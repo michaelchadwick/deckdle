@@ -16,7 +16,14 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: [".*", ".*/", "assets/fontawesome/*", "cypress/*", "**/vendor/*"],
+    ignores: [
+      ".*",
+      ".*/",
+      "cypress.config.js",
+      "assets/fontawesome/*",
+      "cypress/*",
+      "**/vendor/*",
+    ],
   },
   ...compat.extends("eslint:recommended", "plugin:prettier/recommended"),
   {

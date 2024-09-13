@@ -1,6 +1,7 @@
 /* lib/cards/deck.js */
 /* class definition for Deck of Cards */
-/* global Deck, Card, Chance */
+/* global Card, Chance */
+/* eslint-disable no-unused-vars */
 
 class Deck {
   constructor() {

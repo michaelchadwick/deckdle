@@ -1,5 +1,6 @@
 /* lib/constants/general */
 /* constant values: global */
+/* eslint-disable no-unused-vars */
 
 const NEBYOOAPPS_SOURCE_URL = 'https://dave.neb.host/?sites'
 

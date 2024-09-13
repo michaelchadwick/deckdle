@@ -1,6 +1,7 @@
 /* lib/misc/local_storage */
 /* functions to interact with window.localStorage */
 /* global Deckdle */
+/* eslint-disable no-undef, no-unused-vars */
 
 // load state from LS -> code model
 Deckdle._loadGame = async function () {

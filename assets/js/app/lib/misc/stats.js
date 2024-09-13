@@ -1,6 +1,7 @@
 /* lib/misc/stats */
 /* function for modal stats */
 /* global Deckdle */
+/* eslint-disable no-undef */
 
 Deckdle._getFinishedGameCount = function (mode) {
   let ls =

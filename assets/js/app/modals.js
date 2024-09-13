@@ -1,6 +1,7 @@
 /* modals */
 /* various modal configs that get called during gameplay */
 /* global Deckdle */
+/* eslint-disable no-undef */
 
 Deckdle.modalOpen = async function (type) {
   let modalText

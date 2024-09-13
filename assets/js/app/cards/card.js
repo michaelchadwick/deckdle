@@ -1,5 +1,6 @@
 /* lib/cards/card.js */
 /* class definition for Card */
+/* eslint-disable no-unused-vars */
 
 class Card {
   constructor(suit = 3, rank = 14, status = 1) {

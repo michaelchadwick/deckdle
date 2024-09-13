@@ -1,6 +1,7 @@
 /* lib/misc/helpers */
 /* misc global functions */
 /* global Deckdle */
+/* eslint-disable no-undef */
 
 Deckdle._sleep = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms))

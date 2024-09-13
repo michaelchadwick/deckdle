@@ -1,6 +1,7 @@
 /* main */
 /* app entry point and main functions */
-/* global Deckdle, Card */
+/* global Deckdle */
+/* eslint-disable no-undef */
 
 // settings: saved in LOCAL STORAGE
 Deckdle.settings = { ...DECKDLE_DEFAULTS.settings }

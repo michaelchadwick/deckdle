@@ -3,6 +3,7 @@
   Creates a new Deck full of Cards, and then uses
   a generated setupId to create a tableau and stock
 */
+/* eslint-disable no-undef, no-unused-vars */
 
 class Puzzle {
   constructor(setupId, type = 'golf', state = null) {

@@ -4,7 +4,7 @@
 
 Deckdle._animateCSS = (element, animation, loop, prefix = 'animate__') => {
   // We create a Promise and return it
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const animationName = `${prefix}${animation}`
     const node = document.querySelector(element)
 
@@ -26,7 +26,7 @@ Deckdle._animateCSS = (element, animation, loop, prefix = 'animate__') => {
 }
 
 Deckdle.__winAnimation = async function () {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     Deckdle._animateCSS('#base', 'tada')
 
     setTimeout(() => resolve('__winAnimation ended'), 1000)
@@ -34,7 +34,7 @@ Deckdle.__winAnimation = async function () {
 }
 
 Deckdle.__loseAnimation = async function () {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelector('.card'))
 
     tableauCardArray.forEach((card) => card.style.setProperty('--animate-duration', '1000ms'))

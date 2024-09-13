@@ -1,5 +1,6 @@
 /* lib/misc/modal.js */
 /* modal dialog UI */
+/* eslint-disable no-unused-vars */
 
 class Modal {
   constructor(

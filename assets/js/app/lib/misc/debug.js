@@ -1,6 +1,7 @@
 /* lib/misc/debug */
 /* debug functions */
 /* global Deckdle */
+/* eslint-disable no-undef */
 
 // add debug stuff if local
 Deckdle._initDebug = function () {
