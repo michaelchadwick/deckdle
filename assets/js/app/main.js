@@ -136,21 +136,25 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
 Deckdle._loadExistingSetup = async function (gameMode) {
   // 'daily' always uses day hash
   if (gameMode == 'daily') {
-    try {
-      const response = await fetch(DECKDLE_DAILY_SCRIPT)
-      const data = await response.json()
-      const setupId = parseInt(data['setupId'])
+    // if we are testing, we don't need to grab a hash
+    // and instead setupId is already set, like free play
+    if (Deckdle.env != 'test') {
+      try {
+        const response = await fetch(DECKDLE_DAILY_SCRIPT)
+        const data = await response.json()
+        const setupId = parseInt(data['setupId'])
 
-      Deckdle.ui._updateDailyDetails(data['index'])
+        Deckdle.ui._updateDailyDetails(data['index'])
 
-      if (!setupId) {
-        console.error('retrieval of daily setupId went bork', setupId)
-      } else {
-        // Deckdle._logStatus('daily setupId was successfully retrieved')
-        Deckdle.__setState('setupId', setupId, gameMode)
+        if (!setupId) {
+          console.error('retrieval of daily setupId went bork', setupId)
+        } else {
+          // Deckdle._logStatus('daily setupId was successfully retrieved')
+          Deckdle.__setState('setupId', setupId, gameMode)
+        }
+      } catch (e) {
+        console.error('could not get daily setupId', e)
       }
-    } catch (e) {
-      console.error('could not get daily setupId', e)
     }
   }
   // free uses current state, so nothing to do

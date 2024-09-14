@@ -1,9 +1,11 @@
 /// <reference types="Cypress" />
 
-context('cards', () => {
+context('01-cards', () => {
   context('tableau', () => {
     context('golf', () => {
       beforeEach(() => {
+        cy.visit(Cypress.config().baseUrl)
+
         cy.get('#tableau .col').as('cols')
         cy.get('#tableau #col0 .card:last-of-type').as('validCard')
         cy.get('#tableau #col1 .card:last-of-type').as('invalidAvailCard')

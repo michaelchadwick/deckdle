@@ -5,7 +5,7 @@ beforeEach(() => {
   // Check firstTime flag so 'Help' modal doesn't display
   const settings = {
     firstTime: false,
-    gameMode: 'free',
+    gameMode: 'daily',
   }
   localStorage.setItem('deckdle-settings', JSON.stringify(settings))
 

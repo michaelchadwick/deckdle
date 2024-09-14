@@ -17,12 +17,15 @@ Deckdle._loadGame = async function () {
   // if we are testing, short-circuit some stuff
   // and use a debug setup to make things nice
   if (Deckdle.env == 'test') {
-    // Create perfect free puzzle state
-    const debugJson = await fetch('../../assets/json/debug.json')
-    const freeState = await debugJson.json()
+    // Create perfect puzzle states
+    const debugDailyJson = await fetch('../../assets/json/debug_daily.json')
+    const dailyState = await debugDailyJson.json()
+    localStorage.setItem('deckdle-state-daily', JSON.stringify(dailyState))
+    const debugFreeJson = await fetch('../../assets/json/debug_free.json')
+    const freeState = await debugFreeJson.json()
     localStorage.setItem('deckdle-state-free', JSON.stringify(freeState))
 
-    Deckdle.settings.gameMode = 'free'
+    Deckdle.settings.gameMode = 'daily'
   }
 
   // make sure a gameMode is set
@@ -73,37 +76,41 @@ Deckdle._loadGame = async function () {
         }
       })
 
-      // special case for daily word: need to check
-      // to make sure time hasn't elapsed on saved progress
-      try {
-        const response = await fetch(DECKDLE_DAILY_SCRIPT)
-        const data = await response.json()
-        const dailySetupId = data['setupId']
+      if (Deckdle.env == 'test') {
+        dailyCreateOrLoad = 'load'
+      } else {
+        // special case for daily word: need to check
+        // to make sure time hasn't elapsed on saved progress
+        try {
+          const response = await fetch(DECKDLE_DAILY_SCRIPT)
+          const data = await response.json()
+          const dailySetupId = data['setupId']
 
-        // saved setupId and daily setupId are the same? still working on it
-        if (lsStateDaily[Deckdle.__getSessionIndex()].setupId) {
-          if (dailySetupId == parseInt(lsStateDaily[Deckdle.__getSessionIndex()].setupId)) {
-            Deckdle.__setState(
-              'gameState',
-              lsStateDaily[Deckdle.__getSessionIndex()].gameState,
-              'daily'
-            )
+          // saved setupId and daily setupId are the same? still working on it
+          if (lsStateDaily[Deckdle.__getSessionIndex()].setupId) {
+            if (dailySetupId == parseInt(lsStateDaily[Deckdle.__getSessionIndex()].setupId)) {
+              Deckdle.__setState(
+                'gameState',
+                lsStateDaily[Deckdle.__getSessionIndex()].gameState,
+                'daily'
+              )
 
-            dailyCreateOrLoad = 'load'
+              dailyCreateOrLoad = 'load'
+            }
           }
+          // time has elapsed on daily puzzle, and new one is needed
+          else {
+            Deckdle.__setState('gameState', 'IN_PROGRESS', 'daily')
+
+            Deckdle._saveGame('daily', '_loadGame(daily time elapsed)')
+
+            dailyCreateOrLoad = 'create'
+          }
+
+          Deckdle.ui._updateDailyDetails(data['index'])
+        } catch (e) {
+          console.error('could not get daily setupId', e)
         }
-        // time has elapsed on daily puzzle, and new one is needed
-        else {
-          Deckdle.__setState('gameState', 'IN_PROGRESS', 'daily')
-
-          Deckdle._saveGame('daily', '_loadGame(daily time elapsed)')
-
-          dailyCreateOrLoad = 'create'
-        }
-
-        Deckdle.ui._updateDailyDetails(data['index'])
-      } catch (e) {
-        console.error('could not get daily setupId', e)
       }
     } else {
       // Deckdle._logStatus('no previous daily state found. creating new daily puzzle.')
