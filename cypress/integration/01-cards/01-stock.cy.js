@@ -9,6 +9,7 @@ context('01-cards', () => {
         cy.visit(Cypress.config().baseUrl)
 
         cy.get('#stock').as('stock')
+        cy.get('#stock .card-label').as('stockCount')
         cy.get('#stock .card').as('stockCards')
         cy.get('#stock .card:last-of-type').as('stockTopCard')
         cy.get('#base').as('base')
@@ -18,6 +19,7 @@ context('01-cards', () => {
 
       it('should begin with 16 cards', () => {
         cy.get('@stockCards').should('have.length', STOCK_MAX_COUNT)
+        cy.get('@stockCount').should('contain.text', STOCK_MAX_COUNT.toString())
       })
 
       it('should have a back card on top', () => {

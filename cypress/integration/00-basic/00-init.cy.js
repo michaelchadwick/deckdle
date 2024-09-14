@@ -6,7 +6,7 @@ context('00-basic', () => {
       cy.visit(Cypress.config().baseUrl)
     })
 
-    it('should load web app have correct global components', () => {
+    it('should load web app with correct global components', () => {
       cy.title().should('include', 'Deckdle')
 
       cy.get('header').should('exist')
@@ -34,19 +34,7 @@ context('00-basic', () => {
       cy.get('#game #keyboard-container #button-undo-move').should('have.attr', 'disabled')
     })
 
-    it('should load a tableau with 35 cards', () => {
-      cy.get('#tableau .col .card').should('have.length', 35)
-    })
-
-    it('should load a stock with 16 cards', () => {
-      cy.get('#user-cards #stock .card').should('have.length', 16)
-    })
-
-    it('should load a base with 1 card', () => {
-      cy.get('#user-cards #base .card').should('have.length', 1)
-    })
-
-    it('should load daily golf if no saved progress', () => {
+    it('should load daily golf', () => {
       cy.get('#game #mode-container #gamemode-container #gamemode-0').should(
         'have.attr',
         'data-active',

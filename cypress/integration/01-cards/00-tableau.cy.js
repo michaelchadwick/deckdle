@@ -3,10 +3,15 @@
 context('01-cards', () => {
   context('tableau', () => {
     context('golf', () => {
+      const TABLEAU_COL_COUNT = 7
+      const TABLEAU_CARD_MAX_COUNT = 35
+
       beforeEach(() => {
         cy.visit(Cypress.config().baseUrl)
 
+        cy.get('#tableau-count .count').as('tableauCount')
         cy.get('#tableau .col').as('cols')
+        cy.get('#tableau .card').as('cards')
         cy.get('#tableau #col0 .card:last-of-type').as('validCard')
         cy.get('#tableau #col1 .card:last-of-type').as('invalidAvailCard')
         cy.get('#tableau #col1 .card:first-of-type').as('UnavailableCard')
@@ -14,11 +19,16 @@ context('01-cards', () => {
       })
 
       it('should have 7 columns', () => {
-        cy.get('#tableau .col').should('have.length', 7)
+        cy.get('@cols').should('have.length', TABLEAU_COL_COUNT)
+      })
+
+      it('should have 35 cards', () => {
+        cy.get('@cards').should('have.length', TABLEAU_CARD_MAX_COUNT)
+        cy.get('@tableauCount').should('have.text', TABLEAU_CARD_MAX_COUNT.toString())
       })
 
       it('should have available card at the bottom of each column', () => {
-        cy.get('#tableau .col').each(($el) => {
+        cy.get('@cols').each(($el) => {
           cy.wrap($el).find('.card:last-of-type').should('have.class', 'available')
         })
       })
