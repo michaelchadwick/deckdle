@@ -50,8 +50,9 @@ module.exports = defineConfig({
     screenshotsFolder: 'cypress/screenshots',
     specPattern: ['cypress/integration/**/*.cy.js'],
     supportFile: 'cypress/support/e2e.js',
-    viewportWidth: 1000,
-    viewportHeight: 1200,
+    viewportWidth: 768,
+    viewportHeight: 840,
+    watchForFileChanges: true,
   },
   env: {
     CUSTOM_SCRIPTS_ROOT: 'scripts',

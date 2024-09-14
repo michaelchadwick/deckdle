@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-context('anon', () => {
+context('basic init', () => {
   beforeEach(() => {
     cy.visit('/')
   })

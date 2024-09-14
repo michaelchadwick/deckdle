@@ -18,6 +18,11 @@ Deckdle.state = { ...DECKDLE_DEFAULTS.state }
 
 // start the engine
 Deckdle.initApp = async () => {
+  if (window.Cypress) {
+    Deckdle.env = 'test'
+
+    Deckdle.dom.headerTitle += ' (TEST)'
+  }
   // if local dev, show debug stuff
   if (Deckdle.env == 'local') {
     Deckdle._initDebug()

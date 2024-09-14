@@ -1,12 +1,13 @@
 import './commands'
+import 'cypress-real-events'
 
 beforeEach(() => {
-  const defaultLocalStorageObj = {
+  // Check firstTime flag so 'Help' modal doesn't display
+  const settings = {
     firstTime: false,
+    gameMode: 'free',
   }
-
-  // Set the last-visited date so that the how to play modal doesn't display
-  localStorage.setItem('deckdle-settings', JSON.stringify(defaultLocalStorageObj))
+  localStorage.setItem('deckdle-settings', JSON.stringify(settings))
 
   cy.visit(Cypress.config().baseUrl)
 })

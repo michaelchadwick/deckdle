@@ -62,12 +62,14 @@
   opacity: 0;
   z-index: -9999 !important;
 }
+#tableau .col .card.available:not(.disabled):hover,
+#tableau .col .card.available:not(.disabled):active,
+#tableau .col .card.available:not(.disabled):focus {
+  background-color: #ebf7ff;
+  border: 1px dashed var(--dark-color);
+  cursor: pointer;
+}
 @media (hover: hover) {
-  #tableau .col .card.available:not(.disabled):hover {
-    background-color: #ebf7ff;
-    border: 1px dashed var(--dark-color);
-    cursor: pointer;
-  }
   #tableau .col .card.removed:hover {
     cursor: default;
   }

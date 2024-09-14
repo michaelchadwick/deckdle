@@ -5,7 +5,7 @@
 
 Deckdle.ui = {}
 
-Deckdle.ui._createCard = (card, cardType, classes = [], draggable = false) => {
+Deckdle.ui._createCard = (card, cardType, classes = [], tabIndex = null, draggable = false) => {
   const cardDiv = document.createElement('div')
 
   if (classes.length) {
@@ -14,12 +14,17 @@ Deckdle.ui._createCard = (card, cardType, classes = [], draggable = false) => {
   } else {
     cardDiv.classList.add('card')
   }
+
   card.disabled = false
   cardDiv.draggable = draggable
   cardDiv.dataset.rank = card.rank
   cardDiv.dataset.suit = card.suit
   cardDiv.dataset.status = card.status
   cardDiv.dataset.type = cardType
+
+  if (tabIndex) {
+    cardDiv.tabIndex = tabIndex
+  }
 
   const rankTopDiv = document.createElement('div')
   rankTopDiv.classList.add('rank-top')
@@ -185,7 +190,7 @@ Deckdle.ui._dealCards = function (animate = false) {
     Object.values(tableauCards[col]).forEach((card, index) => {
       const lastValidCardIndex = tableauCards[col].filter((card) => card.status == 1).length - 1
       const cardClasses = index == lastValidCardIndex ? ['available'] : []
-      const newCard = Deckdle.ui._createCard(card, 'tableau', cardClasses)
+      const newCard = Deckdle.ui._createCard(card, 'tableau', cardClasses, index ?? 0)
 
       Deckdle.ui._addCardToTableau(newCard, colId)
 

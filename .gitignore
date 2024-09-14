@@ -8,6 +8,7 @@ node_modules
 
 !assets/css/vendor
 !assets/icons
+assets/json/debug*.json
 
 cypress/screenshots
 cypress/videos

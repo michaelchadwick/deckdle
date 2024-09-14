@@ -11,19 +11,27 @@ Deckdle._loadGame = async function () {
 
   Deckdle._loadSettings()
 
+  let dailyCreateOrLoad = ''
+  let freeCreateOrLoad = ''
+
+  // if we are testing, short-circuit some stuff
+  // and use a debug setup to make things nice
+  if (Deckdle.env == 'test') {
+    // Create perfect free puzzle state
+    const debugJson = await fetch('../../assets/json/debug.json')
+    const freeState = await debugJson.json()
+    localStorage.setItem('deckdle-state-free', JSON.stringify(freeState))
+
+    Deckdle.settings.gameMode = 'free'
+  }
+
   // make sure a gameMode is set
   if (!Deckdle.settings.gameMode) {
     Deckdle.settings.gameMode = DECKDLE_DEFAULT_GAMEMODE
   }
 
-  let dailyCreateOrLoad = ''
-  let freeCreateOrLoad = ''
-
+  // daily state LS -> code
   if (Deckdle.__getGameMode() == 'daily') {
-    /* ************************* */
-    /* daily state LS -> code    */
-    /* ************************* */
-
     const lsStateDaily = JSON.parse(localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY))
 
     // if we have previous LS values, sync them to code model
@@ -101,11 +109,9 @@ Deckdle._loadGame = async function () {
       // Deckdle._logStatus('no previous daily state found. creating new daily puzzle.')
       dailyCreateOrLoad = 'create'
     }
-  } else {
-    /* ************************* */
-    /* free state LS -> code     */
-    /* ************************* */
-
+  }
+  // free state LS -> code
+  else {
     const lsStateFree = JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
 
     // if we have previous LS values, sync them to code model

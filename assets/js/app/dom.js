@@ -6,6 +6,7 @@
 Deckdle.dom = {
   navOverlay: document.getElementById('nav-overlay'),
   navContent: document.getElementById('nav-content'),
+  headerTitle: document.querySelector('header h1'),
   dailyDetails: document.getElementById('daily-details'),
   gameType: document.getElementById('game-type'),
   board: document.getElementById('board'),
