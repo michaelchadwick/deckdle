@@ -130,6 +130,8 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
 
   Deckdle.combo = 0
   Deckdle.ui._resetComboCounter()
+
+  Deckdle.ui._enableUI()
 }
 
 // load existing setupId, which retains past progress
@@ -236,7 +238,7 @@ Deckdle._checkWinState = function () {
     Deckdle.__setState('gameState', 'GAME_OVER')
     Deckdle.__setState('lastCompletedTime', new Date().getTime())
 
-    Deckdle._loseAnimationFade().then((msg) => {
+    Deckdle._loseAnimation().then((msg) => {
       Deckdle._logStatus(msg)
       Deckdle.modalOpen('game-over')
     })

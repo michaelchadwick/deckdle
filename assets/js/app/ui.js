@@ -310,4 +310,64 @@ Deckdle.ui._removeModalVestige = () => {
   }
 }
 
+Deckdle.ui._disableUI = function () {
+  Deckdle._logStatus('[UI] disabling')
+
+  setTimeout(() => Deckdle.dom.cardsContainer.classList.remove('disabled'), 0)
+  setTimeout(() => Deckdle.dom.cardsContainer.classList.add('disabled'), 5)
+
+  const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
+
+  tableauCardArray.forEach((card) => {
+    setTimeout(() => card.classList.remove('disabled'), 0)
+    setTimeout(() => card.classList.add('disabled'), 5)
+    card.setAttribute('disabled', true)
+  })
+
+  setTimeout(() => Deckdle.dom.userCards.classList.remove('disabled'), 0)
+  setTimeout(() => Deckdle.dom.userCards.classList.add('disabled'), 5)
+
+  const stockCardTop = Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
+
+  setTimeout(() => stockCardTop.classList.remove('disabled'), 0)
+  setTimeout(() => stockCardTop.classList.add('disabled'), 5)
+  stockCardTop.setAttribute('disabled', true)
+
+  const baseCardTop = Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
+
+  setTimeout(() => baseCardTop.classList.remove('disabled'), 0)
+  setTimeout(() => baseCardTop.classList.add('disabled'), 5)
+  baseCardTop.setAttribute('disabled', true)
+
+  Deckdle.dom.input.btnUndoMove.disabled = true
+
+  Deckdle.dom.gameContainer.classList.add('disabled')
+}
+
+Deckdle.ui._enableUI = function () {
+  Deckdle._logStatus('[UI] enabling')
+
+  Deckdle.dom.cardsContainer.classList.remove('disabled')
+  Deckdle.dom.userCards.classList.remove('disabled')
+
+  const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
+
+  tableauCardArray.forEach((card) => {
+    card.classList.remove('disabled')
+    card.setAttribute('disabled', false)
+  })
+
+  const stockCardTop = Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
+
+  stockCardTop.classList.remove('disabled')
+  stockCardTop.setAttribute('disabled', false)
+
+  const baseCardTop = Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
+
+  baseCardTop.classList.remove('disabled')
+  baseCardTop.setAttribute('disabled', false)
+
+  Deckdle.dom.gameContainer.classList.remove('disabled')
+}
+
 Deckdle._logStatus('[LOADED] /app/ui')

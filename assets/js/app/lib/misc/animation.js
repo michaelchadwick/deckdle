@@ -26,87 +26,31 @@ Deckdle._animateCSS = (element, animation, loop, prefix = 'animate__') => {
 }
 
 Deckdle._winAnimation = async function (debug = false) {
-  Deckdle._logStatus('_winAnimation started')
+  Deckdle._logStatus('[ANIM] _winAnimation started')
   return new Promise((resolve) => {
     Deckdle._animateCSS('#base', 'tada')
 
     if (!debug) {
-      Deckdle._disableUI()
+      Deckdle.ui._disableUI()
     }
 
-    setTimeout(() => resolve('_winAnimation ended'), 1000)
+    setTimeout(() => resolve('[ANIM] _winAnimation ended'), 1000)
   })
 }
 
-Deckdle._loseAnimationFade = async function (debug = false) {
-  Deckdle._logStatus('_loseAnimationFade started')
+Deckdle._loseAnimation = async function (debug = false) {
+  Deckdle._logStatus('[ANIM] _loseAnimation started')
   return new Promise((resolve) => {
-    Deckdle._disableUI()
+    Deckdle.ui._disableUI()
 
     setTimeout(() => {
-      resolve('_loseAnimationFade ended')
+      resolve('[ANIM] _loseAnimation ended')
 
       if (debug) {
-        Deckdle._enableUI()
+        Deckdle.ui._enableUI()
       }
     }, 1000)
   })
-}
-
-Deckdle._disableUI = function () {
-  // Deckdle._logStatus('disabling UI')
-
-  setTimeout(() => Deckdle.dom.cardsContainer.classList.remove('disabled'), 0)
-  setTimeout(() => Deckdle.dom.cardsContainer.classList.add('disabled'), 5)
-
-  const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
-
-  tableauCardArray.forEach((card) => {
-    setTimeout(() => card.classList.remove('disabled'), 0)
-    setTimeout(() => card.classList.add('disabled'), 5)
-    card.setAttribute('disabled', true)
-  })
-
-  setTimeout(() => Deckdle.dom.userCards.classList.remove('disabled'), 0)
-  setTimeout(() => Deckdle.dom.userCards.classList.add('disabled'), 5)
-
-  const stockCardTop = Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
-
-  setTimeout(() => stockCardTop.classList.remove('disabled'), 0)
-  setTimeout(() => stockCardTop.classList.add('disabled'), 5)
-  stockCardTop.setAttribute('disabled', true)
-
-  const baseCardTop = Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
-
-  setTimeout(() => baseCardTop.classList.remove('disabled'), 0)
-  setTimeout(() => baseCardTop.classList.add('disabled'), 5)
-  baseCardTop.setAttribute('disabled', true)
-
-  Deckdle.dom.input.btnUndoMove.disabled = true
-}
-
-Deckdle._enableUI = function () {
-  // Deckdle._logStatus('enabling UI')
-
-  Deckdle.dom.cardsContainer.classList.remove('disabled')
-  Deckdle.dom.userCards.classList.remove('disabled')
-
-  const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
-
-  tableauCardArray.forEach((card) => {
-    card.classList.remove('disabled')
-    card.setAttribute('disabled', false)
-  })
-
-  const stockCardTop = Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
-
-  stockCardTop.classList.remove('disabled')
-  stockCardTop.setAttribute('disabled', false)
-
-  const baseCardTop = Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
-
-  baseCardTop.classList.remove('disabled')
-  baseCardTop.setAttribute('disabled', false)
 }
 
 Deckdle._resetCardsDuration = function () {

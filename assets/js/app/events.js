@@ -109,7 +109,7 @@ Deckdle._attachEventListeners = function () {
       // ☹ display lose animation
       Deckdle.dom.interactive.debug.btnLoseAnimation.addEventListener('click', () => {
         /* eslint-disable-next-line no-undef */
-        Deckdle._loseAnimationFade((debug = true)).then((msg) => {
+        Deckdle._loseAnimation((debug = true)).then((msg) => {
           Deckdle._logStatus(msg)
           Deckdle._resetCardsDuration()
         })

@@ -3,13 +3,14 @@
   gap: 0;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 18px);
-  height: 125px;
+  height: 130px;
   margin: 0 auto;
   max-width: 330px;
+  padding-top: 10px;
   transition: all 400ms;
   width: 100%;
 }
-@media (min-height: 500px) {
+@media (min-height: 600px) {
   #tableau {
     height: 155px;
   }
@@ -20,27 +21,29 @@
     margin: 0 auto;
     max-width: 365px;
   }
-  @media (min-height: 500px) {
+  @media (min-height: 600px) {
     #tableau {
       height: 180px;
     }
   }
 }
 @media (min-width: 768px) {
-  @media (min-height: 500px) {
+  @media (min-height: 600px) {
     #tableau {
       height: 185px;
       max-width: 430px;
+      padding-top: 5px;
     }
   }
 }
 @media (min-width: 992px) {
-  @media (min-height: 500px) {
+  @media (min-height: 600px) {
     #tableau {
       grid-template-rows: repeat(5, 46px);
       height: 210px;
       margin: 10px auto;
       max-width: 575px;
+      padding-top: 0;
     }
   }
 }
@@ -98,7 +101,7 @@
   z-index: 10;
 }
 @media (min-width: 992px) {
-  @media (min-height: 500px) {
+  @media (min-height: 600px) {
     #tableau .col .card:nth-of-type(2) {
       top: -65px;
       z-index: 7;

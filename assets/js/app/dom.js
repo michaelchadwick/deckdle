@@ -4,6 +4,7 @@
 
 // DOM > main divs/elements
 Deckdle.dom = {
+  gameContainer: document.getElementById('game'),
   navOverlay: document.getElementById('nav-overlay'),
   navContent: document.getElementById('nav-content'),
   headerTitle: document.querySelector('header h1'),

@@ -5,6 +5,8 @@
 
 // load state from LS -> code model
 Deckdle._loadGame = async function () {
+  Deckdle._logStatus('[LOADING] game')
+
   /* ************************* */
   /* settings LS -> code       */
   /* ************************* */
@@ -248,6 +250,8 @@ Deckdle._saveGame = function (lsType = Deckdle.__getGameMode(), src = 'unknown')
 
 // load settings (gear icon) from localStorage
 Deckdle._loadSettings = function () {
+  Deckdle._logStatus('[LOADING] settings')
+
   const lsSettings = JSON.parse(localStorage.getItem(DECKDLE_SETTINGS_LS_KEY))
   let setting = null
 
@@ -432,7 +436,7 @@ Deckdle._changeSetting = async function (setting, value) {
       Deckdle.ui._removeModalVestige()
 
       if (Deckdle.__getGameMode() != value) {
-        Deckdle._enableUI()
+        Deckdle.ui._enableUI()
 
         switch (value) {
           case 'daily':

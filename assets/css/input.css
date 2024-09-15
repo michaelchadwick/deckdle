@@ -1,5 +1,5 @@
 section#game #keyboard-container {
-  margin: 1rem 1rem 0;
+  margin: 0.5rem 1rem 0;
   user-select: none; /* no selecting text */
 }
 section#game #keyboard-container button#button-create-new:disabled {
@@ -16,7 +16,7 @@ section#game #keyboard-container .row:last-of-type {
   margin-bottom: 16px;
 }
 
-@media (min-height: 500px) {
+@media (min-height: 600px) {
   section#game #keyboard-container .row {
     margin: 0 auto 8px;
   }
@@ -41,7 +41,7 @@ section#game #keyboard-container .row.sub button:disabled {
   background-color: var(--gray);
 }
 
-@media (min-width: 376px) and (min-height: 500px) {
+@media (min-width: 376px) and (min-height: 600px) {
   section#game #keyboard-container button {
     font-size: 1.25rem;
     height: 50px;

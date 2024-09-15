@@ -231,7 +231,10 @@ section#game {
   transition: all 400ms;
   width: 100%;
 }
-@media (min-height: 500px) {
+section#game.disabled {
+  background-color: var(--gray-light3);
+}
+@media (min-height: 600px) {
   @media (min-width: 768px) {
     section#game {
       width: 480px;
@@ -251,7 +254,7 @@ section#game #mode-container {
   text-underline-offset: 2px;
   width: 100%;
 }
-@media (min-height: 500px) {
+@media (min-height: 600px) {
   section#game #mode-container {
     height: 70px;
   }
@@ -368,7 +371,7 @@ section#game #cards-container.disabled {
   transform: rotate(45deg);
   width: 140px;
 }
-@media (min-height: 500px) {
+@media (min-height: 600px) {
   #version-tag {
     bottom: 17px;
     font-size: 1.4rem;
