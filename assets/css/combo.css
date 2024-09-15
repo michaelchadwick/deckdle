@@ -1,10 +1,9 @@
 #combo-wrapper {
   display: flex;
-  height: 50px;
   justify-content: center;
   margin: 0 auto;
   position: absolute;
-  top: 22px;
+  top: 5vh;
   width: 100%;
 }
 #combo {
