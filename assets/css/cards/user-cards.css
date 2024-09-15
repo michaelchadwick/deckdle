@@ -3,9 +3,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  height: 90px;
+  height: 100px;
   justify-content: center;
-  margin: 5px auto;
+  margin: 5px auto 0;
 }
 #user-cards.disabled {
   background-color: var(--gray-light2);
