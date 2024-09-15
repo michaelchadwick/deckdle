@@ -7,6 +7,7 @@ section#game #keyboard-container button#button-create-new:disabled {
 }
 section#game #keyboard-container .row {
   display: flex;
+  gap: 5px;
   margin: 0 auto 4px;
   /* Enable panning, pinch zoom, but not double-tap zoom */
   touch-action: manipulation;
