@@ -267,11 +267,11 @@ Deckdle.ui._updateComboCounter = function () {
     Deckdle.dom.combo.classList.remove('animate_animated')
 
     if (comboLevel > 1) {
-      Deckdle.dom.comboText.classList.add('x')
+      Deckdle.dom.combo.classList.add('x')
 
       Deckdle.dom.comboText.innerText = `x${Deckdle.combo}`
-      if (comboLevel <= 10) {
-        Deckdle.dom.comboText.classList.add(`x${comboLevel}`)
+      if (comboLevel <= 35) {
+        Deckdle.dom.combo.classList.add(`x${comboLevel}`)
       }
       if (Deckdle.dom.combo.classList.contains('animate__fadeOut')) {
         Deckdle.dom.combo.classList.remove('animate__fadeOut')
@@ -295,7 +295,7 @@ Deckdle.ui._updateComboCounter = function () {
 }
 
 Deckdle.ui._resetComboCounter = function () {
-  Deckdle.dom.comboText.classList.remove('x', 'x2', 'x3', 'x4', 'x5', 'x6', 'x7', 'x8', 'x9', 'x10')
+  Deckdle.dom.combo.classList.remove('x', 'x2', 'x5', 'x10', 'x15', 'x30', 'x35')
 }
 
 Deckdle.ui._removeModalVestige = () => {
