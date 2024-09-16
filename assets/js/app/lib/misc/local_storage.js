@@ -4,7 +4,7 @@
 /* eslint-disable no-undef, no-unused-vars */
 
 // load state from LS -> code model
-Deckdle._loadGame = async function () {
+Deckdle._loadGame = async function (switching = false) {
   Deckdle._logStatus('[LOADING] game')
 
   /* ************************* */
@@ -18,7 +18,7 @@ Deckdle._loadGame = async function () {
 
   // if we are testing, short-circuit some stuff
   // and use a debug setup to make things nice
-  if (Deckdle.env == 'test') {
+  if (Deckdle.env == 'test' && !switching) {
     // Create perfect puzzle states
     const debugDailyJson = await fetch('../../assets/json/debug_daily.json')
     const dailyState = await debugDailyJson.json()
@@ -464,7 +464,7 @@ Deckdle._changeSetting = async function (setting, value) {
             Deckdle.dom.dailyDetails.classList.add('show')
             Deckdle.dom.input.btnCreateNew.disabled = true
 
-            Deckdle._loadGame()
+            Deckdle._loadGame((switching = true))
 
             break
 
@@ -477,7 +477,7 @@ Deckdle._changeSetting = async function (setting, value) {
             Deckdle.dom.dailyDetails.classList.remove('show')
             Deckdle.dom.input.btnCreateNew.disabled = false
 
-            Deckdle._loadGame()
+            Deckdle._loadGame((switching = true))
 
             break
         }

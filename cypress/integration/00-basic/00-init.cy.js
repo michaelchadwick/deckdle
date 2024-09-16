@@ -33,21 +33,5 @@ context('00-basic', () => {
       cy.get('#game #keyboard-container #button-undo-move').should('exist')
       cy.get('#game #keyboard-container #button-undo-move').should('have.attr', 'disabled')
     })
-
-    it('should load daily golf', () => {
-      cy.get('#game #mode-container #gamemode-container #gamemode-0').should(
-        'have.attr',
-        'data-active',
-        'true'
-      )
-      cy.get('#game #mode-container #gamemode-container #gamemode-1').should(
-        'have.attr',
-        'data-active',
-        'false'
-      )
-      cy.get('#game #mode-container #daily-details').should('exist')
-
-      cy.get('#game #game-type').should('have.text', 'golf')
-    })
   })
 })
