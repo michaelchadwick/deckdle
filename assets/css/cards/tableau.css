@@ -68,7 +68,7 @@
 #tableau .col .card.available:not(.disabled):hover,
 #tableau .col .card.available:not(.disabled):active,
 #tableau .col .card.available:not(.disabled):focus {
-  background-color: #ebf7ff;
+  background-color: var(--card-focus-border);
   border: 1px dashed var(--dark-color);
   cursor: pointer;
 }

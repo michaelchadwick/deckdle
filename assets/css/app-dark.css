@@ -68,7 +68,7 @@ body.dark-mode section#game #cards-container #user-cards {
 }
 
 body.dark-mode section#game #cards-container .card {
-  box-shadow: 2px 2px 1px #aaa;
+  box-shadow: 2px 2px 1px var(--gray-light2);
 }
 
 body.dark-mode section#game #cards-container #tableau .card,
@@ -86,7 +86,7 @@ body.dark-mode section#game #cards-container #tableau .card[data-suit="1"],
 body.dark-mode section#game #cards-container #base .card[data-suit="1"],
 body.dark-mode section#game #cards-container #tableau .card[data-suit="2"],
 body.dark-mode section#game #cards-container #base .card[data-suit="2"] {
-  color: #ff8080;
+  color: var(--card-suit-red2);
 }
 
 body.dark-mode section#game #keyboard-container button {

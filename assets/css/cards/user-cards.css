@@ -14,7 +14,7 @@
 @media (min-width: 768px) {
   @media (min-height: 600px) {
     #user-cards {
-      background-color: var(--gray-light);
+      background-color: var(--off-white2);
       gap: 1rem;
       height: 130px;
       margin: 10px auto 0;
@@ -55,6 +55,6 @@
   display: none;
 }
 #stock .card:not(.empty):hover {
-  background-color: #33749f;
+  background-color: var(--card-back-focus);
   cursor: pointer;
 }

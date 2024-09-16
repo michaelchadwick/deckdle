@@ -89,7 +89,7 @@
   display: none;
 }
 .card.empty {
-  background-color: #c7c7c7;
+  background-color: var(--gray-light2);
   border: 1px solid transparent;
 }
 .card.disabled {

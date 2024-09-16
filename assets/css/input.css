@@ -36,7 +36,7 @@ section#game #keyboard-container button:last-of-type {
   margin: 0;
 }
 section#game #keyboard-container .row.sub button {
-  background-color: #d6cece;
+  background-color: var(--gray-light1);
 }
 section#game #keyboard-container .row.sub button:disabled {
   background-color: var(--gray);

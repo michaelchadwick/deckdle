@@ -332,7 +332,7 @@
 }
 #settings .setting-row {
   align-items: center;
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid var(--gray-dark);
   display: flex;
   justify-content: space-between;
   padding: 0;
@@ -347,7 +347,7 @@
   font-size: 18px;
 }
 #settings .setting-row .text .description {
-  color: #444;
+  color: var(--gray-dark2);
   font-size: 12px;
 }
 #settings .setting-row .control {

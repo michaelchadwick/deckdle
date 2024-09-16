@@ -40,8 +40,9 @@
   --black-light: #3a3a3a;
   --white: #fafafa;
   --off-white: #f8f8f8;
+  --off-white2: #f4f4f4;
   --gray: #e1e1e1;
-  --gray-light: #f4f4f4;
+  --gray-light1: #d6cece;
   --gray-light2: #c4c4c4;
   --gray-light3: #ababab;
   --gray-medium: #a7a7a7;
@@ -65,8 +66,11 @@
   --window-game-over-lose: #e9dddd;
 
   --card-back: #2e678e;
+  --card-back-focus: #33749f;
+  --card-focus-border: #ebf7ff;
   --card-suit-black: var(--black);
   --card-suit-red: #e71111;
+  --card-suit-red2: #ff8080;
 
   font-family: "Changa", sans-serif;
   font-size: 16px;

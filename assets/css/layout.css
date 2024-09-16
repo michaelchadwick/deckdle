@@ -151,8 +151,8 @@ header #debug-buttons .ddmenu .ddgroup button {
 }
 @media (hover: hover) {
   header #debug-buttons .ddmenu .ddgroup:hover {
-    background: #d8d2f5;
-    border: 1px solid #8c85ae;
+    background: var(--debug-color-light3);
+    border: 1px solid var(--debug-color-medium);
     cursor: pointer;
   }
 }
@@ -170,7 +170,7 @@ header #debug-buttons .ddmenu .ddgroup .ddsub a {
 }
 /* stylelint-enable */
 header #debug-buttons .ddmenu .ddgroup .ddsub button {
-  background-color: #e3e0f3;
+  background-color: var(--debug-color-light4);
   border: 1px solid transparent;
   border-radius: 0;
   height: 20px;
@@ -179,8 +179,8 @@ header #debug-buttons .ddmenu .ddgroup .ddsub button {
 }
 @media (hover: hover) {
   header #debug-buttons .ddmenu .ddgroup .ddsub button:hover {
-    background: #e1ddf7;
-    border: 1px solid #8c85ae;
+    background: var(--debug-color-light5);
+    border: 1px solid var(--debug-color-medium);
   }
   header #debug-buttons .ddmenu .ddgroup:hover .ddsub {
     display: flex;

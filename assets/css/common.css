@@ -99,7 +99,7 @@ button.icon:disabled {
   }
 }
 button.help {
-  background-color: #d1d1d1;
+  background-color: var(--gray);
   border-radius: 4px;
   display: inline-block;
   height: 21px;
@@ -155,7 +155,7 @@ button.game-over {
   opacity: 0;
 }
 .radio input[type="radio"] + .radio-label.radio-label-disabled {
-  color: #666;
+  color: var(--gray-dark);
 }
 .radio input[type="radio"] + .radio-label:before {
   background: var(--off-white);
@@ -191,7 +191,7 @@ button.game-over {
 }
 
 .switch {
-  background-color: #444;
+  background-color: var(--gray-dark2);
   border-radius: 999px;
   cursor: pointer;
   display: block;
