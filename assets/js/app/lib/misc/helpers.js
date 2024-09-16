@@ -175,18 +175,26 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
 
 // get list of other NebyooApps from Dave
 Deckdle._getNebyooApps = async function () {
+  if (Deckdle.env == 'test') {
+    return null
+  }
+
   const response = await fetch(NEBYOOAPPS_SOURCE_URL)
   const json = await response.json()
   const apps = json.body
   const appList = document.querySelector('.nav-list')
 
-  Object.values(apps).forEach((app) => {
-    const appLink = document.createElement('a')
-    appLink.href = app.url
-    appLink.innerText = app.title
-    appLink.target = '_blank'
-    appList.appendChild(appLink)
-  })
+  if (apps) {
+    Object.values(apps).forEach((app) => {
+      const appLink = document.createElement('a')
+      appLink.href = app.url
+      appLink.innerText = app.title
+      appLink.target = '_blank'
+      appList.appendChild(appLink)
+    })
 
-  // Deckdle._logStatus('[LOADED] nebyooapps')
+    // Deckdle._logStatus('[LOADED] nebyooapps')
+  } else {
+    console.error('Failed to load NebyooApps')
+  }
 }
