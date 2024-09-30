@@ -116,7 +116,10 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
   Deckdle.__setState('stock', puzzle.stock)
   Deckdle.__setState('base', puzzle.base)
 
-  Deckdle._logStatus(`[CREATED] '${gameMode}' Puzzle from id: '${setupId}'`, puzzle)
+  Deckdle._logStatus(
+    `[CREATED] '${gameMode}' Puzzle from id: '${setupId}', shuffled ${puzzle.shuffleCount} time(s)`,
+    puzzle
+  )
 
   Deckdle._saveGame(gameMode, '_createNewSetup')
 

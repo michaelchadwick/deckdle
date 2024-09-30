@@ -6,19 +6,36 @@
 /* eslint-disable no-undef, no-unused-vars */
 
 class Puzzle {
+  MAX_SHUFFLES = 10
+
   constructor(setupId, type = 'golf', state = null) {
     this.setupId = setupId
     this.type = type
+    this.shuffleCount = 0
 
     if (state) {
       this.tableau = this.#createTableau(state.tableau)
       this.stock = this.#createStock(state.stock)
       this.base = this.#createBase(state.base)
     } else {
-      this.deck = new Deck()
+      // create new Deck with initial shuffle based on setupId
+      this.deck = new Deck(true, this.setupId)
+      this.shuffleCount += 1
 
-      // get random, yet deterministic, shuffle
-      this.deck.shuffle(setupId)
+      // if no valid move, shuffle again
+      while (!this.deck.hasValidMove() || this.shuffleCount > this.MAX_SHUFFLES) {
+        // get random, yet deterministic, shuffle
+        this.deck.shuffle(this.setupId)
+
+        this.shuffleCount += 1
+      }
+
+      // randomization has failed me, so give up, but warn
+      if (!this.deck.hasValidMove()) {
+        console.warn(
+          'max shuffle reached, and still no valid move. oh well, just click on the stock!'
+        )
+      }
 
       this.tableau = this.#createTableau()
       this.stock = this.#createStock()

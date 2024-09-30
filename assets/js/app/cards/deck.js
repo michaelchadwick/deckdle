@@ -4,10 +4,14 @@
 /* eslint-disable no-unused-vars */
 
 class Deck {
-  constructor() {
+  constructor(initialShuffle = false, setupId = null) {
     this.cards = []
 
     this.#fillDeck()
+
+    if (initialShuffle && setupId) {
+      this.shuffle(setupId)
+    }
   }
 
   #fillDeck = () => {
@@ -88,6 +92,39 @@ class Deck {
 
     // shuffle them using chance.js
     this.cards = shuffleOrder.shuffle(this.cards)
+  }
+
+  hasValidMove = () => {
+    let valid = false
+    let validTableauCards = []
+
+    // grab bottom cards from what would be each tableau column
+    validTableauCards.push(this.cards[4])
+    validTableauCards.push(this.cards[9])
+    validTableauCards.push(this.cards[14])
+    validTableauCards.push(this.cards[19])
+    validTableauCards.push(this.cards[24])
+    validTableauCards.push(this.cards[29])
+    validTableauCards.push(this.cards[34])
+
+    // grab last card in deck, which would be top of stock
+    const targetCard = this.cards[this.cards.length - 1]
+
+    // console.log(
+    //   validTableauCards.map((card) => card.rank),
+    //   targetCard.rank
+    // )
+
+    validTableauCards.forEach((card) => {
+      const rankAbove = parseInt(targetCard.rank) + 1 == 15 ? 2 : parseInt(targetCard.rank) + 1
+      const rankBelow = parseInt(targetCard.rank) - 1 == 1 ? 14 : parseInt(targetCard.rank) - 1
+
+      if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
+        valid = true
+      }
+    })
+
+    return valid
   }
 
   #suitRankCompareFn = (a, b) => {
