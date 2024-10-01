@@ -37,17 +37,23 @@ Deckdle._displayGameConfig = function () {
   Object.keys(config)
     .sort()
     .forEach((key) => {
-      if (typeof config[key] == 'object' && !Array.isArray(config[key]) && config[key] != null) {
+      if (
+        typeof config[key] == 'object' &&
+        !Array.isArray(config[key]) &&
+        config[key] != null
+      ) {
         html += `<dd><code>${key}: {</code><dl>`
 
         Object.keys(config[key]).forEach((k) => {
           var label = k
           var value = config[key][k]
 
-          if (Object.keys(value)) {
-            // console.log('found another object', key, label, value)
-          } else {
-            html += `<dd><code>${label}:</code></dd><dt>${value.join(', ')}</dt>`
+          if (value) {
+            if (Object.keys(value)) {
+              // console.log('found another object', key, label, value)
+            } else {
+              html += `<dd><code>${label}:</code></dd><dt>${value.join(', ')}</dt>`
+            }
           }
         })
 

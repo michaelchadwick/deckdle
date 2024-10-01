@@ -110,7 +110,10 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
   Deckdle.__setState('setupId', setupId, gameMode)
 
   // create new Deckdle puzzle
-  const puzzle = Deckdle.__createPuzzle(Deckdle.__getState(gameMode).setupId, gameMode)
+  const puzzle = Deckdle.__createPuzzle(
+    Deckdle.__getState(gameMode).setupId,
+    gameMode
+  )
 
   Deckdle.__setState('tableau', puzzle.tableau)
   Deckdle.__setState('stock', puzzle.stock)
@@ -175,7 +178,10 @@ Deckdle._loadExistingSetup = async function (gameMode) {
   Deckdle.__setState('stock', puzzle.stock)
   Deckdle.__setState('base', puzzle.base)
 
-  Deckdle._logStatus(`[LOADED] '${gameMode}' Puzzle from existing card setup`, puzzle)
+  Deckdle._logStatus(
+    `[LOADED] '${gameMode}' Puzzle from existing card setup`,
+    puzzle
+  )
 
   // fill UI with beautiful cards
   Deckdle.ui._emptyPlayingField()
@@ -237,7 +243,10 @@ Deckdle._checkWinState = function () {
     })
   }
   // stock exhausted and no valid tableau card
-  else if (Deckdle.__getState().stock.length == 0 && !Deckdle._tableauHasValidCard()) {
+  else if (
+    Deckdle.__getState().stock.length == 0 &&
+    !Deckdle._tableauHasValidCard()
+  ) {
     Deckdle.__setState('gameState', 'GAME_OVER')
     Deckdle.__setState('lastCompletedTime', new Date().getTime())
 

@@ -17,7 +17,11 @@ Deckdle._animateCSS = (element, animation, loop, prefix = 'animate__') => {
     // When the animation ends, we clean the classes and resolve the Promise
     function handleAnimationEnd(event) {
       event.stopPropagation()
-      node.classList.remove(`${prefix}animated`, `${prefix}infinite`, animationName)
+      node.classList.remove(
+        `${prefix}animated`,
+        `${prefix}infinite`,
+        animationName
+      )
       resolve('Animation ended')
     }
 

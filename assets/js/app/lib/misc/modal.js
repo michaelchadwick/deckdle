@@ -115,7 +115,11 @@ class Modal {
       title.appendChild(titleText)
 
       // Close
-      if (modalType == 'perm' || modalType == 'perm-debug' || modalType == 'end-state') {
+      if (
+        modalType == 'perm' ||
+        modalType == 'perm-debug' ||
+        modalType == 'end-state'
+      ) {
         this.closeButton = document.createElement('button')
         this.closeButton.type = 'button'
         this.closeButton.innerHTML = '&times;'

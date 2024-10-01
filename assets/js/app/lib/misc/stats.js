@@ -9,7 +9,9 @@ Deckdle._getFinishedGameCount = function (mode) {
       ? localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)
       : localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)
 
-  return ls ? JSON.parse(ls).filter((session) => session.lastCompletedTime).length : 0
+  return ls
+    ? JSON.parse(ls).filter((session) => session.lastCompletedTime).length
+    : 0
 }
 
 Deckdle._getBestCombo = function (mode) {
@@ -28,7 +30,9 @@ Deckdle._getBestScore = function (mode) {
       : localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)
 
   if (ls) {
-    const sessionsFinished = JSON.parse(ls).filter((session) => session.lastCompletedTime)
+    const sessionsFinished = JSON.parse(ls).filter(
+      (session) => session.lastCompletedTime
+    )
     let bestScore = 35
     let score = null
 

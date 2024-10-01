@@ -22,7 +22,15 @@ Deckdle.__getFormattedDate = function (date) {
 }
 Deckdle.__getTodaysDate = function () {
   const d = new Date(Date.now())
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ]
   const months = [
     'January',
     'February',
@@ -42,7 +50,9 @@ Deckdle.__getTodaysDate = function () {
 }
 
 Deckdle.__hasParentWithMatchingSelector = function (target, selector) {
-  return [...document.querySelectorAll(selector)].some((el) => el !== target && el.contains(target))
+  return [...document.querySelectorAll(selector)].some(
+    (el) => el !== target && el.contains(target)
+  )
 }
 
 Deckdle.__getParentCard = function (el, selector) {
@@ -50,7 +60,10 @@ Deckdle.__getParentCard = function (el, selector) {
 
   do {
     parent_container = parent_container.parentNode
-  } while (!parent_container.matches(selector) && parent_container !== document.body)
+  } while (
+    !parent_container.matches(selector) &&
+    parent_container !== document.body
+  )
 
   return parent_container
 }
@@ -137,7 +150,10 @@ Deckdle.__addStateObjSession = function (mode = Deckdle.__getGameMode()) {
   }
 }
 
-Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGameType()) => {
+Deckdle.__getShareText = (
+  mode = Deckdle.__getGameMode(),
+  type = Deckdle.__getGameType()
+) => {
   let html = ''
 
   if (mode == 'daily') {
