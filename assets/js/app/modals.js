@@ -48,19 +48,10 @@ Deckdle.modalOpen = async function (type) {
         <p><strong>Dev</strong>: <a href="https://michaelchadwick.info" target="_blank">Michael Chadwick</a>.</p>
       `
 
-      Deckdle.myModal = new Modal(
-        'perm',
-        'How to Play Deckdle',
-        modalText,
-        null,
-        null
-      )
+      Deckdle.myModal = new Modal('perm', 'How to Play Deckdle', modalText, null, null)
 
       if (!localStorage.getItem(DECKDLE_SETTINGS_LS_KEY)) {
-        localStorage.setItem(
-          DECKDLE_SETTINGS_LS_KEY,
-          JSON.stringify(DECKDLE_DEFAULTS.settings)
-        )
+        localStorage.setItem(DECKDLE_SETTINGS_LS_KEY, JSON.stringify(DECKDLE_DEFAULTS.settings))
       }
 
       Deckdle._saveSetting('firstTime', false)
@@ -132,14 +123,7 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      Deckdle.myModal = new Modal(
-        'perm',
-        'Statistics',
-        modalText,
-        null,
-        null,
-        false
-      )
+      Deckdle.myModal = new Modal('perm', 'Statistics', modalText, null, null, false)
       break
 
     case 'settings':
@@ -355,14 +339,7 @@ Deckdle.modalOpen = async function (type) {
         </div>
       `
 
-      Deckdle.myModal = new Modal(
-        'end-state',
-        'Game Over',
-        modalText,
-        null,
-        null,
-        'game-over'
-      )
+      Deckdle.myModal = new Modal('end-state', 'Game Over', modalText, null, null, 'game-over')
 
       break
 
@@ -371,13 +348,7 @@ Deckdle.modalOpen = async function (type) {
         Deckdle.myModalTemp._destroyModal()
       }
 
-      Deckdle.myModalTemp = new Modal(
-        'temp',
-        null,
-        'Results copied to clipboard',
-        null,
-        null
-      )
+      Deckdle.myModalTemp = new Modal('temp', null, 'Results copied to clipboard', null, null)
       break
 
     case 'no-clipboard-access':
@@ -399,13 +370,7 @@ Deckdle.modalOpen = async function (type) {
         Deckdle.myModalTemp._destroyModal()
       }
 
-      Deckdle.myModalTemp = new Modal(
-        'temp',
-        null,
-        'Local Storage has been cleared',
-        null,
-        null
-      )
+      Deckdle.myModalTemp = new Modal('temp', null, 'Local Storage has been cleared', null, null)
       break
   }
 }
