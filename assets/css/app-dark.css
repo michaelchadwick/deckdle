@@ -77,16 +77,20 @@ body.dark-mode section#game #cards-container #base .card {
   border: 1px solid var(--off-white);
 }
 body.dark-mode section#game #cards-container #tableau .card[data-suit="0"],
-body.dark-mode section#game #cards-container #base .card[data-suit="0"],
-body.dark-mode section#game #cards-container #tableau .card[data-suit="3"],
-body.dark-mode section#game #cards-container #base .card[data-suit="3"] {
-  color: var(--off-white);
+body.dark-mode section#game #cards-container #base .card[data-suit="0"] {
+  color: var(--card-suit-club2);
 }
 body.dark-mode section#game #cards-container #tableau .card[data-suit="1"],
-body.dark-mode section#game #cards-container #base .card[data-suit="1"],
+body.dark-mode section#game #cards-container #base .card[data-suit="1"] {
+  color: var(--card-suit-diamond2);
+}
 body.dark-mode section#game #cards-container #tableau .card[data-suit="2"],
 body.dark-mode section#game #cards-container #base .card[data-suit="2"] {
-  color: var(--card-suit-red2);
+  color: var(--card-suit-heart2);
+}
+body.dark-mode section#game #cards-container #tableau .card[data-suit="3"],
+body.dark-mode section#game #cards-container #base .card[data-suit="3"] {
+  color: var(--card-suit-spade2);
 }
 
 body.dark-mode section#game #keyboard-container button {
