@@ -54,15 +54,9 @@ Deckdle._attachEventListeners = function () {
   Deckdle.dom.interactive.btnNavClose.addEventListener('click', () => {
     Deckdle.dom.navOverlay.classList.toggle('show')
   })
-  Deckdle.dom.interactive.btnHelp.addEventListener('click', () =>
-    Deckdle.modalOpen('help')
-  )
-  Deckdle.dom.interactive.btnStats.addEventListener('click', () =>
-    Deckdle.modalOpen('stats')
-  )
-  Deckdle.dom.interactive.btnSettings.addEventListener('click', () =>
-    Deckdle.modalOpen('settings')
-  )
+  Deckdle.dom.interactive.btnHelp.addEventListener('click', () => Deckdle.modalOpen('help'))
+  Deckdle.dom.interactive.btnStats.addEventListener('click', () => Deckdle.modalOpen('stats'))
+  Deckdle.dom.interactive.btnSettings.addEventListener('click', () => Deckdle.modalOpen('settings'))
 
   // ⎌ undo last move
   Deckdle.dom.input.btnUndoMove.addEventListener('click', () => {
@@ -77,20 +71,14 @@ Deckdle._attachEventListeners = function () {
   if (Deckdle.env == 'local') {
     if (Deckdle.dom.interactive.debug.all) {
       // ⚙️ show current deckdle config
-      Deckdle.dom.interactive.debug.btnShowConfig.addEventListener(
-        'click',
-        () => {
-          Deckdle.modalOpen('show-config')
-        }
-      )
+      Deckdle.dom.interactive.debug.btnShowConfig.addEventListener('click', () => {
+        Deckdle.modalOpen('show-config')
+      })
 
       // 🎚️ show current deckdle state
-      Deckdle.dom.interactive.debug.btnShowState.addEventListener(
-        'click',
-        () => {
-          Deckdle.modalOpen('show-state')
-        }
-      )
+      Deckdle.dom.interactive.debug.btnShowState.addEventListener('click', () => {
+        Deckdle.modalOpen('show-state')
+      })
 
       // 🗑️ clear localStorage
       Deckdle.dom.interactive.debug.btnClearLS.addEventListener('click', () => {
@@ -98,46 +86,34 @@ Deckdle._attachEventListeners = function () {
       })
 
       // 🂡 clear cards
-      Deckdle.dom.interactive.debug.btnClearCards.addEventListener(
-        'click',
-        () => {
-          Deckdle.ui._emptyPlayingField()
-        }
-      )
+      Deckdle.dom.interactive.debug.btnClearCards.addEventListener('click', () => {
+        Deckdle.ui._emptyPlayingField()
+      })
 
       // 🂡 deal cards animation
-      Deckdle.dom.interactive.debug.btnDealCards.addEventListener(
-        'click',
-        () => {
-          Deckdle.ui._emptyPlayingField()
-          /* eslint-disable-next-line no-undef */
-          Deckdle.ui._dealCards((animate = true))
-        }
-      )
+      Deckdle.dom.interactive.debug.btnDealCards.addEventListener('click', () => {
+        Deckdle.ui._emptyPlayingField()
+        /* eslint-disable-next-line no-undef */
+        Deckdle.ui._dealCards((animate = true))
+      })
 
       // ☺ display win animation
-      Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener(
-        'click',
-        () => {
-          /* eslint-disable-next-line no-undef */
-          Deckdle._winAnimation((debug = true)).then((msg) => {
-            Deckdle._logStatus(msg)
-            Deckdle._resetCardsDuration()
-          })
-        }
-      )
+      Deckdle.dom.interactive.debug.btnWinAnimation.addEventListener('click', () => {
+        /* eslint-disable-next-line no-undef */
+        Deckdle._winAnimation((debug = true)).then((msg) => {
+          Deckdle._logStatus(msg)
+          Deckdle._resetCardsDuration()
+        })
+      })
 
       // ☹ display lose animation
-      Deckdle.dom.interactive.debug.btnLoseAnimation.addEventListener(
-        'click',
-        () => {
-          /* eslint-disable-next-line no-undef */
-          Deckdle._loseAnimation((debug = true)).then((msg) => {
-            Deckdle._logStatus(msg)
-            Deckdle._resetCardsDuration()
-          })
-        }
-      )
+      Deckdle.dom.interactive.debug.btnLoseAnimation.addEventListener('click', () => {
+        /* eslint-disable-next-line no-undef */
+        Deckdle._loseAnimation((debug = true)).then((msg) => {
+          Deckdle._logStatus(msg)
+          Deckdle._resetCardsDuration()
+        })
+      })
     }
   }
 

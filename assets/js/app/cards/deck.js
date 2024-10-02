@@ -54,17 +54,13 @@ class Deck {
   removeCard = (card) => {
     if (this.#cardExists(card)) {
       const vals = Object.values(this.cards)
-      const index = vals.findIndex(
-        (v) => v.rank == card.rank && v.suit == card.suit
-      )
+      const index = vals.findIndex((v) => v.rank == card.rank && v.suit == card.suit)
 
       // grab card we are removing
       const card = vals[index]
 
       // remove card from deck
-      this.cards = this.cards
-        .slice(0, index)
-        .concat(this.cards.slice(index + 1))
+      this.cards = this.cards.slice(0, index).concat(this.cards.slice(index + 1))
 
       // return removed card
       return card
@@ -120,15 +116,10 @@ class Deck {
     // )
 
     validTableauCards.forEach((card) => {
-      const rankAbove =
-        parseInt(targetCard.rank) + 1 == 15 ? 2 : parseInt(targetCard.rank) + 1
-      const rankBelow =
-        parseInt(targetCard.rank) - 1 == 1 ? 14 : parseInt(targetCard.rank) - 1
+      const rankAbove = parseInt(targetCard.rank) + 1 == 15 ? 2 : parseInt(targetCard.rank) + 1
+      const rankBelow = parseInt(targetCard.rank) - 1 == 1 ? 14 : parseInt(targetCard.rank) - 1
 
-      if (
-        parseInt(card.rank) == rankAbove ||
-        parseInt(card.rank) == rankBelow
-      ) {
+      if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
         valid = true
       }
     })
@@ -143,10 +134,7 @@ class Deck {
   #cardExists = (card) => {
     const vals = Object.values(this.cards)
 
-    if (
-      vals.some((c) => c.suit == card.suit) &&
-      vals.some((c) => c.rank == card.rank)
-    ) {
+    if (vals.some((c) => c.suit == card.suit) && vals.some((c) => c.rank == card.rank)) {
       return true
     } else {
       return false

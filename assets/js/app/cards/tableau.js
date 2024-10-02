@@ -34,9 +34,7 @@ Deckdle._tableauHasValidCard = () => {
     if (tableau[col].filter((card) => card.status == 1).length) {
       if (
         Deckdle._tableauCardCanBeRemoved(
-          tableau[col][
-            tableau[col].filter((card) => card.status == 1).length - 1
-          ]
+          tableau[col][tableau[col].filter((card) => card.status == 1).length - 1]
         )
       ) {
         hasValid = true
@@ -55,10 +53,8 @@ Deckdle._tableauCardCanBeRemoved = (card) => {
   }
 
   const baseCard = base[base.length - 1]
-  const rankAbove =
-    parseInt(baseCard.rank) + 1 == 15 ? 2 : parseInt(baseCard.rank) + 1
-  const rankBelow =
-    parseInt(baseCard.rank) - 1 == 1 ? 14 : parseInt(baseCard.rank) - 1
+  const rankAbove = parseInt(baseCard.rank) + 1 == 15 ? 2 : parseInt(baseCard.rank) + 1
+  const rankBelow = parseInt(baseCard.rank) - 1 == 1 ? 14 : parseInt(baseCard.rank) - 1
 
   if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
     return true
@@ -71,17 +67,11 @@ Deckdle._removeCardFromTableau = (card) => {
   const tableau = Deckdle.__getState()['tableau']
 
   Object.keys(tableau).forEach((col) => {
-    const bottomCard =
-      tableau[col][tableau[col].filter((card) => card.status == 1).length - 1]
+    const bottomCard = tableau[col][tableau[col].filter((card) => card.status == 1).length - 1]
 
     if (bottomCard) {
-      if (
-        bottomCard.rank == card.dataset.rank &&
-        bottomCard.suit == card.dataset.suit
-      ) {
-        tableau[col][
-          tableau[col].filter((card) => card.status == 1).length - 1
-        ].status = 0
+      if (bottomCard.rank == card.dataset.rank && bottomCard.suit == card.dataset.suit) {
+        tableau[col][tableau[col].filter((card) => card.status == 1).length - 1].status = 0
 
         bottomCard.row = parseInt(card.dataset.row)
         bottomCard.col = parseInt(col)
@@ -145,9 +135,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
       }
     } else {
       const cardSelector = `#tableau #${colId} .card[data-row="${rowId}"]`
-      if (
-        !document.querySelector(cardSelector).classList.contains('disabled')
-      ) {
+      if (!document.querySelector(cardSelector).classList.contains('disabled')) {
         Deckdle._animateCSS(cardSelector, 'shakeX').then(() => {
           Deckdle._playSFX('click_tableau_invalid')
         })

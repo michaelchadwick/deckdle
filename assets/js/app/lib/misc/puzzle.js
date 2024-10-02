@@ -23,10 +23,7 @@ class Puzzle {
       this.shuffleCount += 1
 
       // if no valid move, shuffle again
-      while (
-        !this.deck.hasValidMove() ||
-        this.shuffleCount > this.MAX_SHUFFLES
-      ) {
+      while (!this.deck.hasValidMove() || this.shuffleCount > this.MAX_SHUFFLES) {
         // get random, yet deterministic, shuffle
         this.deck.shuffle(this.setupId)
 
