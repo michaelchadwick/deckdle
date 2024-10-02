@@ -1,5 +1,5 @@
 /* lib/misc/helpers */
-/* misc global () =>s */
+/* misc global functions */
 /* global Deckdle */
 /* eslint-disable no-undef */
 
@@ -175,13 +175,9 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
 
 // get list of other NebyooApps from Dave
 Deckdle._getNebyooApps = async () => {
-  if (Deckdle.env == 'test') {
-    return null
-  }
-
   const response = await fetch(NEBYOOAPPS_SOURCE_URL)
   const json = await response.json()
-  const apps = json.body
+  const apps = json.body ?? json
   const appList = document.querySelector('.nav-list')
 
   if (apps) {
