@@ -22,15 +22,7 @@ Deckdle.__getFormattedDate = function (date) {
 }
 Deckdle.__getTodaysDate = function () {
   const d = new Date(Date.now())
-  const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ]
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const months = [
     'January',
     'February',
@@ -50,9 +42,7 @@ Deckdle.__getTodaysDate = function () {
 }
 
 Deckdle.__hasParentWithMatchingSelector = function (target, selector) {
-  return [...document.querySelectorAll(selector)].some(
-    (el) => el !== target && el.contains(target)
-  )
+  return [...document.querySelectorAll(selector)].some((el) => el !== target && el.contains(target))
 }
 
 Deckdle.__getParentCard = function (el, selector) {
@@ -60,15 +50,50 @@ Deckdle.__getParentCard = function (el, selector) {
 
   do {
     parent_container = parent_container.parentNode
-  } while (
-    !parent_container.matches(selector) &&
-    parent_container !== document.body
-  )
+  } while (!parent_container.matches(selector) && parent_container !== document.body)
 
   return parent_container
 }
 
-Deckdle.__getRandomSetupId = function () {
+Deckdle.__getSetupId = async function (gameMode, qsId) {
+  let setupId = null
+
+  // 'daily' always uses day hash
+  if (gameMode == 'daily') {
+    try {
+      const response = await fetch(DECKDLE_DAILY_SCRIPT)
+      const data = await response.json()
+      setupId = parseInt(data['setupId'])
+
+      Deckdle.ui._updateDailyDetails(data['index'])
+
+      if (!setupId) {
+        console.error('retrieval of daily setupId went bork', setupId)
+      }
+    } catch (e) {
+      console.error('could not get daily setupId', e)
+    }
+  }
+  // 'free' generates random setupId
+  else {
+    if (qsId) {
+      setupId = parseInt(qsId)
+
+      Deckdle._changeSetting('gameMode', 'free')
+
+      if ('URLSearchParams' in window) {
+        const url = new URL(window.location)
+        url.searchParams.delete('id')
+        history.pushState(null, '', url)
+      }
+    } else {
+      setupId = Deckdle.__createRandomSetupId()
+    }
+  }
+
+  return setupId
+}
+Deckdle.__createRandomSetupId = function () {
   return Math.floor(Math.random() * 10000000000)
 }
 Deckdle.__getGameMode = function () {
@@ -150,10 +175,7 @@ Deckdle.__addStateObjSession = function (mode = Deckdle.__getGameMode()) {
   }
 }
 
-Deckdle.__getShareText = (
-  mode = Deckdle.__getGameMode(),
-  type = Deckdle.__getGameType()
-) => {
+Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGameType()) => {
   let html = ''
 
   if (mode == 'daily') {

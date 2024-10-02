@@ -153,10 +153,6 @@ body.dark-mode .modal-text {
   background-color: var(--black);
   color: var(--white);
 }
-body.dark-mode .modal-text ul li span.solution-category + ul {
-  background-color: var(--marker-color);
-  color: var(--white);
-}
 body.dark-mode .modal-button-group {
   background-color: var(--black);
 }

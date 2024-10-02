@@ -74,46 +74,12 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
 
   Deckdle.__setState('gameState', 'IN_PROGRESS', gameMode)
 
-  // 'daily' always uses day hash
-  if (gameMode == 'daily') {
-    try {
-      const response = await fetch(DECKDLE_DAILY_SCRIPT)
-      const data = await response.json()
-      setupId = parseInt(data['setupId'])
-
-      Deckdle.ui._updateDailyDetails(data['index'])
-
-      if (!setupId) {
-        console.error('retrieval of daily setupId went bork', setupId)
-      }
-    } catch (e) {
-      console.error('could not get daily setupId', e)
-    }
-  }
-  // 'free' generates random setupId
-  else {
-    if (qsId) {
-      setupId = parseInt(qsId)
-
-      Deckdle._changeSetting('gameMode', 'free')
-
-      if ('URLSearchParams' in window) {
-        const url = new URL(window.location)
-        url.searchParams.delete('id')
-        history.pushState(null, '', url)
-      }
-    } else {
-      setupId = Deckdle.__getRandomSetupId()
-    }
-  }
+  setupId = await Deckdle.__getSetupId(gameMode, qsId)
 
   Deckdle.__setState('setupId', setupId, gameMode)
 
   // create new Deckdle puzzle
-  const puzzle = Deckdle.__createPuzzle(
-    Deckdle.__getState(gameMode).setupId,
-    gameMode
-  )
+  const puzzle = Deckdle.__createPuzzle(Deckdle.__getState(gameMode).setupId, gameMode)
 
   Deckdle.__setState('tableau', puzzle.tableau)
   Deckdle.__setState('stock', puzzle.stock)
@@ -178,10 +144,7 @@ Deckdle._loadExistingSetup = async function (gameMode) {
   Deckdle.__setState('stock', puzzle.stock)
   Deckdle.__setState('base', puzzle.base)
 
-  Deckdle._logStatus(
-    `[LOADED] '${gameMode}' Puzzle from existing card setup`,
-    puzzle
-  )
+  Deckdle._logStatus(`[LOADED] '${gameMode}' Puzzle from existing card setup`, puzzle)
 
   // fill UI with beautiful cards
   Deckdle.ui._emptyPlayingField()
@@ -231,32 +194,48 @@ Deckdle._confirmNewFree = async function () {
 Deckdle._checkWinState = function () {
   // Deckdle._logStatus('checking win state...')
 
-  Deckdle.__setState('lastPlayedTime', new Date().getTime())
+  const gameState = Deckdle.__getState().gameState
+
+  if (gameState != 'GAME_OVER_REPLAY') {
+    Deckdle.__setState('lastPlayedTime', new Date().getTime())
+  }
 
   // tableau exhausted
   if (Deckdle._tableauCount() == 0) {
-    Deckdle.__setState('gameState', 'GAME_OVER')
-    Deckdle.__setState('lastCompletedTime', new Date().getTime())
+    if (gameState != 'GAME_OVER_REPLAY') {
+      Deckdle.__setState('gameState', 'GAME_OVER')
+      Deckdle.__setState('lastCompletedTime', new Date().getTime())
+    }
 
     Deckdle._winAnimation().then(() => {
-      Deckdle.modalOpen('game-over')
+      if (gameState == 'GAME_OVER_REPLAY') {
+        Deckdle.modalOpen('game-over-replay')
+      } else {
+        Deckdle.modalOpen('game-over')
+      }
     })
   }
   // stock exhausted and no valid tableau card
-  else if (
-    Deckdle.__getState().stock.length == 0 &&
-    !Deckdle._tableauHasValidCard()
-  ) {
-    Deckdle.__setState('gameState', 'GAME_OVER')
-    Deckdle.__setState('lastCompletedTime', new Date().getTime())
+  else if (Deckdle.__getState().stock.length == 0 && !Deckdle._tableauHasValidCard()) {
+    if (gameState != 'GAME_OVER_REPLAY') {
+      Deckdle.__setState('gameState', 'GAME_OVER')
+      Deckdle.__setState('lastCompletedTime', new Date().getTime())
+    }
 
     Deckdle._loseAnimation().then((msg) => {
       Deckdle._logStatus(msg)
-      Deckdle.modalOpen('game-over')
+
+      if (gameState == 'GAME_OVER_REPLAY') {
+        Deckdle.modalOpen('game-over-replay')
+      } else {
+        Deckdle.modalOpen('game-over')
+      }
     })
   }
 
-  Deckdle._saveGame(Deckdle.__getGameMode(), 'checkWinState')
+  if (gameState != 'GAME_OVER_REPLAY') {
+    Deckdle._saveGame(Deckdle.__getGameMode(), 'checkWinState')
+  }
 }
 
 Deckdle._loadQueryString = function (param) {
@@ -311,6 +290,41 @@ Deckdle._shareResults = async function () {
     return
   }
   // }
+}
+
+Deckdle._replayGame = async function () {
+  console.log('replaying game')
+
+  if (Deckdle.myModal) {
+    Deckdle.myModal._destroyModal()
+  }
+
+  Deckdle.__setState('gameState', 'GAME_OVER_REPLAY')
+
+  // re-create current Deckdle puzzle
+  const gameMode = Deckdle.__getGameMode()
+  const setupId = Deckdle.__getState(gameMode).setupId
+  const puzzle = Deckdle.__createPuzzle(setupId, gameMode)
+
+  Deckdle.__setState('tableau', puzzle.tableau)
+  Deckdle.__setState('stock', puzzle.stock)
+  Deckdle.__setState('base', puzzle.base)
+
+  Deckdle._logStatus(`[RE-CREATED] '${gameMode}' Puzzle from id: '${setupId}'`, puzzle)
+
+  // fill UI with beautiful cards
+  Deckdle.ui._emptyPlayingField()
+  Deckdle.ui._dealCards((animate = true))
+
+  if (Deckdle._isBaseEmpty()) {
+    Deckdle._moveCardFromStockToBase()
+  }
+
+  Deckdle.combo = 0
+  Deckdle.ui._resetComboCounter()
+
+  // enable the UI, but put it into `replay-mode` so it looks distinct
+  Deckdle.ui._enableUI((replay = true))
 }
 
 Deckdle._reload = function () {

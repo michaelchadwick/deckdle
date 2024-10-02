@@ -172,6 +172,25 @@ Deckdle.modalOpen = async function (type) {
             </div>
           </div>
 
+          <!-- replay mode -->
+          <div class="setting-row">
+            <div class="text">
+              <div class="title">Replay Mode (Experimental)</div>
+              <div class="description">Replay finished daily game, but not save score</div>
+            </div>
+            <div class="control">
+              <div class="container">
+                <div id="button-setting-replay-mode"
+                  data-status=""
+                  class="switch"
+                  onclick="Deckdle._changeSetting('replayMode')"
+                >
+                  <span class="knob"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- noisy -->
           <div class="setting-row">
             <div class="text">
@@ -317,6 +336,17 @@ Deckdle.modalOpen = async function (type) {
         modalText += `
           <div class="para">New daily puzzle available at 12 am PST</div>
         `
+
+        if (Deckdle.settings.replayMode) {
+          modalText += `
+            <div class="para highlighted">
+              <p>You may retry this game to improve your score, but it won't count towards your actual score.</p>
+              <div class="buttons">
+                <button class="game-over replay" onclick="Deckdle._replayGame()" title="Replay game?">Replay game?</button>
+              </div>
+            </div>
+          `
+        }
       }
       // free
       else {
@@ -340,6 +370,87 @@ Deckdle.modalOpen = async function (type) {
       `
 
       Deckdle.myModal = new Modal('end-state', 'Game Over', modalText, null, null, 'game-over')
+
+      break
+
+    case 'game-over-replay':
+      if (Deckdle.myModal) {
+        Deckdle.myModal._destroyModal()
+      }
+
+      modalText = `
+        <div class="container game-over">
+      `
+
+      switch (Deckdle.__getState()['gameType']) {
+        case 'golf':
+        default:
+          if (Deckdle._tableauCount() == 0) {
+            Deckdle._playSFX('win')
+
+            if (Deckdle._stockCount() > 0) {
+              modalText = `
+                <div class='score-animation'>
+                  <div>Whoa! You shot under par with a score of...</div>
+                  <div class='score animate__animated animate__zoomIn'>${Deckdle._stockCount()}</div>
+                </div>
+              `
+            } else {
+              modalText = `
+                <div class='score-animation'>
+                  <div>Whew! You just barely hit...</div>
+                  <div class='score animate__animated animate__zoomIn'>PAR</div>
+                </div>
+              `
+            }
+          } else {
+            Deckdle._playSFX('lose')
+
+            modalText = `
+              <div class='score-animation'>
+                <div>You didn't quite clear it with a score of...</div>
+                <div class='score animate__animated animate__zoomIn'>${Deckdle._tableauCount()}</div>
+                <div>OVER PAR</div>
+              </div>
+            `
+          }
+
+          break
+      }
+
+      // daily
+      if (Deckdle.__getGameMode() == 'daily') {
+        modalText += `
+          <div class="para">New daily puzzle available at 12 am PST</div>
+          <div class="para highlighted">
+            <p>Replay this game...again? Remember, it still won't count towards your actual score.</p>
+            <div class="buttons">
+              <button class="game-over replay" onclick="Deckdle._replayGame()" title="Replay game...again?">Replay game...again?</button>
+            </div>
+          </div>
+        `
+      }
+      // free
+      else {
+        modalText += `
+          <div class="buttons">
+            <button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>
+          </div>
+        `
+      }
+
+      modalText += `
+        </div>
+      `
+
+      Deckdle.myModal = new Modal(
+        'end-state',
+        'Game Over (Replay)',
+        modalText,
+        null,
+        null,
+        'game-over'
+      )
 
       break
 

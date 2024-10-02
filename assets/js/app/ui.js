@@ -5,13 +5,7 @@
 
 Deckdle.ui = {}
 
-Deckdle.ui._createCard = (
-  card,
-  cardType,
-  classes = [],
-  tabIndex = null,
-  draggable = false
-) => {
+Deckdle.ui._createCard = (card, cardType, classes = [], tabIndex = null, draggable = false) => {
   const cardDiv = document.createElement('div')
 
   if (classes.length) {
@@ -135,10 +129,7 @@ Deckdle.ui._removeCardFromStock = () => {
 }
 
 Deckdle.ui._addCardToBase = (card) => {
-  const newCard = Deckdle.ui._createCard(
-    new Card(card.suit, card.rank),
-    (cardType = 'base')
-  )
+  const newCard = Deckdle.ui._createCard(new Card(card.suit, card.rank), (cardType = 'base'))
 
   Deckdle.dom.interactive.base.appendChild(newCard)
 }
@@ -177,12 +168,8 @@ Deckdle.ui._updateGameType = () => {
 Deckdle.ui._emptyPlayingField = function () {
   // clear tableau, stock, base
   Deckdle.dom.interactive.tableau.replaceChildren()
-  Deckdle.dom.interactive.stock
-    .querySelectorAll('.card')
-    .forEach((card) => card.remove())
-  Deckdle.dom.interactive.base
-    .querySelectorAll('.card')
-    .forEach((card) => card.remove())
+  Deckdle.dom.interactive.stock.querySelectorAll('.card').forEach((card) => card.remove())
+  Deckdle.dom.interactive.base.querySelectorAll('.card').forEach((card) => card.remove())
 }
 
 Deckdle.ui._dealCards = function (animate = false) {
@@ -201,15 +188,9 @@ Deckdle.ui._dealCards = function (animate = false) {
   let colId = 0
   Object.keys(tableauCards).forEach((col) => {
     Object.values(tableauCards[col]).forEach((card, index) => {
-      const lastValidCardIndex =
-        tableauCards[col].filter((card) => card.status == 1).length - 1
+      const lastValidCardIndex = tableauCards[col].filter((card) => card.status == 1).length - 1
       const cardClasses = index == lastValidCardIndex ? ['available'] : []
-      const newCard = Deckdle.ui._createCard(
-        card,
-        'tableau',
-        cardClasses,
-        index ?? 0
-      )
+      const newCard = Deckdle.ui._createCard(card, 'tableau', cardClasses, index ?? 0)
 
       Deckdle.ui._addCardToTableau(newCard, colId)
 
@@ -244,11 +225,8 @@ Deckdle.ui._dealCards = function (animate = false) {
 
 Deckdle.ui._updateDailyDetails = function (index) {
   Deckdle.dailyNumber = parseInt(index) + 1
-  Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (
-    parseInt(index) + 1
-  ).toString()
-  Deckdle.dom.dailyDetails.querySelector('.day').innerHTML =
-    Deckdle.__getTodaysDate()
+  Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (parseInt(index) + 1).toString()
+  Deckdle.dom.dailyDetails.querySelector('.day').innerHTML = Deckdle.__getTodaysDate()
 }
 
 Deckdle.ui._undoBaseMove = function (card) {
@@ -317,15 +295,7 @@ Deckdle.ui._updateComboCounter = function () {
 }
 
 Deckdle.ui._resetComboCounter = function () {
-  Deckdle.dom.combo.classList.remove(
-    'x',
-    'x2',
-    'x5',
-    'x10',
-    'x15',
-    'x30',
-    'x35'
-  )
+  Deckdle.dom.combo.classList.remove('x', 'x2', 'x5', 'x10', 'x15', 'x30', 'x35')
 }
 
 Deckdle.ui._removeModalVestige = () => {
@@ -347,9 +317,7 @@ Deckdle.ui._disableUI = function () {
     setTimeout(() => Deckdle.dom.cardsContainer.classList.remove('disabled'), 0)
     setTimeout(() => Deckdle.dom.cardsContainer.classList.add('disabled'), 5)
 
-    const tableauCardArray = Array.from(
-      Deckdle.dom.interactive.tableau.querySelectorAll('.card')
-    )
+    const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
 
     tableauCardArray.forEach((card) => {
       setTimeout(() => card.classList.remove('disabled'), 0)
@@ -360,15 +328,13 @@ Deckdle.ui._disableUI = function () {
     setTimeout(() => Deckdle.dom.userCards.classList.remove('disabled'), 0)
     setTimeout(() => Deckdle.dom.userCards.classList.add('disabled'), 5)
 
-    const stockCardTop =
-      Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
+    const stockCardTop = Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
 
     setTimeout(() => stockCardTop.classList.remove('disabled'), 0)
     setTimeout(() => stockCardTop.classList.add('disabled'), 5)
     stockCardTop.setAttribute('disabled', true)
 
-    const baseCardTop =
-      Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
+    const baseCardTop = Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
 
     setTimeout(() => baseCardTop.classList.remove('disabled'), 0)
     setTimeout(() => baseCardTop.classList.add('disabled'), 5)
@@ -380,35 +346,50 @@ Deckdle.ui._disableUI = function () {
   }
 }
 
-Deckdle.ui._enableUI = function () {
+Deckdle.ui._enableUI = function (replay = false) {
   if (Deckdle.dom.gameContainer.classList.contains('disabled')) {
     Deckdle._logStatus('[UI] enabling')
 
     Deckdle.dom.cardsContainer.classList.remove('disabled')
     Deckdle.dom.userCards.classList.remove('disabled')
 
-    const tableauCardArray = Array.from(
-      Deckdle.dom.interactive.tableau.querySelectorAll('.card')
-    )
+    const tableauCardArray = Array.from(Deckdle.dom.interactive.tableau.querySelectorAll('.card'))
 
     tableauCardArray.forEach((card) => {
       card.classList.remove('disabled')
       card.setAttribute('disabled', false)
     })
 
-    const stockCardTop =
-      Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
+    const stockCardTop = Deckdle.dom.interactive.stock.querySelector('.card:last-of-type')
 
     stockCardTop.classList.remove('disabled')
     stockCardTop.setAttribute('disabled', false)
 
-    const baseCardTop =
-      Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
+    const baseCardTop = Deckdle.dom.interactive.base.querySelector('.card:last-of-type')
 
     baseCardTop.classList.remove('disabled')
     baseCardTop.setAttribute('disabled', false)
 
     Deckdle.dom.gameContainer.classList.remove('disabled')
+
+    if (replay) {
+      document.body.classList.add('replay-mode')
+      Deckdle.ui._disableModeSwitcher()
+    }
+  }
+}
+
+Deckdle.ui._disableModeSwitcher = () => {
+  const gameMode = Deckdle.__getGameMode()
+
+  if (gameMode == 'daily') {
+    Deckdle.dom.interactive.gameModeFreeLink.onclick = ''
+    Deckdle.dom.interactive.gameModeFreeLink.classList.add('disabled')
+    Deckdle.dom.interactive.gameModeFreeLink.disabled = true
+  } else {
+    Deckdle.dom.interactive.gameModeDailyLink.onclick = ''
+    Deckdle.dom.interactive.gameModeDailyLink.classList.add('disabled')
+    Deckdle.dom.interactive.gameModeDailyLink.disabled = true
   }
 }
 

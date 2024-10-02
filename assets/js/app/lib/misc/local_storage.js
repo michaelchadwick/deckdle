@@ -37,9 +37,7 @@ Deckdle._loadGame = async function (switching = false) {
 
   // daily state LS -> code
   if (Deckdle.__getGameMode() == 'daily') {
-    const lsStateDaily = JSON.parse(
-      localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)
-    )
+    const lsStateDaily = JSON.parse(localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY))
 
     // if we have previous LS values, sync them to code model
     if (lsStateDaily) {
@@ -47,18 +45,8 @@ Deckdle._loadGame = async function (switching = false) {
 
       let i = 0
       lsStateDaily.forEach((lsState) => {
-        Deckdle.__setState(
-          'comboMax',
-          lsState.comboMax || dailyDefaults.comboMax,
-          'daily',
-          i
-        )
-        Deckdle.__setState(
-          'gameState',
-          lsState.gameState || dailyDefaults.gameState,
-          'daily',
-          i
-        )
+        Deckdle.__setState('comboMax', lsState.comboMax || dailyDefaults.comboMax, 'daily', i)
+        Deckdle.__setState('gameState', lsState.gameState || dailyDefaults.gameState, 'daily', i)
         Deckdle.__setState(
           'lastCompletedTime',
           lsState.lastCompletedTime || dailyDefaults.lastCompletedTime,
@@ -77,31 +65,11 @@ Deckdle._loadGame = async function (switching = false) {
           'daily',
           i
         )
-        Deckdle.__setState(
-          'setupId',
-          lsState.setupId || dailyDefaults.setupId,
-          'daily',
-          i
-        )
+        Deckdle.__setState('setupId', lsState.setupId || dailyDefaults.setupId, 'daily', i)
 
-        Deckdle.__setState(
-          'tableau',
-          lsState.tableau || dailyDefaults.tableau,
-          'daily',
-          i
-        )
-        Deckdle.__setState(
-          'stock',
-          lsState.stock || dailyDefaults.stock,
-          'daily',
-          i
-        )
-        Deckdle.__setState(
-          'base',
-          lsState.base || dailyDefaults.base,
-          'daily',
-          i
-        )
+        Deckdle.__setState('tableau', lsState.tableau || dailyDefaults.tableau, 'daily', i)
+        Deckdle.__setState('stock', lsState.stock || dailyDefaults.stock, 'daily', i)
+        Deckdle.__setState('base', lsState.base || dailyDefaults.base, 'daily', i)
 
         i++
 
@@ -122,10 +90,7 @@ Deckdle._loadGame = async function (switching = false) {
 
           // saved setupId and daily setupId are the same? still working on it
           if (lsStateDaily[Deckdle.__getSessionIndex()].setupId) {
-            if (
-              dailySetupId ==
-              parseInt(lsStateDaily[Deckdle.__getSessionIndex()].setupId)
-            ) {
+            if (dailySetupId == parseInt(lsStateDaily[Deckdle.__getSessionIndex()].setupId)) {
               Deckdle.__setState(
                 'gameState',
                 lsStateDaily[Deckdle.__getSessionIndex()].gameState,
@@ -156,9 +121,7 @@ Deckdle._loadGame = async function (switching = false) {
   }
   // free state LS -> code
   else {
-    const lsStateFree = JSON.parse(
-      localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY)
-    )
+    const lsStateFree = JSON.parse(localStorage.getItem(DECKDLE_STATE_FREE_LS_KEY))
 
     // if we have previous LS values, sync them to code model
     if (lsStateFree) {
@@ -166,18 +129,8 @@ Deckdle._loadGame = async function (switching = false) {
 
       let i = 0
       lsStateFree.forEach((lsState) => {
-        Deckdle.__setState(
-          'comboMax',
-          lsState.comboMax || freeDefaults.comboMax,
-          'free',
-          i
-        )
-        Deckdle.__setState(
-          'gameState',
-          lsState.gameState || freeDefaults.gameState,
-          'free',
-          i
-        )
+        Deckdle.__setState('comboMax', lsState.comboMax || freeDefaults.comboMax, 'free', i)
+        Deckdle.__setState('gameState', lsState.gameState || freeDefaults.gameState, 'free', i)
         Deckdle.__setState(
           'lastCompletedTime',
           lsState.lastCompletedTime || freeDefaults.lastCompletedTime,
@@ -196,33 +149,15 @@ Deckdle._loadGame = async function (switching = false) {
           'free',
           i
         )
-        Deckdle.__setState(
-          'setupId',
-          lsState.setupId || freeDefaults.setupId,
-          'free',
-          i
-        )
+        Deckdle.__setState('setupId', lsState.setupId || freeDefaults.setupId, 'free', i)
 
-        Deckdle.__setState(
-          'tableau',
-          lsState.tableau || freeDefaults.tableau,
-          'free',
-          i
-        )
-        Deckdle.__setState(
-          'stock',
-          lsState.stock || freeDefaults.stock,
-          'free',
-          i
-        )
+        Deckdle.__setState('tableau', lsState.tableau || freeDefaults.tableau, 'free', i)
+        Deckdle.__setState('stock', lsState.stock || freeDefaults.stock, 'free', i)
         Deckdle.__setState('base', lsState.base || freeDefaults.base, 'free', i)
 
         i++
 
-        if (
-          i < lsStateFree.length &&
-          Deckdle.__getState().gameState == 'GAME_OVER'
-        ) {
+        if (i < lsStateFree.length && Deckdle.__getState().gameState == 'GAME_OVER') {
           Deckdle.__addStateObjSession('free')
         }
       })
@@ -270,59 +205,49 @@ Deckdle._loadGame = async function (switching = false) {
   }
 }
 // save state from code model -> LS
-Deckdle._saveGame = function (
-  lsType = Deckdle.__getGameMode(),
-  src = 'unknown'
-) {
-  switch (lsType) {
-    case 'daily': {
-      let curDailyState = Deckdle.__getStateObj('daily')
+Deckdle._saveGame = function (lsType = Deckdle.__getGameMode(), src = 'unknown') {
+  if (Deckdle.__getState().gameState != 'GAME_OVER_REPLAY') {
+    switch (lsType) {
+      case 'daily': {
+        let curDailyState = Deckdle.__getStateObj('daily')
 
-      curDailyState.forEach((sesh) => {
-        Object.keys(sesh).forEach((key) => {
-          if (sesh[key] === undefined) {
-            sesh[key] = null
-          }
+        curDailyState.forEach((sesh) => {
+          Object.keys(sesh).forEach((key) => {
+            if (sesh[key] === undefined) {
+              sesh[key] = null
+            }
+          })
         })
-      })
 
-      localStorage.setItem(
-        DECKDLE_STATE_DAILY_LS_KEY,
-        JSON.stringify(curDailyState)
-      )
+        localStorage.setItem(DECKDLE_STATE_DAILY_LS_KEY, JSON.stringify(curDailyState))
 
-      break
+        break
+      }
+
+      case 'free': {
+        let curFreeState = Deckdle.__getStateObj('free')
+
+        curFreeState.forEach((sesh) => {
+          Object.keys(sesh).forEach((key) => {
+            if (sesh[key] === undefined) {
+              sesh[key] = null
+            }
+          })
+        })
+
+        localStorage.setItem(DECKDLE_STATE_FREE_LS_KEY, JSON.stringify(curFreeState))
+
+        break
+      }
+
+      case 'settings':
+        localStorage.setItem(DECKDLE_SETTINGS_LS_KEY, JSON.stringify(Deckdle.settings))
+
+        break
     }
 
-    case 'free': {
-      let curFreeState = Deckdle.__getStateObj('free')
-
-      curFreeState.forEach((sesh) => {
-        Object.keys(sesh).forEach((key) => {
-          if (sesh[key] === undefined) {
-            sesh[key] = null
-          }
-        })
-      })
-
-      localStorage.setItem(
-        DECKDLE_STATE_FREE_LS_KEY,
-        JSON.stringify(curFreeState)
-      )
-
-      break
-    }
-
-    case 'settings':
-      localStorage.setItem(
-        DECKDLE_SETTINGS_LS_KEY,
-        JSON.stringify(Deckdle.settings)
-      )
-
-      break
+    Deckdle._logStatus(`[SAVED] game(${lsType})`, src)
   }
-
-  // Deckdle._logStatus(`[SAVED] game(${lsType})`, src)
 }
 
 // load settings (gear icon) from localStorage
@@ -415,6 +340,18 @@ Deckdle._loadSettings = function () {
       }
     }
 
+    if (lsSettings.replayMode !== undefined) {
+      Deckdle.settings.replayMode = lsSettings.replayMode
+
+      if (Deckdle.settings.replayMode) {
+        setting = document.getElementById('button-setting-replay-mode')
+
+        if (setting) {
+          setting.dataset.status = Deckdle.settings.replayMode
+        }
+      }
+    }
+
     if (lsSettings.soundBGMLevel !== undefined) {
       Deckdle._saveSetting('soundBGMLevel', lsSettings.soundBGMLevel)
 
@@ -471,18 +408,15 @@ Deckdle._changeSetting = async function (setting, value) {
 
   switch (setting) {
     case 'comboCounter':
-      st = document.getElementById('button-setting-combo-counter').dataset
-        .status
+      st = document.getElementById('button-setting-combo-counter').dataset.status
 
       if (st == '' || st == 'false') {
-        document.getElementById('button-setting-combo-counter').dataset.status =
-          'true'
+        document.getElementById('button-setting-combo-counter').dataset.status = 'true'
         Deckdle.dom.combo.classList.add('show')
 
         Deckdle._saveSetting('comboCounter', true)
       } else {
-        document.getElementById('button-setting-combo-counter').dataset.status =
-          'false'
+        document.getElementById('button-setting-combo-counter').dataset.status = 'false'
         Deckdle.dom.combo.classList.remove('show')
 
         Deckdle._saveSetting('comboCounter', false)
@@ -497,14 +431,12 @@ Deckdle._changeSetting = async function (setting, value) {
       st = document.getElementById('button-setting-dark-mode').dataset.status
 
       if (st == '' || st == 'false') {
-        document.getElementById('button-setting-dark-mode').dataset.status =
-          'true'
+        document.getElementById('button-setting-dark-mode').dataset.status = 'true'
         document.body.classList.add('dark-mode')
 
         Deckdle._saveSetting('darkMode', true)
       } else {
-        document.getElementById('button-setting-dark-mode').dataset.status =
-          'false'
+        document.getElementById('button-setting-dark-mode').dataset.status = 'false'
         document.body.classList.remove('dark-mode')
 
         Deckdle._saveSetting('darkMode', false)
@@ -531,11 +463,7 @@ Deckdle._changeSetting = async function (setting, value) {
                   const response = await fetch(DECKDLE_DAILY_SCRIPT)
                   const data = await response.json()
 
-                  Deckdle.__setState(
-                    'setupId',
-                    parseInt(data['setupId']),
-                    'daily'
-                  )
+                  Deckdle.__setState('setupId', parseInt(data['setupId']), 'daily')
 
                   Deckdle.ui._updateDailyDetails(data['index'])
                 } catch (e) {
@@ -579,31 +507,34 @@ Deckdle._changeSetting = async function (setting, value) {
 
         Deckdle._initSynths()
 
-        document
-          .querySelector('#range-setting-bgm-level')
-          .removeAttribute('disabled')
-        document
-          .querySelector('#range-setting-sfx-level')
-          .removeAttribute('disabled')
+        document.querySelector('#range-setting-bgm-level').removeAttribute('disabled')
+        document.querySelector('#range-setting-sfx-level').removeAttribute('disabled')
 
         Deckdle._saveSetting('noisy', true)
       } else {
         document.getElementById('button-setting-noisy').dataset.status = 'false'
 
-        document
-          .querySelector('#button-start-music')
-          .setAttribute('disabled', '')
-        document
-          .querySelector('#button-stop-music')
-          .setAttribute('disabled', '')
-        document
-          .querySelector('#range-setting-bgm-level')
-          .setAttribute('disabled', '')
-        document
-          .querySelector('#range-setting-sfx-level')
-          .setAttribute('disabled', '')
+        document.querySelector('#button-start-music').setAttribute('disabled', '')
+        document.querySelector('#button-stop-music').setAttribute('disabled', '')
+        document.querySelector('#range-setting-bgm-level').setAttribute('disabled', '')
+        document.querySelector('#range-setting-sfx-level').setAttribute('disabled', '')
 
         Deckdle._saveSetting('noisy', false)
+      }
+
+      break
+
+    case 'replayMode':
+      st = document.getElementById('button-setting-replay-mode').dataset.status
+
+      if (st == '' || st == 'false') {
+        document.getElementById('button-setting-replay-mode').dataset.status = 'true'
+
+        Deckdle._saveSetting('replayMode', true)
+      } else {
+        document.getElementById('button-setting-replay-mode').dataset.status = 'false'
+
+        Deckdle._saveSetting('replayMode', false)
       }
 
       break

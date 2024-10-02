@@ -137,6 +137,10 @@
   padding: 10px;
   text-align: center;
 }
+.modal-text div.para.highlighted {
+  background-color: var(--off-white2);
+  padding: 10px 15px;
+}
 .modal-text div.buttons {
   display: flex;
   flex-direction: row;

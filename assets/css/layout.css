@@ -327,8 +327,10 @@ section#game #mode-container #daily-details.show .day {
 }
 
 section#game #game-type {
+  display: flex;
   font-size: 1.2rem;
   height: 27px;
+  justify-content: center;
   margin: 0 auto;
   text-align: center;
   text-transform: uppercase;
@@ -338,6 +340,16 @@ section#game #game-type {
   section#game #game-type {
     font-size: 1.4rem;
   }
+}
+section#game #game-type .replay-label {
+  color: var(--replay-label);
+  display: none;
+  font-family: "Changa Bold", sans-serif;
+  font-size: 0.6em;
+  font-weight: 700;
+  position: absolute;
+  transform-origin: 0 0; /* OR top left */
+  transform: translateX(67.3%) translateY(-32%) rotate(23deg);
 }
 
 section#game #cards-container {
