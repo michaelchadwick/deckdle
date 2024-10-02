@@ -48,13 +48,17 @@
     }
   }
 }
-.card[data-suit="0"],
-.card[data-suit="3"] {
-  color: var(--black);
+.card[data-suit="0"] {
+  color: var(--card-suit-club);
 }
-.card[data-suit="1"],
+.card[data-suit="1"] {
+  color: var(--card-suit-diamond);
+}
 .card[data-suit="2"] {
-  color: var(--card-suit-red);
+  color: var(--card-suit-heart);
+}
+.card[data-suit="3"] {
+  color: var(--card-suit-spade);
 }
 
 .card .rank {

@@ -68,9 +68,14 @@
   --card-back: #2e678e;
   --card-back-focus: #33749f;
   --card-focus-border: #ebf7ff;
-  --card-suit-black: var(--black);
-  --card-suit-red: #e71111;
-  --card-suit-red2: #ff8080;
+  --card-suit-club: #13132a;
+  --card-suit-club2: #e3e3fa;
+  --card-suit-diamond: #e54818;
+  --card-suit-diamond2: #ff8080;
+  --card-suit-heart: #e71111;
+  --card-suit-heart2: #f92d2d;
+  --card-suit-spade: #151515;
+  --card-suit-spade2: #f5f5f5;
 
   font-family: "Changa", sans-serif;
   font-size: 16px;
