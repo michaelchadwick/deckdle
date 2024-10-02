@@ -3,7 +3,7 @@
 /* global Deckdle */
 
 // user clicks a card (stock or tableau)
-Deckdle._onCardClick = function (card) {
+Deckdle._onCardClick = (card) => {
   if (card.parentElement.id == 'stock') {
     Deckdle._onStockClick()
   } else if (card.parentElement.parentElement.id == 'stock') {
@@ -16,7 +16,7 @@ Deckdle._onCardClick = function (card) {
 }
 
 // handle both clicks and touches outside of modals
-Deckdle._handleClickTouch = function (event) {
+Deckdle._handleClickTouch = (event) => {
   const dialog = document.getElementsByClassName('modal-dialog')[0]
   const elem = event.target
 
@@ -46,7 +46,7 @@ Deckdle._handleClickTouch = function (event) {
   }
 }
 
-Deckdle._attachEventListeners = function () {
+Deckdle._attachEventListeners = () => {
   // {} header icons to open modals
   Deckdle.dom.interactive.btnNav.addEventListener('click', () => {
     Deckdle.dom.navOverlay.classList.toggle('show')
@@ -130,7 +130,7 @@ Deckdle._attachEventListeners = function () {
 
   document.body.addEventListener(
     'touchmove',
-    function (event) {
+    (event) => {
       event.preventDefault
     },
     { passive: false }

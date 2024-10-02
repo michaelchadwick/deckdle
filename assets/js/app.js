@@ -5,7 +5,7 @@ const DECKDLE_ENV_PROD_URL = ['deckdle.fun', 'deckdle.neb.host']
 
 Deckdle.env = DECKDLE_ENV_PROD_URL.includes(document.location.hostname) ? 'prod' : 'local'
 
-Deckdle._logStatus = function (msg, arg = null) {
+Deckdle._logStatus = (msg, arg = null) => {
   if (Deckdle.env == 'local') {
     if (arg) {
       console.log(msg, arg)

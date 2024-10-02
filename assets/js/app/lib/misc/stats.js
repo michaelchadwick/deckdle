@@ -3,7 +3,7 @@
 /* global Deckdle */
 /* eslint-disable no-undef */
 
-Deckdle._getFinishedGameCount = function (mode) {
+Deckdle._getFinishedGameCount = (mode) => {
   let ls =
     mode == 'daily'
       ? localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)
@@ -12,7 +12,7 @@ Deckdle._getFinishedGameCount = function (mode) {
   return ls ? JSON.parse(ls).filter((session) => session.lastCompletedTime).length : 0
 }
 
-Deckdle._getBestCombo = function (mode) {
+Deckdle._getBestCombo = (mode) => {
   let ls =
     mode == 'daily'
       ? localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)
@@ -21,7 +21,7 @@ Deckdle._getBestCombo = function (mode) {
   return ls ? Math.max(...JSON.parse(ls).map((session) => session.comboMax)) : 0
 }
 
-Deckdle._getBestScore = function (mode) {
+Deckdle._getBestScore = (mode) => {
   let ls =
     mode == 'daily'
       ? localStorage.getItem(DECKDLE_STATE_DAILY_LS_KEY)

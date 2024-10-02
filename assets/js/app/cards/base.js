@@ -2,11 +2,11 @@
 /* functions for base */
 /* global Deckdle */
 
-Deckdle._isBaseEmpty = function () {
+Deckdle._isBaseEmpty = () => {
   return Deckdle.__getState()['base'].length == 0
 }
 
-Deckdle._removeCardFromBase = function (card) {
+Deckdle._removeCardFromBase = (card) => {
   const base = Deckdle.__getState()['base']
 
   base.pop()

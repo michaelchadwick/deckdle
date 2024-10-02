@@ -1,5 +1,5 @@
 /* lib/misc/helpers */
-/* misc global functions */
+/* misc global () =>s */
 /* global Deckdle */
 /* eslint-disable no-undef */
 
@@ -8,7 +8,7 @@ Deckdle._sleep = (ms) => {
 }
 
 // timestamp -> display date
-Deckdle.__getFormattedDate = function (date) {
+Deckdle.__getFormattedDate = (date) => {
   let formatted_date = ''
 
   formatted_date += `${date.getFullYear()}/`
@@ -20,7 +20,7 @@ Deckdle.__getFormattedDate = function (date) {
 
   return formatted_date
 }
-Deckdle.__getTodaysDate = function () {
+Deckdle.__getTodaysDate = () => {
   const d = new Date(Date.now())
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const months = [
@@ -41,11 +41,11 @@ Deckdle.__getTodaysDate = function () {
   return `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
 }
 
-Deckdle.__hasParentWithMatchingSelector = function (target, selector) {
+Deckdle.__hasParentWithMatchingSelector = (target, selector) => {
   return [...document.querySelectorAll(selector)].some((el) => el !== target && el.contains(target))
 }
 
-Deckdle.__getParentCard = function (el, selector) {
+Deckdle.__getParentCard = (el, selector) => {
   var parent_container = el
 
   do {
@@ -55,24 +55,24 @@ Deckdle.__getParentCard = function (el, selector) {
   return parent_container
 }
 
-Deckdle.__getRandomSetupId = function () {
+Deckdle.__getRandomSetupId = () => {
   return Math.floor(Math.random() * 10000000000)
 }
-Deckdle.__getGameMode = function () {
+Deckdle.__getGameMode = () => {
   return Deckdle.settings ? Deckdle.settings.gameMode : DECKDLE_DEFAULT_GAMEMODE
 }
-Deckdle.__getGameType = function () {
+Deckdle.__getGameType = () => {
   return Deckdle.__getState()['gameType'] ?? DECKDLE_DEFAULT_GAMETYPE
 }
 
-Deckdle.__getConfig = function () {
+Deckdle.__getConfig = () => {
   return Deckdle.config || undefined
 }
-Deckdle.__setConfig = function (key, val) {
+Deckdle.__setConfig = (key, val) => {
   Deckdle.config[key] = val
 }
 
-Deckdle.__getState = function (mode = Deckdle.__getGameMode()) {
+Deckdle.__getState = (mode = Deckdle.__getGameMode()) => {
   const rootState = Deckdle.state[mode]
 
   if (rootState) {
@@ -84,12 +84,12 @@ Deckdle.__getState = function (mode = Deckdle.__getGameMode()) {
     return undefined
   }
 }
-Deckdle.__setState = function (
+Deckdle.__setState = (
   key,
   val,
   mode = Deckdle.__getGameMode(),
   index = Deckdle.__getSessionIndex()
-) {
+) => {
   switch (key) {
     // case 'base':
     //   Deckdle.state[mode][index][key].push(val)
@@ -100,7 +100,7 @@ Deckdle.__setState = function (
   }
 }
 
-Deckdle.__getSessionIndex = function (mode = Deckdle.__getGameMode()) {
+Deckdle.__getSessionIndex = (mode = Deckdle.__getGameMode()) => {
   const rootState = Deckdle.__getStateObj(mode)
   let index = null
 
@@ -119,13 +119,13 @@ Deckdle.__getSessionIndex = function (mode = Deckdle.__getGameMode()) {
   return index
 }
 
-Deckdle.__getStateObj = function (mode = Deckdle.__getGameMode()) {
+Deckdle.__getStateObj = (mode = Deckdle.__getGameMode()) => {
   const rootState = Deckdle.state[mode]
 
   return rootState || undefined
 }
 
-Deckdle.__addStateObjSession = function (mode = Deckdle.__getGameMode()) {
+Deckdle.__addStateObjSession = (mode = Deckdle.__getGameMode()) => {
   const rootState = Deckdle.state[mode]
 
   if (rootState) {
@@ -174,7 +174,7 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
 }
 
 // get list of other NebyooApps from Dave
-Deckdle._getNebyooApps = async function () {
+Deckdle._getNebyooApps = async () => {
   if (Deckdle.env == 'test') {
     return null
   }

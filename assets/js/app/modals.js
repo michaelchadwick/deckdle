@@ -3,7 +3,7 @@
 /* global Deckdle */
 /* eslint-disable no-undef */
 
-Deckdle.modalOpen = async function (type) {
+Deckdle.modalOpen = async (type) => {
   let modalText
   const gameType = Deckdle.__getState()['gameType']
 

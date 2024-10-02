@@ -2,11 +2,11 @@
 /* functions for stock */
 /* global Deckdle */
 
-Deckdle._stockCount = function () {
+Deckdle._stockCount = () => {
   return Deckdle.__getState()['stock'].length
 }
 
-Deckdle._checkForEmptyStock = function () {
+Deckdle._checkForEmptyStock = () => {
   if (!Deckdle._stockCount()) {
     Deckdle.dom.interactive.stock.appendChild(Deckdle.ui._createEmptyCard())
 
@@ -36,7 +36,7 @@ Deckdle._moveCardFromStockToBase = () => {
   Deckdle._checkForEmptyStock()
 }
 
-Deckdle._onStockClick = function () {
+Deckdle._onStockClick = () => {
   if (Deckdle.__getState()['stock'].length) {
     Deckdle._moveCardFromStockToBase()
 

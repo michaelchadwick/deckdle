@@ -60,7 +60,7 @@ Deckdle.initApp = async () => {
  *************************************************************************/
 
 // create new setupId, which resets progress
-Deckdle._createNewSetup = async function (gameMode, qsId = null) {
+Deckdle._createNewSetup = async (gameMode, qsId = null) => {
   let setupId = null
 
   // if we have finished the current game
@@ -138,7 +138,7 @@ Deckdle._createNewSetup = async function (gameMode, qsId = null) {
 }
 
 // load existing setupId, which retains past progress
-Deckdle._loadExistingSetup = async function (gameMode) {
+Deckdle._loadExistingSetup = async (gameMode) => {
   // 'daily' always uses day hash
   if (gameMode == 'daily') {
     // if we are testing, we don't need to grab a hash
@@ -192,14 +192,14 @@ Deckdle._loadExistingSetup = async function (gameMode) {
   Deckdle._checkWinState()
 }
 
-Deckdle._createNewFree = async function () {
+Deckdle._createNewFree = async () => {
   await Deckdle._createNewSetup('free')
 
   Deckdle.ui._removeModalVestige()
 }
 
 // ask to create new free gamemode puzzle
-Deckdle._confirmNewFree = async function () {
+Deckdle._confirmNewFree = async () => {
   if (Deckdle.myModal) {
     Deckdle.myModal._destroyModal()
   }
@@ -222,7 +222,7 @@ Deckdle._confirmNewFree = async function () {
 }
 
 // game state checking
-Deckdle._checkWinState = function () {
+Deckdle._checkWinState = () => {
   // Deckdle._logStatus('checking win state...')
 
   Deckdle.__setState('lastPlayedTime', new Date().getTime())
@@ -250,7 +250,7 @@ Deckdle._checkWinState = function () {
   Deckdle._saveGame(Deckdle.__getGameMode(), 'checkWinState')
 }
 
-Deckdle._loadQueryString = function (param) {
+Deckdle._loadQueryString = (param) => {
   const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
   })
@@ -263,7 +263,7 @@ Deckdle._loadQueryString = function (param) {
 }
 
 // copy results to clipboard for sharing
-Deckdle._shareResults = async function () {
+Deckdle._shareResults = async () => {
   let shareText = Deckdle.__getShareText()
 
   // if (navigator.canShare({ text: shareText })) {
@@ -304,7 +304,7 @@ Deckdle._shareResults = async function () {
   // }
 }
 
-Deckdle._reload = function () {
+Deckdle._reload = () => {
   location.reload()
 }
 

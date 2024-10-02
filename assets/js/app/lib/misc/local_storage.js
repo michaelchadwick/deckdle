@@ -4,7 +4,7 @@
 /* eslint-disable no-undef, no-unused-vars */
 
 // load state from LS -> code model
-Deckdle._loadGame = async function (switching = false) {
+Deckdle._loadGame = async (switching = false) => {
   Deckdle._logStatus('[LOADING] game')
 
   /* ************************* */
@@ -205,7 +205,7 @@ Deckdle._loadGame = async function (switching = false) {
   }
 }
 // save state from code model -> LS
-Deckdle._saveGame = function (lsType = Deckdle.__getGameMode(), src = 'unknown') {
+Deckdle._saveGame = (lsType = Deckdle.__getGameMode(), src = 'unknown') => {
   switch (lsType) {
     case 'daily': {
       let curDailyState = Deckdle.__getStateObj('daily')
@@ -249,7 +249,7 @@ Deckdle._saveGame = function (lsType = Deckdle.__getGameMode(), src = 'unknown')
 }
 
 // load settings (gear icon) from localStorage
-Deckdle._loadSettings = function () {
+Deckdle._loadSettings = () => {
   Deckdle._logStatus('[LOADING] settings')
 
   const lsSettings = JSON.parse(localStorage.getItem(DECKDLE_SETTINGS_LS_KEY))
@@ -389,7 +389,7 @@ Deckdle._loadSettings = function () {
 }
 // change a setting (gear icon) value
 // then save to localStorage
-Deckdle._changeSetting = async function (setting, value) {
+Deckdle._changeSetting = async (setting, value) => {
   let st = null
 
   switch (setting) {
@@ -548,7 +548,7 @@ Deckdle._changeSetting = async function (setting, value) {
   // Deckdle._logStatus(`[CHANGED] setting(${setting}, ${value})`)
 }
 // save a setting (gear icon) to localStorage
-Deckdle._saveSetting = function (setting, value) {
+Deckdle._saveSetting = (setting, value) => {
   const settings = JSON.parse(localStorage.getItem(DECKDLE_SETTINGS_LS_KEY))
 
   if (settings) {
@@ -568,7 +568,7 @@ Deckdle._saveSetting = function (setting, value) {
 }
 
 // add another element to localStorage state
-Deckdle._createNewSession = function () {
+Deckdle._createNewSession = () => {
   let curLS = null
 
   // daily

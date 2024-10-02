@@ -25,7 +25,7 @@ Deckdle._animateCSS = (element, animation, loop, prefix = 'animate__') => {
   })
 }
 
-Deckdle._winAnimation = async function (debug = false) {
+Deckdle._winAnimation = async (debug = false) => {
   Deckdle._logStatus('[ANIM] _winAnimation started')
   return new Promise((resolve) => {
     Deckdle._animateCSS('#base', 'tada')
@@ -38,7 +38,7 @@ Deckdle._winAnimation = async function (debug = false) {
   })
 }
 
-Deckdle._loseAnimation = async function (debug = false) {
+Deckdle._loseAnimation = async (debug = false) => {
   Deckdle._logStatus('[ANIM] _loseAnimation started')
   return new Promise((resolve) => {
     Deckdle.ui._disableUI()
@@ -53,7 +53,7 @@ Deckdle._loseAnimation = async function (debug = false) {
   })
 }
 
-Deckdle._resetCardsDuration = function () {
+Deckdle._resetCardsDuration = () => {
   Array.from(Deckdle.dom.interactive.tableau).forEach((card) =>
     card.style.setProperty('--animate-duration', '100ms')
   )

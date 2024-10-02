@@ -1,7 +1,7 @@
 /* lib/misc/audio */
 /* global Deckdle, WebAudioTinySynth */
 
-Deckdle._initSynths = function () {
+Deckdle._initSynths = () => {
   Deckdle._logStatus('[INITIALIZING] synths')
 
   if (!Deckdle.__getConfig().synthBGM) {
@@ -64,7 +64,7 @@ Deckdle._initSynths = function () {
 
 // BackGround Music
 // TODO: add more background music?
-Deckdle._playBGM = function () {
+Deckdle._playBGM = () => {
   if (Deckdle.settings.noisy) {
     const filename = `/assets/audio/deckdle-bgm2.mid`
 
@@ -75,7 +75,7 @@ Deckdle._playBGM = function () {
     }, 20)
   }
 }
-Deckdle._stopBGM = function () {
+Deckdle._stopBGM = () => {
   Deckdle.config.synthBGM.stopMIDI()
 }
 
@@ -184,6 +184,6 @@ Deckdle._playSFX = function (action, arg = null) {
 }
 
 // Flags
-Deckdle._isBGMPlaying = function () {
+Deckdle._isBGMPlaying = () => {
   return Deckdle.config.synthBGM ? Deckdle.config.synthBGM.playing : false
 }

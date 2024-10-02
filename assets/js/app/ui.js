@@ -106,7 +106,7 @@ Deckdle.ui._removeCardFromTableau = (colId) => {
   }
 }
 
-Deckdle.ui._addCardToStock = function (card, animate = false) {
+Deckdle.ui._addCardToStock = (card, animate = false) => {
   const newCard = Deckdle.ui._createCard(card, 'stock', ['back'])
 
   Deckdle.dom.interactive.stock.appendChild(newCard)
@@ -165,14 +165,14 @@ Deckdle.ui._updateGameType = () => {
   Deckdle.dom.gameType.innerText = Deckdle.__getState()['gameType']
 }
 
-Deckdle.ui._emptyPlayingField = function () {
+Deckdle.ui._emptyPlayingField = () => {
   // clear tableau, stock, base
   Deckdle.dom.interactive.tableau.replaceChildren()
   Deckdle.dom.interactive.stock.querySelectorAll('.card').forEach((card) => card.remove())
   Deckdle.dom.interactive.base.querySelectorAll('.card').forEach((card) => card.remove())
 }
 
-Deckdle.ui._dealCards = function (animate = false) {
+Deckdle.ui._dealCards = (animate = false) => {
   // Deckdle._logStatus('[UI][LOADING] fillCards()')
 
   // create <div id="tableau"><div class="col"> * 7</div>
@@ -223,13 +223,13 @@ Deckdle.ui._dealCards = function (animate = false) {
   Deckdle.ui._updateCardCounts()
 }
 
-Deckdle.ui._updateDailyDetails = function (index) {
+Deckdle.ui._updateDailyDetails = (index) => {
   Deckdle.dailyNumber = parseInt(index) + 1
   Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (parseInt(index) + 1).toString()
   Deckdle.dom.dailyDetails.querySelector('.day').innerHTML = Deckdle.__getTodaysDate()
 }
 
-Deckdle.ui._undoBaseMove = function (card) {
+Deckdle.ui._undoBaseMove = (card) => {
   // if card still remains in column
   // remove its availability
   if (
@@ -259,7 +259,7 @@ Deckdle.ui._undoBaseMove = function (card) {
   Deckdle.ui._updateCardCounts()
 }
 
-Deckdle.ui._updateComboCounter = function () {
+Deckdle.ui._updateComboCounter = () => {
   const comboLevel = Deckdle.combo
 
   // need 'show' class via setting
@@ -294,7 +294,7 @@ Deckdle.ui._updateComboCounter = function () {
   }
 }
 
-Deckdle.ui._resetComboCounter = function () {
+Deckdle.ui._resetComboCounter = () => {
   Deckdle.dom.combo.classList.remove('x', 'x2', 'x5', 'x10', 'x15', 'x30', 'x35')
 }
 
@@ -310,7 +310,7 @@ Deckdle.ui._removeModalVestige = () => {
   }
 }
 
-Deckdle.ui._disableUI = function () {
+Deckdle.ui._disableUI = () => {
   if (!Deckdle.dom.gameContainer.classList.contains('disabled')) {
     Deckdle._logStatus('[UI] disabling')
 
@@ -346,7 +346,7 @@ Deckdle.ui._disableUI = function () {
   }
 }
 
-Deckdle.ui._enableUI = function () {
+Deckdle.ui._enableUI = () => {
   if (Deckdle.dom.gameContainer.classList.contains('disabled')) {
     Deckdle._logStatus('[UI] enabling')
 

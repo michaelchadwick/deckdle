@@ -90,7 +90,7 @@ Deckdle._removeCardFromTableau = (card) => {
 }
 
 // undo last move from tableau to base
-Deckdle._undoLastTableauMove = function () {
+Deckdle._undoLastTableauMove = () => {
   if (Deckdle._lastTableauMove) {
     const card = Deckdle._lastTableauMove
     const tableauCards = Deckdle.__getState()['tableau']

@@ -4,7 +4,7 @@
 /* eslint-disable no-undef */
 
 // add debug stuff if local
-Deckdle._initDebug = function () {
+Deckdle._initDebug = () => {
   // if debug buttons are in template
   if (Deckdle.dom.interactive.debug.all) {
     // show debug buttons
@@ -22,7 +22,7 @@ Deckdle._initDebug = function () {
 }
 
 // modal: debug: display Deckdle.config
-Deckdle._displayGameConfig = function () {
+Deckdle._displayGameConfig = () => {
   let config = Deckdle.config
 
   var html = ''
@@ -68,7 +68,7 @@ Deckdle._displayGameConfig = function () {
   return html
 }
 // modal: debug: display Deckdle.state
-Deckdle._displayGameState = function () {
+Deckdle._displayGameState = () => {
   let states = Deckdle.state
 
   var html = ''
@@ -129,7 +129,7 @@ Deckdle._displayGameState = function () {
   return html
 }
 // modal: debug: clear localStorage
-Deckdle._clearLocalStorage = function () {
+Deckdle._clearLocalStorage = () => {
   localStorage.clear()
 
   if (
@@ -141,7 +141,7 @@ Deckdle._clearLocalStorage = function () {
   }
 }
 
-Deckdle._debugCombo = function () {
+Deckdle._debugCombo = () => {
   Deckdle._playSFX('click_tableau_valid')
   Deckdle._increaseCombo()
 }
