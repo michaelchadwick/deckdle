@@ -80,7 +80,7 @@ Deckdle._stopBGM = () => {
 }
 
 // Sound eFfects
-Deckdle._playSFX = function (action, arg = null) {
+Deckdle._playSFX = (action, arg = null) => {
   if (Deckdle.settings.noisy) {
     Deckdle.config.synthSFX.setMasterVol(Deckdle.settings.soundSFXLevel)
     Deckdle.config.synthSFX.setProgram(0, 1)
