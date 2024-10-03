@@ -16,8 +16,8 @@ context('00-basic', () => {
         cy.get('dialog.modal-dialog .modal-window').should('exist')
         cy.get('dialog.modal-dialog .modal-window .modal-title').should('contain.text', 'Settings')
 
-        cy.get('@text').find('.setting-row').should('have.length', 5)
-        cy.get('@switches').should('have.length', 3)
+        cy.get('@text').find('.setting-row').should('have.length', 6)
+        cy.get('@switches').should('have.length', 4)
       })
 
       it('should toggle all switch-type settings', () => {

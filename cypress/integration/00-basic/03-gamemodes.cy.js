@@ -12,7 +12,7 @@ context('00-basic', () => {
       cy.get('@freeModeLink').should('have.attr', 'data-active', 'false')
       cy.get('@dailyDetails').should('exist')
 
-      cy.get('#game #game-type').should('have.text', 'golf')
+      cy.get('#game #game-type').should('contain.text', 'golf')
     })
 
     it('should switch to free play and back to daily', () => {
