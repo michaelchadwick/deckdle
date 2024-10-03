@@ -9,7 +9,7 @@ Deckdle.dom = {
   navContent: document.getElementById('nav-content'),
   headerTitle: document.querySelector('header h1'),
   dailyDetails: document.getElementById('daily-details'),
-  gameType: document.getElementById('game-type'),
+  gameType: document.getElementById('game-type-title'),
   board: document.getElementById('board'),
   cardsContainer: document.getElementById('cards-container'),
   tableauCount: document.querySelector('#tableau-count .count'),
@@ -34,11 +34,6 @@ Deckdle.dom.interactive = {
   stock: document.getElementById('stock'),
   base: document.getElementById('base'),
 }
-// DOM > keyboard buttons
-Deckdle.dom.input = {
-  btnCreateNew: document.getElementById('button-create-new'),
-  btnUndoMove: document.getElementById('button-undo-move'),
-}
 // DOM > interactive elements (debug)
 Deckdle.dom.interactive.debug = {
   all: document.getElementById('debug-buttons'),
@@ -50,6 +45,11 @@ Deckdle.dom.interactive.debug = {
   btnDealCards: document.getElementById('button-deal-cards'),
   btnWinAnimation: document.getElementById('button-win-animation'),
   btnLoseAnimation: document.getElementById('button-lose-animation'),
+}
+// DOM > keyboard buttons
+Deckdle.dom.input = {
+  btnCreateNew: document.getElementById('button-create-new'),
+  btnUndoMove: document.getElementById('button-undo-move'),
 }
 
 Deckdle._logStatus('[LOADED] /app/dom')

@@ -33,6 +33,7 @@ const DECKDLE_DEFAULT_SETTINGS = {
   firstTime: true,
   gameMode: DECKDLE_DEFAULT_GAMEMODE,
   noisy: false,
+  replayMode: false,
   soundBGMLevel: 0.1,
   soundSFXLevel: 0.2,
 }

@@ -371,6 +371,25 @@ Deckdle.ui._enableUI = () => {
     baseCardTop.setAttribute('disabled', false)
 
     Deckdle.dom.gameContainer.classList.remove('disabled')
+
+    if (replay) {
+      document.body.classList.add('replay-mode')
+      Deckdle.ui._disableModeSwitcher()
+    }
+  }
+}
+
+Deckdle.ui._disableModeSwitcher = () => {
+  const gameMode = Deckdle.__getGameMode()
+
+  if (gameMode == 'daily') {
+    Deckdle.dom.interactive.gameModeFreeLink.onclick = ''
+    Deckdle.dom.interactive.gameModeFreeLink.classList.add('disabled')
+    Deckdle.dom.interactive.gameModeFreeLink.disabled = true
+  } else {
+    Deckdle.dom.interactive.gameModeDailyLink.onclick = ''
+    Deckdle.dom.interactive.gameModeDailyLink.classList.add('disabled')
+    Deckdle.dom.interactive.gameModeDailyLink.disabled = true
   }
 }
 

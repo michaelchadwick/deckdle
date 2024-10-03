@@ -19,10 +19,7 @@
     <meta name="title" content="Deckdle" />
     <meta property="og:url" content="https://deckdle.neb.host" />
     <meta property="og:title" content="Deckdle - A daily solitaire card game" />
-    <meta
-      property="og:description"
-      content="Exhaust your tableau before your stock."
-    />
+    <meta property="og:description" content="Exhaust your tableau before your stock." />
     <meta
       property="og:image"
       content="https://deckdle.neb.host/assets/icons/android-chrome-512x512.png"
@@ -33,29 +30,11 @@
     <!-- FAVICONS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="icon" href="/assets/icons/favicon.svg" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="./assets/icons/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./assets/icons/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./assets/icons/favicon-16x16.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16x16.png" />
     <link rel="manifest" href="./site.webmanifest" />
-    <link
-      rel="mask-icon"
-      href="./assets/icons/safari-pinned-tab.svg"
-      color="#000000"
-    />
+    <link rel="mask-icon" href="./assets/icons/safari-pinned-tab.svg" color="#000000" />
     <link rel="shortcut icon" href="./favicon.ico" />
     <meta name="msapplication-TileColor" content="#ffc8ac" />
     <meta name="msapplication-config" content="./browserconfig.xml" />
@@ -63,16 +42,14 @@
 
     <!-- FONTAWESOME
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link
-      rel="stylesheet"
-      href="./assets/fontawesome/css/fontawesome.min.css"
-    />
+    <link rel="stylesheet" href="./assets/fontawesome/css/fontawesome.min.css" />
     <link rel="stylesheet" href="./assets/fontawesome/css/solid.min.css" />
 
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="./assets/css/app.css" />
     <link rel="stylesheet" href="./assets/css/app-dark.css" />
+    <link rel="stylesheet" href="./assets/css/app-replay.css" />
     <link rel="stylesheet" href="./assets/css/modal.css" />
     <link rel="stylesheet" href="./assets/css/animation.css" />
 
@@ -108,11 +85,7 @@
                   <footer id="footer-neb-host">
                     site by
                     <a
-                      style="
-                        color: #ffffff;
-                        font-family: Consolas, sans-serif;
-                        font-size: 12px;
-                      "
+                      style="color: #ffffff; font-family: Consolas, sans-serif; font-size: 12px"
                       href="https://neb.host"
                       >neb.host</a
                     >
@@ -139,45 +112,25 @@
                 <i class="fa-solid fa-bug"></i>
               </button>
               <div class="ddsub">
-                <button
-                  id="button-show-config"
-                  class="icon"
-                  title="Show Config"
-                >
+                <button id="button-show-config" class="icon" title="Show Config">
                   <i class="fa-solid fa-gears"></i>
                 </button>
                 <button id="button-show-state" class="icon" title="Show State">
                   <i class="fa-solid fa-sliders"></i>
                 </button>
-                <button
-                  id="button-clear-ls"
-                  class="icon"
-                  title="Clear Local Storage"
-                >
+                <button id="button-clear-ls" class="icon" title="Clear Local Storage">
                   <i class="fa-solid fa-trash"></i>
                 </button>
-                <button
-                  id="button-clear-cards"
-                  class="icon"
-                  title="Clear Cards"
-                >
+                <button id="button-clear-cards" class="icon" title="Clear Cards">
                   <i class="fa-solid fa-ban"></i>
                 </button>
                 <button id="button-deal-cards" class="icon" title="Deal Cards">
                   <i class="fa-solid fa-diamond"></i>
                 </button>
-                <button
-                  id="button-win-animation"
-                  class="icon"
-                  title="Win Animation"
-                >
+                <button id="button-win-animation" class="icon" title="Win Animation">
                   <i class="fa-solid fa-face-smile"></i>
                 </button>
-                <button
-                  id="button-lose-animation"
-                  class="icon"
-                  title="Lose Animation"
-                >
+                <button id="button-lose-animation" class="icon" title="Lose Animation">
                   <i class="fa-solid fa-face-frown"></i>
                 </button>
               </div>
@@ -191,20 +144,10 @@
       </div>
 
       <div class="menu-right">
-        <button
-          id="button-stats"
-          class="icon"
-          aria-label="Statistics"
-          tabindex="-1"
-        >
+        <button id="button-stats" class="icon" aria-label="Statistics" tabindex="-1">
           <i class="fa-solid fa-chart-simple"></i>
         </button>
-        <button
-          id="button-settings"
-          class="icon"
-          aria-label="Settings"
-          tabindex="-1"
-        >
+        <button id="button-settings" class="icon" aria-label="Settings" tabindex="-1">
           <i class="fa-solid fa-gear"></i>
         </button>
       </div>
@@ -249,13 +192,14 @@
         </div>
       </div>
 
-      <div id="game-type"></div>
+      <div id="game-type">
+        <div id="game-type-title"></div>
+        <div class="replay-label">(replay)</div>
+      </div>
 
       <div id="cards-container">
         <div id="tableau"></div>
-        <div id="tableau-count" class="card-label">
-          Tableau (<span class="count"></span>)
-        </div>
+        <div id="tableau-count" class="card-label">Tableau (<span class="count"></span>)</div>
 
         <div id="user-cards">
           <div id="stock">

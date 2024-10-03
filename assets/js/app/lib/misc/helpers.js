@@ -55,7 +55,45 @@ Deckdle.__getParentCard = (el, selector) => {
   return parent_container
 }
 
-Deckdle.__getRandomSetupId = () => {
+Deckdle.__getSetupId = async (gameMode, qsId) => {
+  let setupId = null
+
+  // 'daily' always uses day hash
+  if (gameMode == 'daily') {
+    try {
+      const response = await fetch(DECKDLE_DAILY_SCRIPT)
+      const data = await response.json()
+      setupId = parseInt(data['setupId'])
+
+      Deckdle.ui._updateDailyDetails(data['index'])
+
+      if (!setupId) {
+        console.error('retrieval of daily setupId went bork', setupId)
+      }
+    } catch (e) {
+      console.error('could not get daily setupId', e)
+    }
+  }
+  // 'free' generates random setupId
+  else {
+    if (qsId) {
+      setupId = parseInt(qsId)
+
+      Deckdle._changeSetting('gameMode', 'free')
+
+      if ('URLSearchParams' in window) {
+        const url = new URL(window.location)
+        url.searchParams.delete('id')
+        history.pushState(null, '', url)
+      }
+    } else {
+      setupId = Deckdle.__createRandomSetupId()
+    }
+  }
+
+  return setupId
+}
+Deckdle.__createRandomSetupId = () => {
   return Math.floor(Math.random() * 10000000000)
 }
 Deckdle.__getGameMode = () => {

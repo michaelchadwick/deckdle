@@ -206,46 +206,48 @@ Deckdle._loadGame = async (switching = false) => {
 }
 // save state from code model -> LS
 Deckdle._saveGame = (lsType = Deckdle.__getGameMode(), src = 'unknown') => {
-  switch (lsType) {
-    case 'daily': {
-      let curDailyState = Deckdle.__getStateObj('daily')
+  if (Deckdle.__getState().gameState != 'GAME_OVER_REPLAY') {
+    switch (lsType) {
+      case 'daily': {
+        let curDailyState = Deckdle.__getStateObj('daily')
 
-      curDailyState.forEach((sesh) => {
-        Object.keys(sesh).forEach((key) => {
-          if (sesh[key] === undefined) {
-            sesh[key] = null
-          }
+        curDailyState.forEach((sesh) => {
+          Object.keys(sesh).forEach((key) => {
+            if (sesh[key] === undefined) {
+              sesh[key] = null
+            }
+          })
         })
-      })
 
-      localStorage.setItem(DECKDLE_STATE_DAILY_LS_KEY, JSON.stringify(curDailyState))
+        localStorage.setItem(DECKDLE_STATE_DAILY_LS_KEY, JSON.stringify(curDailyState))
 
-      break
+        break
+      }
+
+      case 'free': {
+        let curFreeState = Deckdle.__getStateObj('free')
+
+        curFreeState.forEach((sesh) => {
+          Object.keys(sesh).forEach((key) => {
+            if (sesh[key] === undefined) {
+              sesh[key] = null
+            }
+          })
+        })
+
+        localStorage.setItem(DECKDLE_STATE_FREE_LS_KEY, JSON.stringify(curFreeState))
+
+        break
+      }
+
+      case 'settings':
+        localStorage.setItem(DECKDLE_SETTINGS_LS_KEY, JSON.stringify(Deckdle.settings))
+
+        break
     }
 
-    case 'free': {
-      let curFreeState = Deckdle.__getStateObj('free')
-
-      curFreeState.forEach((sesh) => {
-        Object.keys(sesh).forEach((key) => {
-          if (sesh[key] === undefined) {
-            sesh[key] = null
-          }
-        })
-      })
-
-      localStorage.setItem(DECKDLE_STATE_FREE_LS_KEY, JSON.stringify(curFreeState))
-
-      break
-    }
-
-    case 'settings':
-      localStorage.setItem(DECKDLE_SETTINGS_LS_KEY, JSON.stringify(Deckdle.settings))
-
-      break
+    Deckdle._logStatus(`[SAVED] game(${lsType})`, src)
   }
-
-  // Deckdle._logStatus(`[SAVED] game(${lsType})`, src)
 }
 
 // load settings (gear icon) from localStorage
@@ -334,6 +336,18 @@ Deckdle._loadSettings = () => {
         const sfxSetting = document.getElementById('range-setting-sfx-level')
         if (sfxSetting) {
           sfxSetting.setAttribute('disabled', '')
+        }
+      }
+    }
+
+    if (lsSettings.replayMode !== undefined) {
+      Deckdle.settings.replayMode = lsSettings.replayMode
+
+      if (Deckdle.settings.replayMode) {
+        setting = document.getElementById('button-setting-replay-mode')
+
+        if (setting) {
+          setting.dataset.status = Deckdle.settings.replayMode
         }
       }
     }
@@ -506,6 +520,21 @@ Deckdle._changeSetting = async (setting, value) => {
         document.querySelector('#range-setting-sfx-level').setAttribute('disabled', '')
 
         Deckdle._saveSetting('noisy', false)
+      }
+
+      break
+
+    case 'replayMode':
+      st = document.getElementById('button-setting-replay-mode').dataset.status
+
+      if (st == '' || st == 'false') {
+        document.getElementById('button-setting-replay-mode').dataset.status = 'true'
+
+        Deckdle._saveSetting('replayMode', true)
+      } else {
+        document.getElementById('button-setting-replay-mode').dataset.status = 'false'
+
+        Deckdle._saveSetting('replayMode', false)
       }
 
       break

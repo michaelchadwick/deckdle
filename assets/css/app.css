@@ -19,6 +19,7 @@
 
 :root {
   --base-color: #996e52;
+  --base-color1: #835536;
   --base-color2: #8e782e;
   --light-color: #c7b591;
   --vlight-color: #e2cfbc;
@@ -76,6 +77,8 @@
   --card-suit-heart2: #f92d2d;
   --card-suit-spade: #151515;
   --card-suit-spade2: #f5f5f5;
+
+  --replay-label: #aa4402;
 
   font-family: "Changa", sans-serif;
   font-size: 16px;
