@@ -45,9 +45,7 @@ Deckdle._getBestScore = (mode) => {
         }
       })
 
-      if (bestScore < 0) {
-        return `-${bestScore.toString()}`
-      } else if (bestScore == 0) {
+      if (bestScore <= 0) {
         return bestScore.toString()
       } else {
         return `+${bestScore.toString()}`
