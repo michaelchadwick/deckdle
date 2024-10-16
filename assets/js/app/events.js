@@ -114,6 +114,11 @@ Deckdle._attachEventListeners = () => {
           Deckdle._resetCardsDuration()
         })
       })
+
+      // 🧩 display debug game over modal
+      Deckdle.dom.interactive.debug.btnDebugGameOver.addEventListener('click', () => {
+        Deckdle._debugGameOver()
+      })
     }
   }
 

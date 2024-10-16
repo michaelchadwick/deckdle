@@ -145,3 +145,90 @@ Deckdle._debugCombo = () => {
   Deckdle._playSFX('click_tableau_valid')
   Deckdle._increaseCombo()
 }
+
+Deckdle._debugGameOver = (type = 'golf', gameMode = 'daily', win = true, score = 1) => {
+  if (Deckdle.myModal) {
+    Deckdle.myModal._destroyModal()
+  }
+
+  let modalText = `
+    <div class="container game-over">
+  `
+
+  switch (type) {
+    case 'golf':
+    default:
+      if (win) {
+        Deckdle._playSFX('win')
+
+        if (score > 0) {
+          modalText = `
+            <div class='score-animation'>
+              <div>Whoa! You shot under par with a score of...</div>
+              <div class='score animate__animated animate__zoomIn'>-${score}</div>
+            </div>
+            <div class='score-image'>
+              <img src='/assets/images/${score}below.png' alt='Game Score: ${score} below par' title='Game Score: ${score} below par' />
+            </div>
+          `
+        } else {
+          modalText = `
+            <div class='score-animation'>
+              <div>Whew! You just barely hit...</div>
+              <div class='score animate__animated animate__zoomIn'>PAR</div>
+            </div>
+          `
+        }
+      } else {
+        Deckdle._playSFX('lose')
+
+        modalText = `
+          <div class='score-animation'>
+            <div>You didn't quite clear it with a score of...</div>
+            <div class='score animate__animated animate__zoomIn'>${score}</div>
+            <div>OVER PAR</div>
+          </div>
+        `
+      }
+
+      break
+  }
+
+  // daily
+  if (gameMode == 'daily') {
+    modalText += `
+      <div class="para">New daily puzzle available at 12 am PST</div>
+    `
+
+    if (Deckdle.settings.replayMode) {
+      modalText += `
+        <div class="para highlighted">
+          <p>You may retry this game to improve your score, but it won't count towards your actual score.</p>
+          <div class="buttons">
+            <button class="game-over replay" onclick="Deckdle._replayGame()" title="Replay game?">Replay game?</button>
+          </div>
+        </div>
+      `
+    }
+  }
+  // free
+  else {
+    modalText += `
+      <div class="buttons">
+        <button class="game-over new-free" onclick="Deckdle._createNewFree()" title="Try another?">Try another?</button>
+      </div>
+    `
+  }
+
+  modalText += `
+    <div class="share">
+      <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
+    </div>
+  `
+
+  modalText += `
+    </div>
+  `
+
+  Deckdle.myModal = new Modal('end-state', 'Game Over', modalText, null, null, 'game-over')
+}

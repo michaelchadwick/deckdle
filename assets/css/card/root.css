@@ -1,3 +1,6 @@
+@import "tableau.css";
+@import "user-cards.css";
+
 .card {
   background-color: var(--white);
   border: 1px solid var(--black);

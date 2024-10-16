@@ -1,11 +1,10 @@
-@import "cards/card.css";
-@import "cards/tableau.css";
-@import "cards/user-cards.css";
-
 @import "combo.css";
 @import "common.css";
 @import "input.css";
+
+@import "card/root.css";
 @import "layout/root.css";
+@import "modal/root.css";
 
 @font-face {
   font-family: "Changa";

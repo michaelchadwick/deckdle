@@ -1,0 +1,17 @@
+.score-animation {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.score-animation .score {
+  --animate-delay: 100ms;
+  --animate-duration: 2500ms;
+  color: var(--bright-color);
+  font-size: 4rem;
+  text-shadow: 2px 2px 0 var(--black);
+}
+.score-image {
+  align-content: center;
+  display: flex;
+  justify-content: center;
+}

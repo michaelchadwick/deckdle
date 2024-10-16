@@ -111,20 +111,6 @@ header .menu-left #nav-overlay #nav-content {
   transition: all 600ms;
 }
 
-/* game-over modal */
-.score-animation {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-.score-animation .score {
-  --animate-delay: 100ms;
-  --animate-duration: 2500ms;
-  color: var(--bright-color);
-  font-size: 4rem;
-  text-shadow: 2px 2px 0 var(--black);
-}
-
 /* combo counter */
 #combo.show {
   --animate-duration: 250ms;

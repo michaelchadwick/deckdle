@@ -307,6 +307,9 @@ Deckdle.modalOpen = async (type) => {
                   <div>Whoa! You shot under par with a score of...</div>
                   <div class='score animate__animated animate__zoomIn'>${Deckdle._stockCount()}</div>
                 </div>
+                <div class='score-image'>
+                  <img src='/assets/images/${Deckdle._stockCount()}below.png' alt='Game Score: ${Deckdle._stockCount()} below par' title='Game Score: ${Deckdle._stockCount()} below par' />
+                </div>
               `
             } else {
               modalText = `

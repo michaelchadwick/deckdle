@@ -1,4 +1,7 @@
-/* MODAL */
+@import "game-over.css";
+@import "settings.css";
+@import "statistics.css";
+
 .modal-dialog {
   align-items: center;
   background-color: transparent;
@@ -267,114 +270,4 @@
 }
 .modal-text .share {
   margin: 1rem auto 0;
-}
-
-/* MODAL->STATISTICS */
-.statistic-header {
-  align-items: center;
-  display: flex;
-  font-size: 1.4em;
-  font-variant-numeric: proportional-nums;
-  font-weight: 400;
-  justify-content: center;
-  letter-spacing: 0.05em;
-  text-align: center;
-}
-.statistic-subheader {
-  align-items: center;
-  display: flex;
-  font-size: 0.9em;
-  font-variant-numeric: proportional-nums;
-  font-weight: 400;
-  justify-content: center;
-  letter-spacing: 0.05em;
-  text-align: center;
-}
-.statistics {
-  display: flex;
-  gap: 5px;
-  padding-bottom: 10px;
-}
-.statistics .statistic-container {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-.statistics .statistic-container .statistic {
-  align-items: center;
-  display: flex;
-  font-size: 36px;
-  font-variant-numeric: proportional-nums;
-  font-weight: 400;
-  justify-content: center;
-  letter-spacing: 0;
-  text-align: center;
-}
-.statistics .statistic-container .statistic-label {
-  align-items: center;
-  display: flex;
-  font-size: 1em;
-  justify-content: center;
-  max-width: 85px;
-  text-align: center;
-}
-
-/* MODAL->SETTINGS */
-#settings {
-  align-content: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-#settings input[type="range"] {
-  max-width: 100px;
-}
-@media (min-width: 550px) {
-  #settings input[type="range"] {
-    max-width: none;
-  }
-}
-#settings .setting-row {
-  align-items: center;
-  border-bottom: 1px solid var(--gray-dark);
-  display: flex;
-  justify-content: space-between;
-  padding: 0;
-}
-#settings .setting-row:last-of-type {
-  border-bottom: none;
-}
-#settings .setting-row .text {
-  padding: 8px 8px 8px 0;
-}
-#settings .setting-row .text .title {
-  font-size: 18px;
-}
-#settings .setting-row .text .description {
-  color: var(--gray-dark2);
-  font-size: 12px;
-}
-#settings .setting-row .control {
-  align-items: center;
-  display: flex;
-  margin-left: 1em;
-}
-#settings .setting-row .control .spacer {
-  display: block;
-  height: 30px;
-  width: 30px;
-}
-#settings .setting-row .control span.spacer {
-  width: 36px;
-}
-#settings .setting-row .control .spacer:first-of-type {
-  margin-left: 10px;
-}
-@media (hover: hover) {
-  #settings .setting-row .control button:hover:not(.disabled),
-  #settings .setting-row .control button:hover:not([disabled]) {
-    background-color: var(--gray-dark);
-    border: 1px solid var(--black);
-    color: var(--white);
-  }
 }
