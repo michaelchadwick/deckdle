@@ -5,7 +5,7 @@
 @import "combo.css";
 @import "common.css";
 @import "input.css";
-@import "layout.css";
+@import "layout/root.css";
 
 @font-face {
   font-family: "Changa";

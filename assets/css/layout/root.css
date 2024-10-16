@@ -1,3 +1,5 @@
+@import "debug.css";
+
 header {
   align-items: center;
   background-color: var(--bg-color);
@@ -127,73 +129,6 @@ header .menu-left #nav-overlay #nav-content .nav-footer {
   right: 0;
   text-align: left;
   z-index: 2;
-}
-
-header #debug-buttons {
-  display: none;
-}
-header #debug-buttons button {
-  color: var(--debug-color);
-}
-header #debug-buttons .ddmenu {
-  align-items: center;
-  display: flex;
-  z-index: 10;
-}
-header #debug-buttons .ddmenu .ddgroup {
-  border: 1px solid transparent;
-  position: relative;
-  text-decoration: none;
-  width: 100%;
-}
-header #debug-buttons .ddmenu .ddgroup button {
-  margin-right: 0;
-}
-@media (hover: hover) {
-  header #debug-buttons .ddmenu .ddgroup:hover {
-    background: var(--debug-color-light3);
-    border: 1px solid var(--debug-color-medium);
-    cursor: pointer;
-  }
-}
-header #debug-buttons .ddmenu .ddgroup .ddsub {
-  display: none;
-  left: -1px;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-}
-/* stylelint-disable */
-header #debug-buttons .ddmenu .ddgroup .ddsub a {
-  box-sizing: border-box;
-  display: block;
-}
-/* stylelint-enable */
-header #debug-buttons .ddmenu .ddgroup .ddsub button {
-  background-color: var(--debug-color-light4);
-  border: 1px solid transparent;
-  border-radius: 0;
-  height: 20px;
-  padding: 5px;
-  width: 26px;
-}
-@media (hover: hover) {
-  header #debug-buttons .ddmenu .ddgroup .ddsub button:hover {
-    background: var(--debug-color-light5);
-    border: 1px solid var(--debug-color-medium);
-  }
-  header #debug-buttons .ddmenu .ddgroup:hover .ddsub {
-    display: flex;
-    flex-direction: column;
-  }
-}
-@media screen and (max-width: 640px) {
-  .ddmenu {
-    flex-wrap: wrap;
-  }
-  .ddsub {
-    position: static;
-  }
 }
 
 header .title {
