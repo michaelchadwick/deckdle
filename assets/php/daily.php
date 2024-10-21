@@ -5,6 +5,7 @@ $DATE_FORMAT = 'l jS \of F Y';
 
 $deckdleEpoch = new DateTime('2024-08-26T00:00:00-0700');
 $serverDate = new DateTime();
+$serverDate->setTimezone(new DateTimeZone('America/Los_Angeles'));
 
 $daysSinceEpoch = $deckdleEpoch->diff($serverDate)->format('%a');
 
