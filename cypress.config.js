@@ -45,6 +45,7 @@ module.exports = defineConfig({
       })
     },
     baseUrl: 'http://localhost:3000',
+    excludeSpecPattern: ['*/**/_debug'],
     fixturesFolder: 'cypress/fixtures',
     projectId: 'deckdle',
     screenshotsFolder: 'cypress/screenshots',

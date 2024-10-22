@@ -20,6 +20,7 @@ export default [
       ".*",
       ".*/",
       "cypress.config.js",
+      "assets/*/_debug/*",
       "assets/fontawesome/*",
       "cypress/*",
       "**/vendor/*",
