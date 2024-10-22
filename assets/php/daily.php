@@ -4,7 +4,7 @@ $HASH_ALGO = 'crc32';
 $DATE_FORMAT = 'l jS \of F Y';
 $tz = (new DateTimeZone('America/Los_Angeles'));
 
-$epochDateTime = new DateTime('2024-08-25', $tz);
+$epochDateTime = new DateTime('2024-08-26', $tz);
 $serverDateTime = new DateTime('now', $tz);
 
 // daily puzzle index is equal to number of days since epoch
