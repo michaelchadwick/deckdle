@@ -2,15 +2,16 @@
 
 $HASH_ALGO = 'crc32';
 $DATE_FORMAT = 'l jS \of F Y';
+$tz = (new DateTimeZone('America/Los_Angeles'));
 
-$deckdleEpoch = new DateTime('2024-08-26T00:00:00-0700');
-$serverDate = new DateTime();
-$serverDate->setTimezone(new DateTimeZone('America/Los_Angeles'));
+$epochDateTime = new DateTime('2024-08-25', $tz);
+$serverDateTime = new DateTime('now', $tz);
 
-$daysSinceEpoch = $deckdleEpoch->diff($serverDate)->format('%a');
+// daily puzzle index is equal to number of days since epoch
+$index = $epochDateTime->diff($serverDateTime)->format('%a');
 
 // get unique date string for today
-$today = date($DATE_FORMAT);
+$today = date($DATE_FORMAT, $serverDateTime->getTimestamp());
 
 // get integer hash for today
 $hashHex = hash($HASH_ALGO, strval($today));
@@ -19,7 +20,7 @@ $hashHex = hash($HASH_ALGO, strval($today));
 $setupId = base_convert($hashHex, 16, 10);
 
 echo json_encode(array(
-  'index' => $daysSinceEpoch,
+  'index' => $index,
   'message' => 'Got daily setupId and index',
   'setupId' => $setupId,
   'status' => 'ok'
