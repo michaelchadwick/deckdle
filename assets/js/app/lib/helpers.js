@@ -103,6 +103,22 @@ Deckdle.__getGameType = () => {
   return Deckdle.__getState()['gameType'] ?? DECKDLE_DEFAULT_GAMETYPE
 }
 
+Deckdle.__addAction = (action) => {
+  const actions = Deckdle.__getState().actions
+  actions.push(action)
+  Deckdle.__setState('actions', actions)
+}
+Deckdle.__getActionCount = (countUndos = false) => {
+  if (countUndos) {
+    return Deckdle.__getState().actions.length
+  } else {
+    return Deckdle.__getState().actions.filter((a) => a.type != 'undo').length
+  }
+}
+Deckdle.__getUndoCount = () => {
+  return Deckdle.__getState().actions.filter((a) => a.type == 'undo').length
+}
+
 Deckdle.__getConfig = () => {
   return Deckdle.config || undefined
 }

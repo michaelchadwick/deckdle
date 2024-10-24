@@ -334,6 +334,22 @@ Deckdle.modalOpen = async (type) => {
           break
       }
 
+      modalText += `
+        <div class='move-count'>
+      `
+      if (Deckdle.__getUndoCount() > 0) {
+        modalText += `
+          <strong>${Deckdle.__getActionCount()}</strong> moves (${Deckdle.__getActionCount((countUndos = true))} counting undos)
+        `
+      } else {
+        modalText += `
+          <strong>${Deckdle.__getActionCount()}</strong> moves
+        `
+      }
+      modalText += `
+        </div>
+      `
+
       // daily
       if (Deckdle.__getGameMode() == 'daily') {
         modalText += `

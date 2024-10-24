@@ -130,14 +130,16 @@
 }
 
 .modal-text {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
   margin: 10px 0;
-  /* max-height: 500px; */
   overflow-y: auto;
   padding: 0 16px;
   width: 100%;
 }
 .modal-text div.para {
-  padding: 10px;
   text-align: center;
 }
 .modal-text div.para.highlighted {
@@ -269,5 +271,5 @@
   color: var(--dark-color);
 }
 .modal-text .share {
-  margin: 1rem auto 0;
+  margin: 0 auto;
 }

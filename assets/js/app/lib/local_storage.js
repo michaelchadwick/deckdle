@@ -70,6 +70,7 @@ Deckdle._loadGame = async (switching = false) => {
         Deckdle.__setState('tableau', lsState.tableau || dailyDefaults.tableau, 'daily', i)
         Deckdle.__setState('stock', lsState.stock || dailyDefaults.stock, 'daily', i)
         Deckdle.__setState('base', lsState.base || dailyDefaults.base, 'daily', i)
+        Deckdle.__setState('actions', lsState.actions || dailyDefaults.actions, 'daily', i)
 
         i++
 

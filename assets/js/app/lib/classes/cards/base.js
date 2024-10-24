@@ -1,6 +1,10 @@
 /* lib/cards/base.js */
 /* functions for base */
 /* global Deckdle */
+/* eslint-disable no-unused-vars */
+
+// TODO
+class Base {}
 
 Deckdle._isBaseEmpty = () => {
   return Deckdle.__getState()['base'].length == 0
