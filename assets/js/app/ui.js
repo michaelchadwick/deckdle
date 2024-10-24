@@ -346,7 +346,7 @@ Deckdle.ui._disableUI = () => {
   }
 }
 
-Deckdle.ui._enableUI = () => {
+Deckdle.ui._enableUI = (replay = false) => {
   if (Deckdle.dom.gameContainer.classList.contains('disabled')) {
     Deckdle._logStatus('[UI] enabling')
 
