@@ -1,0 +1,96 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+env:
+  COVERAGE: false
+
+jobs:
+  lint:
+    name: "Lint"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Lint
+        run: pnpm lint
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [lint]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20]
+        workspace:
+          - frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Run Tests
+        run: pnpm test
+        env:
+          COVERAGE: true
+      - name: Store Code Coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{matrix.workspace}}
+          path: ./packages/${{matrix.workspace}}/coverage
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: replay-${{matrix.workspace}}-test.json
+          path: ./packages/${{matrix.workspace}}/test-execution-*.json
+          retention-days: 7
+
+  upload-coverage:
+    name: Upload code coverage
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ always() }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: coverage-frontend
+          path: coverage
+      - run: ls -lh
+      - run: ls -lh coverage
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@v9.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageLocations: |
+            coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
