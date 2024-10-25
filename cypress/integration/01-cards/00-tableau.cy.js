@@ -15,7 +15,7 @@ context('01-cards', () => {
         cy.get('#tableau #col0 .card:last-of-type').as('validCard')
         cy.get('#tableau #col1 .card:last-of-type').as('invalidAvailCard')
         cy.get('#tableau #col1 .card:first-of-type').as('UnavailableCard')
-        cy.get('#base .card:last-of-type').as('topBaseCard')
+        cy.get('#base .card:last-of-type').as('baseTopCard')
       })
 
       it('should have 7 columns', () => {
@@ -44,7 +44,7 @@ context('01-cards', () => {
 
       it('should remove valid available card and add to base', () => {
         cy.get('@validCard').click().should('have.class', 'removed')
-        cy.get('@topBaseCard')
+        cy.get('@baseTopCard')
           .should('have.attr', 'data-suit', '2')
           .should('have.attr', 'data-rank', '3')
       })
@@ -54,14 +54,14 @@ context('01-cards', () => {
           .click()
           .should('have.class', 'available')
           .should('not.have.class', 'removed')
-        cy.get('@topBaseCard')
+        cy.get('@baseTopCard')
           .should('have.attr', 'data-suit', '2')
           .should('have.attr', 'data-rank', '2')
       })
 
       it('should fail to remove unavailable card', () => {
         cy.get('@UnavailableCard').click({ force: true }).should('not.have.class', 'available')
-        cy.get('@topBaseCard')
+        cy.get('@baseTopCard')
           .should('have.attr', 'data-suit', '2')
           .should('have.attr', 'data-rank', '2')
       })

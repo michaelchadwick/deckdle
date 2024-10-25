@@ -19,7 +19,7 @@ context('00-basic', () => {
       cy.get('#tableau #col4 .card.available').as('validCol4Card')
       cy.get('#tableau #col5 .card.available').as('validCol5Card')
       cy.get('#tableau #col6 .card.available').as('validCol6Card')
-      cy.get('#base .card:last-of-type').as('topBaseCard')
+      cy.get('#base .card:last-of-type').as('baseTopCard')
     })
 
     it('should show no combo meter on load', () => {
@@ -30,7 +30,7 @@ context('00-basic', () => {
       for (let i = 0; i < 2; i++) {
         cy.get('@validCol0Card').click({ force: true, multiple: true })
       }
-      cy.get('@topBaseCard')
+      cy.get('@baseTopCard')
         .should('have.attr', 'data-suit', '2')
         .should('have.attr', 'data-rank', '4')
 
@@ -44,7 +44,7 @@ context('00-basic', () => {
       for (let i = 0; i < COL_CARD_MAX - 1; i++) {
         cy.get('@validCol0Card').click({ force: true, multiple: true })
       }
-      cy.get('@topBaseCard')
+      cy.get('@baseTopCard')
         .should('have.attr', 'data-suit', '2')
         .should('have.attr', 'data-rank', '7')
 
@@ -56,7 +56,7 @@ context('00-basic', () => {
       for (let i = 0; i < COL_CARD_MAX - 1; i++) {
         cy.get('@validCol1Card').click({ force: true, multiple: true })
       }
-      cy.get('@topBaseCard')
+      cy.get('@baseTopCard')
         .should('have.attr', 'data-suit', '2')
         .should('have.attr', 'data-rank', '12')
 
@@ -68,7 +68,7 @@ context('00-basic', () => {
       for (let i = 0; i < COL_CARD_MAX - 1; i++) {
         cy.get('@validCol2Card').click({ force: true, multiple: true })
       }
-      cy.get('@topBaseCard')
+      cy.get('@baseTopCard')
         .should('have.attr', 'data-suit', '3')
         .should('have.attr', 'data-rank', '4')
 
@@ -80,7 +80,7 @@ context('00-basic', () => {
       for (let i = 0; i < COL_CARD_MAX - 1; i++) {
         cy.get('@validCol3Card').click({ force: true, multiple: true })
       }
-      cy.get('@topBaseCard')
+      cy.get('@baseTopCard')
         .should('have.attr', 'data-suit', '3')
         .should('have.attr', 'data-rank', '9')
 
@@ -92,7 +92,7 @@ context('00-basic', () => {
       for (let i = 0; i < COL_CARD_MAX - 1; i++) {
         cy.get('@validCol4Card').click({ force: true, multiple: true })
       }
-      cy.get('@topBaseCard')
+      cy.get('@baseTopCard')
         .should('have.attr', 'data-suit', '3')
         .should('have.attr', 'data-rank', '14')
 
@@ -104,7 +104,7 @@ context('00-basic', () => {
       for (let i = 0; i < COL_CARD_MAX - 1; i++) {
         cy.get('@validCol5Card').click({ force: true, multiple: true })
       }
-      cy.get('@topBaseCard')
+      cy.get('@baseTopCard')
         .should('have.attr', 'data-suit', '0')
         .should('have.attr', 'data-rank', '6')
 
@@ -116,7 +116,7 @@ context('00-basic', () => {
       for (let i = 0; i < COL_CARD_MAX - 1; i++) {
         cy.get('@validCol6Card').click({ force: true, multiple: true })
       }
-      cy.get('@topBaseCard')
+      cy.get('@baseTopCard')
         .should('have.attr', 'data-suit', '0')
         .should('have.attr', 'data-rank', '11')
 
