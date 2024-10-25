@@ -39,6 +39,7 @@ const DECKDLE_DEFAULT_STATE = {
   tableau: {},
 }
 const DECKDLE_DEFAULT_SETTINGS = {
+  animationDisplay: true,
   comboCounter: true,
   darkMode: false,
   firstTime: true,

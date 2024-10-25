@@ -259,6 +259,20 @@ Deckdle._loadSettings = () => {
   let setting = null
 
   if (lsSettings) {
+    if (lsSettings.animationDisplay !== undefined) {
+      Deckdle.settings.animationDisplay = lsSettings.animationDisplay
+
+      if (Deckdle.settings.animationDisplay) {
+        Deckdle.dom.combo.classList.add('show')
+
+        setting = document.getElementById('button-setting-animation-display')
+
+        if (setting) {
+          setting.dataset.status = Deckdle.settings.animationDisplay
+        }
+      }
+    }
+
     if (lsSettings.comboCounter !== undefined) {
       Deckdle.settings.comboCounter = lsSettings.comboCounter
 
@@ -408,6 +422,21 @@ Deckdle._changeSetting = async (setting, value) => {
   let st = null
 
   switch (setting) {
+    case 'animationDisplay':
+      st = document.getElementById('button-setting-animation-display').dataset.status
+
+      if (st == '' || st == 'false') {
+        document.getElementById('button-setting-animation-display').dataset.status = 'true'
+
+        Deckdle._saveSetting('animationDisplay', true)
+      } else {
+        document.getElementById('button-setting-animation-display').dataset.status = 'false'
+
+        Deckdle._saveSetting('animationDisplay', false)
+      }
+
+      break
+
     case 'comboCounter':
       st = document.getElementById('button-setting-combo-counter').dataset.status
 
