@@ -4,6 +4,7 @@ import 'cypress-real-events'
 beforeEach(() => {
   // Check firstTime flag so 'Help' modal doesn't display
   const settings = {
+    comboCounter: true,
     firstTime: false,
     gameMode: 'daily',
   }
