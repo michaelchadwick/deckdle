@@ -155,6 +155,7 @@ Deckdle._loadGame = async (switching = false) => {
         Deckdle.__setState('tableau', lsState.tableau || freeDefaults.tableau, 'free', i)
         Deckdle.__setState('stock', lsState.stock || freeDefaults.stock, 'free', i)
         Deckdle.__setState('base', lsState.base || freeDefaults.base, 'free', i)
+        Deckdle.__setState('actions', lsState.actions || freeDefaults.actions, 'free', i)
 
         i++
 
