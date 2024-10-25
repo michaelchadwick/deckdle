@@ -19,6 +19,7 @@ export default [
     ignores: [
       ".*",
       ".*/",
+      "_debug/*",
       "cypress.config.js",
       "assets/*/_debug/*",
       "assets/fontawesome/*",
