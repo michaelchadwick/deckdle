@@ -32,6 +32,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.10.0",
     "husky": "^9.1.6",
+    "stylelint": "^16.3.1",
     "stylelint-config-recommended": "^14.0.1"
   },
   "packageManager": "pnpm@9.12.0+sha512.4abf725084d7bcbafbd728bfc7bee61f2f791f977fd87542b3579dcb23504d170d46337945e4c66485cd12d588a0c0e570ed9c477e7ccdd8507cf05f3f92eaca"
