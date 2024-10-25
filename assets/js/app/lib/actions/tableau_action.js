@@ -1,9 +1,9 @@
-/* lib/actions/tableau_move.js */
-/* class definition for TableauMove */
-/* global Move */
+/* lib/actions/tableau_action.js */
+/* class definition for TableauAction */
+/* global Action */
 /* eslint-disable no-unused-vars */
 
-class TableauMove extends Move {
+class TableauAction extends Action {
   constructor(colId, rowId) {
     super()
     this.type = 'tableau'
