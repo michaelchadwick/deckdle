@@ -33,7 +33,7 @@ context('01-cards', () => {
         })
       })
 
-      it.only('should highlight available card on hover', () => {
+      it('should highlight available card on hover', () => {
         cy.get('@validCard').should('have.css', 'border', '1px solid rgb(17, 17, 17)')
         cy.get('@validCard').focus()
         cy.get('@validCard').should('have.css', 'border', '1px dashed rgb(101, 65, 44)')
