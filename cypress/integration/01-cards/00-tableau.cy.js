@@ -45,7 +45,7 @@ context('01-cards', () => {
       it('should remove valid available card and add to base', () => {
         cy.get('@validCard').click().should('have.class', 'removed')
         cy.get('@topBaseCard')
-          .should('have.attr', 'data-suit', '0')
+          .should('have.attr', 'data-suit', '2')
           .should('have.attr', 'data-rank', '3')
       })
 
@@ -55,14 +55,14 @@ context('01-cards', () => {
           .should('have.class', 'available')
           .should('not.have.class', 'removed')
         cy.get('@topBaseCard')
-          .should('have.attr', 'data-suit', '0')
+          .should('have.attr', 'data-suit', '2')
           .should('have.attr', 'data-rank', '2')
       })
 
       it('should fail to remove unavailable card', () => {
         cy.get('@UnavailableCard').click({ force: true }).should('not.have.class', 'available')
         cy.get('@topBaseCard')
-          .should('have.attr', 'data-suit', '0')
+          .should('have.attr', 'data-suit', '2')
           .should('have.attr', 'data-rank', '2')
       })
     })
