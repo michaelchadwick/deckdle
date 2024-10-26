@@ -134,6 +134,25 @@ Deckdle.modalOpen = async (type) => {
       modalText = `
         <div id="settings">
 
+          <!-- animation display -->
+          <div class="setting-row">
+            <div class="text">
+              <div class="title">Animation</div>
+              <div class="description">Display card animations</div>
+            </div>
+            <div class="control">
+              <div class="container">
+                <div id="button-setting-animation-display"
+                  data-status=""
+                  class="switch"
+                  onclick="Deckdle._changeSetting('animationDisplay')"
+                >
+                  <span class="knob"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- combo counter -->
           <div class="setting-row">
             <div class="text">
@@ -333,6 +352,22 @@ Deckdle.modalOpen = async (type) => {
 
           break
       }
+
+      modalText += `
+        <div class='move-count'>
+      `
+      if (Deckdle.__getUndoCount() > 0) {
+        modalText += `
+          <strong>${Deckdle.__getActionCount()}</strong> moves (${Deckdle.__getActionCount((countUndos = true))} counting undos)
+        `
+      } else {
+        modalText += `
+          <strong>${Deckdle.__getActionCount()}</strong> moves
+        `
+      }
+      modalText += `
+        </div>
+      `
 
       // daily
       if (Deckdle.__getGameMode() == 'daily') {

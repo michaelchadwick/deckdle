@@ -1,6 +1,10 @@
 /* lib/cards/stock.js */
 /* functions for stock */
-/* global Deckdle */
+/* global Deckdle, StockAction */
+/* eslint-disable no-unused-vars */
+
+// TODO
+class Stock {}
 
 Deckdle._stockCount = () => {
   return Deckdle.__getState()['stock'].length
@@ -25,6 +29,7 @@ Deckdle._moveCardFromStockToBase = () => {
 
   Deckdle._resetCombo()
 
+  Deckdle.__addAction(new StockAction())
   Deckdle.__setState('lastPlayedTime', new Date().getTime())
   Deckdle._saveGame()
 

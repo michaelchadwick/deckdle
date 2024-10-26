@@ -1,6 +1,10 @@
 /* lib/cards/tableau.js */
 /* functions for tableau */
-/* global Deckdle, Card */
+/* global Deckdle, Card, TableauAction, UndoAction */
+/* eslint-disable no-unused-vars */
+
+// TODO
+class Tableau {}
 
 Deckdle._tableauCount = (cards = null) => {
   let tableau = null
@@ -98,6 +102,7 @@ Deckdle._undoLastTableauMove = () => {
     tableauCards[card.col][card.row].status = 1
     Deckdle._removeCardFromBase(card)
 
+    Deckdle.__addAction(new UndoAction())
     Deckdle.__setState('tableau', tableauCards)
     Deckdle._saveGame()
   }
@@ -126,6 +131,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
 
         Deckdle.ui._moveCardToBase('tableau')
 
+        Deckdle.__addAction(new TableauAction(colId.substring(colId.length - 1), rowId))
         Deckdle.__setState('base', base)
         Deckdle._saveGame()
 

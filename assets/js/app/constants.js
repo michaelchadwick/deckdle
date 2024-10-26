@@ -26,6 +26,7 @@ const DECKDLE_DEFAULT_CONFIG = {
   synthSFX: null,
 }
 const DECKDLE_DEFAULT_STATE = {
+  actions: [],
   base: [],
   comboMax: 0,
   gameState: 'IN_PROGRESS',
@@ -38,6 +39,7 @@ const DECKDLE_DEFAULT_STATE = {
   tableau: {},
 }
 const DECKDLE_DEFAULT_SETTINGS = {
+  animationDisplay: true,
   comboCounter: true,
   darkMode: false,
   firstTime: true,

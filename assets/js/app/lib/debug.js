@@ -90,7 +90,7 @@ Deckdle._displayGameState = () => {
           var label = k
           var value = states[state][key][k]
 
-          const consoleKeys = ['base', 'stock', 'tableau']
+          const consoleKeys = ['actions', 'base', 'stock', 'tableau']
 
           if (consoleKeys.includes(label)) {
             html += `<dd><code>${label}:</code></dd><dt>see dev console (⌥⌘I)</dt>`
