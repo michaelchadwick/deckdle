@@ -1,4 +1,3 @@
-/* lib/misc/debug */
 /* debug functions */
 /* global Deckdle */
 /* eslint-disable no-undef */

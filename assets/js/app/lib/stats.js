@@ -1,4 +1,3 @@
-/* lib/misc/stats */
 /* function for modal stats */
 /* global Deckdle */
 /* eslint-disable no-undef */

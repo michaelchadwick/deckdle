@@ -1,4 +1,3 @@
-/* lib/misc/puzzle */
 /*
   Creates a new Deck full of Cards, and then uses
   a generated setupId to create a tableau and stock

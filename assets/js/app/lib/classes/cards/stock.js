@@ -1,4 +1,3 @@
-/* lib/cards/stock.js */
 /* functions for stock */
 /* global Deckdle, StockAction */
 /* eslint-disable no-unused-vars */

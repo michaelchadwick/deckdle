@@ -1,4 +1,3 @@
-/* lib/misc/combo.js */
 /* functions for combo notification */
 /* global Deckdle */
 

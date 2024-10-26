@@ -1,4 +1,3 @@
-/* lib/misc/helpers */
 /* misc global functions */
 /* global Deckdle */
 /* eslint-disable no-undef */

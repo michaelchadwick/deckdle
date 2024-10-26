@@ -1,4 +1,3 @@
-/* main */
 /* app entry point and main functions */
 /* global Deckdle */
 /* eslint-disable no-undef */

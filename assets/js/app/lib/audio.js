@@ -1,4 +1,4 @@
-/* lib/misc/audio */
+/* functions for audio system */
 /* global Deckdle, WebAudioTinySynth */
 
 Deckdle._initSynths = () => {

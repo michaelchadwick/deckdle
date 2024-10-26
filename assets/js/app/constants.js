@@ -1,4 +1,3 @@
-/* lib/constants */
 /* constant values */
 /* eslint-disable no-unused-vars */
 

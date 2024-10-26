@@ -1,4 +1,3 @@
-/* lib/cards/deck.js */
 /* class definition for Deck of Cards */
 /* global Card, Chance */
 /* eslint-disable no-unused-vars */

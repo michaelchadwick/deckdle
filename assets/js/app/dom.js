@@ -1,4 +1,3 @@
-/* dom */
 /* grab references to dom elements */
 /* global Deckdle */
 

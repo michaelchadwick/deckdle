@@ -1,4 +1,3 @@
-/* lib/actions/tableau_action.js */
 /* class definition for TableauAction */
 /* global Action */
 /* eslint-disable no-unused-vars */

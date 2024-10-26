@@ -1,4 +1,3 @@
-/* lib/actions/undo_action.js */
 /* class definition for UndoAction */
 /* global Action */
 /* eslint-disable no-unused-vars */

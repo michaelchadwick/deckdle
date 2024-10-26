@@ -1,4 +1,3 @@
-/* lib/cards/card.js */
 /* class definition for Card */
 /* eslint-disable no-unused-vars */
 

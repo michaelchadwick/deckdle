@@ -1,4 +1,3 @@
-/* lib/actions/stock_action.js */
 /* class definition for StockAction */
 /* global Action */
 /* eslint-disable no-unused-vars */

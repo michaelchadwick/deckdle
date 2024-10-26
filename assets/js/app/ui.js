@@ -1,4 +1,3 @@
-/* lib/misc/ui */
 /* functions that update the UI */
 /* global Deckdle */
 /* eslint-disable no-undef */

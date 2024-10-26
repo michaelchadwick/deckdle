@@ -1,4 +1,3 @@
-/* lib/cards/tableau.js */
 /* functions for tableau */
 /* global Deckdle, Card, TableauAction, UndoAction */
 /* eslint-disable no-unused-vars */

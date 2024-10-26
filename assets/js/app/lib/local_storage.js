@@ -1,4 +1,3 @@
-/* lib/misc/local_storage */
 /* functions to interact with window.localStorage */
 /* global Deckdle */
 /* eslint-disable no-undef, no-unused-vars */

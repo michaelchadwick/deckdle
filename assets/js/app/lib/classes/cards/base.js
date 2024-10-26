@@ -1,4 +1,3 @@
-/* lib/cards/base.js */
 /* functions for base */
 /* global Deckdle */
 /* eslint-disable no-unused-vars */

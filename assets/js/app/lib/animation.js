@@ -1,4 +1,3 @@
-/* lib/misc/animation */
 /* using Animate.CSS to add and remove animations from things */
 /* global Deckdle */
 

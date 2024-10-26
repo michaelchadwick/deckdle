@@ -1,4 +1,3 @@
-/* events */
 /* adds event listeners to dom */
 /* global Deckdle */
 
