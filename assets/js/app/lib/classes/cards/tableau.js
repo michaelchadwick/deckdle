@@ -37,9 +37,7 @@ class Tableau {
     Object.keys(tableau).forEach((col) => {
       if (tableau[col].filter((card) => card.status == 1).length) {
         if (
-          this.isRemovableCard(
-            tableau[col][tableau[col].filter((card) => card.status == 1).length - 1]
-          )
+          this.isValidCard(tableau[col][tableau[col].filter((card) => card.status == 1).length - 1])
         ) {
           hasValid = true
         }
@@ -49,7 +47,7 @@ class Tableau {
     return hasValid
   }
 
-  isRemovableCard = (card) => {
+  isValidCard = (card) => {
     const base = Deckdle.__getState()['base']
 
     if (!base.length) {
@@ -181,7 +179,7 @@ Deckdle._tableauHasValidCard = () => {
   Object.keys(tableau).forEach((col) => {
     if (tableau[col].filter((card) => card.status == 1).length) {
       if (
-        Deckdle._tableauCardCanBeRemoved(
+        Deckdle._tableauCardIsValid(
           tableau[col][tableau[col].filter((card) => card.status == 1).length - 1]
         )
       ) {
@@ -193,7 +191,7 @@ Deckdle._tableauHasValidCard = () => {
   return hasValid
 }
 
-Deckdle._tableauCardCanBeRemoved = (card) => {
+Deckdle._tableauCardIsValid = (card) => {
   const base = Deckdle.__getState()['base']
 
   if (!base.length) {
@@ -254,7 +252,7 @@ Deckdle._undoLastTableauMove = () => {
 
 Deckdle._onTableauClick = (card, colId, rowId) => {
   if (card.classList.contains('available')) {
-    if (Deckdle._tableauCardCanBeRemoved(card.dataset)) {
+    if (Deckdle._tableauCardIsValid(card.dataset)) {
       Deckdle._playSFX('click_tableau_valid')
 
       Deckdle._removeCardFromTableau(card)
