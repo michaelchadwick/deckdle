@@ -33,41 +33,61 @@ jobs:
         run: pnpm lint
 
   test:
-    name: Test
+    # This job installs pnpm,
+    # installs all dependencies,
+    # caches the Cypress binary cache,
+    # then runs Cypress tests in the single workspace
+    # of the subfolder "packages/workspace-1".
     runs-on: ubuntu-latest
+    name: Test
     timeout-minutes: 15
     needs: [lint]
 
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [20]
-        workspace:
-          - frontend
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # pnpm is not installed by default on GitHub runners
+      - name: Install pnpm
+        run: npm install -g pnpm@9
+
+      - name: Install dependencies
+        # with Cypress GitHub Action.
+        # Calling the Cypress GitHub Action causes all dependencies from
+        # the root of the pnpm workspace examples/start-and-pnpm-workspaces
+        # to be installed
+        # AND it automatically caches the Cypress binary.
+        uses: cypress-io/github-action@v6
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: pnpm
-      - name: Install Dependencies
-        run: pnpm install
-      - name: Run Tests
-        run: pnpm test
-        env:
-          COVERAGE: true
+          working-directory: examples/start-and-pnpm-workspaces
+          runTests: false
+
+      - name: Cypress tests
+        # Run Cypress in examples/start-and-pnpm-workspaces/packages/workspace-1 only
+        uses: cypress-io/github-action@v6
+        with:
+          # Do not attempt to install dependencies in the workspace using the action.
+          # There is no pnpm-lock.yaml file in a workspace for
+          # Cypress GitHub Action to use.
+          # We already installed dependencies when we called the action previously.
+          install: false
+          working-directory: examples/start-and-pnpm-workspaces/packages/workspace-1
+          # build: pnpm run build
+          start: pnpm start
+          wait-on: "http://localhost:3000"
+        # env:
+        #   COVERAGE: true
       # - name: Store Code Coverage
       #   uses: actions/upload-artifact@v4
       #   with:
-      #     name: coverage-${{matrix.workspace}}
-      #     path: ./packages/${{matrix.workspace}}/coverage
+      #     name: coverage
+      #     path: ./coverage
       #     retention-days: 1
       # - uses: actions/upload-artifact@v4
       #   if: failure()
       #   with:
-      #     name: replay-${{matrix.workspace}}-test.json
-      #     path: ./packages/${{matrix.workspace}}/test-execution-*.json
+      #     name: replay-test.json
+      #     path: ./test-execution-*.json
       #     retention-days: 7
 
   # upload-coverage:
