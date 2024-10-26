@@ -4,6 +4,8 @@
 
 Deckdle.ui = {}
 
+/* CREATION */
+
 Deckdle.ui._createCard = (card, cardType, classes = [], tabIndex = null, draggable = false) => {
   const cardDiv = document.createElement('div')
 
@@ -65,13 +67,14 @@ Deckdle.ui._createCard = (card, cardType, classes = [], tabIndex = null, draggab
 
   return cardDiv
 }
-
 Deckdle.ui._createEmptyCard = () => {
   const cardDiv = document.createElement('div')
   cardDiv.classList.add('card', 'empty')
 
   return cardDiv
 }
+
+/* MOVEMENT */
 
 Deckdle.ui._addCardToTableau = (card, colId) => {
   const row = document.getElementById(`col${colId}`).children.length
@@ -153,16 +156,37 @@ Deckdle.ui._moveCardToBase = (source) => {
 
   Deckdle.ui._updateCardCounts()
 }
+Deckdle.ui._undoBaseMove = (card) => {
+  // if card still remains in column
+  // remove its availability
+  if (
+    Deckdle.dom.interactive.tableau.querySelector(
+      `#col${card.col} .card[data-row="${card.row - 1}"]`
+    )
+  ) {
+    Deckdle.dom.interactive.tableau
+      .querySelector(`#col${card.col} .card[data-row="${card.row - 1}"]`)
+      .classList.remove('available')
+  }
+  // make card moved back available
+  Deckdle.dom.interactive.tableau
+    .querySelector(`#col${card.col} .card[data-row="${card.row}"]`)
+    .classList.remove('removed')
+  Deckdle.dom.interactive.tableau
+    .querySelector(`#col${card.col} .card[data-row="${card.row}"]`)
+    .classList.add('available')
+  Deckdle.dom.interactive.tableau.querySelector(
+    `#col${card.col} .card[data-row="${card.row}"]`
+  ).dataset.status = 1
 
-Deckdle.ui._updateCardCounts = () => {
-  Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
-  Deckdle.dom.stockCount.innerText = Deckdle.__getState()['stock'].length
-  Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length
+  // disable button until next card is moved
+  Deckdle.dom.input.btnUndoMove.disabled = true
+
+  Deckdle.ui._resetComboCounter()
+  Deckdle.ui._updateCardCounts()
 }
 
-Deckdle.ui._updateGameType = () => {
-  Deckdle.dom.gameType.innerText = Deckdle.__getState()['gameType']
-}
+/* CARD DEALING */
 
 Deckdle.ui._emptyPlayingField = () => {
   // clear tableau, stock, base
@@ -170,7 +194,6 @@ Deckdle.ui._emptyPlayingField = () => {
   Deckdle.dom.interactive.stock.querySelectorAll('.card').forEach((card) => card.remove())
   Deckdle.dom.interactive.base.querySelectorAll('.card').forEach((card) => card.remove())
 }
-
 Deckdle.ui._dealCards = (animate = false) => {
   // Deckdle._logStatus('[UI][LOADING] fillCards()')
 
@@ -222,41 +245,23 @@ Deckdle.ui._dealCards = (animate = false) => {
   Deckdle.ui._updateCardCounts()
 }
 
+/* STATUS */
+
 Deckdle.ui._updateDailyDetails = (index) => {
   Deckdle.dailyNumber = parseInt(index) + 1
   Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (parseInt(index) + 1).toString()
   Deckdle.dom.dailyDetails.querySelector('.day').innerHTML = Deckdle.__getTodaysDate()
 }
-
-Deckdle.ui._undoBaseMove = (card) => {
-  // if card still remains in column
-  // remove its availability
-  if (
-    Deckdle.dom.interactive.tableau.querySelector(
-      `#col${card.col} .card[data-row="${card.row - 1}"]`
-    )
-  ) {
-    Deckdle.dom.interactive.tableau
-      .querySelector(`#col${card.col} .card[data-row="${card.row - 1}"]`)
-      .classList.remove('available')
-  }
-  // make card moved back available
-  Deckdle.dom.interactive.tableau
-    .querySelector(`#col${card.col} .card[data-row="${card.row}"]`)
-    .classList.remove('removed')
-  Deckdle.dom.interactive.tableau
-    .querySelector(`#col${card.col} .card[data-row="${card.row}"]`)
-    .classList.add('available')
-  Deckdle.dom.interactive.tableau.querySelector(
-    `#col${card.col} .card[data-row="${card.row}"]`
-  ).dataset.status = 1
-
-  // disable button until next card is moved
-  Deckdle.dom.input.btnUndoMove.disabled = true
-
-  Deckdle.ui._resetComboCounter()
-  Deckdle.ui._updateCardCounts()
+Deckdle.ui._updateCardCounts = () => {
+  Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()
+  Deckdle.dom.stockCount.innerText = Deckdle.__getState()['stock'].length
+  Deckdle.dom.baseCount.innerText = Deckdle.__getState()['base'].length
 }
+Deckdle.ui._updateGameType = () => {
+  Deckdle.dom.gameType.innerText = Deckdle.__getState()['gameType']
+}
+
+/* COMBO */
 
 Deckdle.ui._updateComboCounter = () => {
   const comboLevel = Deckdle.combo
@@ -292,10 +297,11 @@ Deckdle.ui._updateComboCounter = () => {
     }
   }
 }
-
 Deckdle.ui._resetComboCounter = () => {
   Deckdle.dom.combo.classList.remove('x', 'x2', 'x5', 'x10', 'x15', 'x30', 'x35')
 }
+
+/* HELPERS */
 
 Deckdle.ui._removeModalVestige = () => {
   const dialog = document.getElementsByClassName('modal-dialog')[0]
@@ -308,7 +314,6 @@ Deckdle.ui._removeModalVestige = () => {
     Deckdle.myModal._destroyModal()
   }
 }
-
 Deckdle.ui._disableUI = () => {
   if (!Deckdle.dom.gameContainer.classList.contains('disabled')) {
     Deckdle._logStatus('[UI] disabling')
@@ -344,7 +349,6 @@ Deckdle.ui._disableUI = () => {
     Deckdle.dom.gameContainer.classList.add('disabled')
   }
 }
-
 Deckdle.ui._enableUI = (replay = false) => {
   if (Deckdle.dom.gameContainer.classList.contains('disabled')) {
     Deckdle._logStatus('[UI] enabling')
@@ -377,7 +381,6 @@ Deckdle.ui._enableUI = (replay = false) => {
     }
   }
 }
-
 Deckdle.ui._disableModeSwitcher = () => {
   const gameMode = Deckdle.__getGameMode()
 
