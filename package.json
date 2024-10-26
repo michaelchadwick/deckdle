@@ -9,6 +9,7 @@
     "lint:css:fix": "stylelint \"**/*.css\" --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
+    "start": "php -S 127.0.0.1:3000",
     "test": "npx cypress run --env host=local",
     "test:coverage": "COVERAGE=true npx cypress run --env host=local",
     "test:open": "npx cypress open --e2e -b electron --env host=local",
