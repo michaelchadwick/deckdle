@@ -37,7 +37,7 @@ class Tableau {
     Object.keys(tableau).forEach((col) => {
       if (tableau[col].filter((card) => card.status == 1).length) {
         if (
-          Deckdle._tableauCardCanBeRemoved(
+          this.isRemovableCard(
             tableau[col][tableau[col].filter((card) => card.status == 1).length - 1]
           )
         ) {
@@ -49,7 +49,7 @@ class Tableau {
     return hasValid
   }
 
-  hasRemovableCard = (card) => {
+  isRemovableCard = (card) => {
     const base = Deckdle.__getState()['base']
 
     if (!base.length) {
