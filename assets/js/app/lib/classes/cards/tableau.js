@@ -30,38 +30,48 @@ class Tableau {
     return this.count() == 0
   }
 
-  hasValidCard = () => {
-    const tableau = Deckdle.__getState()['tableau']
+  hasValidCard = (type = 'golf') => {
     let hasValid = false
+    const tableau = Deckdle.__getState()['tableau']
 
-    Object.keys(tableau).forEach((col) => {
-      if (tableau[col].filter((card) => card.status == 1).length) {
-        if (
-          this.isValidCard(tableau[col][tableau[col].filter((card) => card.status == 1).length - 1])
-        ) {
-          hasValid = true
-        }
+    switch (type) {
+      case 'golf':
+      default: {
+        Object.keys(tableau).forEach((col) => {
+          if (tableau[col].filter((card) => card.status == 1).length) {
+            const row = tableau[col].filter((card) => card.status == 1).length - 1
+
+            if (this.isValidCard(tableau[col][row])) {
+              hasValid = true
+            }
+          }
+        })
       }
-    })
+    }
 
     return hasValid
   }
 
-  isValidCard = (card) => {
-    const base = Deckdle.__getState()['base']
+  isValidCard = (card, type = 'golf') => {
+    switch (type) {
+      case 'golf':
+      default: {
+        const base = Deckdle.__getState()['base']
 
-    if (!base.length) {
-      return false
-    }
+        if (!base.length) {
+          return false
+        }
 
-    const baseCard = base[base.length - 1]
-    const rankAbove = parseInt(baseCard.rank) + 1 == 15 ? 2 : parseInt(baseCard.rank) + 1
-    const rankBelow = parseInt(baseCard.rank) - 1 == 1 ? 14 : parseInt(baseCard.rank) - 1
+        const baseCard = base[base.length - 1]
+        const rankAbove = parseInt(baseCard.rank) + 1 == 15 ? 2 : parseInt(baseCard.rank) + 1
+        const rankBelow = parseInt(baseCard.rank) - 1 == 1 ? 14 : parseInt(baseCard.rank) - 1
 
-    if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
-      return true
-    } else {
-      return false
+        if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
+          return true
+        } else {
+          return false
+        }
+      }
     }
   }
 
@@ -172,40 +182,48 @@ Deckdle._tableauIsEmpty = () => {
   return Deckdle._tableauCount() == 0
 }
 
-Deckdle._tableauHasValidCard = () => {
-  const tableau = Deckdle.__getState()['tableau']
+Deckdle._tableauHasValidCard = (type = 'golf') => {
   let hasValid = false
+  const tableau = Deckdle.__getState()['tableau']
 
-  Object.keys(tableau).forEach((col) => {
-    if (tableau[col].filter((card) => card.status == 1).length) {
-      if (
-        Deckdle._tableauCardIsValid(
-          tableau[col][tableau[col].filter((card) => card.status == 1).length - 1]
-        )
-      ) {
-        hasValid = true
-      }
+  switch (type) {
+    case 'golf':
+    default: {
+      Object.keys(tableau).forEach((col) => {
+        if (tableau[col].filter((card) => card.status == 1).length) {
+          const row = tableau[col].filter((card) => card.status == 1).length - 1
+
+          if (Deckdle._tableauCardIsValid(tableau[col][row])) {
+            hasValid = true
+          }
+        }
+      })
     }
-  })
+  }
 
   return hasValid
 }
 
-Deckdle._tableauCardIsValid = (card) => {
-  const base = Deckdle.__getState()['base']
+Deckdle._tableauCardIsValid = (card, type = 'golf') => {
+  switch (type) {
+    case 'golf':
+    default: {
+      const base = Deckdle.__getState()['base']
 
-  if (!base.length) {
-    return false
-  }
+      if (!base.length) {
+        return false
+      }
 
-  const baseCard = base[base.length - 1]
-  const rankAbove = parseInt(baseCard.rank) + 1 == 15 ? 2 : parseInt(baseCard.rank) + 1
-  const rankBelow = parseInt(baseCard.rank) - 1 == 1 ? 14 : parseInt(baseCard.rank) - 1
+      const baseCard = base[base.length - 1]
+      const rankAbove = parseInt(baseCard.rank) + 1 == 15 ? 2 : parseInt(baseCard.rank) + 1
+      const rankBelow = parseInt(baseCard.rank) - 1 == 1 ? 14 : parseInt(baseCard.rank) - 1
 
-  if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
-    return true
-  } else {
-    return false
+      if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
+        return true
+      } else {
+        return false
+      }
+    }
   }
 }
 

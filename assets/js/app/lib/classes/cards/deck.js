@@ -13,23 +13,6 @@ class Deck {
     }
   }
 
-  #fillDeck = () => {
-    const suitIdMin = 0
-    const suitIdMax = 4
-    const rankIdMin = 2
-    const rankIdMax = 15
-
-    let deck = []
-
-    for (let suit = suitIdMin; suit < suitIdMax; suit++) {
-      for (let rank = rankIdMin; rank < rankIdMax; rank++) {
-        this.cards.push(new Card(suit, rank, 1))
-      }
-    }
-
-    return deck
-  }
-
   size = () => {
     return this.cards.length
   }
@@ -93,37 +76,55 @@ class Deck {
     this.cards = shuffleOrder.shuffle(this.cards)
   }
 
-  hasValidMove = () => {
-    let valid = false
-    let validTableauCards = []
+  hasValidMove = (type = 'golf') => {
+    let hasValid = false
 
-    // grab bottom cards from what would be each tableau column
-    validTableauCards.push(this.cards[4])
-    validTableauCards.push(this.cards[9])
-    validTableauCards.push(this.cards[14])
-    validTableauCards.push(this.cards[19])
-    validTableauCards.push(this.cards[24])
-    validTableauCards.push(this.cards[29])
-    validTableauCards.push(this.cards[34])
+    switch (type) {
+      case 'golf':
+      default: {
+        let validTableauCards = []
 
-    // grab last card in deck, which would be top of stock
-    const targetCard = this.cards[this.cards.length - 1]
+        // grab bottom cards from what would be each tableau column
+        validTableauCards.push(this.cards[4])
+        validTableauCards.push(this.cards[9])
+        validTableauCards.push(this.cards[14])
+        validTableauCards.push(this.cards[19])
+        validTableauCards.push(this.cards[24])
+        validTableauCards.push(this.cards[29])
+        validTableauCards.push(this.cards[34])
 
-    // console.log(
-    //   validTableauCards.map((card) => card.rank),
-    //   targetCard.rank
-    // )
+        // grab last card in deck, which would be top of stock
+        const targetCard = this.cards[this.cards.length - 1]
 
-    validTableauCards.forEach((card) => {
-      const rankAbove = parseInt(targetCard.rank) + 1 == 15 ? 2 : parseInt(targetCard.rank) + 1
-      const rankBelow = parseInt(targetCard.rank) - 1 == 1 ? 14 : parseInt(targetCard.rank) - 1
+        validTableauCards.forEach((card) => {
+          const rankAbove = parseInt(targetCard.rank) + 1 == 15 ? 2 : parseInt(targetCard.rank) + 1
+          const rankBelow = parseInt(targetCard.rank) - 1 == 1 ? 14 : parseInt(targetCard.rank) - 1
 
-      if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
-        valid = true
+          if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
+            hasValid = true
+          }
+        })
       }
-    })
+    }
 
-    return valid
+    return hasValid
+  }
+
+  #fillDeck = () => {
+    const suitIdMin = 0
+    const suitIdMax = 4
+    const rankIdMin = 2
+    const rankIdMax = 15
+
+    let deck = []
+
+    for (let suit = suitIdMin; suit < suitIdMax; suit++) {
+      for (let rank = rankIdMin; rank < rankIdMax; rank++) {
+        this.cards.push(new Card(suit, rank, 1))
+      }
+    }
+
+    return deck
   }
 
   #suitRankCompareFn = (a, b) => {
