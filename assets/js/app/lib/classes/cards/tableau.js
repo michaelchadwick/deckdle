@@ -117,7 +117,7 @@ class Tableau {
 
   onClick = (card, colId, rowId) => {
     if (card.classList.contains('available')) {
-      if (this.hasRemovableCard(card.dataset)) {
+      if (this.isValidCard(card.dataset)) {
         Deckdle._playSFX('click_tableau_valid')
 
         this.removeCard(card)
