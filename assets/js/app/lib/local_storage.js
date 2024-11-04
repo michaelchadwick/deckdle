@@ -86,11 +86,21 @@ Deckdle._loadGame = async (switching = false) => {
         try {
           const response = await fetch(DECKDLE_DAILY_SCRIPT)
           const data = await response.json()
-          const dailySetupId = data['setupId']
+          const serverDailySetupId = parseInt(data['setupId'])
+          const clientDailySetupId = parseInt(lsStateDaily[Deckdle.__getSessionIndex()].setupId)
 
-          // saved setupId and daily setupId are the same? still working on it
-          if (lsStateDaily[Deckdle.__getSessionIndex()].setupId) {
-            if (dailySetupId == parseInt(lsStateDaily[Deckdle.__getSessionIndex()].setupId)) {
+          // client setupId and server setupId are the same? still working on it
+          if (serverDailySetupId && clientDailySetupId) {
+            Deckdle._logStatus(
+              `[LOADING] serverDailySetupId(${serverDailySetupId}) vs clientDailySetupId(${clientDailySetupId})`,
+              serverDailySetupId == clientDailySetupId
+            )
+
+            if (serverDailySetupId == clientDailySetupId) {
+              Deckdle._logStatus(
+                '[LOADING] Server and Client setupId match. Loading existing daily setupId and puzzle.'
+              )
+
               Deckdle.__setState(
                 'gameState',
                 lsStateDaily[Deckdle.__getSessionIndex()].gameState,
@@ -102,6 +112,10 @@ Deckdle._loadGame = async (switching = false) => {
           }
           // time has elapsed on daily puzzle, and new one is needed
           else {
+            Deckdle._logStatus(
+              '[LOADING] Server and Client setupId do not match or one is missing. Creating new daily puzzle.'
+            )
+
             Deckdle.__setState('gameState', 'IN_PROGRESS', 'daily')
 
             Deckdle._saveGame('daily', '_loadGame(daily time elapsed)')
@@ -115,7 +129,7 @@ Deckdle._loadGame = async (switching = false) => {
         }
       }
     } else {
-      // Deckdle._logStatus('no previous daily state found. creating new daily puzzle.')
+      Deckdle._logStatus('[LOADING] No previous daily state found. Creating new daily puzzle.')
       dailyCreateOrLoad = 'create'
     }
   }
