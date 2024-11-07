@@ -54,7 +54,7 @@ Deckdle.__getParentCard = (el, selector) => {
   return parent_container
 }
 
-Deckdle.__getSetupId = async (gameMode, qsId) => {
+Deckdle.__createSetupId = async (gameMode, qsId) => {
   let setupId = null
 
   // 'daily' always uses day hash
@@ -86,14 +86,11 @@ Deckdle.__getSetupId = async (gameMode, qsId) => {
         history.pushState(null, '', url)
       }
     } else {
-      setupId = Deckdle.__createRandomSetupId()
+      setupId = Math.floor(Math.random() * 10000000000)
     }
   }
 
   return setupId
-}
-Deckdle.__createRandomSetupId = () => {
-  return Math.floor(Math.random() * 10000000000)
 }
 Deckdle.__getGameMode = () => {
   return Deckdle.settings ? Deckdle.settings.gameMode : DECKDLE_DEFAULT_GAMEMODE
@@ -194,7 +191,7 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
   let html = ''
 
   if (mode == 'daily') {
-    html += `♦️ Deckdle DAILY #${Deckdle.dailyNumber}\n`
+    html += `♦️ Deckdle DAILY #${Deckdle.dailyNumber} [${Deckdle.__getState().setupId}]\n`
   } else {
     html += `♦️ Deckdle FREE id:${Deckdle.__getState()['setupId']}\n`
   }

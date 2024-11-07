@@ -15,3 +15,6 @@
   display: flex;
   justify-content: center;
 }
+.setupid {
+  font-size: 0.75rem;
+}

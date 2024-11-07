@@ -73,7 +73,7 @@ Deckdle._createNewSetup = async (gameMode, qsId = null) => {
 
   Deckdle.__setState('gameState', 'IN_PROGRESS', gameMode)
 
-  setupId = await Deckdle.__getSetupId(gameMode, qsId)
+  setupId = await Deckdle.__createSetupId(gameMode, qsId)
 
   Deckdle.__setState('setupId', setupId, gameMode)
 
