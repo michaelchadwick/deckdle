@@ -8,6 +8,9 @@
   letter-spacing: 0.05em;
   text-align: center;
 }
+.statistic-setupid {
+  font-size: 0.75em;
+}
 .statistic-subheader {
   align-items: center;
   display: flex;

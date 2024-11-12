@@ -4,7 +4,17 @@
 
 Deckdle.modalOpen = async (type) => {
   let modalText
+  const gameMode = Deckdle.settings['gameMode']
+  const gameState = Deckdle.__getState()['gameState']
   const gameType = Deckdle.__getState()['gameType']
+  const actionCount = Deckdle.__getActionCount()
+  const actionCountWithUndos = Deckdle.__getActionCount((countUndos = true))
+  const stockCount = Deckdle._stockCount()
+  const tableauCount = Deckdle._tableauCount()
+  const undoCount = Deckdle.__getUndoCount()
+  const setupId = Deckdle.__getState()['setupId']
+  const setupIdDaily = Deckdle.__getState('daily')['setupId']
+  const setupIdFree = Deckdle.__getState('free')['setupId']
 
   switch (type) {
     case 'start':
@@ -59,7 +69,14 @@ Deckdle.modalOpen = async (type) => {
 
       break
 
-    case 'stats':
+    case 'stats': {
+      const finishedGamesDaily = Deckdle._getFinishedGameCount('daily')
+      const bestComboDaily = Deckdle._getBestCombo('daily')
+      const bestScoreDaily = Deckdle._getBestScore('daily')
+      const finishedGamesFree = Deckdle._getFinishedGameCount('free')
+      const bestComboFree = Deckdle._getBestCombo('free')
+      const bestScoreFree = Deckdle._getBestScore('free')
+
       if (Deckdle.myModal) {
         Deckdle.myModal._destroyModal()
       }
@@ -71,21 +88,22 @@ Deckdle.modalOpen = async (type) => {
       // daily stats
       modalText += `
           <div class="statistic-header">Daily</div>
+          <div class="statistic-setupid">${setupIdDaily}</div>
           <div class="statistic-subheader">
             (<small>New puzzle available at 12am PST</small>)
           </div>
 
           <div class="statistics">
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getFinishedGameCount('daily')}</div>
+              <div class="statistic">${finishedGamesDaily}</div>
               <div class="statistic-label">Game(s) Finished</div>
             </div>
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getBestCombo('daily')}</div>
+              <div class="statistic">${bestComboDaily}</div>
               <div class="statistic-label">Max<br />Combo</div>
             </div>
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getBestScore('daily')}</div>
+              <div class="statistic">${bestScoreDaily}</div>
               <div class="statistic-label">Best<br />Score</div>
             </div>
           </div>
@@ -94,23 +112,24 @@ Deckdle.modalOpen = async (type) => {
       // free stats
       modalText += `
           <div class="statistic-header">Free Play</div>
+          <div class="statistic-setupid">${setupIdFree}</div>
           <div class="statistics">
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getFinishedGameCount('free')}</div>
+              <div class="statistic">${finishedGamesFree}</div>
               <div class="statistic-label">Game(s) Finished</div>
             </div>
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getBestCombo('free')}</div>
+              <div class="statistic">${bestComboFree}</div>
               <div class="statistic-label">Max<br />Combo</div>
             </div>
             <div class="statistic-container">
-              <div class="statistic">${Deckdle._getBestScore('free')}</div>
+              <div class="statistic">${bestScoreFree}</div>
               <div class="statistic-label">Best<br />Score</div>
             </div>
           </div>
       `
 
-      if (Deckdle.__getState().gameState == 'GAME_OVER') {
+      if (gameState == 'GAME_OVER') {
         modalText += `
           <div class="share">
             <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
@@ -123,7 +142,9 @@ Deckdle.modalOpen = async (type) => {
       `
 
       Deckdle.myModal = new Modal('perm', 'Statistics', modalText, null, null, false)
+
       break
+    }
 
     case 'settings':
       if (Deckdle.myModal) {
@@ -304,7 +325,7 @@ Deckdle.modalOpen = async (type) => {
       )
       break
 
-    case 'game-over':
+    case 'game-over': {
       if (Deckdle.myModal) {
         Deckdle.myModal._destroyModal()
       }
@@ -313,20 +334,20 @@ Deckdle.modalOpen = async (type) => {
         <div class="container game-over">
       `
 
-      switch (Deckdle.__getState()['gameType']) {
+      switch (gameState) {
         case 'golf':
         default:
-          if (Deckdle._tableauCount() == 0) {
+          if (tableauCount == 0) {
             Deckdle._playSFX('win')
 
-            if (Deckdle._stockCount() > 0) {
+            if (stockCount > 0) {
               modalText = `
                 <div class='score-animation'>
                   <div>Whoa! You shot under par with a score of...</div>
-                  <div class='score animate__animated animate__zoomIn'>${Deckdle._stockCount()}</div>
+                  <div class='score animate__animated animate__zoomIn'>${stockCount}</div>
                 </div>
                 <div class='score-image'>
-                  <img src='/assets/images/${Deckdle._stockCount()}below.png' alt='Game Score: ${Deckdle._stockCount()} below par' title='Game Score: ${Deckdle._stockCount()} below par' />
+                  <img src='/assets/images/${stockCount}below.png' alt='Game Score: ${stockCount} below par' title='Game Score: ${stockCount} below par' />
                 </div>
               `
             } else {
@@ -343,7 +364,7 @@ Deckdle.modalOpen = async (type) => {
             modalText = `
               <div class='score-animation'>
                 <div>You didn't quite clear it with a score of...</div>
-                <div class='score animate__animated animate__zoomIn'>${Deckdle._tableauCount()}</div>
+                <div class='score animate__animated animate__zoomIn'>${tableauCount}</div>
                 <div>OVER PAR</div>
               </div>
             `
@@ -355,22 +376,22 @@ Deckdle.modalOpen = async (type) => {
       modalText += `
         <div class='move-count'>
       `
-      if (Deckdle.__getUndoCount() > 0) {
+      if (undoCount > 0) {
         modalText += `
-          <strong>${Deckdle.__getActionCount()}</strong> moves (${Deckdle.__getActionCount((countUndos = true))} counting undos)
+          <strong>${actionCount}</strong> moves (${actionCountWithUndos} counting undos)
         `
       } else {
         modalText += `
-          <strong>${Deckdle.__getActionCount()}</strong> moves
+          <strong>${actionCount}</strong> moves
         `
       }
       modalText += `
         </div>
-        <div class="setupid">${Deckdle.__getState().setupId}</div>
+        <div class="setupid">${setupId}</div>
       `
 
       // daily
-      if (Deckdle.__getGameMode() == 'daily') {
+      if (gameMode == 'daily') {
         modalText += `
           <div class="para">New daily puzzle available at 12 am PST</div>
         `
@@ -395,7 +416,7 @@ Deckdle.modalOpen = async (type) => {
         `
       }
 
-      if (Deckdle.__getState().gameState == 'GAME_OVER') {
+      if (gameState == 'GAME_OVER') {
         modalText += `
           <div class="share">
             <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
@@ -410,6 +431,7 @@ Deckdle.modalOpen = async (type) => {
       Deckdle.myModal = new Modal('end-state', 'Game Over', modalText, null, null, 'game-over')
 
       break
+    }
 
     case 'game-over-replay':
       if (Deckdle.myModal) {
@@ -420,17 +442,17 @@ Deckdle.modalOpen = async (type) => {
         <div class="container game-over">
       `
 
-      switch (Deckdle.__getState()['gameType']) {
+      switch (gameType) {
         case 'golf':
         default:
-          if (Deckdle._tableauCount() == 0) {
+          if (tableauCount == 0) {
             Deckdle._playSFX('win')
 
-            if (Deckdle._stockCount() > 0) {
+            if (stockCount > 0) {
               modalText = `
                 <div class='score-animation'>
                   <div>Whoa! You shot under par with a score of...</div>
-                  <div class='score animate__animated animate__zoomIn'>${Deckdle._stockCount()}</div>
+                  <div class='score animate__animated animate__zoomIn'>${stockCount}</div>
                 </div>
               `
             } else {
@@ -447,7 +469,7 @@ Deckdle.modalOpen = async (type) => {
             modalText = `
               <div class='score-animation'>
                 <div>You didn't quite clear it with a score of...</div>
-                <div class='score animate__animated animate__zoomIn'>${Deckdle._tableauCount()}</div>
+                <div class='score animate__animated animate__zoomIn'>${tableauCount}</div>
                 <div>OVER PAR</div>
               </div>
             `
@@ -457,7 +479,7 @@ Deckdle.modalOpen = async (type) => {
       }
 
       // daily
-      if (Deckdle.__getGameMode() == 'daily') {
+      if (gameMode == 'daily') {
         modalText += `
           <div class="para">New daily puzzle available at 12 am PST</div>
           <div class="para highlighted">
