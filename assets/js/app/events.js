@@ -21,8 +21,7 @@ Deckdle._handleClickTouch = (event) => {
 
   if (dialog) {
     const isConfirm = dialog.classList.contains('modal-confirm')
-    const isShareLink = event.target.classList.contains('share')
-    // const isEndState = dialog.classList.contains('end-state')
+    const isShareLink = elem.classList.contains('share')
 
     // only close if not a confirmation or share link!
     if (elem == dialog && !isConfirm && !isShareLink) {

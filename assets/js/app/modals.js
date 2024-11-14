@@ -515,11 +515,11 @@ Deckdle.modalOpen = async (type) => {
       break
 
     case 'shared':
-      if (Deckdle.myModalTemp) {
-        Deckdle.myModalTemp._destroyModal()
-      }
+      // if (Deckdle.myModalTemp) {
+      //   Deckdle.myModalTemp._destroyModal()
+      // }
 
-      Deckdle.myModalTemp = new Modal('temp', null, 'Results copied to clipboard', null, null)
+      Deckdle.myModal = new Modal('temp', null, 'Results copied to clipboard', null, null)
       break
 
     case 'no-clipboard-access':

@@ -1,4 +1,4 @@
-/* modal dialog UI */
+/* Modal class */
 /* eslint-disable no-unused-vars */
 
 class Modal {
@@ -64,16 +64,24 @@ class Modal {
     this.modal = document.createElement('dialog')
     this.modal.classList.add('modal-dialog')
 
-    if (modalType == 'confirm' || modalType == 'confirm-debug') {
-      this.modal.classList.add('modal-confirm')
-    }
+    // add proper CSS class
+    switch (modalType) {
+      case 'confirm':
+      case 'confirm-debug':
+        this.modal.classList.add('modal-confirm')
+        break
 
-    if (modalType == 'temp') {
-      this.modal.classList.add('temp')
-    }
+      case 'temp':
+        this.modal.classList.add('temp')
+        break
 
-    if (modalType == 'end-state') {
-      this.modal.classList.add('end-state')
+      case 'temp-api':
+        this.modal.classList.add('temp-api')
+        break
+
+      case 'end-state':
+        this.modal.classList.add('end-state')
+        break
     }
 
     // Message window
