@@ -514,13 +514,28 @@ Deckdle.modalOpen = async (type) => {
 
       break
 
-    case 'shared':
+    case 'shared': {
       // if (Deckdle.myModalTemp) {
       //   Deckdle.myModalTemp._destroyModal()
       // }
 
+      const btnShare = document.querySelector('button.share')
+
+      if (btnShare) {
+        btnShare.innerHTML = `
+          Copied <i class="fa-solid fa-check"></i>
+        `
+
+        setTimeout(() => {
+          btnShare.innerHTML = `
+            Share <i class="fa-solid fa-share-nodes"></i>
+          `
+        }, 1500)
+      }
+
       Deckdle.myModal = new Modal('temp', null, 'Results copied to clipboard', null, null)
       break
+    }
 
     case 'no-clipboard-access':
       if (Deckdle.myModalTemp) {
