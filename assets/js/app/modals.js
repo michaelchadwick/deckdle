@@ -12,9 +12,6 @@ Deckdle.modalOpen = async (type) => {
   const stockCount = Deckdle._stockCount()
   const tableauCount = Deckdle._tableauCount()
   const undoCount = Deckdle.__getUndoCount()
-  const setupId = Deckdle.__getState()['setupId']
-  const setupIdDaily = Deckdle.__getState('daily')['setupId']
-  const setupIdFree = Deckdle.__getState('free')['setupId']
 
   switch (type) {
     case 'start':
@@ -88,7 +85,7 @@ Deckdle.modalOpen = async (type) => {
       // daily stats
       modalText += `
           <div class="statistic-header">Daily</div>
-          <div class="statistic-setupid">${setupIdDaily}</div>
+          <div class="statistic-setupid">${Deckdle.__getState('daily')['setupId']}</div>
           <div class="statistic-subheader">
             (<small>New puzzle available at 12am PST</small>)
           </div>
@@ -112,7 +109,7 @@ Deckdle.modalOpen = async (type) => {
       // free stats
       modalText += `
           <div class="statistic-header">Free Play</div>
-          <div class="statistic-setupid">${setupIdFree}</div>
+          <div class="statistic-setupid">${Deckdle.__getState('free')['setupId']}</div>
           <div class="statistics">
             <div class="statistic-container">
               <div class="statistic">${finishedGamesFree}</div>
@@ -387,7 +384,7 @@ Deckdle.modalOpen = async (type) => {
       }
       modalText += `
         </div>
-        <div class="setupid">${setupId}</div>
+        <div class="setupid">${Deckdle.__getState()['setupId']}</div>
       `
 
       // daily
