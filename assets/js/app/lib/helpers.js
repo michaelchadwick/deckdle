@@ -129,9 +129,9 @@ Deckdle.__getState = (mode = Deckdle.__getGameMode()) => {
     const seshId = Deckdle.__getSessionIndex()
     const state = rootState[seshId]
 
-    return state || undefined
+    return state || {}
   } else {
-    return undefined
+    return {}
   }
 }
 Deckdle.__setState = (
