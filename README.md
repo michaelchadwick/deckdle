@@ -8,10 +8,13 @@ More expository words spilled digitally about Deckdle [are available if interest
 
 Deckdle uses a semi-standard naming convention for golf scores. Some scores will display a picture upon achieving. All images taken from [AI Emojis](https://emojis.sh). Credit is given when the picture has attribution.
 
+* 9 Below Par: -9: Roc (<https://emojis.sh/emoji/roc-mythical-bird-a5Q1qXr>)
+* 8 Below Par: -8: Swan (<https://emojis.sh/emoji/swan-KDCIgtYccz8>)
+* 7 Below Par: -7: Robin (<https://emojis.sh/emoji/robin-qpHgd3BL1EU>) (In honor of Robyn's amazing achievement)
 * 6 Below Par: -6: Phoenix (<https://emojis.sh/hello0538>)
-* 5 Below Par: -5: Ostrich
+* 5 Below Par: -5: Ostrich (<https://emojis.sh/emoji/full-body-ostrich-ojpJDdapzN>)
 * 4 Below Par: -4: Condor (Triple Eagle) (<https://emojis.sh/hugosueiras>)
-* 3 Below Par: -3: Albatross (Double Eagle)
+* 3 Below Par: -3: Albatross (Double Eagle) (<https://emojis.sh/emoji/albatross-EVDB2cq36Q>)
 * 2 Below Par: -2: Eagle (<https://emojis.sh/mortezazarein_s>)
 * 1 Below Par: -1: Birdie (<https://emojis.sh/keorapetsebtn>)
 * Exactly Par: 0
