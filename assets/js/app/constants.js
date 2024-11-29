@@ -13,6 +13,7 @@ const DECKDLE_SHARE_URL = `${document.location.origin}/?r=share`
 
 const DECKDLE_GOLF_ROW_MAX = 5
 const DECKDLE_GOLF_COL_MAX = 7
+const DECKDLE_GOLF_BIRD_MAX = 10
 
 const DECKDLE_KLONDIKE_ROW_MAX = 7
 const DECKDLE_KLONDIKE_COL_MAX = 7
