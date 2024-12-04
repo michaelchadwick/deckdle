@@ -345,8 +345,7 @@ Deckdle.modalOpen = async (type) => {
                 </div>
               `
 
-              if (stockCount >= -99) {
-                // if (stockCount >= DECKDLE_GOLF_BIRD_MAX) {
+              if (stockCount >= DECKDLE_GOLF_BIRD_MAX) {
                 modalText += `
                   <iframe src="https://giphy.com/embed/l0Ex7OYRjmY0dnxqo" width="128" height="128" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/crazy-wow-rainbow-l0Ex7OYRjmY0dnxqo">via GIPHY</a></p>
                 `
