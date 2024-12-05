@@ -191,7 +191,7 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
   let html = ''
 
   if (mode == 'daily') {
-    html += `♦️ Deckdle DAILY #${Deckdle.dailyNumber} [${Deckdle.__getState().setupId}]\n`
+    html += `♦️ Deckdle DAILY #${Deckdle.dailyNumber}\n`
   } else {
     html += `♦️ Deckdle FREE id:${Deckdle.__getState()['setupId']}\n`
   }

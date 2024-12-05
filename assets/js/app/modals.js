@@ -393,7 +393,6 @@ Deckdle.modalOpen = async (type) => {
       }
       modalText += `
         </div>
-        <div class="setupid">${Deckdle.__getState()['setupId']}</div>
       `
 
       // daily
