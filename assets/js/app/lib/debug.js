@@ -128,15 +128,17 @@ Deckdle._displayGameState = () => {
   return html
 }
 // modal: debug: clear localStorage
-Deckdle._clearLocalStorage = () => {
+Deckdle._clearLocalStorage = (showModal = true) => {
   localStorage.clear()
 
-  if (
-    localStorage.key(DECKDLE_SETTINGS_LS_KEY) == undefined &&
-    localStorage.key(DECKDLE_STATE_DAILY_LS_KEY) == undefined &&
-    localStorage.key(DECKDLE_STATE_FREE_LS_KEY) == undefined
-  ) {
-    Deckdle.modalOpen('cleared-local-storage')
+  if (showModal) {
+    if (
+      localStorage.key(DECKDLE_SETTINGS_LS_KEY) == undefined &&
+      localStorage.key(DECKDLE_STATE_DAILY_LS_KEY) == undefined &&
+      localStorage.key(DECKDLE_STATE_FREE_LS_KEY) == undefined
+    ) {
+      Deckdle.modalOpen('cleared-local-storage')
+    }
   }
 }
 
