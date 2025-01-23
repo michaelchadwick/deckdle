@@ -352,7 +352,7 @@ Deckdle.modalOpen = async (type) => {
               } else {
                 modalText += `
                   <div class='score-image'>
-                    <img src='/assets/images/${stockCount}below.png' alt='Game Score: ${stockCount} below par' title='Game Score: ${stockCount} below par' />
+                    <img src='/assets/images/${stockCount}below.png' alt='Game Score: ${stockCount} below par (${DECKDLE_SCORE_TO_BIRD[stockCount]})' title='Game Score: ${stockCount} below par (${DECKDLE_SCORE_TO_BIRD[stockCount]})' />
                   </div>
                 `
               }

@@ -169,7 +169,7 @@ Deckdle._debugGameOver = (type = 'golf', gameMode = 'daily', win = true, score =
               <div class='score animate__animated animate__zoomIn'>-${score}</div>
             </div>
             <div class='score-image'>
-              <img src='/assets/images/${score}below.png' alt='Game Score: ${score} below par' title='Game Score: ${score} below par' />
+              <img src='/assets/images/${score}below.png' alt='Game Score: ${score} below par (${DECKDLE_SCORE_TO_BIRD[score]})' title='Game Score: ${score} below par (${DECKDLE_SCORE_TO_BIRD[score]})' />
             </div>
           `
         } else {

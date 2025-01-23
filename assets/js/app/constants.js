@@ -58,3 +58,15 @@ const DECKDLE_DEFAULTS = {
   },
   settings: DECKDLE_DEFAULT_SETTINGS,
 }
+
+const DECKDLE_SCORE_TO_BIRD = {
+  1: 'Birdie',
+  2: 'Eagle',
+  3: 'Albatross',
+  4: 'Condor',
+  5: 'Ostrich',
+  6: 'Phoenix',
+  7: 'Robin',
+  8: 'Swan',
+  9: 'Roc',
+}
