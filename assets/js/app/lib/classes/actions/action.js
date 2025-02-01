@@ -5,4 +5,8 @@ class Action {
   constructor(type) {
     this.type = type
   }
+
+  show = () => {
+    return this.constructor.name.toString()
+  }
 }
