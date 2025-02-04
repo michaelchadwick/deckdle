@@ -12,7 +12,7 @@ Deckdle._increaseCombo = () => {
 
   Deckdle.ui._updateComboCounter()
 
-  Deckdle._saveGame()
+  Deckdle._saveGame('_increaseCombo')
 }
 
 Deckdle._resetCombo = () => {

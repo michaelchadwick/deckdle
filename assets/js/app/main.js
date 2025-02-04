@@ -93,7 +93,7 @@ Deckdle._createNewSetup = async (gameMode, qsId = null) => {
     puzzle
   )
 
-  Deckdle._saveGame(gameMode, '_createNewSetup')
+  Deckdle._saveGame('_createNewSetup', gameMode)
 
   // fill UI with beautiful cards
   Deckdle.ui._emptyPlayingField()
@@ -237,7 +237,7 @@ Deckdle._checkWinState = () => {
   }
 
   if (gameState != 'GAME_OVER_REPLAY') {
-    Deckdle._saveGame(Deckdle.__getGameMode(), 'checkWinState')
+    Deckdle._saveGame('_checkWinState')
   }
 }
 

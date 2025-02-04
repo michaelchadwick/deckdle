@@ -74,7 +74,7 @@ class Stock {
 
     Deckdle.__addAction(new StockAction())
     Deckdle.__setState('lastPlayedTime', new Date().getTime())
-    Deckdle._saveGame()
+    Deckdle._saveGame('Stock.moveCardToBase')
 
     // updates DOM
     Deckdle.ui._removeCardFromStock()
@@ -118,7 +118,7 @@ Deckdle._moveCardFromStockToBase = () => {
 
   Deckdle.__addAction(new StockAction())
   Deckdle.__setState('lastPlayedTime', new Date().getTime())
-  Deckdle._saveGame()
+  Deckdle._saveGame('_moveCardFromStockToBase')
 
   // updates DOM
   Deckdle.ui._removeCardFromStock()

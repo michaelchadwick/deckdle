@@ -248,7 +248,7 @@ class Tableau {
     Deckdle.dom.input.btnUndoMove.disabled = false
 
     Deckdle.__setState('tableau', tableau)
-    Deckdle._saveGame()
+    Deckdle._saveGame('Tableau.removeCard')
   }
 
   // Code Model
@@ -285,7 +285,7 @@ class Tableau {
 
       Deckdle.__addAction(new UndoAction())
       Deckdle.__setState('tableau', tableauCards)
-      Deckdle._saveGame()
+      Deckdle._saveGame('Tableau.undoLastMove')
     }
   }
 
@@ -315,7 +315,7 @@ class Tableau {
 
           Deckdle.__addAction(new TableauAction(colId.substring(colId.length - 1), rowId), tableau)
           Deckdle.__setState('base', base)
-          Deckdle._saveGame()
+          Deckdle._saveGame('Tableau.onClick')
 
           Deckdle._checkWinState()
         } else {
@@ -341,7 +341,6 @@ Deckdle._getTableauCardAtPos = (col, row) => {
   }
 
   const tableau = Deckdle.__getState()['tableau']
-  console.log('tableau', tableau)
 
   return tableau[col][row]
 }
@@ -440,7 +439,7 @@ Deckdle._removeCardFromTableau = (card) => {
   Deckdle.dom.input.btnUndoMove.disabled = false
 
   Deckdle.__setState('tableau', tableau)
-  Deckdle._saveGame()
+  Deckdle._saveGame('_removeCardFromTableau')
 }
 
 // undo last move from tableau to base
@@ -457,7 +456,7 @@ Deckdle._undoLastTableauMove = () => {
 
     Deckdle.__addAction(new UndoAction())
     Deckdle.__setState('tableau', tableau)
-    Deckdle._saveGame()
+    Deckdle._saveGame('_undoLastTableauMove')
   }
 }
 
@@ -487,7 +486,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
 
         Deckdle.__addAction(new TableauAction(colId.substring(colId.length - 1), rowId), tableau)
         Deckdle.__setState('base', base)
-        Deckdle._saveGame()
+        Deckdle._saveGame('_onTableauClick')
 
         Deckdle._checkWinState()
       } else {

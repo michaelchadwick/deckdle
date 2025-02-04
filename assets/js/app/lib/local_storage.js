@@ -118,7 +118,7 @@ Deckdle._loadGame = async (switching = false) => {
 
             Deckdle.__setState('gameState', 'IN_PROGRESS', 'daily')
 
-            Deckdle._saveGame('daily', '_loadGame(daily time elapsed)')
+            Deckdle._saveGame('_loadGame(daily time elapsed)', 'daily')
 
             dailyCreateOrLoad = 'create'
           }
@@ -220,7 +220,7 @@ Deckdle._loadGame = async (switching = false) => {
   }
 }
 // save state from code model -> LS
-Deckdle._saveGame = (lsType = Deckdle.__getGameMode(), src = 'unknown') => {
+Deckdle._saveGame = (src = 'unknown', lsType = Deckdle.__getGameMode()) => {
   if (Deckdle.__getState().gameState != 'GAME_OVER_REPLAY') {
     switch (lsType) {
       case 'daily': {
@@ -616,7 +616,7 @@ Deckdle._changeSetting = async (setting, value) => {
     }
   }
 
-  Deckdle._saveGame('settings', '_changeSetting')
+  Deckdle._saveGame('_changeSetting')
 
   // Deckdle._logStatus(`[CHANGED] setting(${setting}, ${value})`)
 }
