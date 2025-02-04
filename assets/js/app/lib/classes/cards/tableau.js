@@ -1,80 +1,228 @@
 /* functions for tableau */
-/* global Deckdle, Card, TableauAction, UndoAction */
+/* global Deckdle, Card, TableauAction, UndoAction, DECKDLE_GOLF_COL_MAX, DECKDLE_GOLF_ROW_MAX */
 /* eslint-disable no-unused-vars */
 
 // TODO
 class Tableau {
-  constructor() {}
+  constructor(cards, type = 'golf') {
+    this.type = type
+    this.cards = {}
+    this.lastMove = null
 
-  count = (cards = null) => {
-    let tableau = null
-
-    if (cards) {
-      tableau = cards
-    } else {
-      tableau = Deckdle.__getState()['tableau']
-    }
-
-    let cardCount = 0
-
-    Object.keys(tableau).forEach((col) => {
-      const activeColCards = tableau[col].filter((card) => card.status == 1)
-
-      cardCount += activeColCards.length
-    })
-
-    return cardCount
-  }
-
-  isEmpty = () => {
-    return this.count() == 0
-  }
-
-  hasValidCard = (type = 'golf') => {
-    let hasValid = false
-    const tableau = Deckdle.__getState()['tableau']
-
-    switch (type) {
+    switch (this.type) {
       case 'golf':
       default: {
-        Object.keys(tableau).forEach((col) => {
-          if (tableau[col].filter((card) => card.status == 1).length) {
-            const row = tableau[col].filter((card) => card.status == 1).length - 1
+        for (let colId = 0; colId < DECKDLE_GOLF_COL_MAX; colId++) {
+          this.cards[colId] = []
 
-            if (this.isValidCard(tableau[col][row])) {
-              hasValid = true
+          for (let cardId = 0; cardId < DECKDLE_GOLF_ROW_MAX; cardId++) {
+            let cardToAdd = null
+
+            if (Deckdle._valType(cards) == 'Deck') {
+              cardToAdd = cards.removeTop()
+            } else {
+              const srcCard = cards.cards[colId][cardId]
+
+              cardToAdd = new Card(srcCard.suit, srcCard.rank, srcCard.status)
             }
+
+            this.cards[colId][cardId] = cardToAdd
           }
-        })
+        }
+
+        break
       }
     }
-
-    return hasValid
   }
 
-  isValidCard = (card, type = 'golf') => {
+  size = (type = 'active') => {
     switch (type) {
+      case 'all': {
+        return Object.keys(this.cards).map((col) =>
+          this.cards[col].reduce((acc, curVal) => acc + curVal, 0)
+        )
+      }
+
+      case 'removed': {
+        return Object.keys(this.cards)
+          .map((col) => this.cards[col].filter((card) => !card.isActive).length)
+          .reduce((acc, curVal) => acc + curVal, 0)
+      }
+
+      case 'valid': {
+        return Object.keys(this.cards)
+          .map((col) => this.cards[col].filter((card) => card.isValid).length)
+          .reduce((acc, curVal) => acc + curVal, 0)
+      }
+
+      case 'active':
+      default: {
+        return Object.keys(this.cards)
+          .map((col) => this.cards[col].filter((card) => card.isActive).length)
+          .reduce((acc, curVal) => acc + curVal, 0)
+      }
+    }
+  }
+
+  getBottomCard = (col) => {
+    return this.cards[col][this.cards[col].filter((card) => card.isActive).length - 1]
+  }
+
+  getBottomCardRow = (col) => {
+    return this.cards[col].filter((card) => card.isActive).length - 1
+  }
+
+  getCardAtPos = (col, row) => {
+    if (col > DECKDLE_GOLF_COL_MAX || row > DECKDLE_GOLF_ROW_MAX) {
+      console.error(
+        chalk['red'](
+          `ERROR - Can't PLAY Tableau card: column (${col}) or row (${row}) out of bounds`
+        )
+      )
+
+      return false
+    }
+
+    return this.cards[col][row]
+  }
+
+  getPosFromCard = (card) => {
+    let pos = null
+
+    Object.keys(this.cards).forEach((col) => {
+      Object.keys(this.cards[col]).forEach((row) => {
+        const cardToCheck = this.cards[col][row]
+
+        if (cardToCheck.rank == card.rank && cardToCheck.suit == card.suit) {
+          pos = { col, row }
+        }
+      })
+    })
+
+    return pos
+  }
+
+  getValidCards = () => {
+    const validCards = []
+    Object.keys(this.cards).map((col) => {
+      this.cards[col].map((card, row) => {
+        if (card.isValid) {
+          validCards.push({ card, col, row })
+        }
+      })
+    })
+    return validCards
+  }
+
+  // choose the column with the largest combo
+  getBestCol = (cols) => {
+    const scores = []
+
+    cols.forEach((col) => {
+      if (!scores[col]) {
+        scores.push({ id: col, score: 0 })
+      }
+
+      // if column only has one card, it gets one point
+      if (this.cards[col].length == 1) {
+        scores[col].score += 1
+      }
+      // otherwise, go through each card from the bottom
+      // and count up how many combos there are (|j - (j - 1)| == 1)
+      else {
+        let j = this.cards[col].length - 1
+        let noFirstCombo = false
+
+        while (j > 0 && !noFirstCombo) {
+          const cardFloor = parseInt(this.cards[col][j].rank)
+          const cardAbove = parseInt(this.cards[col][j - 1].rank)
+
+          if (Math.abs(cardFloor - cardAbove) == 1) {
+            scores[col].score += 1
+            j -= 1
+          } else {
+            noFirstCombo = true
+          }
+        }
+      }
+    })
+
+    return scores.sort((a, b) => a.score - b.score)[0].id
+  }
+
+  // choose a random column from a list of valid columns
+  getRandCol = (cols) => {
+    return Math.floor(Math.random() * cols.length)
+  }
+
+  hasValidMove = () => {
+    return this.size('valid') > 0
+  }
+
+  isValidCard = (card, base) => {
+    switch (this.type) {
       case 'golf':
       default: {
-        const base = Deckdle.__getState()['base']
-
-        if (!base.length) {
+        // if base is empty, nothing to compare to
+        if (base.isEmpty()) {
           return false
         }
 
-        const baseCard = base[base.length - 1]
+        // if card itself is not Active, return
+        if (!card.isActive) {
+          return false
+        }
+
+        // if card not bottom of column of active cards, return
+        const pos = this.getPosFromCard(card)
+
+        if (pos) {
+          const activeCards = this.cards[pos.col].filter((card) => card.isActive)
+          const bottomCard = activeCards[activeCards.length - 1]
+
+          if (bottomCard) {
+            if (!bottomCard.matches(card)) {
+              // card not the bottom of column of active cards
+              return false
+            }
+          } else {
+            // column has no more cards
+            return false
+          }
+        } else {
+          // position of card is not valid
+          return false
+        }
+
+        // check if base card can be played on
+        const baseCard = base.topCard()
         const rankAbove = parseInt(baseCard.rank) + 1 == 15 ? 2 : parseInt(baseCard.rank) + 1
         const rankBelow = parseInt(baseCard.rank) - 1 == 1 ? 14 : parseInt(baseCard.rank) - 1
 
-        if (parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow) {
-          return true
+        return parseInt(card.rank) == rankAbove || parseInt(card.rank) == rankBelow
+      }
+    }
+  }
+
+  playCard = (col, row, base) => {
+    switch (this.type) {
+      case 'golf':
+      default: {
+        const potentialCard = this.cards[col][row]
+
+        if (this.isValidCard(potentialCard, base)) {
+          return this.#removeCard(potentialCard)
         } else {
-          return false
+          console.error(
+            `ERROR: Tableau card can't be played: [${col}, ${row}] is an invalid position`
+          )
+          return null
         }
       }
     }
   }
 
+  // GUI
   removeCard = (card) => {
     const tableau = Deckdle.__getState()['tableau']
 
@@ -88,6 +236,8 @@ class Tableau {
           bottomCard.row = parseInt(card.dataset.row)
           bottomCard.col = parseInt(col)
 
+          // tableau.lastMove = bottomCard
+          // Deckdle.__setState('tableau', tableau)
           Deckdle._lastTableauMove = bottomCard
         }
       }
@@ -101,9 +251,33 @@ class Tableau {
     Deckdle._saveGame()
   }
 
+  // Code Model
+  #removeCard = (card) => {
+    let cardToRemove = null
+
+    Object.keys(this.cards).forEach((col) => {
+      const activeCards = this.cards[col].filter((card) => card.isActive)
+      const bottomCard = activeCards[activeCards.length - 1]
+
+      if (bottomCard) {
+        if (bottomCard.matches(card)) {
+          this.cards[col][activeCards.length - 1].isActive = false
+
+          cardToRemove = bottomCard
+        } else {
+          return null
+        }
+      } else {
+        return null
+      }
+    })
+
+    return cardToRemove
+  }
+
   undoLastMove = () => {
-    if (Deckdle._lastTableauMove) {
-      const card = Deckdle._lastTableauMove
+    if (this.lastMove) {
+      const card = this.lastMove
       const tableauCards = Deckdle.__getState()['tableau']
 
       tableauCards[card.col][card.row].status = 1
@@ -240,6 +414,8 @@ Deckdle._removeCardFromTableau = (card) => {
         bottomCard.row = parseInt(card.dataset.row)
         bottomCard.col = parseInt(col)
 
+        // tableau.lastMove = bottomCard
+        // Deckdle.__setState('tableau', tableau)
         Deckdle._lastTableauMove = bottomCard
       }
     }
@@ -255,15 +431,18 @@ Deckdle._removeCardFromTableau = (card) => {
 
 // undo last move from tableau to base
 Deckdle._undoLastTableauMove = () => {
-  if (Deckdle._lastTableauMove) {
-    const card = Deckdle._lastTableauMove
-    const tableauCards = Deckdle.__getState()['tableau']
+  const tableau = Deckdle.__getState()['tableau']
 
-    tableauCards[card.col][card.row].status = 1
+  // if (tableauCards.lastMove) {
+  if (Deckdle._lastTableauMove) {
+    // const card = tableau.lastMove
+    const card = Deckdle._lastTableauMove
+
+    tableau[card.col][card.row].status = 1
     Deckdle._removeCardFromBase(card)
 
     Deckdle.__addAction(new UndoAction())
-    Deckdle.__setState('tableau', tableauCards)
+    Deckdle.__setState('tableau', tableau)
     Deckdle._saveGame()
   }
 }
