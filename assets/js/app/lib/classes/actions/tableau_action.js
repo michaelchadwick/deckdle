@@ -3,10 +3,15 @@
 /* eslint-disable no-unused-vars */
 
 class TableauAction extends Action {
-  constructor(colId, rowId) {
+  constructor(col, row, tableau) {
     super()
     this.type = 'tableau'
-    this.colId = parseInt(colId)
-    this.rowId = parseInt(rowId)
+    this.card = tableau.getCardAtPos(col, row)
+    this.colId = parseInt(col)
+    this.rowId = parseInt(row)
+  }
+
+  show = () => {
+    return `${this.constructor.name.toString()}(${this.colId}: ${this.card.show()})`
   }
 }
