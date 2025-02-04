@@ -77,9 +77,7 @@ class Tableau {
   getCardAtPos = (col, row) => {
     if (col > DECKDLE_GOLF_COL_MAX || row > DECKDLE_GOLF_ROW_MAX) {
       console.error(
-        chalk['red'](
-          `ERROR - Can't PLAY Tableau card: column (${col}) or row (${row}) out of bounds`
-        )
+        `ERROR - Can't PLAY Tableau card: column (${col}) or row (${row}) out of bounds`
       )
 
       return false
