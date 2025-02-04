@@ -5,32 +5,33 @@ class Card {
   constructor(suit = 3, rank = 14, status = 1) {
     this.suit = suit
     this.rank = rank
-    this.status = status
+    this.isActive = true // exists in tableau (false == removed because taken)
   }
 
-  show = (type) => {
+  show = (type = null) => {
     let display
 
     switch (type) {
-      case 'short':
+      case 'long':
         display = {
-          rank: this.rankDisplay(this.rank),
-          suit: this.suitDisplay(this.suit, (type = 'symbol')),
-        }
-
-        return `${display.rank}${display.suit}`
-
-      default:
-        display = {
-          rank: this.rankDisplay(this.rank),
-          suit: this.suitDisplay(this.suit),
+          rank: this.#rankDisplay(this.rank),
+          suit: this.#suitDisplay(this.suit),
         }
 
         return `${display.rank} of ${display.suit}`
+
+      case 'short':
+      default:
+        display = {
+          rank: this.#rankDisplay(this.rank),
+          suit: this.#suitDisplay(this.suit, (type = 'symbol')),
+        }
+
+        return `${display.rank}${display.suit}`
     }
   }
 
-  rankDisplay = (rank) => {
+  #rankDisplay = (rank) => {
     switch (parseInt(rank)) {
       case 2:
         return 2
@@ -61,7 +62,7 @@ class Card {
     }
   }
 
-  suitDisplay = (suit, type = 'symbol') => {
+  #suitDisplay = (suit, type = 'symbol') => {
     if (type == 'symbol') {
       switch (parseInt(suit)) {
         case 0:

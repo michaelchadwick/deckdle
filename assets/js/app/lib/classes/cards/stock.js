@@ -1,21 +1,64 @@
 /* functions for stock */
-/* global Deckdle, StockAction */
+/* global Deckdle, Card, StockAction */
 /* eslint-disable no-unused-vars */
 
 // TODO
 class Stock {
-  constructor() {}
+  constructor(cards, type = 'golf') {
+    this.type = type
+    this.cards = []
 
-  count = () => {
+    switch (this.type) {
+      case 'golf':
+      default: {
+        if (Deckdle._valType(cards) == 'Deck') {
+          while (cards.size()) {
+            this.cards.push(cards.removeTop())
+          }
+        } else {
+          cards.forEach((card) => {
+            this.addCard(card)
+          })
+        }
+      }
+    }
+  }
+
+  size = () => {
+    // return this.cards.length
     return Deckdle.__getState()['stock'].length
   }
 
   isEmpty = () => {
+    // return this.cards.length == 0
+
     if (!Deckdle._stockCount()) {
       Deckdle.dom.interactive.stock.appendChild(Deckdle.ui._createEmptyCard())
 
       Deckdle._checkWinState()
     }
+  }
+
+  list = () => {
+    let display = ''
+
+    this.cards.forEach((card) => {
+      display += card.show()
+    })
+
+    return display
+  }
+
+  addCard = (card) => {
+    this.cards.push(new Card(card.suit, card.rank))
+  }
+
+  removeCard = () => {
+    return this.cards.pop()
+  }
+
+  topCard = () => {
+    return this.cards[this.cards.length - 1]
   }
 
   moveCardToBase = () => {

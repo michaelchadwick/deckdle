@@ -1,16 +1,59 @@
 /* functions for base */
-/* global Deckdle */
+/* global Deckdle, Card */
 /* eslint-disable no-unused-vars */
 
-// TODO
+// two options for creation:
+// 1. Card array to re-create existing Base
+// 2. Null for empty Base
 class Base {
-  constructor() {}
+  constructor(cards = null, type = 'golf') {
+    this.type = type
+    this.cards = []
+
+    switch (this.type) {
+      case 'golf':
+      default: {
+        if (cards) {
+          cards.forEach((card) => {
+            this.addCard(card)
+          })
+        }
+      }
+    }
+  }
+
+  size = () => {
+    return this.cards.length
+  }
 
   isEmpty = () => {
+    // return this.cards.length == 0
     return Deckdle.__getState()['base'].length == 0
   }
 
-  removeCard = (card) => {
+  list = () => {
+    let display = ''
+
+    this.cards.forEach((card) => {
+      display += card.show()
+    })
+
+    return display
+  }
+
+  addCard = (card) => {
+    this.cards.push(new Card(card.suit, card.rank))
+  }
+
+  removeCard = () => {
+    return this.cards.pop()
+  }
+
+  topCard = () => {
+    return this.cards[this.cards.length - 1]
+  }
+
+  undoLastMove = (card) => {
     const base = Deckdle.__getState()['base']
 
     base.pop()
