@@ -309,12 +309,13 @@ class Tableau {
           }
 
           const base = Deckdle.__getState()['base']
+          const tableau = Deckdle.__getState()['tableau']
 
           base.push(new Card(cardRemoved.dataset.suit, cardRemoved.dataset.rank))
 
           Deckdle.ui._moveCardToBase('tableau')
 
-          Deckdle.__addAction(new TableauAction(colId.substring(colId.length - 1), rowId))
+          Deckdle.__addAction(new TableauAction(colId.substring(colId.length - 1), rowId), tableau)
           Deckdle.__setState('base', base)
           Deckdle._saveGame()
 
@@ -332,6 +333,19 @@ class Tableau {
       }
     }
   }
+}
+
+Deckdle._getTableauCardAtPos = (col, row) => {
+  if (col > DECKDLE_GOLF_COL_MAX || row > DECKDLE_GOLF_ROW_MAX) {
+    console.error(`ERROR - Can't PLAY Tableau card: column (${col}) or row (${row}) out of bounds`)
+
+    return false
+  }
+
+  const tableau = Deckdle.__getState()['tableau']
+  console.log('tableau', tableau)
+
+  return tableau[col][row]
 }
 
 Deckdle._tableauCount = (cards = null) => {
@@ -467,12 +481,13 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
         }
 
         const base = Deckdle.__getState()['base']
+        const tableau = Deckdle.__getState()['tableau']
 
         base.push(new Card(cardRemoved.dataset.suit, cardRemoved.dataset.rank))
 
         Deckdle.ui._moveCardToBase('tableau')
 
-        Deckdle.__addAction(new TableauAction(colId.substring(colId.length - 1), rowId))
+        Deckdle.__addAction(new TableauAction(colId.substring(colId.length - 1), rowId), tableau)
         Deckdle.__setState('base', base)
         Deckdle._saveGame()
 

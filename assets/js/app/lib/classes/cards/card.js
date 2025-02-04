@@ -2,9 +2,10 @@
 /* eslint-disable no-unused-vars */
 
 class Card {
-  constructor(suit = 3, rank = 1) {
+  constructor(suit = 3, rank = 1, status = 1) {
     this.suit = suit
     this.rank = rank
+    this.status = status
     this.isActive = true // exists in tableau (false == removed because taken)
   }
 
@@ -14,8 +15,8 @@ class Card {
     switch (type) {
       case 'long':
         display = {
-          rank: this.#rankDisplay(this.rank),
-          suit: this.#suitDisplay(this.suit),
+          rank: this.rankDisplay(this.rank),
+          suit: this.suitDisplay(this.suit),
         }
 
         return `${display.rank} of ${display.suit}`
@@ -23,15 +24,15 @@ class Card {
       case 'short':
       default:
         display = {
-          rank: this.#rankDisplay(this.rank),
-          suit: this.#suitDisplay(this.suit, (type = 'symbol')),
+          rank: this.rankDisplay(this.rank),
+          suit: this.suitDisplay(this.suit, (type = 'symbol')),
         }
 
         return `${display.rank}${display.suit}`
     }
   }
 
-  #rankDisplay = (rank) => {
+  rankDisplay = (rank) => {
     switch (parseInt(rank)) {
       case 2:
         return 2
@@ -62,7 +63,7 @@ class Card {
     }
   }
 
-  #suitDisplay = (suit, type = 'symbol') => {
+  suitDisplay = (suit, type = 'symbol') => {
     if (type == 'symbol') {
       switch (parseInt(suit)) {
         case 0:
