@@ -2,7 +2,9 @@
 /* global Deckdle, Card, TableauAction, UndoAction, DECKDLE_GOLF_COL_MAX, DECKDLE_GOLF_ROW_MAX */
 /* eslint-disable no-unused-vars */
 
-// TODO
+// two options for creation:
+// 1. Deck object to create fresh Tableau
+// 2. Card array that re-creates existing Tableau
 class Tableau {
   constructor(cards, type = 'golf') {
     this.type = type
