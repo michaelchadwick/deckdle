@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 
 class Card {
-  constructor(suit = 3, rank = 14, status = 1) {
+  constructor(suit = 3, rank = 1) {
     this.suit = suit
     this.rank = rank
     this.isActive = true // exists in tableau (false == removed because taken)
