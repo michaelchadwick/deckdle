@@ -125,7 +125,7 @@ class Tableau {
 
       // if column only has one card, it gets one point
       if (this.cards[col].length == 1) {
-        scores[col].score += 1
+        scores.filter((score) => score.id == col).score += 1
       }
       // otherwise, go through each card from the bottom
       // and count up how many combos there are (|j - (j - 1)| == 1)
@@ -136,9 +136,10 @@ class Tableau {
         while (j > 0 && !noFirstCombo) {
           const cardFloor = parseInt(this.cards[col][j].rank)
           const cardAbove = parseInt(this.cards[col][j - 1].rank)
+          const rankDiff = Math.abs(cardFloor - cardAbove)
 
-          if (Math.abs(cardFloor - cardAbove) == 1) {
-            scores[col].score += 1
+          if (rankDiff == 1) {
+            scores.filter((score) => score.id == col).score += 1
             j -= 1
           } else {
             noFirstCombo = true
