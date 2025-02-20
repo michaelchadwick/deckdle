@@ -6,7 +6,14 @@ Deckdle.ui = {}
 
 /* CREATION */
 
-Deckdle.ui._createCard = (card, cardType, classes = [], tabIndex = null, draggable = false) => {
+Deckdle.ui._createCard = (
+  card,
+  cardType,
+  classes = [],
+  tabIndex = null,
+  active = true,
+  draggable = false
+) => {
   const cardDiv = document.createElement('div')
 
   if (classes.length) {
@@ -16,11 +23,10 @@ Deckdle.ui._createCard = (card, cardType, classes = [], tabIndex = null, draggab
     cardDiv.classList.add('card')
   }
 
-  card.disabled = false
   cardDiv.draggable = draggable
   cardDiv.dataset.rank = card.rank
   cardDiv.dataset.suit = card.suit
-  cardDiv.dataset.status = card.status
+  cardDiv.dataset.active = active
   cardDiv.dataset.type = cardType
 
   if (tabIndex) {
@@ -80,7 +86,7 @@ Deckdle.ui._addCardToTableau = (card, colId) => {
   const row = document.getElementById(`col${colId}`).children.length
   card.dataset.row = row
 
-  if (card.dataset.status == 0) {
+  if (!card.dataset.active) {
     card.classList.add('removed')
     card.classList.remove('available')
   }
@@ -97,7 +103,7 @@ Deckdle.ui._removeCardFromTableau = (colId) => {
     Deckdle._animateCSS(elem, 'fadeOutDown').then(() => {
       card.classList.add('removed')
       card.classList.remove('available')
-      card.dataset.status = 0
+      card.dataset.active = false
     })
 
     return card
@@ -177,7 +183,7 @@ Deckdle.ui._undoBaseMove = (card) => {
     .classList.add('available')
   Deckdle.dom.interactive.tableau.querySelector(
     `#col${card.col} .card[data-row="${card.row}"]`
-  ).dataset.status = 1
+  ).dataset.active = true
 
   // disable button until next card is moved
   Deckdle.dom.input.btnUndoMove.disabled = true
@@ -208,11 +214,12 @@ Deckdle.ui._dealCards = (animate = false) => {
   // fill tableau UI with cards
   const tableauCards = Deckdle.__getState()['tableau']
   let colId = 0
+
   Object.keys(tableauCards).forEach((col) => {
     Object.values(tableauCards[col]).forEach((card, index) => {
-      const lastValidCardIndex = tableauCards[col].filter((card) => card.status == 1).length - 1
+      const lastValidCardIndex = tableauCards[col].filter((card) => card.active).length - 1
       const cardClasses = index == lastValidCardIndex ? ['available'] : []
-      const newCard = Deckdle.ui._createCard(card, 'tableau', cardClasses, index ?? 0)
+      const newCard = Deckdle.ui._createCard(card, 'tableau', cardClasses, index ?? 0, card.active)
 
       Deckdle.ui._addCardToTableau(newCard, colId)
 

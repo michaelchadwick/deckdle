@@ -26,9 +26,11 @@ class Base {
     return this.cards.length
   }
 
+  // Deckdle._isBaseEmpty = () => {
+  //   return Deckdle.__getState()['base'].length == 0
+  // }
   isEmpty = () => {
-    // return this.cards.length == 0
-    return Deckdle.__getState()['base'].length == 0
+    return this.cards.length == 0
   }
 
   list = () => {
@@ -53,6 +55,7 @@ class Base {
     return this.cards[this.cards.length - 1]
   }
 
+  // TODO: GUI
   undoLastMove = (card) => {
     const base = Deckdle.__getState()['base']
 

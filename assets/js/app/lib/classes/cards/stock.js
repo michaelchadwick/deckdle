@@ -24,19 +24,22 @@ class Stock {
     }
   }
 
+  // Deckdle._stockCount = () => {
+  //   return Deckdle.__getState()['stock'].length
+  // }
   size = () => {
-    // return this.cards.length
-    return Deckdle.__getState()['stock'].length
+    return this.cards.length
   }
 
+  // Deckdle._checkForEmptyStock = () => {
+  //   if (!Deckdle._stockCount()) {
+  //     Deckdle.dom.interactive.stock.appendChild(Deckdle.ui._createEmptyCard())
+
+  //     Deckdle._checkWinState()
+  //   }
+  // }
   isEmpty = () => {
-    // return this.cards.length == 0
-
-    if (!Deckdle._stockCount()) {
-      Deckdle.dom.interactive.stock.appendChild(Deckdle.ui._createEmptyCard())
-
-      Deckdle._checkWinState()
-    }
+    return this.cards.length == 0
   }
 
   list = () => {
@@ -61,6 +64,7 @@ class Stock {
     return this.cards[this.cards.length - 1]
   }
 
+  // TODO: GUI
   moveCardToBase = () => {
     const base = Deckdle.__getState()['base']
     const stock = Deckdle.__getState()['stock']
@@ -84,6 +88,7 @@ class Stock {
     this.isEmpty()
   }
 
+  // TODO: GUI
   onClick = () => {
     if (this._stockCount()) {
       this.moveCardToBase()

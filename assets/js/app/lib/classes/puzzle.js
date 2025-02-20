@@ -56,7 +56,7 @@ class Puzzle {
             if (source) {
               const srcCard = source[colId][cardId]
 
-              cardToAdd = new Card(srcCard.suit, srcCard.rank, srcCard.status)
+              cardToAdd = new Card(srcCard.suit, srcCard.rank, srcCard.active)
             } else {
               cardToAdd = this.deck.removeTop()
             }

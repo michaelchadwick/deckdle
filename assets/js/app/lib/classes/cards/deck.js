@@ -6,7 +6,7 @@ class Deck {
   constructor(initialShuffle = false, setupId = null) {
     this.cards = []
 
-    this.#fillDeck()
+    this.#fill()
 
     if (initialShuffle && setupId) {
       this.shuffle(setupId)
@@ -17,11 +17,15 @@ class Deck {
     return this.cards.length
   }
 
-  list = () => {
+  isEmpty = () => {
+    return this.size() <= 0
+  }
+
+  list = (verbose = false) => {
     let display = ''
 
     this.cards.forEach((card) => {
-      display += card.show('short')
+      display += card.show(verbose ? 'long' : 'short')
     })
 
     console.log(display)
@@ -50,11 +54,7 @@ class Deck {
   }
 
   removeTop = () => {
-    if (this.size()) {
-      return this.cards.shift()
-    } else {
-      return null
-    }
+    return this.size() ? this.cards.shift() : null
   }
 
   shuffle = (seed = null) => {
@@ -110,7 +110,7 @@ class Deck {
     return hasValid
   }
 
-  #fillDeck = () => {
+  #fill = () => {
     const suitIdMin = 0
     const suitIdMax = 4
     const rankIdMin = 2

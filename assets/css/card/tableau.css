@@ -61,7 +61,7 @@
   cursor: not-allowed;
 }
 #tableau .col .card.removed,
-#tableau .col .card[data-status="0"] {
+#tableau .col .card[data-active="false"] {
   opacity: 0;
   z-index: -9999 !important;
 }

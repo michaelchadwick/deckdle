@@ -2,11 +2,10 @@
 /* eslint-disable no-unused-vars */
 
 class Card {
-  constructor(suit = 3, rank = 1, status = 1) {
+  constructor(suit = 3, rank = 1, active = true) {
     this.suit = suit
     this.rank = rank
-    this.status = status
-    this.isActive = true // exists in tableau (false == removed because taken)
+    this.active = active // exists in tableau (false == removed because taken)
   }
 
   show = (type = null) => {
@@ -30,6 +29,10 @@ class Card {
 
         return `${display.rank}${display.suit}`
     }
+  }
+
+  matches = (card) => {
+    return this.rank == card.rank && this.suit == card.suit
   }
 
   rankDisplay = (rank) => {

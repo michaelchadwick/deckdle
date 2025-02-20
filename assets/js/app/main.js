@@ -296,7 +296,7 @@ Deckdle._shareResults = async () => {
 }
 
 Deckdle._replayGame = async () => {
-  console.log('replaying game')
+  Deckdle._logStatus('replaying game')
 
   if (Deckdle.myModal) {
     Deckdle.myModal._destroyModal()
