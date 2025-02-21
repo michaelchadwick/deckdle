@@ -563,5 +563,22 @@ Deckdle.modalOpen = async (type) => {
 
       Deckdle.myModalTemp = new Modal('temp', null, 'Local Storage has been cleared', null, null)
       break
+
+    case 'bot-score': {
+      if (Deckdle.myModal) {
+        Deckdle.myModal._destroyModal()
+      }
+
+      const data = await Deckdle._getBotScore()
+
+      Deckdle.myModal = new Modal(
+        'perm-small',
+        `Bot Score for ${data.lastModified}`,
+        data.score,
+        null,
+        null
+      )
+      break
+    }
   }
 }

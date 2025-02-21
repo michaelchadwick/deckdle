@@ -81,6 +81,7 @@
 .modal-title.debug {
   background-color: var(--debug-color);
 }
+
 .modal-window.game-over .modal-title {
   height: 48px;
 }
@@ -96,6 +97,11 @@
 }
 .modal-window.game-over-lose .modal-text .score {
   color: var(--window-lose2);
+}
+
+.modal-window.perm-small {
+  height: 100px;
+  width: 250px;
 }
 
 .modal-close {
@@ -190,6 +196,9 @@
 }
 .modal-text dl dl {
   margin-left: 1em;
+}
+.modal-window.perm-small .modal-text {
+  font-size: 2rem;
 }
 
 .modal-button {

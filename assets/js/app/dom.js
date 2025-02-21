@@ -45,6 +45,7 @@ Deckdle.dom.interactive.debug = {
   btnWinAnimation: document.getElementById('button-win-animation'),
   btnLoseAnimation: document.getElementById('button-lose-animation'),
   btnDebugGameOver: document.getElementById('button-debug-gameover'),
+  btnGetBotScore: document.getElementById('button-get-bot-score'),
 }
 // DOM > keyboard buttons
 Deckdle.dom.input = {

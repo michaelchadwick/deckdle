@@ -279,3 +279,17 @@ Deckdle._getNebyooApps = async () => {
     console.error('Failed to load NebyooApps')
   }
 }
+
+Deckdle._getBotScore = async () => {
+  const dailyBatchPath = '/_debug/text/daily_batch.txt'
+
+  const response = await fetch(dailyBatchPath)
+  const score = await response.text()
+  const lastModified = new Date(response.headers.get('Date')).toISOString().split('T')[0]
+
+  if (score) {
+    return { lastModified, score }
+  } else {
+    return { lastModified: null, score: 'N/A' }
+  }
+}

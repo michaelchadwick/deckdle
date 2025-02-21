@@ -102,6 +102,10 @@ class Modal {
       msgWindow.classList.add('debug')
     }
 
+    if (modalType == 'perm-small') {
+      msgWindow.classList.add('perm-small')
+    }
+
     this.modal.appendChild(msgWindow)
 
     // if not a temporary modal, add a title and close button
@@ -122,7 +126,12 @@ class Modal {
       title.appendChild(titleText)
 
       // Close
-      if (modalType == 'perm' || modalType == 'perm-debug' || modalType == 'end-state') {
+      if (
+        modalType == 'perm' ||
+        modalType == 'perm-debug' ||
+        modalType == 'perm-small' ||
+        modalType == 'end-state'
+      ) {
         this.closeButton = document.createElement('button')
         this.closeButton.type = 'button'
         this.closeButton.innerHTML = '&times;'

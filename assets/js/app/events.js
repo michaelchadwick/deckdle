@@ -117,6 +117,11 @@ Deckdle._attachEventListeners = () => {
       Deckdle.dom.interactive.debug.btnDebugGameOver.addEventListener('click', () => {
         Deckdle._debugGameOver()
       })
+
+      // 🤖 display bot batch score for today's puzzle
+      Deckdle.dom.interactive.debug.btnGetBotScore.addEventListener('click', () => {
+        Deckdle.modalOpen('bot-score')
+      })
     }
   }
 
