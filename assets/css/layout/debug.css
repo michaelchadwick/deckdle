@@ -7,7 +7,7 @@ header #debug-buttons button {
 header #debug-buttons .ddmenu {
   align-items: center;
   display: flex;
-  z-index: 10;
+  z-index: 11;
 }
 header #debug-buttons .ddmenu .ddgroup {
   border: 1px solid transparent;
