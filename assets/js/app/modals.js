@@ -73,6 +73,7 @@ Deckdle.modalOpen = async (type) => {
       const finishedGamesFree = Deckdle._getFinishedGameCount('free')
       const bestComboFree = Deckdle._getBestCombo('free')
       const bestScoreFree = Deckdle._getBestScore('free')
+      const botScoreDaily = await Deckdle._getBotScore()
 
       if (Deckdle.myModal) {
         Deckdle.myModal._destroyModal()
@@ -85,7 +86,9 @@ Deckdle.modalOpen = async (type) => {
       // daily stats
       modalText += `
           <div class="statistic-header">Daily</div>
-          <div class="statistic-setupid">${Deckdle.__getState('daily')['setupId']}</div>
+          <div class="statistic-setupid">
+            ${Deckdle.__getState('daily')['setupId']} <i class="fa-solid fa-robot" title="${botScoreDaily.score.trim()}"></i>
+          </div>
           <div class="statistic-subheader">
             (<small>New puzzle available at 12am PST</small>)
           </div>
@@ -323,6 +326,8 @@ Deckdle.modalOpen = async (type) => {
       break
 
     case 'game-over': {
+      const botScoreDaily = await Deckdle._getBotScore()
+
       if (Deckdle.myModal) {
         Deckdle.myModal._destroyModal()
       }
@@ -425,6 +430,9 @@ Deckdle.modalOpen = async (type) => {
         modalText += `
           <div class="share">
             <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
+          </div>
+          <div>
+            <i class="fa-solid fa-robot" title="${botScoreDaily.score.trim()}"></i>
           </div>
         `
       }
