@@ -87,7 +87,7 @@ Deckdle.modalOpen = async (type) => {
       modalText += `
           <div class="statistic-header">Daily</div>
           <div class="statistic-setupid">
-            ${Deckdle.__getState('daily')['setupId']} <i class="fa-solid fa-robot" title="${botScoreDaily.score.trim()}"></i>
+            ${Deckdle.__getState('daily')['setupId']} <button class="fa-solid fa-robot icon tiny solo" title="${botScoreDaily.score.trim()}" onclick="Deckdle.modalOpen('bot-score')"></button>
           </div>
           <div class="statistic-subheader">
             (<small>New puzzle available at 12am PST</small>)
@@ -432,7 +432,7 @@ Deckdle.modalOpen = async (type) => {
             <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
           </div>
           <div>
-            <i class="fa-solid fa-robot" title="${botScoreDaily.score.trim()}"></i>
+            <button class="fa-solid fa-robot icon tiny solo" title="${botScoreDaily.score.trim()}" onclick="Deckdle.modalOpen('bot-score')"></button>
           </div>
         `
       }
@@ -573,16 +573,16 @@ Deckdle.modalOpen = async (type) => {
       break
 
     case 'bot-score': {
-      if (Deckdle.myModal) {
-        Deckdle.myModal._destroyModal()
+      if (Deckdle.myModalModal) {
+        Deckdle.myModalModal._destroyModal()
       }
 
-      const data = await Deckdle._getBotScore()
+      const botScoreDaily = await Deckdle._getBotScore()
 
-      Deckdle.myModal = new Modal(
+      Deckdle.myModalModal = new Modal(
         'perm-small',
-        `Bot Score for ${data.lastModified}`,
-        data.score,
+        `Bot Score for ${botScoreDaily.lastModified}`,
+        botScoreDaily.score,
         null,
         null
       )

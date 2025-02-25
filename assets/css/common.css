@@ -125,11 +125,17 @@ button.share {
 button.share i {
   margin-left: 6px;
 }
-button.share.tiny {
+button.tiny {
   font-size: 0.8em;
   height: 20px;
   margin-left: 1em;
   width: 75px;
+}
+button.solo {
+  font-size: 16px;
+  height: auto;
+  margin: 0;
+  width: auto;
 }
 button.game-over {
   margin-top: 10px;
