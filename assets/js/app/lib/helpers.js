@@ -135,8 +135,14 @@ Deckdle.__getGameType = () => {
 }
 
 Deckdle.__addAction = (action) => {
-  const actions = Deckdle.__getState().actions
-  actions.push(action)
+  let actions = Deckdle.__getState().actions
+
+  if (actions) {
+    actions.push(action)
+  } else {
+    actions = []
+  }
+
   Deckdle.__setState('actions', actions)
 }
 Deckdle.__getActionCount = (countUndos = false) => {
