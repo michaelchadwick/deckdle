@@ -21,7 +21,7 @@ Deckdle.modalOpen = async (type) => {
       }
 
       modalText = `
-        <p><strong>Deckdle</strong> is a daily solitaire card game. Currently, the only solitaire type is <code>golf</code>, but there are plans to add the classic <code>klondike</code>, <code>pyramid</code>, and <code>spider</code>.</p>
+        <p><strong>Deckdle</strong> is a daily solitaire card game. Currently, the only solitaire type is <code>golf</code>, but there are plans to add others.</p>
       `
 
       switch (gameType) {
@@ -29,7 +29,9 @@ Deckdle.modalOpen = async (type) => {
         default:
           modalText += `
             <h3 class="blamph">${gameType}</h3>
-            <p>Exhaust the tableau (the top grid of cards) onto your base (bottom-right stack) before your stock (bottom-left stack) runs out. You can move any unobscured card (just click/touch it) as long as its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current base card. Suit <strong>does not</strong> matter.</p>
+            <p>Exhaust the <span class="blamph">tableau</span> (the top grid of cards) onto your <span class="blamph">base</span> (bottom-right stack) before your <span class="blamph">stock</span> (bottom-left stack) runs out.</p>
+
+            <p>Move any unobscured card (just click/touch it) from the <span class="blamph">tableau</span> as long as its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current <span class="blamph">base</span> card. Suit <strong><em>does not</em></strong> matter. If no valid move is available, click/touch the <span class="blamph">stock</span> to get a new <span class="blamph">base</span> card.</p>
           `
           break
       }
@@ -38,12 +40,12 @@ Deckdle.modalOpen = async (type) => {
         <div class="flex">
           <div>
             <h4>Daily</h4>
-            <p>Come back every day (at 12 am PST) for a new <span class="blamph">${gameType}</span> solitaire tableau and stock!</p>
+            <p>New <span class="blamph">${gameType}</span> solitaire tableau and stock every day (at 12am PST)!</p>
           </div>
 
           <div>
             <h4>Free</h4>
-            <p>Play <span class="blamph">${gameType}</span> solitaire endlessly!
+            <p>New <span class="blamph">${gameType}</span> solitaire tableau and stock endlessly!
           </div>
         </div>
 
@@ -87,7 +89,9 @@ Deckdle.modalOpen = async (type) => {
       modalText += `
           <div class="statistic-header">Daily</div>
           <div class="statistic-setupid">
-            ${Deckdle.__getState('daily')['setupId']} <button class="fa-solid fa-robot icon tiny solo" title="${botScoreDaily.score.trim()}" onclick="Deckdle.modalOpen('bot-score')"></button>
+            ${
+              Deckdle.__getState('daily')['setupId']
+            } <button class="fa-solid fa-robot icon tiny solo" title="${botScoreDaily.score.trim()}" onclick="Deckdle.modalOpen('bot-score')"></button>
           </div>
           <div class="statistic-subheader">
             (<small>New puzzle available at 12am PST</small>)
