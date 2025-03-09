@@ -4,6 +4,7 @@
 
 Deckdle.modalOpen = async (type) => {
   let modalText
+  const comboMax = Deckdle.__getState()['comboMax']
   const gameMode = Deckdle.settings['gameMode']
   const gameState = Deckdle.__getState()['gameState']
   const gameType = Deckdle.__getState()['gameType']
@@ -393,11 +394,11 @@ Deckdle.modalOpen = async (type) => {
       `
       if (undoCount > 0) {
         modalText += `
-          <strong>${actionCount}</strong> moves (${actionCountWithUndos} counting undos)
+          Moves: <strong>${actionCount}</strong> (${actionCountWithUndos} counting undos), Best Combo: <strong>x${comboMax}</strong>
         `
       } else {
         modalText += `
-          <strong>${actionCount}</strong> moves
+          Moves: <strong>${actionCount}</strong>, Best Combo: <strong>x${comboMax}</strong>
         `
       }
       modalText += `
