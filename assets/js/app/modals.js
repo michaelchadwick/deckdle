@@ -89,11 +89,19 @@ Deckdle.modalOpen = async (type) => {
       // daily stats
       modalText += `
           <div class="statistic-header">Daily</div>
+      `
+
+      if (Deckdle.__getState('daily')['setupId']) {
+        modalText += `
           <div class="statistic-setupid">
             ${
               Deckdle.__getState('daily')['setupId']
             } <button class="fa-solid fa-robot icon tiny solo" title="${botScoreDaily.score.trim()}" onclick="Deckdle.modalOpen('bot-score')"></button>
           </div>
+        `
+      }
+
+      modalText += `
           <div class="statistic-subheader">
             (<small>New puzzle available at 12am PST</small>)
           </div>
@@ -117,7 +125,14 @@ Deckdle.modalOpen = async (type) => {
       // free stats
       modalText += `
           <div class="statistic-header">Free Play</div>
+      `
+      if (Deckdle.__getState('free')['setupId']) {
+        modalText += `
           <div class="statistic-setupid">${Deckdle.__getState('free')['setupId']}</div>
+        `
+      }
+
+      modalText += `
           <div class="statistics">
             <div class="statistic-container">
               <div class="statistic">${finishedGamesFree}</div>
