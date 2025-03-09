@@ -33,6 +33,13 @@
   display: grid;
   justify-items: center;
   opacity: 1;
+  width: 80px;
+}
+@media (min-width: 768px) {
+  #base,
+  #stock {
+    width: 90px;
+  }
 }
 
 #base .card,
