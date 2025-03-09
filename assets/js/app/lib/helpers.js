@@ -145,6 +145,9 @@ Deckdle.__addAction = (action) => {
 
   Deckdle.__setState('actions', actions)
 }
+Deckdle.__getActions = () => {
+  return Deckdle.__getState().actions
+}
 Deckdle.__getActionCount = (countUndos = false) => {
   if (countUndos) {
     return Deckdle.__getState().actions.length

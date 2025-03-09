@@ -110,7 +110,7 @@ Deckdle._checkForEmptyStock = () => {
   }
 }
 
-Deckdle._moveCardFromStockToBase = () => {
+Deckdle._moveCardFromStockToBase = (noMoveInPrevGame) => {
   const base = Deckdle.__getState()['base']
   const stock = Deckdle.__getState()['stock']
 
@@ -121,7 +121,9 @@ Deckdle._moveCardFromStockToBase = () => {
 
   Deckdle._resetCombo()
 
-  Deckdle.__addAction(new StockAction())
+  if (!noMoveInPrevGame) {
+    Deckdle.__addAction(new StockAction())
+  }
   Deckdle.__setState('lastPlayedTime', new Date().getTime())
   Deckdle._saveGame('_moveCardFromStockToBase')
 

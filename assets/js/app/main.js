@@ -100,7 +100,9 @@ Deckdle._createNewSetup = async (gameMode, qsId = null) => {
   Deckdle.ui._dealCards((animate = true))
 
   if (Deckdle._isBaseEmpty()) {
-    Deckdle._moveCardFromStockToBase()
+    const noMoveInPrevGame =
+      Deckdle.__getActionCount() == 1 && Deckdle.__getActions()[0].type == 'stock'
+    Deckdle._moveCardFromStockToBase(noMoveInPrevGame)
   }
 
   Deckdle.combo = 0
