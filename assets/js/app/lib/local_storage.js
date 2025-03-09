@@ -216,7 +216,9 @@ Deckdle._loadGame = async (switching = false) => {
   }
 
   if (Deckdle.settings.firstTime) {
-    Deckdle.modalOpen('start')
+    if (document.referrer.indexOf('omni.neb.host') < 0) {
+      Deckdle.modalOpen('start')
+    }
   }
 }
 // save state from code model -> LS
@@ -412,7 +414,9 @@ Deckdle._loadSettings = () => {
       }
     }
   } else {
-    Deckdle.modalOpen('start')
+    if (document.referrer.indexOf('omni.neb.host') < 0) {
+      Deckdle.modalOpen('start')
+    }
   }
 
   // set dom status
