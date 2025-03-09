@@ -179,7 +179,7 @@ Deckdle._confirmNewFree = async () => {
   Deckdle.myModal = new Modal(
     'confirm',
     'Create New Free Play Puzzle?',
-    'Are you <strong>sure</strong> you want to create a new free play puzzle?',
+    'Are you sure you want to create a new free play puzzle?',
     'Yes, please',
     'No, never mind'
   )
