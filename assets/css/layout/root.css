@@ -262,19 +262,26 @@ section#game #mode-container #daily-details.show .day {
 }
 
 section#game #game-type {
+  align-items: center;
   display: flex;
   font-size: 1.2rem;
   height: 27px;
   justify-content: center;
   margin: 0 auto;
   text-align: center;
-  text-transform: uppercase;
   width: 100%;
 }
 @media (min-width: 768px) {
   section#game #game-type {
     font-size: 1.4rem;
   }
+}
+section#game #game-type #game-type-title {
+  text-transform: uppercase;
+}
+section#game #game-type #game-max-combo {
+  font-size: 1rem;
+  padding-left: 0.35em;
 }
 section#game #game-type .replay-label {
   color: var(--replay-label);

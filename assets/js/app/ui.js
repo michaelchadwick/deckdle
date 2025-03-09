@@ -279,6 +279,7 @@ Deckdle.ui._updateComboCounter = () => {
 
     if (comboLevel > 1) {
       Deckdle.dom.combo.classList.add('x')
+      Deckdle.dom.gameMaxCombo.innerText = `(x${comboLevel})`
 
       Deckdle.dom.comboText.innerText = `x${Deckdle.combo}`
       if (comboLevel <= 35) {
@@ -296,6 +297,7 @@ Deckdle.ui._updateComboCounter = () => {
         })
       }
     } else if (comboLevel == 0) {
+      Deckdle.dom.gameMaxCombo.innerText = ''
       Deckdle.dom.comboText.innerText = ':-('
 
       Deckdle._animateCSS('#combo', 'hinge').then(() => {

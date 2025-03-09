@@ -9,6 +9,7 @@ Deckdle.dom = {
   headerTitle: document.querySelector('header h1'),
   dailyDetails: document.getElementById('daily-details'),
   gameType: document.getElementById('game-type-title'),
+  gameMaxCombo: document.getElementById('game-max-combo'),
   board: document.getElementById('board'),
   cardsContainer: document.getElementById('cards-container'),
   tableauCount: document.querySelector('#tableau-count .count'),
