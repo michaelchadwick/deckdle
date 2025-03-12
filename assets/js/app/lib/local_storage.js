@@ -302,7 +302,8 @@ Deckdle._loadSettings = () => {
         }
       }
 
-      Deckdle.combo = 0
+      Deckdle.comboCurrent = 0
+      Deckdle.comboCurrentMax = 0
       Deckdle.ui._resetComboCounter()
     }
 
@@ -470,7 +471,8 @@ Deckdle._changeSetting = async (setting, value) => {
         Deckdle._saveSetting('comboCounter', false)
       }
 
-      Deckdle.combo = 0
+      Deckdle.comboCurrent = 0
+      Deckdle.comboCurrentMax = 0
       Deckdle.ui._resetComboCounter()
 
       break

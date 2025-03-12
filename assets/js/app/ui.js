@@ -271,7 +271,7 @@ Deckdle.ui._updateGameType = () => {
 /* COMBO */
 
 Deckdle.ui._updateComboCounter = () => {
-  const comboLevel = Deckdle.combo
+  const comboLevel = Deckdle.comboCurrent
 
   // need 'show' class via setting
   if (Deckdle.dom.combo.classList.contains('show')) {
@@ -281,7 +281,7 @@ Deckdle.ui._updateComboCounter = () => {
       Deckdle.dom.combo.classList.add('x')
       Deckdle.dom.gameMaxCombo.innerText = `(x${comboLevel})`
 
-      Deckdle.dom.comboText.innerText = `x${Deckdle.combo}`
+      Deckdle.dom.comboText.innerText = `x${Deckdle.comboCurrent}`
       if (comboLevel <= 35) {
         Deckdle.dom.combo.classList.add(`x${comboLevel}`)
       }

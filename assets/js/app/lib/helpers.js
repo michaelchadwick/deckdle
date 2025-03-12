@@ -247,13 +247,15 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
 
       if (tableauCount == 0) {
         if (stockCount == 0) {
-          html += `GOLF: 0\n`
+          gameScore += `GOLF: 0`
         } else if (stockCount > 0) {
-          html += `GOLF: -${stockCount}\n`
+          gameScore += `GOLF: -${stockCount}`
         }
       } else {
-        html += `GOLF: +${tableauCount + stockCount}\n`
+        gameScore = `GOLF: +${tableauCount + stockCount}`
       }
+
+      html += `${gameScore}, x${Deckdle.comboCurrentMax}\n`
       break
     }
   }

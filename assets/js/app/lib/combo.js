@@ -2,12 +2,16 @@
 /* global Deckdle */
 
 Deckdle._increaseCombo = () => {
-  Deckdle.combo += 1
+  Deckdle.comboCurrent += 1
 
-  const curComboMax = Deckdle.__getState()['comboMax']
+  if (Deckdle.comboCurrent > Deckdle.comboCurrentMax) {
+    Deckdle.comboCurrentMax += 1
+  }
 
-  if (Deckdle.combo > curComboMax) {
-    Deckdle.__setState('comboMax', Deckdle.combo)
+  const comboOverallMax = Deckdle.__getState()['comboMax']
+
+  if (Deckdle.comboCurrent > comboOverallMax) {
+    Deckdle.__setState('comboMax', Deckdle.comboCurrent)
   }
 
   Deckdle.ui._updateComboCounter()
@@ -16,9 +20,9 @@ Deckdle._increaseCombo = () => {
 }
 
 Deckdle._resetCombo = () => {
-  const needsToReset = Deckdle.combo > 1
+  const needsToReset = Deckdle.comboCurrent > 1
 
-  Deckdle.combo = 0
+  Deckdle.comboCurrent = 0
 
   if (needsToReset) {
     Deckdle.ui._updateComboCounter()

@@ -45,7 +45,8 @@ Deckdle.initApp = async () => {
     await Deckdle._loadGame()
   }
 
-  Deckdle.combo = 0
+  Deckdle.comboCurrent = 0
+  Deckdle.comboCurrentMax = 0
   Deckdle.ui._resetComboCounter()
   Deckdle.ui._updateGameType()
 
@@ -105,7 +106,8 @@ Deckdle._createNewSetup = async (gameMode, qsId = null) => {
     Deckdle._moveCardFromStockToBase(noMoveInPrevGame)
   }
 
-  Deckdle.combo = 0
+  Deckdle.comboCurrent = 0
+  Deckdle.comboCurrentMax = 0
   Deckdle.ui._resetComboCounter()
 
   Deckdle.ui._enableUI()
@@ -159,7 +161,8 @@ Deckdle._loadExistingSetup = async (gameMode) => {
     Deckdle.dom.interactive.stock.appendChild(Deckdle.ui._createEmptyCard())
   }
 
-  Deckdle.combo = 0
+  Deckdle.comboCurrent = 0
+  Deckdle.comboCurrentMax = 0
   Deckdle.ui._resetComboCounter()
 
   // see if we've already won
@@ -325,7 +328,8 @@ Deckdle._replayGame = async () => {
     Deckdle._moveCardFromStockToBase()
   }
 
-  Deckdle.combo = 0
+  Deckdle.comboCurrent = 0
+  Deckdle.comboCurrentMax = 0
   Deckdle.ui._resetComboCounter()
 
   // enable the UI, but put it into `replay-mode` so it looks distinct
