@@ -256,7 +256,7 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
         gameScore = `GOLF: +${tableauCount + stockCount}`
       }
 
-      html += `${gameScore}, x${Deckdle.comboCurrentMax}\n`
+      html += `${gameScore}, x${Deckdle.__getState()['comboCurrentMax']}\n`
       break
     }
   }
