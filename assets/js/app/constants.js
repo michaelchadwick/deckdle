@@ -28,6 +28,8 @@ const DECKDLE_DEFAULT_CONFIG = {
 const DECKDLE_DEFAULT_STATE = {
   actions: [],
   base: [],
+  comboCurrent: 0,
+  comboCurrentMax: 0,
   comboMax: 0,
   gameState: 'IN_PROGRESS',
   gameType: DECKDLE_DEFAULT_GAMETYPE,

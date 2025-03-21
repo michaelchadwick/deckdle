@@ -271,19 +271,20 @@ Deckdle.ui._updateGameType = () => {
 /* COMBO */
 
 Deckdle.ui._updateComboCounter = () => {
-  const comboLevel = Deckdle.comboCurrent
+  const currentComboLevel = Deckdle.comboCurrent
 
   // need 'show' class via setting
   if (Deckdle.dom.combo.classList.contains('show')) {
     Deckdle.dom.combo.classList.remove('animate_animated')
 
-    if (comboLevel > 1) {
+    if (currentComboLevel > 1) {
       Deckdle.dom.combo.classList.add('x')
-      Deckdle.dom.gameMaxCombo.innerText = `(x${comboLevel})`
+      Deckdle.dom.gameMaxCombo.innerText = `(x${currentComboLevel})`
 
-      Deckdle.dom.comboText.innerText = `x${Deckdle.comboCurrent}`
-      if (comboLevel <= 35) {
-        Deckdle.dom.combo.classList.add(`x${comboLevel}`)
+      Deckdle.dom.comboText.innerText = `x${currentComboLevel}`
+
+      if (currentComboLevel <= 35) {
+        Deckdle.dom.combo.classList.add(`x${currentComboLevel}`)
       }
       if (Deckdle.dom.combo.classList.contains('animate__fadeOut')) {
         Deckdle.dom.combo.classList.remove('animate__fadeOut')
@@ -296,7 +297,7 @@ Deckdle.ui._updateComboCounter = () => {
           }
         })
       }
-    } else if (comboLevel == 0) {
+    } else if (currentComboLevel == 0) {
       Deckdle.dom.gameMaxCombo.innerText = ''
       Deckdle.dom.comboText.innerText = ':-('
 

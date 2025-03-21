@@ -10,8 +10,9 @@ context('00-basic', () => {
       settings.comboCounter = true
       localStorage.setItem('deckdle-settings', JSON.stringify(settings))
 
-      cy.get('#combo').as('combo')
-      cy.get('#combo .text').as('comboMult')
+      cy.get('#combo').as('comboModal')
+      cy.get('#combo .text').as('comboMultVal')
+      cy.get('#game-max-combo').as('comboGameMax')
       cy.get('#tableau #col0 .card.available').as('validCol0Card')
       cy.get('#tableau #col1 .card.available').as('validCol1Card')
       cy.get('#tableau #col2 .card.available').as('validCol2Card')
@@ -23,7 +24,8 @@ context('00-basic', () => {
     })
 
     it('should show no combo meter on load', () => {
-      cy.get('@combo').should('not.be.visible')
+      cy.get('@comboModal').should('not.be.visible')
+      cy.get('@comboGameMax').should('not.be.visible')
     })
 
     xit('should show correct x2 multiplier when two valid cards are played in a row', () => {
@@ -34,8 +36,10 @@ context('00-basic', () => {
         .should('have.attr', 'data-suit', '2')
         .should('have.attr', 'data-rank', '4')
 
-      cy.get('@combo').should('be.visible')
-      cy.get('@comboMult').should('have.text', 'x2')
+      // cy.get('@comboModal').should('be.visible')
+      // cy.get('@comboMultVal').should('have.text', 'x2')
+      cy.get('@comboGameMax').should('be.visible')
+      cy.get('@comboGameMax').should('have.text', '(x2)')
     })
 
     xit('should show correct x(n*5) multiplier when an appropriate combo is achieved', () => {
@@ -48,8 +52,10 @@ context('00-basic', () => {
         .should('have.attr', 'data-suit', '2')
         .should('have.attr', 'data-rank', '7')
 
-      cy.get('@combo').should('be.visible')
-      cy.get('@comboMult').should('have.text', 'x5')
+      // cy.get('@comboModal').should('be.visible')
+      // cy.get('@comboMultVal').should('have.text', 'x5')
+      cy.get('@comboGameMax').should('be.visible')
+      cy.get('@comboGameMax').should('have.text', 'x5')
 
       // exhaust col1
       cy.get('@validCol1Card').click()
@@ -60,8 +66,10 @@ context('00-basic', () => {
         .should('have.attr', 'data-suit', '2')
         .should('have.attr', 'data-rank', '12')
 
-      cy.get('@combo').should('be.visible')
-      cy.get('@comboMult').should('have.text', 'x10')
+      // cy.get('@comboModal').should('be.visible')
+      // cy.get('@comboMultVal').should('have.text', 'x10')
+      cy.get('@comboGameMax').should('be.visible')
+      cy.get('@comboGameMax').should('have.text', 'x10')
 
       // exhaust col2
       cy.get('@validCol2Card').click()
@@ -72,8 +80,10 @@ context('00-basic', () => {
         .should('have.attr', 'data-suit', '3')
         .should('have.attr', 'data-rank', '4')
 
-      cy.get('@combo').should('be.visible')
-      cy.get('@comboMult').should('have.text', 'x15')
+      // cy.get('@comboModal').should('be.visible')
+      // cy.get('@comboMultVal').should('have.text', 'x15')
+      cy.get('@comboGameMax').should('be.visible')
+      cy.get('@comboGameMax').should('have.text', 'x15')
 
       // exhaust col3
       cy.get('@validCol3Card').click()
@@ -84,8 +94,10 @@ context('00-basic', () => {
         .should('have.attr', 'data-suit', '3')
         .should('have.attr', 'data-rank', '9')
 
-      cy.get('@combo').should('be.visible')
-      cy.get('@comboMult').should('have.text', 'x20')
+      // cy.get('@comboModal').should('be.visible')
+      // cy.get('@comboMultVal').should('have.text', 'x20')
+      cy.get('@comboGameMax').should('be.visible')
+      cy.get('@comboGameMax').should('have.text', 'x20')
 
       // exhaust col4
       cy.get('@validCol4Card').click()
@@ -96,8 +108,10 @@ context('00-basic', () => {
         .should('have.attr', 'data-suit', '3')
         .should('have.attr', 'data-rank', '14')
 
-      cy.get('@combo').should('be.visible')
-      cy.get('@comboMult').should('have.text', 'x25')
+      // cy.get('@comboModal').should('be.visible')
+      // cy.get('@comboMultVal').should('have.text', 'x25')
+      cy.get('@comboGameMax').should('be.visible')
+      cy.get('@comboGameMax').should('have.text', 'x25')
 
       // exhaust col5
       cy.get('@validCol5Card').click()
@@ -108,8 +122,10 @@ context('00-basic', () => {
         .should('have.attr', 'data-suit', '0')
         .should('have.attr', 'data-rank', '6')
 
-      cy.get('@combo').should('be.visible')
-      cy.get('@comboMult').should('have.text', 'x30')
+      // cy.get('@comboModal').should('be.visible')
+      // cy.get('@comboMultVal').should('have.text', 'x30')
+      cy.get('@comboGameMax').should('be.visible')
+      cy.get('@comboGameMax').should('have.text', 'x30')
 
       // exhaust col6
       cy.get('@validCol6Card').click()
@@ -120,8 +136,10 @@ context('00-basic', () => {
         .should('have.attr', 'data-suit', '0')
         .should('have.attr', 'data-rank', '11')
 
-      cy.get('@combo').should('be.visible')
-      cy.get('@comboMult').should('have.text', 'x35')
+      // cy.get('@comboModal').should('be.visible')
+      // cy.get('@comboMultVal').should('have.text', 'x35')
+      cy.get('@comboGameMax').should('be.visible')
+      cy.get('@comboGameMax').should('have.text', 'x35')
     })
   })
 })

@@ -42,8 +42,31 @@ Deckdle._loadGame = async (switching = false) => {
     if (lsStateDaily) {
       const dailyDefaults = DECKDLE_DEFAULTS.state.daily
 
+      console.log('dailyDefaults', dailyDefaults)
+
       let i = 0
       lsStateDaily.forEach((lsState) => {
+        Deckdle.__setState(
+          'comboCurrent',
+          lsState.comboCurrent || dailyDefaults.comboCurrent,
+          'daily',
+          i
+        )
+
+        // Deckdle._logStatus(
+        //   `[LOAD-DAILY] setting Deckdle.comboCurrent to ${
+        //     lsState.comboCurrent || dailyDefaults.comboCurrent
+        //   }`
+        // )
+
+        Deckdle.comboCurrent = lsState.comboCurrent || dailyDefaults.comboCurrent
+
+        Deckdle.__setState(
+          'comboCurrentMax',
+          lsState.comboCurrentMax || dailyDefaults.comboCurrentMax,
+          'daily',
+          i
+        )
         Deckdle.__setState('comboMax', lsState.comboMax || dailyDefaults.comboMax, 'daily', i)
         Deckdle.__setState('gameState', lsState.gameState || dailyDefaults.gameState, 'daily', i)
         Deckdle.__setState(
@@ -141,8 +164,30 @@ Deckdle._loadGame = async (switching = false) => {
     if (lsStateFree) {
       const freeDefaults = DECKDLE_DEFAULTS.state.free
 
+      console.log('freeDefaults', freeDefaults)
+
       let i = 0
       lsStateFree.forEach((lsState) => {
+        Deckdle.__setState(
+          'comboCurrent',
+          lsState.comboCurrent || freeDefaults.comboCurrent,
+          'free',
+          i
+        )
+
+        // Deckdle._logStatus(
+        //   `[LOAD-FREE] setting Deckdle.comboCurrent to ${
+        //     lsState.comboCurrent || freeDefaults.comboCurrent
+        //   }`
+        // )
+        Deckdle.comboCurrent = lsState.comboCurrent || freeDefaults.comboCurrent
+
+        Deckdle.__setState(
+          'comboCurrentMax',
+          lsState.comboCurrentMax || freeDefaults.comboCurrentMax,
+          'free',
+          i
+        )
         Deckdle.__setState('comboMax', lsState.comboMax || freeDefaults.comboMax, 'free', i)
         Deckdle.__setState('gameState', lsState.gameState || freeDefaults.gameState, 'free', i)
         Deckdle.__setState(
@@ -182,6 +227,11 @@ Deckdle._loadGame = async (switching = false) => {
       // Deckdle._logStatus('no previous free state found. creating new free puzzle.')
       freeCreateOrLoad = 'create'
     }
+  }
+
+  // if we had a combo going, update code state and UI
+  if (Deckdle.__getState()['comboCurrent'] > 1) {
+    Deckdle.dom.gameMaxCombo.innerText = `(x${Deckdle.__getState()['comboCurrent']})`
   }
 
   /* ************************* */
@@ -302,8 +352,9 @@ Deckdle._loadSettings = () => {
         }
       }
 
+      // Deckdle._logStatus('[LOAD-SETTINGS] setting Deckdle.comboCurrent to 0')
+      Deckdle.__setState('comboCurrent', 0)
       Deckdle.comboCurrent = 0
-      Deckdle.comboCurrentMax = 0
       Deckdle.ui._resetComboCounter()
     }
 
@@ -416,6 +467,7 @@ Deckdle._loadSettings = () => {
     }
   } else {
     if (document.referrer.indexOf('omni.neb.host') < 0) {
+      Deckdle.comboCurrent = 0
       Deckdle.modalOpen('start')
     }
   }
@@ -471,8 +523,6 @@ Deckdle._changeSetting = async (setting, value) => {
         Deckdle._saveSetting('comboCounter', false)
       }
 
-      Deckdle.comboCurrent = 0
-      Deckdle.comboCurrentMax = 0
       Deckdle.ui._resetComboCounter()
 
       break
