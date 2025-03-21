@@ -244,6 +244,7 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
     case 'golf': {
       const tableauCount = Deckdle._tableauCount()
       const stockCount = Deckdle._stockCount()
+      let gameScore = ''
 
       if (tableauCount == 0) {
         if (stockCount == 0) {
