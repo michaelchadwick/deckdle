@@ -366,7 +366,7 @@ Deckdle.modalOpen = async (type) => {
               modalText = `
                 <div class='score-animation'>
                   <div>Whoa! You shot under par with a score of...</div>
-                  <div class='score animate__animated animate__zoomIn'>${stockCount}</div>
+                  <div class='score animate__animated animate__zoomIn'>-${stockCount}</div>
                 </div>
               `
 
@@ -485,7 +485,7 @@ Deckdle.modalOpen = async (type) => {
               modalText = `
                 <div class='score-animation'>
                   <div>Whoa! You shot under par with a score of...</div>
-                  <div class='score animate__animated animate__zoomIn'>${stockCount}</div>
+                  <div class='score animate__animated animate__zoomIn'>-${stockCount}</div>
                 </div>
               `
             } else {
