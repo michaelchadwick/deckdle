@@ -29,7 +29,7 @@
 .modal-window {
   --animate-duration: 100ms;
   background-color: var(--white);
-  border: 4px solid var(--base-color);
+  border: 4px solid var(--base-color1);
   border-top-width: 0;
   /* stylelint-disable-next-line */
   box-shadow: 0 0 0 4px rgb(0 0 0 / 15%), 0 0 16px rgb(0 0 0 / 25%);
@@ -68,7 +68,7 @@
 
 .modal-title {
   align-items: center;
-  background-color: var(--base-color);
+  background-color: var(--base-color1);
   color: var(--white);
   display: flex;
   font-weight: 500;

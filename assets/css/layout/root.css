@@ -113,10 +113,10 @@ header .menu-left #nav-overlay #nav-content .nav-footer {
   display: flex;
 }
 #footer-neb-host {
-  background: var(--base-color);
+  background: var(--base-color1);
   border-top: 2px solid var(--dark-color);
   bottom: 0;
-  color: var(--vlight-color);
+  color: var(--vvlight-color);
   font-family: "Consolas", sans-serif;
   font-size: 12px;
   font-weight: 500;
