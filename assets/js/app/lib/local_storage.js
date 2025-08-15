@@ -619,6 +619,8 @@ Deckdle._changeSetting = async (setting, value) => {
         document.querySelector('#range-setting-bgm-level').setAttribute('disabled', '')
         document.querySelector('#range-setting-sfx-level').setAttribute('disabled', '')
 
+        Deckdle._stopBGM()
+
         Deckdle._saveSetting('noisy', false)
       }
 
