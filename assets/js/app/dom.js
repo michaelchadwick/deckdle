@@ -45,8 +45,16 @@ Deckdle.dom.interactive.debug = {
   btnDealCards: document.getElementById('button-deal-cards'),
   btnWinAnimation: document.getElementById('button-win-animation'),
   btnLoseAnimation: document.getElementById('button-lose-animation'),
-  btnDebugGameOver: document.getElementById('button-debug-gameover'),
   btnGetBotScore: document.getElementById('button-get-bot-score'),
+}
+// DOM > interactive elements (debug-gameover)
+Deckdle.dom.interactive.debugGameover = {
+  all: document.getElementById('debug-buttons-gameover'),
+  btnDebugGameOverOver: document.getElementById('button-debug-gameover-over'),
+  btnDebugGameOverPar: document.getElementById('button-debug-gameover-par'),
+  btnDebugGameOverUnder: document.getElementById('button-debug-gameover-under'),
+  btnDebugGameOverMatchBot: document.getElementById('button-debug-gameover-matchbot'),
+  btnDebugGameOverBeatBot: document.getElementById('button-debug-gameover-beatbot'),
 }
 // DOM > keyboard buttons
 Deckdle.dom.input = {

@@ -18,6 +18,19 @@ Deckdle._initDebug = () => {
       }
     })
   }
+  if (Deckdle.dom.interactive.debugGameover.all) {
+    // show debug buttons
+    Deckdle.dom.interactive.debugGameover.all.style.display = 'flex'
+    // make header buttons smaller to fit in debug buttons
+    document.querySelectorAll('button.icon').forEach((btn) => {
+      btn.style.fontSize = '16px'
+
+      if (btn.id == 'button-nav') {
+        btn.querySelector('img').style.height = '16px'
+        btn.querySelector('img').style.width = '16px'
+      }
+    })
+  }
 }
 
 // modal: debug: display Deckdle.config
@@ -147,7 +160,13 @@ Deckdle._debugCombo = () => {
   Deckdle._increaseCombo()
 }
 
-Deckdle._debugGameOver = (type = 'golf', gameMode = 'daily', win = true, score = 1) => {
+Deckdle._debugGameOver = (
+  type = 'golf',
+  gameMode = 'daily',
+  win = true,
+  stockCount = 1,
+  botStockCount = 10
+) => {
   if (Deckdle.myModal) {
     Deckdle.myModal._destroyModal()
   }
@@ -162,16 +181,25 @@ Deckdle._debugGameOver = (type = 'golf', gameMode = 'daily', win = true, score =
       if (win) {
         Deckdle._playSFX('win')
 
-        if (score > 0) {
+        if (stockCount > 0) {
           modalText = `
             <div class='score-animation'>
               <div>Whoa! You shot under par with a score of...</div>
-              <div class='score animate__animated animate__zoomIn'>-${score}</div>
-            </div>
-            <div class='score-image'>
-              <img src='/assets/images/${score}below.png' alt='Game Score: ${score} below par (${DECKDLE_SCORE_TO_BIRD[score]})' title='Game Score: ${score} below par (${DECKDLE_SCORE_TO_BIRD[score]})' />
+              <div class='score animate__animated animate__zoomIn'>-${stockCount}</div>
             </div>
           `
+
+          if (stockCount >= DECKDLE_GOLF_BIRD_MAX) {
+            modalText += `
+              <iframe src="https://giphy.com/embed/l0Ex7OYRjmY0dnxqo" width="128" height="128" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/crazy-wow-rainbow-l0Ex7OYRjmY0dnxqo">via GIPHY</a></p>
+            `
+          } else {
+            modalText += `
+              <div class='score-image'>
+                <img src='/assets/images/${stockCount}below.png' alt='Game Score: ${stockCount} below par (${DECKDLE_SCORE_TO_BIRD[stockCount]})' title='Game Score: ${stockCount} below par (${DECKDLE_SCORE_TO_BIRD[stockCount]})' />
+              </div>
+            `
+          }
         } else {
           modalText = `
             <div class='score-animation'>
@@ -186,13 +214,23 @@ Deckdle._debugGameOver = (type = 'golf', gameMode = 'daily', win = true, score =
         modalText = `
           <div class='score-animation'>
             <div>You didn't quite clear it with a score of...</div>
-            <div class='score animate__animated animate__zoomIn'>${score}</div>
+            <div class='score animate__animated animate__zoomIn'>+${stockCount}</div>
             <div>OVER PAR</div>
           </div>
         `
       }
 
       break
+  }
+
+  if (stockCount > botStockCount) {
+    modalText += `
+      <div>🤖🤖🤖</div>
+      <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
+      <div>🤖🤖🤖</div>
+    `
+  } else if (stockCount == botStockCount) {
+    modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
   }
 
   // daily
