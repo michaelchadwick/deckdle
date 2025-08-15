@@ -42,8 +42,6 @@ Deckdle._loadGame = async (switching = false) => {
     if (lsStateDaily) {
       const dailyDefaults = DECKDLE_DEFAULTS.state.daily
 
-      console.log('dailyDefaults', dailyDefaults)
-
       let i = 0
       lsStateDaily.forEach((lsState) => {
         Deckdle.__setState(
@@ -163,8 +161,6 @@ Deckdle._loadGame = async (switching = false) => {
     // if we have previous LS values, sync them to code model
     if (lsStateFree) {
       const freeDefaults = DECKDLE_DEFAULTS.state.free
-
-      console.log('freeDefaults', freeDefaults)
 
       let i = 0
       lsStateFree.forEach((lsState) => {
