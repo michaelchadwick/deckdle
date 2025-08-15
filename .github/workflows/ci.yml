@@ -49,7 +49,7 @@ jobs:
 
       # pnpm is not installed by default on GitHub runners
       - name: Install pnpm
-        run: npm install -g pnpm@9
+        run: npm install -g pnpm@10
 
       - name: Install dependencies
         # with Cypress GitHub Action.
