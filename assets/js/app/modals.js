@@ -395,13 +395,24 @@ Deckdle.modalOpen = async (type) => {
             modalText = `
               <div class='score-animation'>
                 <div>You didn't quite clear it with a score of...</div>
-                <div class='score animate__animated animate__zoomIn'>${tableauCount}</div>
+                <div class='score animate__animated animate__zoomIn'>+${tableauCount}</div>
                 <div>OVER PAR</div>
               </div>
             `
           }
 
           break
+      }
+
+      // did you beat the bot?
+      if (stockCount > parseInt(botScoreDaily.score)) {
+        modalText += `
+          <div>🤖🤖🤖</div>
+          <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
+          <div>🤖🤖🤖</div>
+        `
+      } else if (stockCount == parseInt(botScoreDaily.score)) {
+        modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
       }
 
       modalText += `

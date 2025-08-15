@@ -102,7 +102,7 @@
           <i class="fa-solid fa-question"></i>
         </button>
 
-        <div id="debug-buttons" class="debug">
+        <div id="debug-buttons" class="debug debug-buttons">
           <nav class="ddmenu">
             <div class="ddgroup">
               <button id="button-debug-dropdown" class="icon debug" aria-label="Debug">
@@ -130,11 +130,47 @@
                 <button id="button-lose-animation" class="icon" title="Lose Animation">
                   <i class="fa-solid fa-face-frown"></i> Lose Animation
                 </button>
-                <button id="button-debug-gameover" class="icon" title="Debug Game over">
-                  <i class="fa-solid fa-puzzle-piece"></i> Debug Game Over
+                <button id="button-get-bot-score" class="icon" title="Today's Bot Score">
+                  <i class="fa-solid fa-robot"></i> Today's Bot Score
                 </button>
-                <button id="button-get-bot-score" class="icon" title="Get Bot Score">
-                  <i class="fa-solid fa-robot"></i> Get Bot Score
+              </div>
+            </div>
+          </nav>
+        </div>
+
+        <div id="debug-buttons-gameover" class="debug debug-buttons">
+          <nav class="ddmenu">
+            <div class="ddgroup">
+              <button
+                id="button-debug-dropdown-gameover"
+                class="icon debug"
+                aria-label="Debug (Game Over)"
+              >
+                <i class="fa-solid fa-bug"></i>
+              </button>
+              <div class="ddsub">
+                <button id="button-debug-gameover-over" class="icon" title="Game Over (over par)">
+                  <i class="fa-solid fa-puzzle-piece"></i> Game Over (+1)
+                </button>
+                <button id="button-debug-gameover-par" class="icon" title="Game Over (par)">
+                  <i class="fa-solid fa-puzzle-piece"></i> Game Over (0)
+                </button>
+                <button id="button-debug-gameover-under" class="icon" title="Game Over (under par)">
+                  <i class="fa-solid fa-puzzle-piece"></i> Game Over (-1)
+                </button>
+                <button
+                  id="button-debug-gameover-matchbot"
+                  class="icon"
+                  title="Game Over (matched bot)"
+                >
+                  <i class="fa-solid fa-puzzle-piece"></i> Game Over (-10)
+                </button>
+                <button
+                  id="button-debug-gameover-beatbot"
+                  class="icon"
+                  title="Game Over (beat bot)"
+                >
+                  <i class="fa-solid fa-puzzle-piece"></i> Game Over (-11)
                 </button>
               </div>
             </div>
