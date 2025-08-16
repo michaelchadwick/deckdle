@@ -156,7 +156,7 @@ Deckdle._clearLocalStorage = (showModal = true) => {
 }
 
 Deckdle._debugCombo = () => {
-  Deckdle._playSFX('click_tableau_valid')
+  Deckdle._playSFX('click_tableau_valid', Deckdle.comboCurrent)
   Deckdle._increaseCombo()
 }
 

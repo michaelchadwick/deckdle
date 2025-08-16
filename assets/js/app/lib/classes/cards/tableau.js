@@ -468,7 +468,7 @@ Deckdle._onTableauClick = (card, colId, rowId) => {
 
   if (card.classList.contains('available')) {
     if (Deckdle._tableauCardIsValid(card.dataset)) {
-      Deckdle._playSFX('click_tableau_valid')
+      Deckdle._playSFX('click_tableau_valid', Deckdle.comboCurrent)
 
       Deckdle._removeCardFromTableau(card)
 
