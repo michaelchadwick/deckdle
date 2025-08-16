@@ -404,17 +404,37 @@ Deckdle.modalOpen = async (type) => {
           break
       }
 
-      // TODO: need to make the bot output JSON so I have more context
       // did you beat the bot?
-      // if (stockCount > -parseInt(botScoreDaily.score)) {
-      //   modalText += `
-      //     <div>🤖🤖🤖</div>
-      //     <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
-      //     <div>🤖🤖🤖</div>
-      //   `
-      // } else if (stockCount == parseInt(botScoreDaily.score)) {
-      //   modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
-      // }
+      const botScore = parseInt(botScoreDaily.score)
+
+      // win
+      if (tableauCount == 0) {
+        // check if our stock count is better than the bots score
+        // (which will be a negative number for their stock count)
+        if (stockCount > -botScore) {
+          modalText += `
+            <div>🤖🤖🤖</div>
+            <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
+            <div>🤖🤖🤖</div>
+          `
+        } else if (stockCount == botScore) {
+          modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+        }
+      }
+      // loss
+      else {
+        // check if our tableau count is better than the bots score
+        // (which will be a positive number for their tableau count)
+        if (tableauCount < botScore) {
+          modalText += `
+            <div>🤖🤖🤖</div>
+            <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
+            <div>🤖🤖🤖</div>
+          `
+        } else if (tableauCount == botScore) {
+          modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+        }
+      }
 
       modalText += `
         <div class='move-count'>
