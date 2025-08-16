@@ -113,6 +113,11 @@ Deckdle._attachEventListeners = () => {
         })
       })
 
+      // 🤖 display bot batch score for today's puzzle
+      Deckdle.dom.interactive.debug.btnGetBotScore.addEventListener('click', () => {
+        Deckdle.modalOpen('bot-score')
+      })
+
       // 🧩 display debug game over modal (over par)
       Deckdle.dom.interactive.debugGameover.btnDebugGameOverOver.addEventListener('click', () => {
         Deckdle._debugGameOver('golf', 'daily', false, 1)
@@ -139,11 +144,6 @@ Deckdle._attachEventListeners = () => {
           Deckdle._debugGameOver('golf', 'daily', true, 11)
         }
       )
-
-      // 🤖 display bot batch score for today's puzzle
-      Deckdle.dom.interactive.debug.btnGetBotScore.addEventListener('click', () => {
-        Deckdle.modalOpen('bot-score')
-      })
     }
   }
 
