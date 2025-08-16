@@ -404,16 +404,17 @@ Deckdle.modalOpen = async (type) => {
           break
       }
 
+      // TODO: need to make the bot output JSON so I have more context
       // did you beat the bot?
-      if (stockCount > parseInt(botScoreDaily.score)) {
-        modalText += `
-          <div>🤖🤖🤖</div>
-          <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
-          <div>🤖🤖🤖</div>
-        `
-      } else if (stockCount == parseInt(botScoreDaily.score)) {
-        modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
-      }
+      // if (stockCount > -parseInt(botScoreDaily.score)) {
+      //   modalText += `
+      //     <div>🤖🤖🤖</div>
+      //     <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
+      //     <div>🤖🤖🤖</div>
+      //   `
+      // } else if (stockCount == parseInt(botScoreDaily.score)) {
+      //   modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+      // }
 
       modalText += `
         <div class='move-count'>
