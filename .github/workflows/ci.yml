@@ -61,6 +61,7 @@ jobs:
         with:
           working-directory: examples/start-and-pnpm-workspaces
           runTests: false
+          install: false
 
       - name: Cypress tests
         # Run Cypress in examples/start-and-pnpm-workspaces/packages/workspace-1 only
