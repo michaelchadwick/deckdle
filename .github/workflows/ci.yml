@@ -51,17 +51,20 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm@10
 
-      - name: Install dependencies
+      # Install all deps once
+      - name: Install deps with pnpm
+        run: pnpm install
+
+      - name: Cache Cypress
         # with Cypress GitHub Action.
         # Calling the Cypress GitHub Action causes all dependencies from
         # the root of the pnpm workspace examples/start-and-pnpm-workspaces
-        # to be installed
-        # AND it automatically caches the Cypress binary.
+        # to be installed AND it automatically caches the Cypress binary.
         uses: cypress-io/github-action@v6
         with:
           working-directory: examples/start-and-pnpm-workspaces
-          runTests: false
           install: false
+          runTests: false
 
       - name: Cypress tests
         # Run Cypress in examples/start-and-pnpm-workspaces/packages/workspace-1 only
@@ -73,7 +76,6 @@ jobs:
           # We already installed dependencies when we called the action previously.
           install: false
           working-directory: examples/start-and-pnpm-workspaces/packages/workspace-1
-          # build: pnpm run build
           start: pnpm start
           wait-on: "http://localhost:3000"
         # env:
