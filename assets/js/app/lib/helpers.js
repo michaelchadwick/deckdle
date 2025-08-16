@@ -293,6 +293,7 @@ Deckdle._getNebyooApps = async () => {
 }
 
 Deckdle._getBotScore = async () => {
+  // will have negative numbers or 0 for wins, and positive number for losses
   const dailyBatchPath = '/_debug/text/daily_batch.txt'
 
   const response = await fetch(dailyBatchPath)
