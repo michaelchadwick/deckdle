@@ -7,9 +7,10 @@
   justify-content: center;
   margin: 5px auto 0;
   padding-top: 5px;
-}
-#user-cards.disabled {
-  background-color: var(--gray-light2);
+
+  &.disabled {
+    background-color: var(--gray-light2);
+  }
 }
 @media (min-width: 768px) {
   @media (min-height: 600px) {
@@ -22,9 +23,11 @@
   }
 }
 @media (max-width: 375px) {
-  #user-cards .card {
-    max-width: 50px;
-    min-width: 40px;
+  #user-cards {
+    .card {
+      max-width: 50px;
+      min-width: 40px;
+    }
   }
 }
 
@@ -34,6 +37,20 @@
   justify-items: center;
   opacity: 1;
   width: 80px;
+
+  .card {
+    grid-column: 1;
+    grid-row: 1;
+
+    .disabled {
+      cursor: not-allowed;
+      opacity: 1;
+    }
+
+    &:nth-last-child(2) {
+      background-color: var(--gray);
+    }
+  }
 }
 @media (min-width: 768px) {
   #base,
@@ -42,26 +59,15 @@
   }
 }
 
-#base .card,
-#stock .card {
-  grid-column: 1;
-  grid-row: 1;
-}
+#stock {
+  .card {
+    > * {
+      display: none;
+    }
 
-#base .card.disabled,
-#stock .card.disabled {
-  cursor: not-allowed;
-  opacity: 1;
-}
-
-#base .card:nth-last-child(2) {
-  background-color: var(--gray);
-}
-
-#stock .card > * {
-  display: none;
-}
-#stock .card:not(.empty):hover {
-  background-color: var(--card-back-focus);
-  cursor: pointer;
+    &:not(.empty):hover {
+      background-color: var(--card-back-focus);
+      cursor: pointer;
+    }
+  }
 }

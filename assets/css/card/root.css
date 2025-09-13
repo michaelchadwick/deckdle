@@ -15,6 +15,63 @@
   min-height: 67px;
   opacity: 1;
   width: 12vw;
+
+  &[data-suit="0"] {
+    color: var(--card-suit-club);
+  }
+  &[data-suit="1"] {
+    color: var(--card-suit-diamond);
+  }
+  &[data-suit="2"] {
+    color: var(--card-suit-heart);
+  }
+  &[data-suit="3"] {
+    color: var(--card-suit-spade);
+  }
+
+  .rank {
+    display: flex;
+    justify-content: center;
+  }
+  .rank-bot,
+  .rank-top {
+    display: flex;
+    justify-content: space-around;
+  }
+  @media (min-width: 992px) {
+    @media (min-height: 600px) {
+      .rank-bot,
+      .rank-top {
+        padding-top: 2px;
+      }
+    }
+  }
+
+  .suit {
+    display: flex;
+    justify-content: center;
+  }
+
+  &.back {
+    background-color: var(--card-back);
+    border: 1px solid var(--white);
+    transition: all 50ms;
+
+    .rank,
+    .suit {
+      display: none;
+    }
+  }
+
+  .empty {
+    background-color: var(--gray-light2);
+    border: 1px solid transparent;
+  }
+
+  .disabled {
+    background-color: var(--disabled);
+    opacity: 0.3;
+  }
 }
 @media (min-height: 600px) {
   .card {
@@ -50,58 +107,6 @@
       width: 73px;
     }
   }
-}
-.card[data-suit="0"] {
-  color: var(--card-suit-club);
-}
-.card[data-suit="1"] {
-  color: var(--card-suit-diamond);
-}
-.card[data-suit="2"] {
-  color: var(--card-suit-heart);
-}
-.card[data-suit="3"] {
-  color: var(--card-suit-spade);
-}
-
-.card .rank {
-  display: flex;
-  justify-content: center;
-}
-.card .rank-bot,
-.card .rank-top {
-  display: flex;
-  justify-content: space-around;
-}
-@media (min-width: 992px) {
-  @media (min-height: 600px) {
-    .card .rank-bot,
-    .card .rank-top {
-      padding-top: 2px;
-    }
-  }
-}
-.card .suit {
-  display: flex;
-  justify-content: center;
-}
-
-.card.back {
-  background-color: var(--card-back);
-  border: 1px solid var(--white);
-  transition: all 50ms;
-}
-.card.back .rank,
-.card.back .suit {
-  display: none;
-}
-.card.empty {
-  background-color: var(--gray-light2);
-  border: 1px solid transparent;
-}
-.card.disabled {
-  background-color: var(--disabled);
-  opacity: 0.3;
 }
 
 .card-label {
