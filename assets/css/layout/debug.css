@@ -1,79 +1,90 @@
-header .debug-buttons {
-  display: none;
-}
-header .debug-buttons button {
-  color: var(--debug-color);
-}
-header .debug-buttons .ddmenu {
-  align-items: center;
-  display: flex;
-  z-index: 11;
-}
-header .debug-buttons .ddmenu .ddgroup {
-  border: 1px solid transparent;
-  position: relative;
-  text-decoration: none;
-  width: 100%;
-}
-header .debug-buttons .ddmenu .ddgroup button {
-  margin-right: 0;
-}
-header
-  #debug-buttons-gameover
-  .ddmenu
-  .ddgroup
-  button#button-debug-dropdown-gameover {
-  color: var(--debug-color2);
-}
-@media (hover: hover) {
-  header .debug-buttons .ddmenu .ddgroup:hover {
-    background: var(--debug-color-light3);
-    border: 1px solid var(--debug-color-medium);
-    cursor: pointer;
-  }
-}
-header .debug-buttons .ddmenu .ddgroup .ddsub {
-  display: none;
-  left: -1px;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-}
-/* stylelint-disable */
-header .debug-buttons .ddmenu .ddgroup .ddsub a {
-  box-sizing: border-box;
-  display: block;
-}
-/* stylelint-enable */
-header .debug-buttons .ddmenu .ddgroup .ddsub button {
-  background-color: var(--debug-color-light4);
-  border: 1px solid transparent;
-  border-radius: 0;
-  display: flex;
-  gap: 5px;
-  height: 20px;
-  justify-content: flex-start;
-  padding: 2px 5px;
-  width: 175px;
-}
-header .debug-buttons .ddmenu .ddgroup .ddsub button i {
-  width: 20px;
-}
-@media (hover: hover) {
-  header .debug-buttons .ddmenu .ddgroup .ddsub button:hover {
-    background: var(--debug-color-light5);
-    border: 1px solid var(--debug-color-medium);
-  }
-  header .debug-buttons .ddmenu .ddgroup:hover .ddsub {
-    display: flex;
-    flex-direction: column;
-  }
-}
-@media screen and (max-width: 640px) {
-  .ddmenu {
-    flex-wrap: wrap;
-  }
-  .ddsub {
-    position: static;
+header {
+  .debug-buttons {
+    display: none;
+
+    button {
+      color: var(--debug-color);
+    }
+
+    .ddmenu {
+      align-items: center;
+      display: flex;
+      z-index: 11;
+
+      .ddgroup {
+        border: 1px solid transparent;
+        position: relative;
+        text-decoration: none;
+        width: 100%;
+
+        button {
+          margin-right: 0;
+
+          &#button-debug-dropdown-gameover {
+            color: var(--debug-color2);
+          }
+        }
+        @media (hover: hover) {
+          button {
+            &:hover {
+              background: var(--debug-color-light5);
+            }
+          }
+        }
+
+        .ddsub {
+          display: none;
+          left: -1px;
+          position: absolute;
+          top: 100%;
+          width: 100%;
+
+          a {
+            box-sizing: border-box;
+            display: block;
+          }
+
+          button {
+            background-color: var(--debug-color-light4);
+            border: 1px solid transparent;
+            border-radius: 0;
+            display: flex;
+            gap: 5px;
+            height: 20px;
+            justify-content: flex-start;
+            padding: 2px 5px;
+            width: 175px;
+
+            i {
+              width: 20px;
+            }
+          }
+        }
+        @media screen and (max-width: 640px) {
+          .ddsub {
+            position: static;
+          }
+        }
+      }
+      @media (hover: hover) {
+        .ddgroup {
+          &:hover {
+            background: var(--debug-color-light3);
+            border: 1px solid var(--debug-color-medium);
+            cursor: pointer;
+
+            .ddsub {
+              display: flex;
+              flex-direction: column;
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 640px) {
+      .ddmenu {
+        flex-wrap: wrap;
+      }
+    }
   }
 }
