@@ -25,27 +25,30 @@
   display: flex;
   gap: 5px;
   padding-bottom: 10px;
-}
-.statistics .statistic-container {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-.statistics .statistic-container .statistic {
-  align-items: center;
-  display: flex;
-  font-size: 36px;
-  font-variant-numeric: proportional-nums;
-  font-weight: 400;
-  justify-content: center;
-  letter-spacing: 0;
-  text-align: center;
-}
-.statistics .statistic-container .statistic-label {
-  align-items: center;
-  display: flex;
-  font-size: 1em;
-  justify-content: center;
-  max-width: 85px;
-  text-align: center;
+
+  .statistic-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    .statistic {
+      align-items: center;
+      display: flex;
+      font-size: 36px;
+      font-variant-numeric: proportional-nums;
+      font-weight: 400;
+      justify-content: center;
+      letter-spacing: 0;
+      text-align: center;
+    }
+
+    .statistic-label {
+      align-items: center;
+      display: flex;
+      font-size: 1em;
+      justify-content: center;
+      max-width: 85px;
+      text-align: center;
+    }
+  }
 }
