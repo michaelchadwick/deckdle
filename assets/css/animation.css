@@ -19,121 +19,154 @@
 }
 
 /* nebyooaps slider */
-header .menu-left #nav-overlay #nav-content {
-  animation: SlideRight 200ms;
+header {
+  .menu-left {
+    #nav-overlay {
+      #nav-content {
+        animation: SlideRight 200ms;
+      }
+    }
+  }
 }
 
-#tableau .card {
-  --animate-delay: 0ms;
-  --animate-duration: 100ms;
-  transition: all 600ms;
+#tableau {
+  .card {
+    --animate-delay: 0ms;
+    --animate-duration: 100ms;
+    transition: all 600ms;
+
+    &.animate__animated {
+      &.animate__fadeInDown {
+        --animate-delay: 0ms;
+        --animate-duration: 200ms;
+      }
+
+      &.animate__flipInY {
+        --animate-delay: 0ms;
+        --animate-duration: 400ms;
+      }
+    }
+
+    #col0 .card.animate__animated.animate__fadeInDown,
+    #col0 .card.animate__animated.animate__slideInDown {
+      --animate-delay: 100ms;
+    }
+    #col1 .card.animate__animated.animate__fadeInDown,
+    #col1 .card.animate__animated.animate__slideInDown {
+      --animate-delay: 400ms;
+    }
+    #col2 .card.animate__animated.animate__fadeInDown,
+    #col2 .card.animate__animated.animate__slideInDown {
+      --animate-delay: 700ms;
+    }
+    #col3 .card.animate__animated.animate__fadeInDown,
+    #col3 .card.animate__animated.animate__slideInDown {
+      --animate-delay: 1000ms;
+    }
+    #col4 .card.animate__animated.animate__fadeInDown,
+    #col4 .card.animate__animated.animate__slideInDown {
+      --animate-delay: 1300ms;
+    }
+    #col5 .card.animate__animated.animate__fadeInDown,
+    #col5 .card.animate__animated.animate__slideInDown {
+      --animate-delay: 1600ms;
+    }
+    #col6 .card.animate__animated.animate__fadeInDown,
+    #col6 .card.animate__animated.animate__slideInDown {
+      --animate-delay: 1900ms;
+    }
+
+    &[data-row="4"].animate__animated.animate__fadeInDown,
+    &[data-row="4"].animate__animated.animate__slideInDown {
+      --animate-duration: 200ms;
+    }
+    &[data-row="3"].animate__animated.animate__fadeInDown,
+    &[data-row="3"].animate__animated.animate__slideInDown {
+      --animate-duration: 300ms;
+    }
+    &[data-row="2"].animate__animated.animate__fadeInDown,
+    &[data-row="2"].animate__animated.animate__slideInDown {
+      --animate-duration: 400ms;
+    }
+    &[data-row="1"].animate__animated.animate__fadeInDown,
+    &[data-row="1"].animate__animated.animate__slideInDown {
+      --animate-duration: 500ms;
+    }
+    &[data-row="0"].animate__animated.animate__fadeInDown,
+    &[data-row="0"].animate__animated.animate__slideInDown {
+      --animate-duration: 600ms;
+    }
+  }
 }
 
-#tableau .card.animate__animated.animate__fadeInDown {
-  --animate-delay: 0ms;
-  --animate-duration: 200ms;
-}
-#tableau .card.animate__animated.animate__flipInY {
-  --animate-delay: 0ms;
-  --animate-duration: 400ms;
-}
+.card {
+  &.animate__animated {
+    &.animate__fadeOutDown {
+      /* remove tableau card to put on base */
+      --animate-duration: 350ms;
+    }
 
-#tableau #col0 .card.animate__animated.animate__fadeInDown,
-#tableau #col0 .card.animate__animated.animate__slideInDown {
-  --animate-delay: 100ms;
-}
-#tableau #col1 .card.animate__animated.animate__fadeInDown,
-#tableau #col1 .card.animate__animated.animate__slideInDown {
-  --animate-delay: 400ms;
-}
-#tableau #col2 .card.animate__animated.animate__fadeInDown,
-#tableau #col2 .card.animate__animated.animate__slideInDown {
-  --animate-delay: 700ms;
-}
-#tableau #col3 .card.animate__animated.animate__fadeInDown,
-#tableau #col3 .card.animate__animated.animate__slideInDown {
-  --animate-delay: 1000ms;
-}
-#tableau #col4 .card.animate__animated.animate__fadeInDown,
-#tableau #col4 .card.animate__animated.animate__slideInDown {
-  --animate-delay: 1300ms;
-}
-#tableau #col5 .card.animate__animated.animate__fadeInDown,
-#tableau #col5 .card.animate__animated.animate__slideInDown {
-  --animate-delay: 1600ms;
-}
-#tableau #col6 .card.animate__animated.animate__fadeInDown,
-#tableau #col6 .card.animate__animated.animate__slideInDown {
-  --animate-delay: 1900ms;
-}
-
-#tableau .card[data-row="4"].animate__animated.animate__fadeInDown,
-#tableau .card[data-row="4"].animate__animated.animate__slideInDown {
-  --animate-duration: 200ms;
-}
-#tableau .card[data-row="3"].animate__animated.animate__fadeInDown,
-#tableau .card[data-row="3"].animate__animated.animate__slideInDown {
-  --animate-duration: 300ms;
-}
-#tableau .card[data-row="2"].animate__animated.animate__fadeInDown,
-#tableau .card[data-row="2"].animate__animated.animate__slideInDown {
-  --animate-duration: 400ms;
-}
-#tableau .card[data-row="1"].animate__animated.animate__fadeInDown,
-#tableau .card[data-row="1"].animate__animated.animate__slideInDown {
-  --animate-duration: 500ms;
-}
-#tableau .card[data-row="0"].animate__animated.animate__fadeInDown,
-#tableau .card[data-row="0"].animate__animated.animate__slideInDown {
-  --animate-duration: 600ms;
-}
-
-/* remove tableau card to put on base */
-#tableau .card.animate__animated.animate__fadeOutDown {
-  --animate-duration: 350ms;
-}
-/* invalud tableau card removal */
-#tableau .card.animate__animated.animate__shakeX {
-  --animate-duration: 100ms;
+    &.animate__shakeX {
+      /* invalid tableau card removal */
+      --animate-duration: 100ms;
+    }
+  }
 }
 
 #stock {
   --animate-delay: 0s;
+
+  .card {
+    transition: all 600ms;
+  }
 }
 
-#stock .card {
-  transition: all 600ms;
-}
-
-#base .card {
-  --animate-delay: 0s;
-  --animate-duration: 700ms;
-  transition: all 600ms;
+#base {
+  .card {
+    --animate-delay: 0s;
+    --animate-duration: 700ms;
+    transition: all 600ms;
+  }
 }
 
 /* combo counter */
-#combo.show {
-  --animate-duration: 250ms;
-}
-#combo.show.animate__animated.animate__backInUp {
-  --animate-delay: 0ms;
-  --animate-duration: 500ms;
-  display: flex;
-}
-#combo.show.animate__animated.animate__fadeOut {
-  --animate-delay: 1s;
-  --animate-duration: 500ms;
-  display: flex;
-}
-#combo.show.animate__animated.animate__hinge {
-  --animate-delay: 0ms;
-  --animate-duration: 750ms;
-  display: flex;
+#combo {
+  &.show {
+    --animate-duration: 250ms;
+
+    &.animate__animated {
+      &.animate__backInUp {
+        --animate-delay: 0ms;
+        --animate-duration: 500ms;
+        display: flex;
+      }
+
+      &.animate__fadeOut {
+        --animate-delay: 1s;
+        --animate-duration: 500ms;
+        display: flex;
+      }
+
+      &.animate__hinge {
+        --animate-delay: 0ms;
+        --animate-duration: 750ms;
+        display: flex;
+      }
+    }
+  }
 }
 
-.modal-dialog.end-state .modal-window.animate__animated.animate__zoomIn {
-  --animate-delay: 0ms;
-  --animate-duration: 2000ms;
+.modal-dialog {
+  &.end-state {
+    .modal-window {
+      &.animate__animated {
+        &.animate__zoomIn {
+          --animate-delay: 0ms;
+          --animate-duration: 2000ms;
+        }
+      }
+    }
+  }
 }
 
 @keyframes SlideRight {

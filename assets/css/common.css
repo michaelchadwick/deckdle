@@ -70,75 +70,89 @@ button {
   -webkit-user-select: none;
   -moz-user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
-}
-button:disabled {
-  background-color: var(--gray);
-  color: var(--disabled);
-  cursor: not-allowed;
-}
-@media (hover: hover) {
-  button:disabled:hover {
-    background-color: inherit;
-    color: inherit;
-  }
-}
 
-button.icon {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-  padding: 0 4px;
-}
-button.icon:disabled {
-  cursor: not-allowed;
-}
-@media (hover: hover) {
-  button.icon:hover {
-    color: var(--base-color);
+  &:disabled {
+    background-color: var(--gray);
+    color: var(--disabled);
+    cursor: not-allowed;
   }
-}
-button.help {
-  background-color: var(--gray);
-  border-radius: 4px;
-  display: inline-block;
-  height: 21px;
-  margin-right: 2px;
-  position: relative;
-  top: 1px;
-  width: 21px;
-}
-button.help.wide {
-  width: 60px;
-}
-button.help i {
-  bottom: 1px;
-  position: relative;
-}
-button.share {
-  background-color: var(--base-color);
-  color: var(--white);
-  height: 30px;
-  padding: 5px;
-  width: 100px;
-}
-button.share i {
-  margin-left: 6px;
-}
-button.tiny {
-  font-size: 0.8em;
-  height: 20px;
-  margin-left: 1em;
-  width: 75px;
-}
-button.solo {
-  font-size: 16px;
-  height: auto;
-  margin: 0;
-  width: auto;
-}
-button.game-over {
-  margin-top: 10px;
+  @media (hover: hover) {
+    &:disabled {
+      &:hover {
+        background-color: inherit;
+        color: inherit;
+      }
+    }
+  }
+
+  &.icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 0 4px;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+  @media (hover: hover) {
+    &.icon {
+      &:hover {
+        color: var(--base-color);
+      }
+    }
+  }
+
+  &.help {
+    background-color: var(--gray);
+    border-radius: 4px;
+    display: inline-block;
+    height: 21px;
+    margin-right: 2px;
+    position: relative;
+    top: 1px;
+    width: 21px;
+
+    &.wide {
+      width: 60px;
+    }
+
+    i {
+      bottom: 1px;
+      position: relative;
+    }
+  }
+
+  &.share {
+    background-color: var(--base-color);
+    color: var(--white);
+    height: 30px;
+    padding: 5px;
+    width: 100px;
+
+    i {
+      margin-left: 6px;
+    }
+  }
+
+  &.tiny {
+    font-size: 0.8em;
+    height: 20px;
+    margin-left: 1em;
+    width: 75px;
+  }
+
+  &.solo {
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    width: auto;
+  }
+
+  &.game-over {
+    margin-top: 10px;
+  }
 }
 
 .container {
@@ -155,45 +169,48 @@ button.game-over {
 
 .radio {
   margin: 0.2rem;
-}
-.radio input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-}
-.radio input[type="radio"] + .radio-label.radio-label-disabled {
-  color: var(--gray-dark);
-}
-.radio input[type="radio"] + .radio-label:before {
-  background: var(--off-white);
-  border: 1px solid var(--gray-dark);
-  border-radius: 100%;
-  content: "";
-  cursor: pointer;
-  display: inline-block;
-  height: 1em;
-  margin-right: 0.5em;
-  position: relative;
-  text-align: center;
-  transition: all 250ms ease;
-  top: 0;
-  vertical-align: top;
-  width: 1em;
-}
-.radio input[type="radio"]:checked + .radio-label:before {
-  background-color: var(--base-color);
-  box-shadow: inset 0 0 0 4px var(--off-white);
-}
-.radio input[type="radio"]:focus + .radio-label:before {
-  outline: none;
-  border-color: var(--base-color);
-}
-.radio input[type="radio"]:disabled + .radio-label:before {
-  box-shadow: inset 0 0 0 4px var(--off-white);
-  border-color: var(--gray-dark);
-  background: var(--gray-dark);
-}
-.radio input[type="radio"] + .radio-label:empty:before {
-  margin-right: 0;
+
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+
+    & + .radio-label.radio-label-disabled {
+      color: var(--gray-dark);
+    }
+    & + .radio-label:before {
+      background: var(--off-white);
+      border: 1px solid var(--gray-dark);
+      border-radius: 100%;
+      content: "";
+      cursor: pointer;
+      display: inline-block;
+      height: 1em;
+      margin-right: 0.5em;
+      position: relative;
+      text-align: center;
+      transition: all 250ms ease;
+      top: 0;
+      vertical-align: top;
+      width: 1em;
+    }
+
+    &:checked + .radio-label:before {
+      background-color: var(--base-color);
+      box-shadow: inset 0 0 0 4px var(--off-white);
+    }
+    &:focus + .radio-label:before {
+      outline: none;
+      border-color: var(--base-color);
+    }
+    &:disabled + .radio-label:before {
+      box-shadow: inset 0 0 0 4px var(--off-white);
+      border-color: var(--gray-dark);
+      background: var(--gray-dark);
+    }
+    & + .radio-label:empty:before {
+      margin-right: 0;
+    }
+  }
 }
 
 .switch {
@@ -204,24 +221,27 @@ button.game-over {
   height: 20px;
   position: relative;
   width: 32px;
-}
-.switch .knob {
-  background-color: var(--white);
-  border-radius: 8px;
-  display: block;
-  height: calc(100% - 4px);
-  left: 2px;
-  position: absolute;
-  top: 2px;
-  transform: translateX(0);
-  transition: transform 0.3s;
-  width: 50%;
-}
-.switch[data-status="true"] {
-  background-color: var(--base-color);
-}
-.switch[data-status="true"] .knob {
-  transform: translateX(calc(100% - 4px));
+
+  .knob {
+    background-color: var(--white);
+    border-radius: 8px;
+    display: block;
+    height: calc(100% - 4px);
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    transform: translateX(0);
+    transition: transform 0.3s;
+    width: 50%;
+  }
+
+  &[data-status="true"] {
+    background-color: var(--base-color);
+
+    .knob {
+      transform: translateX(calc(100% - 4px));
+    }
+  }
 }
 
 .help .invalid,
@@ -235,18 +255,19 @@ button.game-over {
   flex-direction: column;
   gap: 1em;
   margin: 0.5em 0;
+
+  & > div {
+    width: 100%;
+  }
+  @media (min-width: 550px) {
+    & > div {
+      width: 50%;
+    }
+  }
 }
 @media (min-width: 550px) {
   .flex {
     flex-direction: row;
-  }
-}
-.flex > div {
-  width: 100%;
-}
-@media (min-width: 550px) {
-  .flex > div {
-    width: 50%;
   }
 }
 

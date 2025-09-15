@@ -1,65 +1,71 @@
 section#game #keyboard-container {
   margin: 0.5rem 1rem 0;
   user-select: none; /* no selecting text */
-}
-section#game #keyboard-container button#button-create-new:disabled {
-  display: none;
-}
-section#game #keyboard-container .row {
-  display: flex;
-  gap: 5px;
-  margin: 0 auto 4px;
-  /* Enable panning, pinch zoom, but not double-tap zoom */
-  touch-action: manipulation;
-  width: 100%;
-}
-section#game #keyboard-container .row:last-of-type {
-  margin-bottom: 16px;
-}
 
-@media (min-height: 600px) {
-  section#game #keyboard-container .row {
-    margin: 0 auto 8px;
-  }
-  section#game #keyboard-container .row:last-of-type {
-    margin-bottom: 20px;
-  }
-}
-
-section#game #keyboard-container button {
-  border: 1px solid transparent;
-  font-size: 0.8rem;
-  height: 35px;
-  width: 50px;
-}
-section#game #keyboard-container button:last-of-type {
-  margin: 0;
-}
-section#game #keyboard-container .row.sub button {
-  background-color: var(--gray-light1);
-}
-section#game #keyboard-container .row.sub button:disabled {
-  background-color: var(--gray);
-}
-
-@media (min-width: 376px) and (min-height: 600px) {
-  section#game #keyboard-container button {
-    font-size: 1.25rem;
-    height: 50px;
-    width: 100px;
-  }
-}
-
-@media (hover: hover) {
-  section#game #keyboard-container button:hover:not(.disabled),
-  section#game #keyboard-container button:hover:not([disabled]) {
-    background-color: var(--gray-dark);
-    border: 1px solid var(--black);
-    color: var(--white);
-  }
-  section#game #keyboard-container button:disabled:hover {
-    background-color: var(--gray);
+  button {
     border: 1px solid transparent;
-    color: var(--disabled);
+    font-size: 0.8rem;
+    height: 35px;
+    width: 50px;
+
+    &#button-create-new:disabled {
+      display: none;
+    }
+
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+  @media (min-width: 376px) and (min-height: 600px) {
+    button {
+      font-size: 1.25rem;
+      height: 50px;
+      width: 100px;
+    }
+  }
+  @media (hover: hover) {
+    button:hover:not(.disabled),
+    button:hover:not([disabled]) {
+      background-color: var(--gray-dark);
+      border: 1px solid var(--black);
+      color: var(--white);
+    }
+    button:disabled:hover {
+      background-color: var(--gray);
+      border: 1px solid transparent;
+      color: var(--disabled);
+    }
+  }
+
+  .row {
+    display: flex;
+    gap: 5px;
+    margin: 0 auto 4px;
+    /* Enable panning, pinch zoom, but not double-tap zoom */
+    touch-action: manipulation;
+    width: 100%;
+
+    &:last-of-type {
+      margin-bottom: 16px;
+    }
+  }
+  @media (min-height: 600px) {
+    .row {
+      margin: 0 auto 8px;
+
+      &:last-of-type {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .row.sub {
+    button {
+      background-color: var(--gray-light1);
+
+      &:disabled {
+        background-color: var(--gray);
+      }
+    }
   }
 }

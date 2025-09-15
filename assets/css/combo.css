@@ -15,57 +15,64 @@
   margin: 0 auto;
   min-height: 20px;
   z-index: 10;
-}
-#combo.show .title {
-  align-content: center;
-  background-color: var(--bg-color);
-  border: 1px solid var(--black);
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-  box-shadow: 2px 2px 2px var(--gray-light3);
-  display: flex;
-  font-weight: 700;
-  justify-content: center;
-  margin: 0;
-  min-width: 70px;
-  padding: 0 2px;
-  text-align: center;
-  text-transform: uppercase;
-  width: 100%;
-}
-#combo.show .text {
-  align-content: center;
-  background-color: var(--white);
-  border: 1px solid var(--black);
-  border-left: none;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
-  box-shadow: 2px 2px 2px var(--gray-light3);
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  min-width: 50px;
-  padding: 0;
-  text-align: center;
-}
-#combo.show.x.x2 {
-  font-size: 0.85em;
-}
-#combo.show.x.x5 {
-  font-size: 0.9em;
-}
-#combo.show.x.x10 {
-  font-size: 1em;
-}
-#combo.show.x.x15 {
-  font-size: 1.125em;
-}
-#combo.show.x.x20 {
-  font-size: 1.25em;
-}
-#combo.show.x.x30 {
-  font-size: 1.375em;
-}
-#combo.show.x.x35 {
-  font-size: 1.5em;
+
+  &.show {
+    .title {
+      align-content: center;
+      background-color: var(--bg-color);
+      border: 1px solid var(--black);
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+      box-shadow: 2px 2px 2px var(--gray-light3);
+      display: flex;
+      font-weight: 700;
+      justify-content: center;
+      margin: 0;
+      min-width: 70px;
+      padding: 0 2px;
+      text-align: center;
+      text-transform: uppercase;
+      width: 100%;
+    }
+
+    .text {
+      align-content: center;
+      background-color: var(--white);
+      border: 1px solid var(--black);
+      border-left: none;
+      border-bottom-right-radius: 10px;
+      border-top-right-radius: 10px;
+      box-shadow: 2px 2px 2px var(--gray-light3);
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      min-width: 50px;
+      padding: 0;
+      text-align: center;
+    }
+
+    &.x {
+      &.x2 {
+        font-size: 0.85em;
+      }
+      &.x5 {
+        font-size: 0.9em;
+      }
+      &.x10 {
+        font-size: 1em;
+      }
+      &.x15 {
+        font-size: 1.125em;
+      }
+      &.x20 {
+        font-size: 1.25em;
+      }
+      &.x30 {
+        font-size: 1.375em;
+      }
+      &.x35 {
+        font-size: 1.5em;
+      }
+    }
+  }
 }
