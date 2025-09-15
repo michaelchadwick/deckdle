@@ -46,26 +46,27 @@ Deckdle._loadGame = async (switching = false) => {
       lsStateDaily.forEach((lsState) => {
         Deckdle.__setState(
           'comboCurrent',
-          lsState.comboCurrent || dailyDefaults.comboCurrent,
+          !isNaN(lsState.comboCurrent) ? lsState.comboCurrent : dailyDefaults.comboCurrent,
           'daily',
           i
         )
 
-        // Deckdle._logStatus(
-        //   `[LOAD-DAILY] setting Deckdle.comboCurrent to ${
-        //     lsState.comboCurrent || dailyDefaults.comboCurrent
-        //   }`
-        // )
-
-        Deckdle.comboCurrent = lsState.comboCurrent || dailyDefaults.comboCurrent
+        Deckdle.comboCurrent = !isNaN(lsState.comboCurrent)
+          ? lsState.comboCurrent
+          : dailyDefaults.comboCurrent
 
         Deckdle.__setState(
           'comboCurrentMax',
-          lsState.comboCurrentMax || dailyDefaults.comboCurrentMax,
+          !isNaN(lsState.comboCurrentMax) ? lsState.comboCurrentMax : dailyDefaults.comboCurrentMax,
           'daily',
           i
         )
-        Deckdle.__setState('comboMax', lsState.comboMax || dailyDefaults.comboMax, 'daily', i)
+        Deckdle.__setState(
+          'comboMax',
+          !isNaN(lsState.comboMax) ? lsState.comboMax : dailyDefaults.comboMax,
+          'daily',
+          i
+        )
         Deckdle.__setState('gameState', lsState.gameState || dailyDefaults.gameState, 'daily', i)
         Deckdle.__setState(
           'lastCompletedTime',
@@ -81,7 +82,7 @@ Deckdle._loadGame = async (switching = false) => {
         )
         Deckdle.__setState(
           'sessionIndex',
-          lsState.sessionIndex || dailyDefaults.sessionIndex,
+          !isNaN(lsState.sessionIndex) ? lsState.sessionIndex : dailyDefaults.sessionIndex,
           'daily',
           i
         )
