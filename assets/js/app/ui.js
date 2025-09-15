@@ -271,6 +271,8 @@ Deckdle.ui._updateGameType = () => {
 /* COMBO */
 
 Deckdle.ui._updateComboCounter = () => {
+  Deckdle._logStatus('updating UI combo')
+
   const currentComboLevel = Deckdle.comboCurrent
 
   // need 'show' class via setting

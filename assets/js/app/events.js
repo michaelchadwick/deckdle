@@ -113,6 +113,15 @@ Deckdle._attachEventListeners = () => {
         })
       })
 
+      // + increase combo
+      Deckdle.dom.interactive.debug.btnComboIncrease.addEventListener('click', () => {
+        Deckdle._debugIncreaseCombo()
+      })
+      // - decrease combo
+      Deckdle.dom.interactive.debug.btnComboDecrease.addEventListener('click', () => {
+        Deckdle._debugDecreaseCombo()
+      })
+
       // 🤖 display bot batch score for today's puzzle
       Deckdle.dom.interactive.debug.btnGetBotScore.addEventListener('click', () => {
         Deckdle.modalOpen('bot-score')

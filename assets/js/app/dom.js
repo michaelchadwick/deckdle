@@ -45,6 +45,8 @@ Deckdle.dom.interactive.debug = {
   btnDealCards: document.getElementById('button-deal-cards'),
   btnWinAnimation: document.getElementById('button-win-animation'),
   btnLoseAnimation: document.getElementById('button-lose-animation'),
+  btnComboIncrease: document.getElementById('button-combo-increase'),
+  btnComboDecrease: document.getElementById('button-combo-decrease'),
   btnGetBotScore: document.getElementById('button-get-bot-score'),
 }
 // DOM > interactive elements (debug-gameover)

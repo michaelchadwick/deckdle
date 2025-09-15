@@ -155,9 +155,29 @@ Deckdle._clearLocalStorage = (showModal = true) => {
   }
 }
 
-Deckdle._debugCombo = () => {
+Deckdle._debugIncreaseCombo = () => {
   Deckdle._playSFX('click_tableau_valid', Deckdle.comboCurrent)
-  Deckdle._increaseCombo()
+  Deckdle.comboCurrent += 1
+
+  Deckdle._logStatus('_debugIncreaseCombo', Deckdle.comboCurrent)
+
+  // update the UI's version of the combo
+  Deckdle.ui._updateComboCounter()
+}
+
+Deckdle._debugDecreaseCombo = () => {
+  Deckdle._playSFX('click_tableau_invalid', Deckdle.comboCurrent)
+
+  if (Deckdle.comboCurrent > 0) {
+    Deckdle.comboCurrent -= 1
+  }
+
+  Deckdle._logStatus('_debugDecreaseCombo', Deckdle.comboCurrent)
+
+  Deckdle.ui._resetComboCounter()
+
+  // update the UI's version of the combo
+  Deckdle.ui._updateComboCounter()
 }
 
 Deckdle._debugGameOver = (
