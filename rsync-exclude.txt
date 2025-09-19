@@ -11,6 +11,7 @@
 .stylelintignore
 .stylelintrc.js
 
+_debug
 assets/php/_debug
 assets/scripts/*.java
 assets/scripts/*.py
