@@ -409,21 +409,21 @@ Deckdle.modalOpen = async (type) => {
 
       // win
       if (tableauCount == 0) {
-        // check if our stock count is better than the bots score
-        // (which will be a negative number for their stock count)
-        if (stockCount > -botScore) {
+        // check if our stock count is better than the bot score
+        // flip stockCount so it's negative (bot score will be negative, too)
+        if (-stockCount < botScore) {
           modalText += `
             <div>🤖🤖🤖</div>
             <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
             <div>🤖🤖🤖</div>
           `
-        } else if (stockCount == botScore) {
+        } else if (-stockCount == botScore) {
           modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
         }
       }
       // loss
       else {
-        // check if our tableau count is better than the bots score
+        // check if our tableau count is better than the bot score
         // (which will be a positive number for their tableau count)
         if (tableauCount < botScore) {
           modalText += `
