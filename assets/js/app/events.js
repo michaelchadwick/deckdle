@@ -135,9 +135,41 @@ Deckdle._attachEventListeners = () => {
       Deckdle.dom.interactive.debugGameover.btnDebugGameOverPar.addEventListener('click', () => {
         Deckdle._debugGameOver('golf', 'daily', true, 0)
       })
-      // 🧩 display debug game over modal (under par)
-      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder.addEventListener('click', () => {
+      // 🧩 display debug game over modal (1 under par)
+      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder1.addEventListener('click', () => {
         Deckdle._debugGameOver('golf', 'daily', true, 1)
+      })
+      // 🧩 display debug game over modal (2 under par)
+      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder2.addEventListener('click', () => {
+        Deckdle._debugGameOver('golf', 'daily', true, 2)
+      })
+      // 🧩 display debug game over modal (3 under par)
+      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder3.addEventListener('click', () => {
+        Deckdle._debugGameOver('golf', 'daily', true, 3)
+      })
+      // 🧩 display debug game over modal (4 under par)
+      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder4.addEventListener('click', () => {
+        Deckdle._debugGameOver('golf', 'daily', true, 4)
+      })
+      // 🧩 display debug game over modal (5 under par)
+      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder5.addEventListener('click', () => {
+        Deckdle._debugGameOver('golf', 'daily', true, 5)
+      })
+      // 🧩 display debug game over modal (6 under par)
+      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder6.addEventListener('click', () => {
+        Deckdle._debugGameOver('golf', 'daily', true, 6)
+      })
+      // 🧩 display debug game over modal (7 under par)
+      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder7.addEventListener('click', () => {
+        Deckdle._debugGameOver('golf', 'daily', true, 7)
+      })
+      // 🧩 display debug game over modal (8 under par)
+      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder8.addEventListener('click', () => {
+        Deckdle._debugGameOver('golf', 'daily', true, 8)
+      })
+      // 🧩 display debug game over modal (9 under par)
+      Deckdle.dom.interactive.debugGameover.btnDebugGameOverUnder9.addEventListener('click', () => {
+        Deckdle._debugGameOver('golf', 'daily', true, 9)
       })
       // 🧩 display debug game over modal (match bot)
       Deckdle.dom.interactive.debugGameover.btnDebugGameOverMatchBot.addEventListener(
