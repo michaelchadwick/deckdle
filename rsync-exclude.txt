@@ -8,6 +8,7 @@
 *.logicx
 .prettierignore
 .prettierrc.js
+.ruby-lsp
 .stylelintignore
 .stylelintrc.js
 
