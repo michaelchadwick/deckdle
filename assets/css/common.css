@@ -253,7 +253,7 @@ button {
 .flex {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.5em;
   margin: 0.5em 0;
 
   & > div {

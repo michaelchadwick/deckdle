@@ -68,11 +68,10 @@
   }
 
   .modal-text {
-    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    line-height: 1.2;
+    line-height: 1.1;
     margin: 0;
     overflow-y: auto;
     padding: 10px;

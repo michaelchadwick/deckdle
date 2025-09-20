@@ -22,17 +22,16 @@ Deckdle.modalOpen = async (type) => {
       }
 
       modalText = `
-        <p><strong>Deckdle</strong> is a daily solitaire card game. Currently, the only solitaire type is <code>golf</code>, but there are plans to add others.</p>
+        <p><strong>Deckdle</strong> is a solitaire card game, <code>golf</code>-style.</p>
       `
 
       switch (gameType) {
         case 'golf':
         default:
           modalText += `
-            <h3 class="blamph">${gameType}</h3>
-            <p>Exhaust the <span class="blamph">tableau</span> (the top grid of cards) onto your <span class="blamph">base</span> (bottom-right stack) before your <span class="blamph">stock</span> (bottom-left stack) runs out.</p>
+            <p>Exhaust the <span class="blamph">tableau</span> (top grid of cards) onto your <span class="blamph">base</span> (bottom-right stack) before your <span class="blamph">stock</span> (bottom-left stack) runs out.</p>
 
-            <p>Move any unobscured card (just click/touch it) from the <span class="blamph">tableau</span> as long as its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current <span class="blamph">base</span> card. Suit <strong><em>does not</em></strong> matter. If no valid move is available, click/touch the <span class="blamph">stock</span> to get a new <span class="blamph">base</span> card.</p>
+            <p>Move any unobscured card (click/touch it) from the <span class="blamph">tableau</span> as long as its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current <span class="blamph">base</span> card. Suit <strong><em>does not</em></strong> matter. If no valid move is available, click/touch the <span class="blamph">stock</span> to get a new <span class="blamph">base</span> card.</p>
           `
           break
       }
@@ -41,12 +40,12 @@ Deckdle.modalOpen = async (type) => {
         <div class="flex">
           <div>
             <h4>Daily</h4>
-            <p>New <span class="blamph">${gameType}</span> solitaire tableau and stock every day (at 12am PST)!</p>
+            <p>New tableau and stock every day (12am PST)!</p>
           </div>
 
           <div>
             <h4>Free</h4>
-            <p>New <span class="blamph">${gameType}</span> solitaire tableau and stock endlessly!
+            <p>New tableau and stock endlessly!
           </div>
         </div>
 
