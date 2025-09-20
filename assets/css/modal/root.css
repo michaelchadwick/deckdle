@@ -154,6 +154,15 @@
     .share {
       margin: 0 auto;
     }
+
+    .bot-meta {
+      text-align: center;
+
+      .bot-statistics {
+        font-size: 1rem;
+        line-height: 1;
+      }
+    }
   }
 
   .modal-window {
@@ -210,7 +219,7 @@
     }
 
     &.perm-small {
-      height: 100px;
+      height: 130px;
       width: 250px;
 
       .modal-text {
