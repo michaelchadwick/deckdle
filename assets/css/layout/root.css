@@ -197,7 +197,7 @@ section#game {
     width: 100%;
 
     .setting-row {
-      font-size: 20px;
+      font-size: 1.1rem;
       margin: 0 auto;
       padding: 4px;
       text-align: center;
@@ -257,6 +257,7 @@ section#game {
     display: none;
     font-size: 0.75rem;
     height: 20px;
+    line-height: 1;
     margin: 5px 0 0;
     padding: 4px 4px 0;
     transform: scale(0);
@@ -268,6 +269,20 @@ section#game {
       .day {
         font-family: "Changa Bold", sans-serif;
         font-weight: 400;
+
+        &.long {
+          display: none;
+        }
+
+        @media (min-width: 576px) {
+          &.short {
+            display: none;
+          }
+
+          &.long {
+            display: inline;
+          }
+        }
       }
     }
   }

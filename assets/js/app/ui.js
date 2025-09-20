@@ -257,7 +257,8 @@ Deckdle.ui._dealCards = (animate = false) => {
 Deckdle.ui._updateDailyDetails = (index) => {
   Deckdle.dailyNumber = parseInt(index) + 1
   Deckdle.dom.dailyDetails.querySelector('.index').innerHTML = (parseInt(index) + 1).toString()
-  Deckdle.dom.dailyDetails.querySelector('.day').innerHTML = Deckdle.__getTodaysDate()
+  Deckdle.dom.dailyDetails.querySelector('.day.long').innerHTML = Deckdle.__getTodaysDate('long')
+  Deckdle.dom.dailyDetails.querySelector('.day.short').innerHTML = Deckdle.__getTodaysDate('short')
 }
 Deckdle.ui._updateCardCounts = () => {
   Deckdle.dom.tableauCount.innerText = Deckdle._tableauCount()

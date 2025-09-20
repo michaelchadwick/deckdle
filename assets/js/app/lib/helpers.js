@@ -54,25 +54,31 @@ Deckdle.__getFormattedDate = (date) => {
 
   return formatted_date
 }
-Deckdle.__getTodaysDate = () => {
+Deckdle.__getTodaysDate = (type = 'short') => {
   const d = new Date(Date.now())
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
+  let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-  return `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
+  if (type == 'long') {
+    days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ]
+
+    return `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
+  } else {
+    return `${days[d.getDay()]}, ${d.getFullYear()}/${d.getMonth()}/${d.getDate()}`
+  }
 }
 
 Deckdle.__hasParentWithMatchingSelector = (target, selector) => {
