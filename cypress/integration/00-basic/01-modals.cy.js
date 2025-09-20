@@ -33,11 +33,11 @@ context('00-basic', () => {
       )
       cy.get('dialog.modal-dialog .modal-window .modal-text').should(
         'contain.text',
-        'Deckdle is a daily solitaire card game'
+        'Deckdle is a solitaire card game'
       )
       cy.get('dialog.modal-dialog .modal-window .modal-text').should(
         'contain.text',
-        'Exhaust the tableau (the top grid of cards) onto your base (bottom-right stack) before your stock (bottom-left stack) runs out.'
+        'Exhaust the tableau (top grid of cards) onto your base (bottom-right stack) before your stock (bottom-left stack) runs out.'
       )
 
       cy.get('.modal-close').click()
