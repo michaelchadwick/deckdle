@@ -300,15 +300,20 @@ Deckdle._getNebyooApps = async () => {
 
 Deckdle._getBotScore = async () => {
   // will have negative numbers or 0 for wins, and positive number for losses
-  const dailyBatchPath = '/_debug/text/daily_batch.txt'
+  const dailyBatchPath = '/_debug/text/daily_batch.json'
 
-  const response = await fetch(dailyBatchPath)
-  const score = await response.text()
-  const lastModified = new Date(response.headers.get('Date')).toISOString().split('T')[0]
+  try {
+    const response = await fetch(dailyBatchPath)
+    const result = await response.json()
+    const lastModified = new Date(response.headers.get('Date')).toISOString().split('T')[0]
 
-  if (score) {
-    return { lastModified, score }
-  } else {
-    return { lastModified: null, score: 'N/A' }
+    if (result) {
+      return { lastModified, result }
+    } else {
+      return { lastModified: null, result: 'N/A' }
+    }
+  } catch (e) {
+    console.error('could not get bot score', e)
+    return { lastModified: null, result: 'N/A' }
   }
 }
