@@ -52,13 +52,13 @@ jobs:
         run: npm install -g pnpm@10
 
       - name: Install dependencies
-        uses: ./
+        uses: cypress-io/github-action@v6
         with:
           working-directory: examples/start-and-pnpm-workspaces
           runTests: false
 
       - name: Cypress tests
-        uses: ./
+        uses: cypress-io/github-action@v6
         with:
           install: false
           working-directory: examples/start-and-pnpm-workspaces/packages/workspace-1
