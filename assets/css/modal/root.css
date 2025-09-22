@@ -78,7 +78,9 @@
     width: 100%;
 
     div {
-      &.para {
+      &.move-count,
+      &.para,
+      &.bot-score {
         text-align: center;
 
         &.highlighted {

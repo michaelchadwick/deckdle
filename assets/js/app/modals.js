@@ -482,7 +482,7 @@ Deckdle.modalOpen = async (type) => {
           <div class="share">
             <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
           </div>
-          <div>
+          <div class="bot-score">
             <button class="fa-solid fa-robot icon tiny solo" title="${botScoreDaily}" onclick="Deckdle.modalOpen('bot-score')"></button>
           </div>
         `
