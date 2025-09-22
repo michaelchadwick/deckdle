@@ -52,24 +52,14 @@ jobs:
         run: npm install -g pnpm@10
 
       - name: Install dependencies
-        # with Cypress GitHub Action.
-        # Calling the Cypress GitHub Action causes all dependencies from
-        # the root of the pnpm workspace examples/start-and-pnpm-workspaces
-        # to be installed
-        # AND it automatically caches the Cypress binary.
-        uses: cypress-io/github-action@v6
+        uses: ./
         with:
           working-directory: examples/start-and-pnpm-workspaces
           runTests: false
 
       - name: Cypress tests
-        # Run Cypress in examples/start-and-pnpm-workspaces/packages/workspace-1 only
-        uses: cypress-io/github-action@v6
+        uses: ./
         with:
-          # Do not attempt to install dependencies in the workspace using the action.
-          # There is no pnpm-lock.yaml file in a workspace for
-          # Cypress GitHub Action to use.
-          # We already installed dependencies when we called the action previously.
           install: false
           working-directory: examples/start-and-pnpm-workspaces/packages/workspace-1
           start: pnpm start
