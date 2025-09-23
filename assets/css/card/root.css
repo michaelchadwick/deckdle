@@ -63,7 +63,7 @@
     }
   }
 
-  .empty {
+  &.empty {
     background-color: var(--gray-light2);
     border: 1px solid transparent;
   }
