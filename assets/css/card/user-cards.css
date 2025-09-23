@@ -65,10 +65,6 @@
       display: none;
     }
 
-    &.empty {
-      visibility: hidden;
-    }
-
     &:not(.empty):hover {
       background-color: var(--card-back-focus);
       cursor: pointer;
