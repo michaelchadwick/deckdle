@@ -47,35 +47,6 @@ header {
       }
     }
 
-    #col0 .card.animate__animated.animate__fadeInDown,
-    #col0 .card.animate__animated.animate__slideInDown {
-      --animate-delay: 100ms;
-    }
-    #col1 .card.animate__animated.animate__fadeInDown,
-    #col1 .card.animate__animated.animate__slideInDown {
-      --animate-delay: 400ms;
-    }
-    #col2 .card.animate__animated.animate__fadeInDown,
-    #col2 .card.animate__animated.animate__slideInDown {
-      --animate-delay: 700ms;
-    }
-    #col3 .card.animate__animated.animate__fadeInDown,
-    #col3 .card.animate__animated.animate__slideInDown {
-      --animate-delay: 1000ms;
-    }
-    #col4 .card.animate__animated.animate__fadeInDown,
-    #col4 .card.animate__animated.animate__slideInDown {
-      --animate-delay: 1300ms;
-    }
-    #col5 .card.animate__animated.animate__fadeInDown,
-    #col5 .card.animate__animated.animate__slideInDown {
-      --animate-delay: 1600ms;
-    }
-    #col6 .card.animate__animated.animate__fadeInDown,
-    #col6 .card.animate__animated.animate__slideInDown {
-      --animate-delay: 1900ms;
-    }
-
     &[data-row="4"].animate__animated.animate__fadeInDown,
     &[data-row="4"].animate__animated.animate__slideInDown {
       --animate-duration: 200ms;
@@ -96,6 +67,35 @@ header {
     &[data-row="0"].animate__animated.animate__slideInDown {
       --animate-duration: 600ms;
     }
+  }
+
+  #col0 .card.animate__animated.animate__fadeInDown,
+  #col0 .card.animate__animated.animate__slideInDown {
+    --animate-delay: 100ms;
+  }
+  #col1 .card.animate__animated.animate__fadeInDown,
+  #col1 .card.animate__animated.animate__slideInDown {
+    --animate-delay: 400ms;
+  }
+  #col2 .card.animate__animated.animate__fadeInDown,
+  #col2 .card.animate__animated.animate__slideInDown {
+    --animate-delay: 700ms;
+  }
+  #col3 .card.animate__animated.animate__fadeInDown,
+  #col3 .card.animate__animated.animate__slideInDown {
+    --animate-delay: 1000ms;
+  }
+  #col4 .card.animate__animated.animate__fadeInDown,
+  #col4 .card.animate__animated.animate__slideInDown {
+    --animate-delay: 1300ms;
+  }
+  #col5 .card.animate__animated.animate__fadeInDown,
+  #col5 .card.animate__animated.animate__slideInDown {
+    --animate-delay: 1600ms;
+  }
+  #col6 .card.animate__animated.animate__fadeInDown,
+  #col6 .card.animate__animated.animate__slideInDown {
+    --animate-delay: 1900ms;
   }
 }
 
