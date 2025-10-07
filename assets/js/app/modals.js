@@ -371,7 +371,7 @@ Deckdle.modalOpen = async (type) => {
 
               if (stockCount >= DECKDLE_GOLF_BIRD_MAX) {
                 modalText += `
-                  <iframe src="https://giphy.com/embed/l0Ex7OYRjmY0dnxqo" width="128" height="128" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/crazy-wow-rainbow-l0Ex7OYRjmY0dnxqo">via GIPHY</a></p>
+                  <iframe src="https://giphy.com/embed/l0Ex7OYRjmY0dnxqo" width="128" height="128" style="text-align: center; width: 100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p  style="text-align: center;"><a href="https://giphy.com/gifs/crazy-wow-rainbow-l0Ex7OYRjmY0dnxqo">via GIPHY</a></p>
                 `
               } else {
                 modalText += `
@@ -412,12 +412,14 @@ Deckdle.modalOpen = async (type) => {
         // flip stockCount so it's negative (bot score will be negative, too)
         if (-stockCount < botScore) {
           modalText += `
-            <div>🤖🤖🤖</div>
-            <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
-            <div>🤖🤖🤖</div>
+            <div class="bot-match">
+              <div>🤖🤖🤖</div>
+              <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
+              <div>🤖🤖🤖</div>
+            </div>
           `
         } else if (-stockCount == botScore) {
-          modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+          modalText += `<div class="bot-match">🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
         }
       }
       // loss

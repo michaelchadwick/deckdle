@@ -464,7 +464,7 @@ Deckdle._undoLastTableauMove = () => {
 }
 
 Deckdle._onTableauClick = (card, colId, rowId) => {
-  Deckdle._logStatus('[UI] Deckdle._onTableauClick')
+  Deckdle._logStatus('[UI] Deckdle._onTableauClick', card, colId, rowId)
 
   if (card.classList.contains('available')) {
     if (Deckdle._tableauCardIsValid(card.dataset)) {
