@@ -403,37 +403,39 @@ Deckdle.modalOpen = async (type) => {
           break
       }
 
-      // did you beat the bot?
-      const botScore = parseInt(botScoreDaily)
+      if (gameMode == 'daily') {
+        // did you beat the daily bot?
+        const botScore = parseInt(botScoreDaily)
 
-      // win
-      if (tableauCount == 0) {
-        // check if our stock count is better than the bot score
-        // flip stockCount so it's negative (bot score will be negative, too)
-        if (-stockCount < botScore) {
-          modalText += `
-            <div class="bot-match">
+        // win
+        if (tableauCount == 0) {
+          // check if our stock count is better than the bot score
+          // flip stockCount so it's negative (bot score will be negative, too)
+          if (-stockCount < botScore) {
+            modalText += `
+              <div class="bot-match">
+                <div>🤖🤖🤖</div>
+                <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
+                <div>🤖🤖🤖</div>
+              </div>
+            `
+          } else if (-stockCount == botScore) {
+            modalText += `<div class="bot-match">🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+          }
+        }
+        // loss
+        else {
+          // check if our tableau count is better than the bot score
+          // (which will be a positive number for their tableau count)
+          if (tableauCount < botScore) {
+            modalText += `
               <div>🤖🤖🤖</div>
               <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
               <div>🤖🤖🤖</div>
-            </div>
-          `
-        } else if (-stockCount == botScore) {
-          modalText += `<div class="bot-match">🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
-        }
-      }
-      // loss
-      else {
-        // check if our tableau count is better than the bot score
-        // (which will be a positive number for their tableau count)
-        if (tableauCount < botScore) {
-          modalText += `
-            <div>🤖🤖🤖</div>
-            <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
-            <div>🤖🤖🤖</div>
-          `
-        } else if (tableauCount == botScore) {
-          modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+            `
+          } else if (tableauCount == botScore) {
+            modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+          }
         }
       }
 
