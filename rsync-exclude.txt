@@ -2,6 +2,7 @@
 .editorconfig
 .eslintcache
 .git
+.github
 .gitignore
 .husky
 *.icloud
@@ -13,6 +14,7 @@
 .stylelintrc.js
 
 _debug
+action.yml
 assets/php/_debug
 assets/scripts/*.java
 assets/scripts/*.py
@@ -24,6 +26,8 @@ cypress.config.js
 eslint.config.mjs
 LICENSE.md
 node_modules
+package.json
+pnpm-lock.yaml
 README.md
 Rakefile
 rsync-exclude.txt
