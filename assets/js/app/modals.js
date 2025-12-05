@@ -413,7 +413,7 @@ Deckdle.modalOpen = async (type) => {
           // flip stockCount so it's negative (bot score will be negative, too)
           if (-stockCount < botScore) {
             modalText += `
-              <div class="bot-match">
+              <div class="bot-beat">
                 <div>🤖🤖🤖</div>
                 <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
                 <div>🤖🤖🤖</div>
@@ -434,7 +434,7 @@ Deckdle.modalOpen = async (type) => {
               <div>🤖🤖🤖</div>
             `
           } else if (tableauCount == botScore) {
-            modalText += `<div>🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+            modalText += `<div class="bot-match">🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
           }
         }
       }
