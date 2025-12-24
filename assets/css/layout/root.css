@@ -352,7 +352,7 @@ section#game {
 @media (min-height: 600px) {
   @media (min-width: 768px) {
     section#game {
-      width: 480px;
+      width: 600px;
     }
   }
   @media (min-width: 992px) {

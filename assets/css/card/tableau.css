@@ -106,7 +106,7 @@
 @media (min-width: 768px) {
   @media (min-height: 600px) {
     #tableau {
-      height: 185px;
+      height: 195px;
       max-width: 430px;
       padding-top: 5px;
     }

@@ -95,7 +95,8 @@
 @media (min-width: 768px) {
   @media (min-height: 600px) {
     .card {
-      width: 55px;
+      height: 75px;
+      width: 60px;
     }
   }
 }
@@ -123,14 +124,14 @@
 @media (min-width: 768px) {
   @media (min-height: 600px) {
     .card-label {
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
   }
 }
 @media (min-width: 992px) {
   @media (min-height: 600px) {
     .card-label {
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
 }
