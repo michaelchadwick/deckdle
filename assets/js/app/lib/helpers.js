@@ -77,7 +77,7 @@ Deckdle.__getTodaysDate = (type = 'short') => {
 
     return `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`
   } else {
-    return `${days[d.getDay()]}, ${d.getFullYear()}/${d.getMonth()}/${d.getDate()}`
+    return `${days[d.getDay()]}, ${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`
   }
 }
 
