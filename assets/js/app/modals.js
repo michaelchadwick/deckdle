@@ -22,7 +22,7 @@ Deckdle.modalOpen = async (type) => {
       }
 
       modalText = `
-        <p><strong>Deckdle</strong> is a solitaire card game, <code>golf</code>-style.</p>
+        <p><strong>Deckdle</strong> is solitaire, <code>golf</code>-style.</p>
       `
 
       switch (gameType) {
@@ -31,25 +31,18 @@ Deckdle.modalOpen = async (type) => {
           modalText += `
             <p>Exhaust the <span class="blamph">tableau</span> (top grid of cards) onto your <span class="blamph">base</span> (bottom-right stack) before your <span class="blamph">stock</span> (bottom-left stack) runs out.</p>
 
-            <p>Move any unobscured card (click/touch it) from the <span class="blamph">tableau</span> as long as its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current <span class="blamph">base</span> card. Suit <strong><em>does not</em></strong> matter. If no valid move is available, click/touch the <span class="blamph">stock</span> to get a new <span class="blamph">base</span> card.</p>
+            <p>Move any free card from the <span class="blamph">tableau</span> as long as its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current <span class="blamph">base</span> card. Suit <strong><em>does not</em></strong> matter. If no valid move is available, click/touch the <span class="blamph">stock</span> to get a new <span class="blamph">base</span> card.</p>
           `
           break
       }
 
       modalText += `
-        <div class="flex">
-          <div>
-            <h4>Daily</h4>
-            <p>New tableau and stock every day (12am PST)!</p>
-          </div>
+        <p>
+          <strong>DAILY</strong>: <span>New puzzle every day (12am PST)!</span>
+          <strong>FREE</strong>: <span>New puzzles endlessly!</span>
+        </p>
 
-          <div>
-            <h4>Free</h4>
-            <p>New tableau and stock endlessly!
-          </div>
-        </div>
-
-        <p>Settings for dark mode, sounds, and a visual combo counter can be adjusted using the <i class="fa-solid fa-gear"></i> icon.</p>
+        <p>Settings for dark mode, sounds, and other things can be adjusted using the <i class="fa-solid fa-gear"></i> icon.</p>
 
         <hr />
 
