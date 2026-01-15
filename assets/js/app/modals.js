@@ -346,15 +346,29 @@ Deckdle.modalOpen = async (type) => {
 
     case 'game-over': {
       const botScoreDaily = (await Deckdle._getBotScore()).result.score
+      const botBeatHTML = `
+        <div class="bot-beat">
+          <div>🤖🤖🤖</div>
+          <div>You <strong>BEAT</strong> the bot! <strong><em>How on earth...?!?!</em></strong></div>
+          <div>🤖🤖🤖</div>
+        </div>
+      `
+      const botMatchHTML = `
+        <div class="bot-match">
+          🤖 You <strong>matched</strong> the bot! <strong>Holy cowabunga!</strong> 🤖
+        </div>
+      `
 
       if (Deckdle.myModal) {
         Deckdle.myModal._destroyModal()
       }
 
+      // START: block of stuff
       modalText = `
         <div class="container game-over">
       `
 
+      // player score
       switch (gameState) {
         case 'golf':
         default:
@@ -403,8 +417,8 @@ Deckdle.modalOpen = async (type) => {
           break
       }
 
+      // did you beat the daily bot?
       if (gameMode == 'daily') {
-        // did you beat the daily bot?
         const botScore = parseInt(botScoreDaily)
 
         // win
@@ -412,15 +426,9 @@ Deckdle.modalOpen = async (type) => {
           // check if our stock count is better than the bot score
           // flip stockCount so it's negative (bot score will be negative, too)
           if (-stockCount < botScore) {
-            modalText += `
-              <div class="bot-beat">
-                <div>🤖🤖🤖</div>
-                <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
-                <div>🤖🤖🤖</div>
-              </div>
-            `
+            modalText += botBeatHTML
           } else if (-stockCount == botScore) {
-            modalText += `<div class="bot-match">🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+            modalText += botMatchHTML
           }
         }
         // loss
@@ -428,17 +436,14 @@ Deckdle.modalOpen = async (type) => {
           // check if our tableau count is better than the bot score
           // (which will be a positive number for their tableau count)
           if (tableauCount < botScore) {
-            modalText += `
-              <div>🤖🤖🤖</div>
-              <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
-              <div>🤖🤖🤖</div>
-            `
+            modalText += botBeatHTML
           } else if (tableauCount == botScore) {
-            modalText += `<div class="bot-match">🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+            modalText += botMatchHTML
           }
         }
       }
 
+      // moves count
       modalText += `
         <div class='move-count'>
       `
@@ -455,7 +460,7 @@ Deckdle.modalOpen = async (type) => {
         </div>
       `
 
-      // daily
+      // daily: next puzzle text
       if (gameMode == 'daily') {
         modalText += `
           <div class="para">New daily puzzle available at 12 am PST</div>
@@ -472,7 +477,7 @@ Deckdle.modalOpen = async (type) => {
           `
         }
       }
-      // free
+      // free: try another text
       else {
         modalText += `
           <div class="buttons">
@@ -481,6 +486,7 @@ Deckdle.modalOpen = async (type) => {
         `
       }
 
+      // share score
       if (gameState == 'GAME_OVER') {
         modalText += `
           <div class="share">
@@ -492,6 +498,7 @@ Deckdle.modalOpen = async (type) => {
         `
       }
 
+      // END: block of stuff
       modalText += `
         </div>
       `
@@ -506,10 +513,12 @@ Deckdle.modalOpen = async (type) => {
         Deckdle.myModal._destroyModal()
       }
 
+      // START: block of stuff
       modalText = `
         <div class="container game-over">
       `
 
+      // player score
       switch (gameType) {
         case 'golf':
         default:
@@ -546,7 +555,7 @@ Deckdle.modalOpen = async (type) => {
           break
       }
 
-      // daily
+      // daily: next puzzle text
       if (gameMode == 'daily') {
         modalText += `
           <div class="para">New daily puzzle available at 12 am PST</div>
@@ -558,7 +567,7 @@ Deckdle.modalOpen = async (type) => {
           </div>
         `
       }
-      // free
+      // free: try another text
       else {
         modalText += `
           <div class="buttons">
@@ -570,6 +579,7 @@ Deckdle.modalOpen = async (type) => {
       modalText += `
         </div>
       `
+      // END: block of stuff
 
       Deckdle.myModal = new Modal(
         'end-state',
