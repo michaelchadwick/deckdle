@@ -555,6 +555,49 @@ Deckdle.modalOpen = async (type) => {
           break
       }
 
+      // did you beat the daily bot?
+      if (gameMode == 'daily') {
+        const botScore = parseInt(botScoreDaily)
+
+        // win
+        if (tableauCount == 0) {
+          // check if our stock count is better than the bot score
+          // flip stockCount so it's negative (bot score will be negative, too)
+          if (-stockCount < botScore) {
+            modalText += botBeatHTML
+          } else if (-stockCount == botScore) {
+            modalText += botMatchHTML
+          }
+        }
+        // loss
+        else {
+          // check if our tableau count is better than the bot score
+          // (which will be a positive number for their tableau count)
+          if (tableauCount < botScore) {
+            modalText += botBeatHTML
+          } else if (tableauCount == botScore) {
+            modalText += botMatchHTML
+          }
+        }
+      }
+
+      // moves count
+      modalText += `
+        <div class='move-count'>
+      `
+      if (undoCount > 0) {
+        modalText += `
+          Moves: <strong>${actionCount}</strong> (${actionCountWithUndos} counting undos), Best Combo: <strong>x${comboCurrentMax}</strong>
+        `
+      } else {
+        modalText += `
+          Moves: <strong>${actionCount}</strong>, Best Combo: <strong>x${comboCurrentMax}</strong>
+        `
+      }
+      modalText += `
+        </div>
+      `
+
       // daily: next puzzle text
       if (gameMode == 'daily') {
         modalText += `
