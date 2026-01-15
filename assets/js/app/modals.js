@@ -351,6 +351,7 @@ Deckdle.modalOpen = async (type) => {
           🤖 You <strong>matched</strong> the bot! <strong>Holy cowabunga!</strong> 🤖
         </div>
       `
+      let botCompScore = -1
 
       if (Deckdle.myModal) {
         Deckdle.myModal._destroyModal()
@@ -420,8 +421,10 @@ Deckdle.modalOpen = async (type) => {
           // flip stockCount so it's negative (bot score will be negative, too)
           if (-stockCount < botScore) {
             modalText += botBeatHTML
+            botCompScore = 1
           } else if (-stockCount == botScore) {
             modalText += botMatchHTML
+            botCompScore = 0
           }
         }
         // loss
@@ -430,8 +433,10 @@ Deckdle.modalOpen = async (type) => {
           // (which will be a positive number for their tableau count)
           if (tableauCount < botScore) {
             modalText += botBeatHTML
+            botCompScore = 1
           } else if (tableauCount == botScore) {
             modalText += botMatchHTML
+            botCompScore = 0
           }
         }
       }
@@ -483,7 +488,7 @@ Deckdle.modalOpen = async (type) => {
       if (gameState == 'GAME_OVER') {
         modalText += `
           <div class="share">
-            <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
+            <button class="game-over share" onclick="Deckdle._shareResults(${botCompScore})">Share <i class="fa-solid fa-share-nodes"></i></button>
           </div>
           <div class="bot-score">
             <button class="fa-solid fa-robot icon tiny solo" title="${botScoreDaily}" onclick="Deckdle.modalOpen('bot-score')"></button>

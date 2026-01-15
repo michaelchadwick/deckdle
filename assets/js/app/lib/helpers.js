@@ -237,7 +237,7 @@ Deckdle.__addStateObjSession = (mode = Deckdle.__getGameMode()) => {
   }
 }
 
-Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGameType()) => {
+Deckdle.__getShareText = (mode, type, botCompScore) => {
   let html = ''
 
   if (mode == 'daily') {
@@ -260,6 +260,17 @@ Deckdle.__getShareText = (mode = Deckdle.__getGameMode(), type = Deckdle.__getGa
         }
       } else {
         gameScore = `GOLF: +${tableauCount + stockCount}`
+      }
+
+      switch (botCompScore) {
+        case 0:
+          gameScore += ` == 🤖`
+          break
+        case 1:
+          gameScore += ` > 🤖`
+          break
+        default:
+          break
       }
 
       html += `${gameScore}, x${Deckdle.__getState()['comboCurrentMax']}\n`

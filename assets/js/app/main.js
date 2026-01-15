@@ -255,8 +255,12 @@ Deckdle._loadQueryString = (param) => {
 }
 
 // copy results to clipboard for sharing
-Deckdle._shareResults = async () => {
-  let shareText = Deckdle.__getShareText()
+Deckdle._shareResults = async (botCompScore) => {
+  let shareText = Deckdle.__getShareText(
+    Deckdle.__getGameMode(),
+    Deckdle.__getGameType(),
+    botCompScore
+  )
 
   // if (navigator.canShare({ text: shareText })) {
   //   navigator.share({ text: shareText }).then(() => {
