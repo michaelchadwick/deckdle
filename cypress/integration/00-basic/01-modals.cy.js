@@ -33,7 +33,7 @@ context('00-basic', () => {
       )
       cy.get('dialog.modal-dialog .modal-window .modal-text').should(
         'contain.text',
-        'Deckdle is a solitaire card game'
+        'Deckdle is solitaire, golf-style'
       )
       cy.get('dialog.modal-dialog .modal-window .modal-text').should(
         'contain.text',
