@@ -187,14 +187,30 @@ Deckdle._debugGameOver = (
   stockCount = 1,
   botStockCount = 10
 ) => {
+  const botBeatHTML = `
+    <div class="bot-beat">
+      <div>🤖🤖🤖</div>
+      <div>You <strong>BEAT</strong> the bot! <strong><em>How on earth...?!?!</em></strong></div>
+      <div>🤖🤖🤖</div>
+    </div>
+  `
+  const botMatchHTML = `
+    <div class="bot-match">
+      🤖 You <strong>matched</strong> the bot! <strong>Holy cowabunga!</strong> 🤖
+    </div>
+  `
+  let botCompScore = -1
+
   if (Deckdle.myModal) {
     Deckdle.myModal._destroyModal()
   }
 
+  // START: block of stuff
   let modalText = `
     <div class="container game-over">
   `
 
+  // player score
   switch (type) {
     case 'golf':
     default:
@@ -244,18 +260,14 @@ Deckdle._debugGameOver = (
   }
 
   if (stockCount > botStockCount) {
-    modalText += `
-      <div class="bot-beat">
-        <div>🤖🤖🤖</div>
-        <div>You <strong>beat</strong> the bot! <em>How on earth...?!?!</em></div>
-        <div>🤖🤖🤖</div>
-      </div>
-    `
+    modalText += botBeatHTML
+    botCompScore = 1
   } else if (stockCount == botStockCount) {
-    modalText += `<div class="bot-match">🤖 You matched the bot! <strong>Holy cowabunga!</strong> 🤖</div>`
+    modalText += botMatchHTML
+    botCompScore = 0
   }
 
-  // daily
+  // daily: next puzzle text
   if (gameMode == 'daily') {
     modalText += `
       <div class="para">New daily puzzle available at 12 am PST</div>
@@ -272,7 +284,7 @@ Deckdle._debugGameOver = (
       `
     }
   }
-  // free
+  // free: try another
   else {
     modalText += `
       <div class="buttons">
@@ -281,15 +293,17 @@ Deckdle._debugGameOver = (
     `
   }
 
+  // share score
   modalText += `
     <div class="share">
-      <button class="game-over share" onclick="Deckdle._shareResults()">Share <i class="fa-solid fa-share-nodes"></i></button>
+      <button class="game-over share" onclick="Deckdle._shareResults(${botCompScore})">Share <i class="fa-solid fa-share-nodes"></i></button>
     </div>
   `
 
   modalText += `
     </div>
   `
+  // END: block of stuff
 
   Deckdle.myModal = new Modal('end-state', 'Game Over', modalText, null, null, 'game-over')
 }
