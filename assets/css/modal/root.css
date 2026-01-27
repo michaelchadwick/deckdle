@@ -122,6 +122,14 @@
         width: fit-content;
       }
 
+      &.move-count {
+        font-size: 1.1rem;
+      }
+
+      &.para {
+        font-size: 0.9rem;
+      }
+
       &.buttons {
         display: flex;
         flex-direction: row;
