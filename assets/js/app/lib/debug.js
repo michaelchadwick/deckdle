@@ -195,7 +195,7 @@ Deckdle._debugGameOver = (
     </div>
   `
   const botMatchHTML = `
-    <div class="bot-match">
+    <div class="bot-match animate__animated animate__infinite animate__pulse">
       🤖 You <strong>matched</strong> the bot! <strong>Holy cowabunga!</strong> 🤖
     </div>
   `
