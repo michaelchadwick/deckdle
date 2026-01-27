@@ -286,6 +286,7 @@
   margin: 0 1em;
   max-height: 95%;
   max-width: 500px;
+  overflow-x: hidden;
   width: 90%;
 
   &.loaded {
