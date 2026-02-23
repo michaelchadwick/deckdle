@@ -242,6 +242,23 @@ section#game {
     }
   }
 
+  #cards-container {
+    margin: 0;
+
+    &.disabled {
+      background-color: var(--gray);
+    }
+
+    @media (min-width: 768px) {
+      #cards-container {
+        background-color: var(--white);
+        border: 2px solid var(--black);
+        box-shadow: 4px 4px 4px var(--gray-dark);
+        margin: 0 1rem;
+      }
+    }
+  }
+
   #gamemode-container {
     height: 20px;
 
@@ -330,22 +347,6 @@ section#game {
   @media (min-width: 768px) {
     #game-type {
       font-size: 1.4rem;
-    }
-  }
-
-  #cards-container {
-    margin: 0;
-
-    &.disabled {
-      background-color: var(--gray);
-    }
-  }
-  @media (min-width: 768px) {
-    #cards-container {
-      background-color: var(--white);
-      border: 2px solid var(--black);
-      box-shadow: 4px 4px 4px var(--gray-dark);
-      margin: 0 1rem;
     }
   }
 }
