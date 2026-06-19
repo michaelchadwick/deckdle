@@ -262,15 +262,17 @@ Deckdle.__getShareText = (mode, type, botCompScore) => {
         gameScore = `GOLF: +${tableauCount + stockCount}`
       }
 
-      switch (botCompScore) {
-        case 0:
-          gameScore += ` == 🤖`
-          break
-        case 1:
-          gameScore += ` > 🤖`
-          break
-        default:
-          break
+      if (mode == 'daily') {
+        switch (botCompScore) {
+          case 0:
+            gameScore += ` == 🤖`
+            break
+          case 1:
+            gameScore += ` > 🤖`
+            break
+          default:
+            break
+        }
       }
 
       html += `${gameScore}, x${Deckdle.__getState()['comboCurrentMax']}\n`

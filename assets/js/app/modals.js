@@ -490,10 +490,14 @@ Deckdle.modalOpen = async (type) => {
           <div class="share">
             <button class="game-over share" onclick="Deckdle._shareResults(${botCompScore})">Share <i class="fa-solid fa-share-nodes"></i></button>
           </div>
-          <div class="bot-score">
-            <button class="fa-solid fa-robot icon tiny solo" title="${botScoreDaily}" onclick="Deckdle.modalOpen('bot-score')"></button>
-          </div>
         `
+        if (gameMode == 'daily') {
+          modalText += `
+            <div class="bot-score">
+              <button class="fa-solid fa-robot icon tiny solo" title="${botScoreDaily}" onclick="Deckdle.modalOpen('bot-score')"></button>
+            </div>
+          `
+        }
       }
 
       // END: block of stuff
