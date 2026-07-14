@@ -10,10 +10,10 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "start": "php -S 127.0.0.1:3000",
-    "test": "npx cypress run --env host=local",
-    "test:coverage": "COVERAGE=true npx cypress run --env host=local",
-    "test:open": "npx cypress open --e2e -b electron --env host=local",
-    "test:open:prod": "npx cypress open --e2e -b electron --config baseUrl='https://deckdle.neb.host' --env host=prod",
+    "test": "pnpm cypress run --env host=local",
+    "test:coverage": "COVERAGE=true pnpm cypress run --env host=local",
+    "test:open": "pnpm cypress open --e2e -b electron --env host=local",
+    "test:open:prod": "pnpm cypress open --e2e -b electron --config baseUrl='https://deckdle.neb.host' --env host=prod",
     "prepare": "husky"
   },
   "keywords": [],
@@ -37,10 +37,10 @@
     "stylelint-config-recommended": "^18.0.0",
     "stylelint-prettier": "^5.0.3"
   },
-  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "cypress"
-    ]
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.13.0"
+    }
   }
 }
