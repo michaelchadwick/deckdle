@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Deckdle",
+    "short_name": "Deckdle",
     "icons": [
         {
             "src": "/assets/icons/android-chrome-192x192.png",
@@ -13,7 +13,8 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "display": "standalone"
+    "description": "Daily solitaire card game",
+    "display": "standalone",
+    "theme_color": "#ffffff"
 }
