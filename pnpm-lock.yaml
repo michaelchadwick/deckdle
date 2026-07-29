@@ -220,11 +220,11 @@ importers:
         specifier: ^9.39.5
         version: 9.39.5
       cypress:
-        specifier: ^15.18.1
-        version: 15.18.1
+        specifier: ^15.19.0
+        version: 15.19.0
       cypress-real-events:
         specifier: ^1.15.0
-        version: 1.15.0(cypress@15.18.1)
+        version: 1.15.0(cypress@15.19.0)
       eslint:
         specifier: ^9.39.5
         version: 9.39.5
@@ -769,8 +769,8 @@ packages:
     peerDependencies:
       cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x || ^10.x || ^11.x || ^12.x || ^13.x || ^14.x || ^15.x
 
-  cypress@15.18.1:
-    resolution: {integrity: sha512-JtkTVtUE2lvLYgZCaug+Uai0H9IqsJirlBO49c87QwG0bJUGvAUVBz1EJve0b0oaYP244Ew9M0BkrHpcqkYxmw==}
+  cypress@15.19.0:
+    resolution: {integrity: sha512-kjy1u3SWlMRWS5qffH3U+bXx1PqPP7qwhIzEY3UtERcW2r/8zy5uk6uSwa75pYXJyYFVP1SO8mAn/avZUvUbfg==}
     engines: {node: ^20.1.0 || ^22.0.0 || >=24.0.0}
     hasBin: true
 
@@ -2388,11 +2388,11 @@ snapshots:
 
   cssesc@3.0.0: {}
 
-  cypress-real-events@1.15.0(cypress@15.18.1):
+  cypress-real-events@1.15.0(cypress@15.19.0):
     dependencies:
-      cypress: 15.18.1
+      cypress: 15.19.0
 
-  cypress@15.18.1:
+  cypress@15.19.0:
     dependencies:
       '@cypress/request': 4.0.1
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
