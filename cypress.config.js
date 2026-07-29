@@ -44,6 +44,7 @@ module.exports = defineConfig({
         }
       })
     },
+    allowCypressEnv: false,
     baseUrl: 'http://localhost:3000',
     excludeSpecPattern: ['*/**/_debug'],
     fixturesFolder: 'cypress/fixtures',
