@@ -46,7 +46,7 @@ Deckdle.modalOpen = async (type) => {
 
         <hr />
 
-        <p><strong>Dev</strong>: <a href="https://michaelchadwick.info" target="_blank">Michael Chadwick</a>.</p>
+        <p><strong>Dev</strong>: <a href="https://michaelchadwick.info" target="_blank">Michael Chadwick</a>. <strong>Source</strong>: <a href="https://github.com/michaelchadwick/deckdle">Github</a></p>
       `
 
       Deckdle.myModal = new Modal('perm', 'How to Play Deckdle', modalText, null, null)
