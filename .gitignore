@@ -8,6 +8,7 @@ node_modules
 
 !assets/css/vendor
 !assets/icons
+!assets/js/vendor
 
 cypress/screenshots
 cypress/videos
