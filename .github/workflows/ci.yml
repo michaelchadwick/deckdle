@@ -42,22 +42,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     needs: [lint]
-
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [24]
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v7
-
-      # pnpm is not installed by default on GitHub runners
       - name: Install pnpm
-        run: npm install -g pnpm@11
-
-      - name: Install dependencies
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+          cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
+      - name: Install Cypress
         uses: cypress-io/github-action@v7
         with:
           working-directory: examples/start-and-pnpm-workspaces
           runTests: false
-
-      - name: Cypress tests
+      - name: Run Cypress tests
         uses: cypress-io/github-action@v7
         with:
           install: false
