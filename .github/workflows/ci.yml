@@ -24,44 +24,41 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
           cache: pnpm
       - name: Install Dependencies
         run: pnpm install
       - name: Lint
         run: pnpm lint
+      - name: Test Dependency Installation
+        run: pnpm install --resolution-only --no-frozen-lockfile
 
   test:
-    # This job installs pnpm,
-    # installs all dependencies,
-    # caches the Cypress binary cache,
-    # then runs Cypress tests in the single workspace
-    # of the subfolder "packages/workspace-1".
-    runs-on: ubuntu-latest
     name: Test
-    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs: [lint]
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # pnpm is not installed by default on GitHub runners
       - name: Install pnpm
         run: npm install -g pnpm@11
 
       - name: Install dependencies
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           working-directory: examples/start-and-pnpm-workspaces
           runTests: false
 
       - name: Cypress tests
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           working-directory: examples/start-and-pnpm-workspaces/packages/workspace-1
