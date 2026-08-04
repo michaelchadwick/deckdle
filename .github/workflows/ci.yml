@@ -70,6 +70,7 @@ jobs:
         with:
           install: false
           package-manager-cache: false
+          quiet: true
           start: pnpm start
           wait-on: "http://localhost:3000"
         # env:
