@@ -1,0 +1,82 @@
+[
+  {
+    "actions": [],
+    "base": [{ "suit": 2, "rank": 2, "status": 1 }],
+    "comboMax": null,
+    "gameState": "IN_PROGRESS",
+    "gameType": "golf",
+    "lastCompletedTime": null,
+    "lastPlayedTime": 1705998645000,
+    "sessionIndex": null,
+    "setupId": 2345678901,
+    "stock": [
+      { "suit": 1, "rank": 14, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 13, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 12, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 11, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 10, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 9, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 8, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 7, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 6, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 5, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 4, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 3, "status": 1, "disabled": false },
+      { "suit": 1, "rank": 2, "status": 1, "disabled": false },
+      { "suit": 0, "rank": 14, "status": 1, "disabled": false },
+      { "suit": 0, "rank": 13, "status": 1, "disabled": false },
+      { "suit": 0, "rank": 12, "status": 1, "disabled": false }
+    ],
+    "tableau": {
+      "0": [
+        { "suit": 2, "rank": 7, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 6, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 5, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 4, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 3, "status": 1, "disabled": false }
+      ],
+      "1": [
+        { "suit": 2, "rank": 12, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 11, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 10, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 9, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 8, "status": 1, "disabled": false }
+      ],
+      "2": [
+        { "suit": 3, "rank": 4, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 3, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 2, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 14, "status": 1, "disabled": false },
+        { "suit": 2, "rank": 13, "status": 1, "disabled": false }
+      ],
+      "3": [
+        { "suit": 3, "rank": 9, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 8, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 7, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 6, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 5, "status": 1, "disabled": false }
+      ],
+      "4": [
+        { "suit": 3, "rank": 14, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 13, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 12, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 11, "status": 1, "disabled": false },
+        { "suit": 3, "rank": 10, "status": 1, "disabled": false }
+      ],
+      "5": [
+        { "suit": 0, "rank": 6, "status": 1, "disabled": false },
+        { "suit": 0, "rank": 5, "status": 1, "disabled": false },
+        { "suit": 0, "rank": 4, "status": 1, "disabled": false },
+        { "suit": 0, "rank": 3, "status": 1, "disabled": false },
+        { "suit": 0, "rank": 2, "status": 1, "disabled": false }
+      ],
+      "6": [
+        { "suit": 0, "rank": 11, "status": 1, "disabled": false },
+        { "suit": 0, "rank": 10, "status": 1, "disabled": false },
+        { "suit": 0, "rank": 9, "status": 1, "disabled": false },
+        { "suit": 0, "rank": 8, "status": 1, "disabled": false },
+        { "suit": 0, "rank": 7, "status": 1, "disabled": false }
+      ]
+    }
+  }
+]
