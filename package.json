@@ -37,6 +37,11 @@
     "stylelint-config-recommended": "^18.0.0",
     "stylelint-prettier": "^5.0.3"
   },
+  "engines": {
+    "node": ">= 24",
+    "yarn": "use pnpm",
+    "npm": "use pnpm"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
