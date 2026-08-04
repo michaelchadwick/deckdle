@@ -57,13 +57,16 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
+          cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
       - name: Run Cypress tests
         uses: cypress-io/github-action@v7
         with:
+          package-manager-cache: false
           start: pnpm start
           wait-on: "http://localhost:3000"
+          working-directory: examples/basic-pnpm
         # env:
         #   COVERAGE: true
 
