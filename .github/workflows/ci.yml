@@ -66,7 +66,6 @@ jobs:
           package-manager-cache: false
           start: pnpm start
           wait-on: "http://localhost:3000"
-          working-directory: examples/basic-pnpm
         # env:
         #   COVERAGE: true
 
