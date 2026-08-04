@@ -60,9 +60,15 @@ jobs:
           cache: pnpm
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install Cypress (skip npm)
+        uses: cypress-io/github-action@v7
+        with:
+          runTests: false
+          install: false
       - name: Run Cypress tests
         uses: cypress-io/github-action@v7
         with:
+          install: false
           package-manager-cache: false
           start: pnpm start
           wait-on: "http://localhost:3000"
