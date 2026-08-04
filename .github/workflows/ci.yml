@@ -58,9 +58,7 @@ jobs:
           node-version: 24
           cache: pnpm
       - name: Install workspace dependencies
-        working-directory: examples/start-and-pnpm-workspaces
-        run: |
-          pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Run Cypress tests
         uses: cypress-io/github-action@v7
         with:
