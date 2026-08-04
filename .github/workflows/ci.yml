@@ -64,7 +64,6 @@ jobs:
         with:
           start: pnpm start
           wait-on: "http://localhost:3000"
-          working-directory: examples/start-and-pnpm-workspaces/packages/workspace-1
         # env:
         #   COVERAGE: true
 
