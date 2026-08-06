@@ -31,7 +31,7 @@ Deckdle.modalOpen = async (type) => {
           modalText += `
             <p>Exhaust the <span class="blamph">tableau</span> (top grid of cards) onto your <span class="blamph">base</span> (bottom-right stack) before your <span class="blamph">stock</span> (bottom-left stack) runs out.</p>
 
-            <p>Move any <strong>free</strong> card from the <span class="blamph">tableau</span> to the <span class="blamph">base</span> stack. A card is <strong>free</strong> if it not covered by another card, and its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current <span class="blamph">base</span> card. Suit <strong><em>does not</em></strong> matter. If no valid move is available, click/touch the <span class="blamph">stock</span> to get a new <span class="blamph">base</span> card.</p>
+            <p>Move any <strong>free</strong> card from the <span class="blamph">tableau</span> to the <span class="blamph">base</span> stack. A card is <strong>free</strong> if it not covered by another card, and its rank (e.g. 2, 8, J, etc.) is <strong>one higher</strong> or <strong>one lower</strong> than the current <span class="blamph">base</span> card. Suit and color <strong><em>do not</em></strong> matter. If no valid move is available, click/touch the <span class="blamph">stock</span> to get a new <span class="blamph">base</span> card.</p>
           `
           break
       }
