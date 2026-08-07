@@ -56,6 +56,17 @@
         width: 36px;
       }
 
+      #button-setting-card-style {
+        align-items: center;
+        display: flex;
+        gap: 5px;
+
+        img {
+          height: 46px;
+          width: 39px;
+        }
+      }
+
       @media (hover: hover) {
         button:hover:not(.disabled),
         button:hover:not([disabled]) {

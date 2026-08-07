@@ -42,6 +42,7 @@ const DECKDLE_DEFAULT_STATE = {
 }
 const DECKDLE_DEFAULT_SETTINGS = {
   animationDisplay: true,
+  cardStyle: 'default',
   comboCounter: true,
   darkMode: false,
   firstTime: true,

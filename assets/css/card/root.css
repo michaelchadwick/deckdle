@@ -71,7 +71,7 @@
       width: 73px;
 
       &.large {
-        height: 85px;
+        height: 88px;
       }
     }
   }
@@ -123,8 +123,6 @@
   }
 
   &.large {
-    height: 17vw;
-
     .rank-top {
       height: 30px;
       margin: -2px;

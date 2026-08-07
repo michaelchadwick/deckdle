@@ -185,6 +185,29 @@ Deckdle.modalOpen = async (type) => {
             </div>
           </div>
 
+          <!-- card style -->
+          <div class="setting-row">
+            <div class="text">
+              <div class="title">Card Style</div>
+              <div class="description">How to display cards</div>
+            </div>
+            <div class="control">
+              <div class="container">
+                <div id="button-setting-card-style"
+                  data-status=""
+                  class="select"
+                  onclick="Deckdle._changeSetting('cardStyle', event.target.value)"
+                >
+                  <img src="/assets/images/card-${Deckdle.settings.cardStyle}.png" />
+                  <select>
+                    <option value="default"${Deckdle.settings.cardStyle == 'default' ? ' selected' : ''}>Default</option>
+                    <option value="large"${Deckdle.settings.cardStyle == 'large' ? ' selected' : ''}>Large</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- combo counter -->
           <div class="setting-row">
             <div class="text">
