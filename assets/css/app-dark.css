@@ -102,10 +102,12 @@ body.dark-mode {
   section#game {
     background-color: var(--black);
 
-    #mode-container {
-      #daily-details {
-        color: var(--white);
-      }
+    #gamemode-container {
+      color: var(--white);
+    }
+
+    #daily-details {
+      color: var(--white);
     }
 
     #cards-container,
