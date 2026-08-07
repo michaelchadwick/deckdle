@@ -119,11 +119,13 @@ Deckdle._moveCardFromStockToBase = (noMoveInPrevGame) => {
   Deckdle.__setState('base', base)
   Deckdle.__setState('stock', stock)
 
-  Deckdle._resetCombo()
-
   if (!noMoveInPrevGame) {
     Deckdle.__addAction(new StockAction())
+
+    // only resetCombo if game had prev moves to reset
+    Deckdle._resetCombo()
   }
+
   Deckdle.__setState('lastPlayedTime', new Date().getTime())
   Deckdle._saveGame('_moveCardFromStockToBase')
 
