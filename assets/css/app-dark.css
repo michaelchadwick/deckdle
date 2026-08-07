@@ -99,6 +99,18 @@ body.dark-mode {
     }
   }
 
+  #combo {
+    color: var(--white);
+
+    .title {
+      background-color: var(--bg-dark-color);
+    }
+
+    .text {
+      background-color: var(--black);
+    }
+  }
+
   section#game {
     background-color: var(--black);
 
