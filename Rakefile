@@ -3,4 +3,8 @@ task :deploy do
   sh "rsync -auP --no-p --exclude-from='rsync-exclude.txt' . $DECKDLE_REMOTE"
 end
 
+task :sync do
+  sh "rsync -auP --no-p --exclude-from='rsync-exclude.txt' . $DECKDLE_REMOTE"
+end
+
 task default: [:deploy]
