@@ -336,6 +336,25 @@ Deckdle._loadSettings = () => {
       }
     }
 
+    if (lsSettings.cardStyle !== undefined) {
+      Deckdle._saveSetting('cardStyle', lsSettings.cardStyle)
+
+      if (Deckdle.settings.cardStyle) {
+        Array.from(Deckdle.dom.interactive.cards).forEach((card) => {
+          card.classList.remove('default', 'large')
+          card.classList.add('card', Deckdle.settings.cardStyle)
+        })
+
+        setting = document.getElementById('button-setting-card-style')
+
+        if (setting) {
+          setting.dataset.status = Deckdle.settings.cardStyle
+        }
+
+        Deckdle.__setState('cardStyle', Deckdle.settings.cardStyle)
+      }
+    }
+
     if (lsSettings.comboCounter !== undefined) {
       Deckdle.settings.comboCounter = lsSettings.comboCounter
 
@@ -501,6 +520,24 @@ Deckdle._changeSetting = async (setting, value) => {
         document.getElementById('button-setting-animation-display').dataset.status = 'false'
 
         Deckdle._saveSetting('animationDisplay', false)
+      }
+
+      break
+
+    case 'cardStyle':
+      document.getElementById('button-setting-card-style').dataset.status = value
+      // iterate over all cards and add new cardType
+      Array.from(Deckdle.dom.interactive.cards).forEach((card) => {
+        card.classList.remove('default', 'large')
+        card.classList.add('card', value)
+      })
+
+      Deckdle._saveSetting('cardStyle', value)
+
+      st = document.querySelector('#button-setting-card-style img')
+
+      if (st) {
+        st.src = `/assets/images/card-${Deckdle.settings.cardStyle}.png`
       }
 
       break
@@ -673,7 +710,7 @@ Deckdle._changeSetting = async (setting, value) => {
 
   Deckdle._saveGame('_changeSetting')
 
-  // Deckdle._logStatus(`[CHANGED] setting(${setting}, ${value})`)
+  Deckdle._logStatus(`[CHANGED] setting(${setting}, ${value})`)
 }
 // save a setting (gear icon) to localStorage
 Deckdle._saveSetting = (setting, value) => {
@@ -689,7 +726,7 @@ Deckdle._saveSetting = (setting, value) => {
     // save all settings to LS
     localStorage.setItem(DECKDLE_SETTINGS_LS_KEY, JSON.stringify(settings))
 
-    // Deckdle._logStatus(`[SAVED] setting(${setting}, ${value})`)
+    Deckdle._logStatus(`[SAVED] setting(${setting}, ${value})`)
   } else {
     console.error('could not parse local storage key', DECKDLE_SETTINGS_LS_KEY)
   }

@@ -29,20 +29,69 @@
     color: var(--card-suit-spade);
   }
 
+  @media (min-height: 600px) {
+    min-height: 73px;
+
+    &.large {
+      min-height: 68px;
+    }
+  }
+  @media (min-width: 376px) {
+    height: 68px;
+    width: 50px;
+
+    &.large {
+      height: 65px;
+    }
+
+    @media (min-height: 600px) {
+      font-size: 1.2rem;
+      height: 73px;
+      margin-top: 5px;
+
+      &.large {
+        height: 70px;
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    @media (min-height: 600px) {
+      height: 75px;
+      width: 60px;
+
+      &.large {
+        height: 70px;
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    @media (min-height: 600px) {
+      font-size: 1.3rem;
+      height: 88px;
+      width: 73px;
+
+      &.large {
+        height: 88px;
+      }
+    }
+  }
+
   .rank {
     display: flex;
     justify-content: center;
   }
+
   .rank-bot,
   .rank-top {
     display: flex;
     justify-content: space-around;
-  }
-  @media (min-width: 992px) {
-    @media (min-height: 600px) {
-      .rank-bot,
-      .rank-top {
-        padding-top: 2px;
+
+    @media (min-width: 992px) {
+      @media (min-height: 600px) {
+        .rank-bot,
+        .rank-top {
+          padding-top: 2px;
+        }
       }
     }
   }
@@ -72,40 +121,29 @@
     background-color: var(--disabled);
     opacity: 0.3;
   }
-}
-@media (min-height: 600px) {
-  .card {
-    min-height: 73px;
-  }
-}
-@media (min-width: 376px) {
-  .card {
-    height: 68px;
-    width: 50px;
-  }
 
-  @media (min-height: 600px) {
-    .card {
-      font-size: 1.2rem;
-      height: 73px;
-      margin-top: 5px;
+  &.large {
+    .rank-top {
+      height: 30px;
+      margin: -2px;
+
+      .rank-top-left {
+        font-size: 1.5em;
+      }
+
+      .rank-top-right {
+        display: none;
+      }
     }
-  }
-}
-@media (min-width: 768px) {
-  @media (min-height: 600px) {
-    .card {
-      height: 75px;
-      width: 60px;
+
+    .suit {
+      font-size: 1.8em;
+      height: auto;
+      padding-top: 3px;
     }
-  }
-}
-@media (min-width: 992px) {
-  @media (min-height: 600px) {
-    .card {
-      font-size: 1.3rem;
-      height: 88px;
-      width: 73px;
+
+    .rank-bot {
+      display: none;
     }
   }
 }
@@ -115,22 +153,16 @@
   font-size: 0.65rem;
   margin: 5px 0 0;
   text-transform: uppercase;
-}
-@media (min-width: 376px) {
-  .card-label {
+
+  @media (min-width: 376px) {
     font-size: 0.75rem;
   }
-}
-@media (min-width: 768px) {
+
   @media (min-height: 600px) {
-    .card-label {
+    @media (min-width: 768px) {
       font-size: 1rem;
     }
-  }
-}
-@media (min-width: 992px) {
-  @media (min-height: 600px) {
-    .card-label {
+    @media (min-width: 992px) {
       font-size: 1.1rem;
     }
   }

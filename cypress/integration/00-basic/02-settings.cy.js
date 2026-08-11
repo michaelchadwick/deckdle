@@ -21,7 +21,7 @@ context('00-basic', () => {
         cy.get('@window').should('exist')
         cy.get('@title').should('contain.text', 'Settings')
 
-        cy.get('@text').find('.setting-row').should('have.length', 7)
+        cy.get('@text').find('.setting-row').should('have.length', 8)
         cy.get('@switches').should('have.length', 5)
       })
 

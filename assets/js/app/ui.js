@@ -23,6 +23,8 @@ Deckdle.ui._createCard = (
     cardDiv.classList.add('card')
   }
 
+  cardDiv.classList.add(Deckdle.settings.cardStyle)
+
   cardDiv.draggable = draggable
   cardDiv.dataset.rank = card.rank
   cardDiv.dataset.suit = card.suit
