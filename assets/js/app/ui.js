@@ -198,6 +198,7 @@ Deckdle.ui._undoBaseMove = (card) => {
 
 Deckdle.ui._emptyPlayingField = () => {
   // clear tableau, stock, base
+  Deckdle.dom.interactive.tableau.classList.remove('loading')
   Deckdle.dom.interactive.tableau.replaceChildren()
   Deckdle.dom.interactive.stock.querySelectorAll('.card').forEach((card) => card.remove())
   Deckdle.dom.interactive.base.querySelectorAll('.card').forEach((card) => card.remove())

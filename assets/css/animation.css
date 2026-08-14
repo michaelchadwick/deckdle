@@ -192,3 +192,34 @@ header {
     transform: translateX(-200px);
   }
 }
+
+/* loading */
+#tableau.loading {
+  display: flex;
+  justify-content: center;
+}
+.lds-dual-ring {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0 1rem;
+
+  &:after {
+    animation: lds-dual-ring 1.2s linear infinite;
+    border: 6px solid #000;
+    border-color: #000 transparent #000 transparent;
+    border-radius: 50%;
+    content: " ";
+    display: block;
+    height: 8px;
+    margin: 0 auto;
+    width: 8px;
+  }
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
