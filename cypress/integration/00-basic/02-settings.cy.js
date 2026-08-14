@@ -17,34 +17,30 @@ context('00-basic', () => {
       })
 
       it('should load settings modal', () => {
-        cy.wait(10).then(() => {
-          cy.get('@dialog').should('exist')
-          cy.get('@window').should('exist')
-          cy.get('@title').should('contain.text', 'Settings')
+        cy.get('@dialog').should('exist')
+        cy.get('@window').should('exist')
+        cy.get('@title').should('contain.text', 'Settings')
 
-          cy.get('@text').find('.setting-row').should('have.length', 8)
-          cy.get('@switches').should('have.length', 5)
-        })
+        cy.get('@text').find('.setting-row').should('have.length', 8)
+        cy.get('@switches').should('have.length', 5)
       })
 
       it('should toggle all switch-type settings', () => {
-        cy.wait(10).then(() => {
-          cy.get('@switches').each(($el) => {
-            cy.wrap($el).should('have.attr', 'data-status')
-            cy.wrap($el).click()
-            cy.wrap($el).should('have.attr', 'data-status', 'true')
+        cy.get('@switches').each(($el) => {
+          cy.wrap($el).should('have.attr', 'data-status')
+          cy.wrap($el).click()
+          cy.wrap($el).should('have.attr', 'data-status', 'true')
 
-            if ($el[0].id == 'button-setting-noisy') {
-              cy.get('#range-setting-bgm-level').should('not.be.disabled')
-              cy.get('#range-setting-sfx-level').should('not.be.disabled')
-            } else {
-              cy.get('#range-setting-bgm-level').should('be.disabled')
-              cy.get('#range-setting-sfx-level').should('be.disabled')
-            }
+          if ($el[0].id == 'button-setting-noisy') {
+            cy.get('#range-setting-bgm-level').should('not.be.disabled')
+            cy.get('#range-setting-sfx-level').should('not.be.disabled')
+          } else {
+            cy.get('#range-setting-bgm-level').should('be.disabled')
+            cy.get('#range-setting-sfx-level').should('be.disabled')
+          }
 
-            cy.wrap($el).click()
-            cy.wrap($el).should('have.attr', 'data-status', 'false')
-          })
+          cy.wrap($el).click()
+          cy.wrap($el).should('have.attr', 'data-status', 'false')
         })
       })
 

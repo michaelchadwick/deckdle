@@ -21,6 +21,11 @@ Deckdle.initApp = async () => {
     Deckdle.env = 'test'
 
     Deckdle.dom.headerTitle += ' (TEST)'
+
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = '/assets/css/testing.css'
+    document.head.appendChild(link)
   }
   // if local dev, show debug stuff
   if (Deckdle.env == 'local') {
